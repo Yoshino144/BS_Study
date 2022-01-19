@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_entries_net_flow">
+        <item>跟随系统</item>
+        <item>根据系统时间</item>
+        <item>手动</item>
+    </string-array>
+    <string-array name="pref_entryValues_net_flow">
+        <item>auto_system</item>
+        <item>auto_time</item>
+        <item>manual</item>
+    </string-array>
+</resources>

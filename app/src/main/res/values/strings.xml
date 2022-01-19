@@ -1,0 +1,124 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">喵喵学</string>
+    <string-array name="language_entries">
+        <item>普通话</item>
+        <item>粤语</item>
+        <item>英语</item>
+        <item>俄语</item>
+        <item>法语</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>mandarin</item>
+        <item>cantonese</item>
+        <item>en_us</item>
+        <item>russian</item>
+        <item>french</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="cancel">取消</string>
+    <string name="jmui_time_format_accuracy" tools:ignore="MissingTranslation">yyyy-MM-dd HH:mm:ss </string>
+    <string name="jmui_monday" translatable="false">周一</string>
+    <string name="jmui_tuesday" translatable="false">周二</string>
+    <string name="jmui_wednesday" translatable="false">周三</string>
+    <string name="jmui_thursday" translatable="false">周四</string>
+    <string name="jmui_friday" translatable="false">周五</string>
+    <string name="jmui_saturday" translatable="false">周六</string>
+    <string name="rationale_photo" translatable="false">This app needs access photos.</string>
+    <string name="rationale_camera" translatable="false">This app needs access camera.</string>
+    <string name="rationale_record_voice" translatable="false">This app needs access microphone to record voice.</string>
+    <string name="jmui_sunday" translatable="false">周日</string>
+    <string name="evenote_title" translatable="false">ShareSDK是一个神奇的SDK</string>
+    <string name="share_content" translatable="false">ShareSDK for Android不仅集成简单、支持如QQ好友、微信、新浪微博、腾讯微博等所有社交平台，而且还有强大的统计分析管理后台，实时了解用户、信息流、回流率、传播效应等数据，详情见官网 http://mob.com @Mob移动开发者服务平台</string>
+    <string name="infile_default" translatable="false" />
+    <string-array name="infile_list">
+        <item>@string/infile_default</item>
+        <item>res:///com/baidu/android/voicedemo/16k_test.pcm, 16k采样的测试音频</item>
+        <item>res:///com/baidu/android/voicedemo/offline_input.pcm, 测试离线命令词</item>
+        <item>#com.baidu.aip.asrwakeup3.core.inputstream.InFileStream.create16kStream(), 文件流</item>
+        <item>#com.baidu.aip.asrwakeup3.core.inputstream.MyMicrophoneInputStream.getInstance(), 自行从麦克风读取</item>
+    </string-array>
+    <string name="pid_default" translatable="false" />
+    <string-array name="pid">
+        <item>@string/pid_default</item>
+        <item>1537, 普通话输入法模型(默认) </item>
+        <item>15372, 普通话输入法模型(后处理带标点) </item>
+        <item>15373, 普通话输入法模型(在线语义) </item>
+        <item>8001, 自训练平台输入法模型</item>
+        <item>8002, 自训练平台搜索模型</item>
+        <item>1936, 普通话远场模型 </item>
+        <item>19362,普通话远场模型（后处理带标点） </item>
+        <item>19363,普通话远场模型（在线语义） </item>
+        <item>1737, 英语</item>
+        <item>1637, 粤语</item>
+        <item>16372, 粤语（后处理带标点）</item>
+        <item>1837, 四川话</item>
+    </string-array>
+    <string name="input_hint" translatable="false">Send message</string>
+    <string name="message_click_hint" translatable="false">Message click event</string>
+    <string name="message_long_click_hint" translatable="false">Message long press event</string>
+    <string name="avatar_click_hint" translatable="false">Avatar click event</string>
+
+
+    <string-array name="messages_array">
+        <item>How are you</item>
+        <item>Fine. And you?</item>
+        <item>Me, too. Is there any news today?</item>
+        <item>Yep! I got a news here: boom! Tomorrow is the end of The Walking Dead!</item>
+        <item>Are you kidding me?</item>
+        <item>Absolutely not!</item>
+        <item>Jesus, that\'s crazy</item>
+        <item>I thought no one would gonna to make it</item>
+        <item>That\'s cruel, I don\'t like it, maybe there is a favourable turn</item>
+        <item>Hope so</item>
+    </string-array>
+
+    <string-array name="conversation">
+        <item>test</item>
+        <item>History message 1</item>
+        <item>History message 2</item>
+        <item>History message 3</item>
+        <item>History message 4</item>
+        <item>History message 5</item>
+        <item>History message 6</item>
+        <item>History message 7</item>
+        <item>History message 8</item>
+        <item>History message 9</item>
+        <item>History message 10</item>
+    </string-array>
+    <string name="lm_id_default" translatable="false"></string>
+    <string-array name="lm_id">
+        <item>@string/lm_id_default</item>
+        <item>1068, 自训练平台上线的id，和账号维度绑定</item>
+    </string-array>
+    <string name="vad_default" translatable="false"></string>
+    <string-array name="vad_list">
+        <item>@string/vad_default</item>
+        <item>dnn, 默认，推荐模型</item>
+        <item>touch,  关闭静音断句功能。用戶手动停止录音</item>
+    </string-array>
+    <string name="vad_timeout_default" translatable="false"></string>
+    <string-array name="vad_timeout_list">
+        <item>@string/vad_timeout_default</item>
+        <item>0, 开启长语音（离线不支持）。建议pid选择15372。</item>
+        <item>800, 毫秒，静音800ms后断句，适用于输入短语</item>
+        <item>2000, 毫秒，静音2000ms后断句，适用于输入长句</item>
+        <item>2230, 毫秒，请修改代码中的VAD_ENDPOINT_TIMEOUT，自定义时长（建议800ms-3000ms之间）</item>
+    </string-array>
+    <string name="texttest" translatable="false">Android是一种基于Linux的自由及开放源代码的操作系统，主要使用于移动设备，如智能手机和平板电脑， 由Google公司和开放手机联盟领导及开发。尚未有统一中文名称，中国大陆地区较多人使用“安卓”或“安致”。 Android操作系统最初由Andy Rubin开发，主要支持手机。2005年8月由Google收购注资。2007年11月， Google与84家硬件制造商、软件开发商及电信营运商组建开放手机联盟共同研发改良Android系统。 随后Google以Apache开源许可证的授权方式，发布了Android的源代码。第一部Android智能手机发布于2008年10月。 Android逐渐扩展到平板电脑及其他领域上，如电视、数码相机、游戏机等。2011年第一季度， Android在全球的市场份额首次超过塞班系统，跃居全球第一。 2013年的第四季度，Android平台手机的全球市场份额已经达到78.1%。 [1] 2013年09月24日谷歌开发的操作系统Android在迎来了5岁生日，全世界采用这款系统的设备数量已经达到10亿台。 2003年10月，Andy Rubin等人创建Android公司，并组建Android团队。 2005年8月17日，Google低调收购了成立仅22个月的高科技企业Android及其团队。安迪鲁宾成为Google公司工程部副总裁，继续负责Android项目。 2007年11月5日，谷歌公司正式向外界展示了这款名为Android的操作系统，并且在这天谷歌宣布建立一个全球性的联盟组织，该组织由34家手机制造商、软件开发商、电信运营商以及芯片制造商共同组成，并与84家硬件制造商、软件开发商及电信营运商组成开放手持设备联盟（Open Handset Alliance）来共同研发改良Android系统，这一联盟将支持谷歌发布的手机操作系统以及应用软件，Google以Apache免费开源许可证的授权方式，发布了Android的源代码。[4-5] 2008年，在GoogleI/O大会上，谷歌提出了AndroidHAL架构图，在同年8月18号，Android获得了美国联邦通信委员会（FCC）的批准，在2008年9月，谷歌正式发布了Android 1.0系统，这也是Android系统最早的版本。 2009年4月，谷歌正式推出了Android 1.5这款手机，从Android 1.5版本开始，谷歌开始将Android的版本以甜品的名字命名，Android 1.5命名为Cupcake（纸杯蛋糕）。该系统与Android 1.0相比有了很大的改进。 2009年9月份，谷歌发布了Android 1.6的正式版，并且推出了搭载Android 1.6正式版的手机HTC Hero（G3），凭借着出色的外观设计以及全新的Android 1.6操作系统，HTC Hero（G3）成为当时全球最受欢迎的手机。Android 1.6也有一个有趣的甜品名称，它被称为Donut（甜甜圈）。 2010年2月份，Linux内核开发者Greg Kroah-Hartman将Android的驱动程序从Linux内核“状态树”（“staging tree”）上除去，从此，Android与Linux开发主流将分道扬镳。在同年5月份，谷歌正式发布了Android 2.2操作系统。谷歌将Android 2.2操作系统命名为Froyo，翻译完名为冻酸奶。 2010年10月份，谷歌宣布Android系统达到了第一个里程碑，即电子市场上获得官方数字认证的Android应用数量已经达到了10万个，Android系统的应用增长非常迅速。在2010年12月，谷歌正式发布了Android 2.3操作系统Gingerbread （姜饼）。 2011年1月，谷歌称每日的Android设备新用户数量达到了30万部，到2011年7月，这个数字增长到55万部，而Android系统设备的用户总数达到了1.35亿，Android系统已经成为智能手机领域占有量最高的系统。 2011年8月2日，Android手机已占据全球智能机市场48%的份额，并在亚太地区市场占据统治地位，终结了Symbian（塞班系统）的霸主地位，跃居全球第一。 2011年9月份，Android系统的应用数目已经达到了48万，而在智能手机市场，Android系统的占有率已经达到了43%。继续在排在移动操作系统首位。谷歌将会发布全新的Android 4.0操作系统，这款系统被谷歌命名为Ice Cream Sandwich（冰激凌三明治）。 2012年1月6日，谷歌Android Market已有10万开发者推出超过40万活跃的应用，大多数的应用程序为免费。Android Market应用程序商店目录在新年首周周末突破40万基准，距离突破30万应用仅4个月。在2011年早些时候，Android Market从20万增加到30万应用也花了四个月。[6] 2013年11月1日，Android4.4正式发布，从具体功能上讲，Android4.4提供了各种实用小功能，新的Android系统更智能，添加更多的Emoji表情图案，UI的改进也更现代，如全新的HelloiOS7半透明效果。 2015年27日，网络安全公司Zimperium研究人员警告，安卓(Android)存在“致命”安全漏洞,黑客发送一封彩信便能在用户毫不知情的情况下完全控制手机</string>
+    <string name="title_activity_settings" translatable="false">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header" translatable="false">Messages</string>
+    <string name="sync_header" translatable="false">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="touming">#00000000</color>
+    <color name="colorPrimary">#f8f8f8</color>
+    <color name="colorPrimaryDark">#f8f8f8</color>
+    <color name="background">#f2f1f6</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#f8f8f8</color>
+    <color name="black">#000000</color>
+    <color name="text1">#407179</color>
+    <color name="ocbg">#ffffff</color>
+    <color name="info_layout_bg">#eaeaea</color>
+    <color name="bg">#F0F0F0</color>
+    <color name="white_text_color">#F0F0F0</color>
+    <color name="gray_color">#4b4b58</color>
+    <color name="radar_circle_color">#F10C0C</color>
+    <color name="aa">#505050</color>
+    <color name="bg_huidi2">#f7f7f7</color>
+    <color name="bg_huidi">#f2f1f6</color>
+    <color name="text_black">#000000</color>
+    <color name="write_fan">#ffffff</color>
+    <color name="write_black">#ffffff</color>
+    <color name="tab_fen">#e9e9eb</color>
+    <color name="moren_text">#8A000000</color>
+    <color name="chat_title_bg">#427BED</color>
+    <color name="text_hui">#959595</color>
+    <color name="random">#ccffffff</color>
+    <color name="google_red">#FFC93437</color>
+    <color name="google_blue">#FF375BF1</color>
+    <color name="google_yellow">#FFF7D23E</color>
+    <color name="google_green">#FF34A350</color>
+</resources>

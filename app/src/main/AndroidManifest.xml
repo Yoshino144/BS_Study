@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="top.pcat.study">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <permission
+        android:name="top.pcat.study.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="top.pcat.study.permission.JPUSH_MESSAGE" />
+
+    <application
+        android:name="top.pcat.study.BaseApplication"
+        android:allowBackup="true"
+        android:exported="false"
+        android:grantUriPermissions="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name="top.pcat.study.Setting.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="top.pcat.study.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+            <meta-data
+                android:name="com.baidu.speech.APP_ID"
+                android:value="18586428" />
+            <meta-data
+                android:name="com.baidu.speech.API_KEY"
+                android:value="lNtcjKmN4u1QfqP8LaalOY2d" />
+            <meta-data
+                android:name="com.baidu.speech.SECRET_KEY"
+                android:value="wKUjMVCOxpA0pexncEbiGI49Npr7zcKu" />
+        </provider>
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="top.pcat.study.StartPage.StartPageActivitye"
+            android:launchMode="singleTask"
+            android:theme="@style/SplashActivityTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="top.pcat.study.StartPage.InitAdvActivitye" />
+        <activity android:name="top.pcat.study.MainActivity" />
+        <activity android:name="top.pcat.study.user.SignActivity" />
+        <activity android:name="top.pcat.study.user.User" />
+        <activity android:name="top.pcat.study.user.res" />
+        <activity android:name="top.pcat.study.Size.ExercisesActivity" />
+        <activity android:name="top.pcat.study.Search.SearchActivity" />
+        <activity android:name="top.pcat.study.Search.MesActivity" />
+        <activity android:name="top.pcat.study.FastBlur.FastBlurActivity" />
+        <activity android:name="top.pcat.study.Setting.UpData" />
+        <activity android:name="top.pcat.study.Curriculum.Curriculum" />
+        <activity android:name="top.pcat.study.Curriculum.Collection" />
+        <activity android:name="top.pcat.study.Curriculum.Recommend" />
+        <activity android:name="top.pcat.study.Setting.Setting" />
+        <activity android:name="top.pcat.study.View.ClipImageActivity" />
+        <activity android:name="top.pcat.study.Size.ChapterActivity" />
+        <activity android:name="top.pcat.study.SpeechRecognition.ActivityOnlineRecog" />
+        <activity
+            android:name="top.pcat.study.SpeechRecognition.OnlineSetting"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
+            android:label="识别设置"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.DeviceDefault.Light" />
+        <activity android:name="top.pcat.study.WrongQuestion.WrongQuestion" />
+        <activity android:name="top.pcat.study.WrongQuestion.WrongOne" />
+        <activity android:name="top.pcat.study.Size.Examination" />
+        <activity android:name="top.pcat.study.NewExercisesActitity.NewExercisesActitity" />
+        <activity android:name="top.pcat.study.user.UserDisplay" />
+        <activity android:name="top.pcat.study.Size.AHHHHHH" />
+        <activity android:name="top.pcat.study.Size.OHHHHHH" />
+        <activity android:name="top.pcat.study.PushService.NewFriendActivity" />
+    </application>
+
+</manifest>

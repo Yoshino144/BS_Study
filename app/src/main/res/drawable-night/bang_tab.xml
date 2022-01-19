@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bang_radius5" android:state_checked="true"
+        android:elevation="2dp"/>
+    <item android:drawable="@drawable/bang_radius5_wei" />
+</selector>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_huidi"
+    tools:context=".Fragment.BlankFragment6"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:elevation="0dp"
+        android:background="@drawable/shape_fra3"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <RadioButton
+            android:id="@+id/bang_one"
+            android:checked="true"
+            android:button="@null"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="消息"
+            android:textColor="@drawable/bang_textcolor"
+            android:background="@drawable/bang_tab"
+            android:layout_height="match_parent"/>
+
+        <RadioButton
+            android:id="@+id/bang_two"
+            android:button="@null"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="通讯录"
+            android:textColor="@drawable/bang_textcolor"
+            android:background="@drawable/bang_tab"
+            android:layout_height="match_parent"/>
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/bang_three"-->
+<!--            android:button="@null"-->
+<!--            android:layout_marginLeft="3dp"-->
+<!--            android:layout_marginRight="3dp"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:layout_marginBottom="3dp"-->
+<!--            android:paddingLeft="10dp"-->
+<!--            android:paddingRight="10dp"-->
+<!--            android:paddingTop="5dp"-->
+<!--            android:paddingBottom="5dp"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="添加"-->
+<!--            android:textColor="@drawable/bang_textcolor"-->
+<!--            android:background="@drawable/bang_tab"-->
+<!--            android:layout_height="match_parent"/>-->
+
+        <RadioButton
+            android:id="@+id/bang_four"
+            android:button="@null"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="管理"
+            android:textColor="@drawable/bang_textcolor"
+            android:background="@drawable/bang_tab"
+            android:layout_height="match_parent"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:background="@drawable/shape_radius_banner"
+        android:layout_height="match_parent">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:background="@drawable/shape_radius_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+</LinearLayout>

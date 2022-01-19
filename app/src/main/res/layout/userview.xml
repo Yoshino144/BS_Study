@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/user"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="0dp"
+        android:background="@color/bg_huidi"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:layout_width="95dp"
+            android:layout_height="100dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_height="70dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_height="70dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/hearImg"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="65dp"
+                        android:layout_gravity="center"
+                        android:layout_height="65dp"
+                        android:src="@drawable/user"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="#77000000"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="-3dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="100dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_height="50dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/usernameshow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/moren_text"
+                        android:text="未登录 | 点击登录"/>
+
+                    <LinearLayout
+                        android:id="@+id/lvView"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/sign_lv"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/lvtext"
+                            android:layout_width="wrap_content"
+                            android:text="Lv.10"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:textColor="#ffffff"
+                            android:textSize="11dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/moren_text"
+                    android:text="查看主页或编辑资料"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="62dp"
+            android:layout_marginRight="4dp"
+            android:layout_height="100dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_gravity="center"
+                android:layout_height="22dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/user_erwei"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_gravity="center"
+                android:layout_height="25dp"
+                android:src="@drawable/user_all"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,249 @@
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/bg_huidi"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_huidi"
+        android:orientation="vertical">
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="  "-->
+<!--            android:textSize="24dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:textColor="@color/black"/>-->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@drawable/shape_test"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="223dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <com.youth.banner.Banner
+                    xmlns:banner="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+<!--                <androidx.viewpager.widget.ViewPager-->
+<!--                    android:id="@+id/banner_viewPager"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent" />-->
+
+<!--                <com.shizhefei.view.indicator.FixedIndicatorView-->
+<!--                    android:id="@+id/banner_indicator"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:layout_gravity="right|bottom" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="65dp">
+
+                <LinearLayout
+                    android:id="@+id/twoOne"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="70dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/two_one"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="我的课程"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/twoTwo"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="70dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/two_two"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="推荐课程"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/twoThree"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="70dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/two_three"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="全部课程"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/twoFour"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="70dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/two_four"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="13dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="我的收藏"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include
+            android:id="@+id/cpp"
+            android:visibility="gone"
+            layout="@layout/problem_cpp"/>
+
+        <include
+            android:id="@+id/c"
+            android:visibility="gone"
+            layout="@layout/problem_c"/>
+
+        <include
+            android:id="@+id/sjjg"
+            android:visibility="gone"
+            layout="@layout/problem_sjjg"/>
+
+        <include
+            android:id="@+id/sjk"
+            android:visibility="gone"
+            layout="@layout/problem_sjk"/>
+
+        <include
+            android:id="@+id/sf"
+            android:visibility="gone"
+            layout="@layout/problem_sf"/>
+
+        <include
+            android:id="@+id/yy"
+            android:visibility="gone"
+            layout="@layout/problem_yy"/>
+
+        <LinearLayout
+            android:id="@+id/add"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:background="@drawable/class_radius2"
+            android:layout_height="70dp">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/add"
+                android:layout_height="45dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loginFlag"
+            android:visibility="gone"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:background="@drawable/shape_one"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:textSize="17dp"
+                android:textColor="@color/text_black"
+                android:text="你还未登录   点击登录"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:layout_height="70dp">
+
+    </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/userbg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#55ffffff"
+        android:layout_height="match_parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tileMode="repeat"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text=" "
+                android:textSize="15dp"
+                android:textColor="#000000"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="match_parent"
+                android:text="个人信息"
+                android:layout_marginLeft="15dp"
+                android:textSize="25dp"
+                android:textColor="#000000"
+                android:layout_height="40dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_userdata"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/changeImg"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="90dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="头像"
+                            android:textSize="15dp"
+                            android:textColor="#000000"
+                            android:layout_height="wrap_content"/>
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/headImage"-->
+        <!--                    android:layout_width="60dp"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:src="@drawable/user"/>-->
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_height="60dp">
+
+                            <top.pcat.study.View.CircleImageView
+                                android:id="@+id/headImage"
+                                android:layout_width="60dp"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/user" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_userdata"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="45dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textColor="#000000"
+                        android:text="ID"
+                        android:textSize="16dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:text=" "
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/idText"
+                        android:layout_width="wrap_content"
+                        android:text="未登录"
+                        android:layout_marginRight="5dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/setName"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="45dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textColor="#000000"
+                        android:text="用户名"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:text=" "
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/nameText"
+                        android:layout_width="wrap_content"
+                        android:text="未登录"
+                        android:layout_marginRight="5dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/setSex"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="45dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textColor="#000000"
+                        android:text="性别"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:text=" "
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/sexText"
+                        android:layout_width="wrap_content"
+                        android:text="未设置"
+                        android:layout_marginRight="5dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/birSet"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="45dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textColor="#000000"
+                        android:text="生日"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:text=" "
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/birText"
+                        android:layout_width="wrap_content"
+                        android:text="未设置"
+                        android:layout_marginRight="5dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/setCity"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="45dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="60dp"
+                        android:textColor="#000000"
+                        android:text="城市"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:text=" "
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/cityText"
+                        android:layout_width="wrap_content"
+                        android:text="未设置"
+                        android:layout_marginRight="5dp"
+                        android:textSize="15dp"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_userdata"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/setSchool"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:textColor="#000000"
+                            android:text="学校"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:text=" "
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/schoolText"
+                            android:layout_width="wrap_content"
+                            android:text="未登录"
+                            android:layout_marginRight="5dp"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/setCollege"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:textColor="#000000"
+                            android:text="学院"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:text=" "
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/collegeText"
+                            android:layout_width="wrap_content"
+                            android:text="未登录"
+                            android:layout_marginRight="5dp"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/setMajor"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:textColor="#000000"
+                            android:text="专业"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:text=" "
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/majorText"
+                            android:layout_width="wrap_content"
+                            android:text="未设置"
+                            android:layout_marginRight="5dp"
+                            android:textSize="17dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/setGrade"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:textColor="#000000"
+                            android:text="年级"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:text=" "
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/gradeText"
+                            android:layout_width="wrap_content"
+                            android:text="未设置"
+                            android:layout_marginRight="5dp"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/setoccu"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="60dp"
+                            android:textColor="#000000"
+                            android:text="职位"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#000000"
+                            android:text=" "
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/occuText"
+                            android:layout_width="wrap_content"
+                            android:text="未设置"
+                            android:layout_marginRight="5dp"
+                            android:textSize="17dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_userdata_tui"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="45dp">
+
+                    <LinearLayout
+                        android:id="@+id/outuser"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:textColor="#ffffff"
+                            android:text="退出登录"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

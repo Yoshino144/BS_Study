@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/tab_radius_un" android:state_selected="false"/>
+    <item android:drawable="@drawable/tab_radius_se" android:state_selected="true"/>
+</selector>
+<!--<shape xmlns:android="http://schemas.android.com/apk/res/android" >-->
+<!--    <corners android:radius="5dip"/>-->
+<!--    <solid android:color="#515151"/>-->
+
+<!--</shape>-->

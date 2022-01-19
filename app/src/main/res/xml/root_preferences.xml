@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceScreen
+        android:key="yuyin_settings"
+        android:title="用户信息"
+        android:summary="设置详细用户信息" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.pc.pc"
+            android:targetClass="com.pc.pc.user.User" />
+    </PreferenceScreen>
+
+    <ListPreference
+        app:dialogTitle="夜间设置"
+        app:entries="@array/pref_entries_net_flow"
+        app:entryValues="@array/pref_entryValues_net_flow"
+        app:key="yejian"
+        app:summary="设置夜间模式"
+        app:title="夜间设置" />
+
+    <PreferenceScreen
+        android:key="yuyin_settings"
+        android:title="语音识别"
+        android:summary="语音识别相关设置" >
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.pc.pc"
+            android:targetClass="com.pc.pc.SpeechRecognition.OnlineSetting" />
+    </PreferenceScreen>
+
+    <SwitchPreference
+        android:title="自动更新题库"
+        />
+
+</PreferenceScreen>
+    

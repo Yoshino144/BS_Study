@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#35464e</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#212a2f</color>
+    <color name="background">#212121</color>
+    <color name="bg_huidi">#212121</color>
+    <color name="text_black">#ddffffff</color>
+    <color name="write_fan">#212121</color>
+    <color name="white">#212121</color>
+    <color name="black">#ddffffff</color>
+    <color name="tab_fen">#1b1b1b</color>
+    <color name="moren_text">#8Affffff</color>
+    <color name="text_hui">#959595</color>
+    <color name="write_black">#1b1b1b</color>
+</resources>

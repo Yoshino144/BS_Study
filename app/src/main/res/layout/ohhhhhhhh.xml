@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="@color/write_fan"
+        android:id="@+id/view_two"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <top.pcat.study.View.CircleRippleView
+                android:id="@+id/radar_bg_image"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/radar_bg" />
+
+            <ImageView
+                android:id="@+id/radar_image"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/radar" />
+
+            <top.pcat.study.View.RadarImageView
+                android:id="@+id/radar_head_image"
+                android:layout_width="@dimen/radar_head_image_width"
+                android:layout_height="@dimen/radar_head_image_width"
+                android:layout_centerInParent="true"
+                android:src="@drawable/user" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="-200dp"
+            android:layout_height="300dp">
+
+            <TextView
+                android:text="请稍等..."
+                android:gravity="center"
+                android:textSize="40dp"
+                android:textColor="#998f8f8f"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/two_page"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:id="@+id/size"
+            android:text="24521"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:id="@+id/wrongsize"
+            android:text="24521"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:id="@+id/truesize"
+            android:text="24521"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="300dp">
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="155dp"
+                android:background="@color/bg_huidi"
+                android:layout_width="match_parent"
+                android:layout_height="565dp"/>
+
+
+                <ListView
+                    android:padding="6dp"
+                    android:background="@drawable/ohhhh_bian"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="155dp"
+                    android:id="@+id/listView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbarFadeDuration="0">
+
+                </ListView>
+
+
+<!--            </LinearLayout>-->
+
+        </RelativeLayout>
+
+</RelativeLayout>

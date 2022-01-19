@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="radar_circle_width">4dp</dimen>
+    <dimen name="radar_head_image_width">60dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="chat_title_bar_txt_size">18sp</dimen>
+</resources>

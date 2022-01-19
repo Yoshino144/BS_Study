@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/write_radius_radius"
+    android:layout_height="60dp"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/itemname"
+        android:text="htnl/css"
+        android:layout_gravity="center_vertical"/>
+
+    <com.suke.widget.SwitchButton
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:sb_checked="true"
+        android:id="@+id/switch_button"
+        android:layout_width="53dp"
+        app:sb_show_indicator="false"
+        android:layout_height="32dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

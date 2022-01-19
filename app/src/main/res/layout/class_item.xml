@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/item"
+    android:orientation="vertical"
+    android:layout_height="60dp">
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/id_num"
+            android:text="123"
+            android:layout_marginLeft="3dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/fruit_image"
+            android:layout_marginLeft="8dp"
+            android:layout_width="45dp"
+            android:gravity="center"
+            android:src="@drawable/new_friend"
+            android:layout_gravity="center"
+            android:layout_height="45dp" />
+        <TextView
+            android:id="@+id/fruit_name"
+            android:textColor="@color/black"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="18dp" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/new_fr"
+            android:layout_gravity="center_vertical"
+            android:layout_width="20dp"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_jishu"
+            android:layout_height="20dp">
+
+            <TextView
+                android:id="@+id/new_size"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:text="5"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="#55e9e9eb"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_height="1dp" />-->
+
+</RelativeLayout>

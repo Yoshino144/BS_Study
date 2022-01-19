@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/fragment_vp"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_above="@+id/tabs_rg" />
+
+    <Button
+        android:id="@+id/bbbb"
+        android:layout_width="200dp"
+        android:text="rtgj"
+        android:layout_height="50dp"/>
+
+</LinearLayout>

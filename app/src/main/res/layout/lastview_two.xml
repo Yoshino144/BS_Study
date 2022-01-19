@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/random" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#00ffffff"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textmm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:text="题目"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#00ffffff"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/AAA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="9dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/image_A"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/aaa" />
+
+                    <TextView
+                        android:id="@+id/text_A"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="您给出的回答选项？"
+                        android:textSize="16sp"
+                        android:textColor="#9a9a9a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/BBB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/image_B"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/bbb" />
+
+                    <TextView
+                        android:id="@+id/text_B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="您给出的回答选项？"
+                        android:textSize="16sp"
+                        android:textColor="#9a9a9a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/CCC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="9dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/image_C"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ccc" />
+
+                    <TextView
+                        android:id="@+id/text_C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="您给出的回答选项？"
+                        android:textSize="16sp"
+                        android:textColor="#9a9a9a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DDD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="9dp"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/image_D"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ddd" />
+
+                    <TextView
+                        android:id="@+id/text_D"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:text="您给出的回答选项？"
+                        android:textSize="16sp"
+                        android:textColor="#9a9a9a" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+<!--            -->
+        <LinearLayout
+            android:id="@+id/trueaa"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/random"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="显示解析"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+
+            <LinearLayout
+                android:id="@+id/wrongaa"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:background="@drawable/shape_lastview_jiexi"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:paddingTop="5dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="17dp"
+                    android:text="题目解析："/>
+
+                <TextView
+                    android:id="@+id/jiexi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
+                    android:text="一般人回答这个问题过于平常，只说姓名、年龄、爱好、工作经验，这些在简历上都有，其实，企业最希望知道的是求职者能否胜任工作，包括：最强的技能、最深入研究的知识领域、个性中最积极的部分、做过的最成功的事，主要的成就等，这些都可以和学习无关，也可以和学习有关，但要突出积极的个性和做事的能力，说得合情合理企业才会相信。企业很重视一个人的礼貌，求职者要尊重考官，在回答每个问题之后都说一句“谢谢”。企业喜欢有礼貌的求职者。
+这个问题企业问的概率很大，通常不希望听到直接回答的缺点是什么等，如果求职者说自己小心眼、爱忌妒人、非常懒、脾气大、工作效率低，企业肯定不会录用你。绝对不要自作聪明地回答“我最大的缺点是过于追求完美”，有的人以为这样回答会显得自己比较出色，但事实上，他已经岌芨可危了。企业喜欢求职者从自己的优点说起，中间加一些小缺点，最后再把问题转回到优点上，突出优点的部分。企业喜欢聪明的求职者。
+"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+<!--    <com.barnettwong.dragfloatactionbuttonlibrary.view.DragFloatActionButton-->
+<!--        android:id="@+id/circle_button"-->
+<!--        android:layout_width="48dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_alignParentBottom="ttrue"-->
+<!--        android:layout_alignParentRight="ttrue"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:clickable="ttrue"-->
+<!--        android:src="@mipmap/ic_launcher_round" />-->
+
+
+</RelativeLayout>
