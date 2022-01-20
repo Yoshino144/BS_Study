@@ -15,14 +15,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
@@ -126,6 +129,7 @@ public class BlankFragment extends Fragment {
     private String userdata;
     private LinearLayout  tt;
     private TextView todaysize;
+    private ScrollView scrollone;
 
     private TextView baifenbitext;
     private TextView timusizetext;
@@ -269,8 +273,12 @@ public class BlankFragment extends Fragment {
             baifenbitext.setText("0.0 %");
             usertext2.setText("成功的决心远胜于任何东西");
         }
+
+
+
         return rootView;
     }
+
 
     private void getSize(String userId) {
         new Thread(() -> {
@@ -298,6 +306,8 @@ public class BlankFragment extends Fragment {
                 e.printStackTrace();
             }
         }).start();
+
+
     }
 
 

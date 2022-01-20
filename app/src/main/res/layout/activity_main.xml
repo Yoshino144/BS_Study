@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +11,45 @@
     <LinearLayout
         android:id="@+id/bar_wei_main"
         android:layout_width="match_parent"
-        android:background="@color/bg_huidi"
-        android:layout_height="66px"
-        android:visibility="gone"
-        android:orientation="horizontal" />
+        android:layout_height="64px"
+        android:background="#515151"
+        android:orientation="horizontal"
+        android:visibility="gone" />
 
 
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/fragment_vp"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_above="@+id/tabs_rg" />
+        android:layout_weight="1">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#fff"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是一个按钮" />
+
+            </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fragment_vp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tabs_rg"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,60 +57,60 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@color/tab_fen"
             android:layout_width="match_parent"
-            android:layout_height="2px" />
+            android:layout_height="2px"
+            android:background="@color/tab_fen" />
 
         <RadioGroup
             android:id="@+id/tabs_rg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
             android:background="@color/write_fan"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/today_tab"
-                android:checked="true"
-                android:gravity="center"
-                android:layout_gravity="center"
                 style="@style/Custom.TabRadioButton"
-                android:textColor="@drawable/radiobutton_textcolor"
+                android:layout_gravity="center"
+                android:checked="true"
+                android:drawableTop="@drawable/tab_sign_selector"
+                android:gravity="center"
                 android:text="学习"
-                android:textSize="10dp"
-                android:drawableTop="@drawable/tab_sign_selector"/>
+                android:textColor="@drawable/radiobutton_textcolor"
+                android:textSize="10dp" />
 
             <RadioButton
                 android:id="@+id/record_tab"
-                android:gravity="center"
-                android:layout_gravity="center"
                 style="@style/Custom.TabRadioButton"
-                android:textColor="@drawable/radiobutton_textcolor"
+                android:layout_gravity="center"
                 android:drawableTop="@drawable/tab_ke_selector"
+                android:gravity="center"
                 android:text="课程"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="10dp" />
 
             <RadioButton
                 android:id="@+id/pai_tab"
-                android:gravity="center"
-                android:layout_gravity="center"
                 style="@style/Custom.TabRadioButton"
-                android:textColor="@drawable/radiobutton_textcolor"
+                android:layout_gravity="center"
                 android:drawableTop="@drawable/tab_pai_selector"
+                android:gravity="center"
                 android:text="班级"
+                android:textColor="@drawable/radiobutton_textcolor"
                 android:textSize="10dp" />
 
             <RadioButton
                 android:id="@+id/settings_tab"
-                android:gravity="center"
-                android:layout_gravity="center"
                 style="@style/Custom.TabRadioButton"
-                android:textColor="@drawable/radiobutton_textcolor"
+                android:layout_gravity="center"
                 android:drawableTop="@drawable/tab_me_selector"
+                android:gravity="center"
                 android:text="我的"
-                android:textSize="10dp"/>
+                android:textColor="@drawable/radiobutton_textcolor"
+                android:textSize="10dp" />
         </RadioGroup>
     </LinearLayout>
 </LinearLayout>

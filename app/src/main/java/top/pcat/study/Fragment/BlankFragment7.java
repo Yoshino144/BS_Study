@@ -51,22 +51,11 @@ public class BlankFragment7 extends Fragment {
     }
 
     private void initRanking() {
-        RankingList apple = new RankingList(1,"root", R.drawable.aa1);
-        rankingList.add(apple);
-        apple = new RankingList(2,"张嘀咕", R.drawable.aa2);
-        rankingList.add(apple);
-        apple = new RankingList(3,"武小松", R.drawable.aa3);
-        rankingList.add(apple);
-        apple = new RankingList(4,"怜雪", R.drawable.aa4);
-        rankingList.add(apple);
-        apple = new RankingList(5,"藏小航", R.drawable.aa5);
-        rankingList.add(apple);
-        apple = new RankingList(6,"李嘉琪", R.drawable.aa6);
-        rankingList.add(apple);
-        apple = new RankingList(7,"张快", R.drawable.aa7);
-        rankingList.add(apple);
-        apple = new RankingList(8,"吴凯心", R.drawable.aa8);
-        rankingList.add(apple);
+        for(int i = 1 ; i < 50;i++){
+
+            RankingList apple = new RankingList(i,"root", R.drawable.aa1);
+            rankingList.add(apple);
+        }
     }
 
 }

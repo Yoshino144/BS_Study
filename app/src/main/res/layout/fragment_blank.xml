@@ -14,10 +14,13 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <ScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:background="@color/bg_huidi" >
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollone"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:background="@color/bg_huidi">
+
 
 
         <RelativeLayout
@@ -763,7 +766,7 @@
 
             </LinearLayout>
         </RelativeLayout>
-    </ScrollView>
+        </androidx.core.widget.NestedScrollView>>
     </top.pcat.study.Fresh.CircleRefreshLayout>
 
     <Button

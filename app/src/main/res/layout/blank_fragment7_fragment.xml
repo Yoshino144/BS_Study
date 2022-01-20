@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_huidi"
     tools:context=".Fragment.BlankFragment6"
     android:orientation="vertical">
@@ -99,29 +100,33 @@
 
     </RadioGroup>
 
-    <ScrollView
-        android:orientation="horizontal"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:background="@drawable/shape_radius_banner"
-        android:layout_height="match_parent">
+<!--    <ScrollView-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:gravity="center"-->
+<!--        android:background="@drawable/shape_radius_banner"-->
+<!--        android:layout_height="match_parent">-->
 
         <LinearLayout
-            android:layout_margin="7dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_radius_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rank_recycler_view7"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
 
-    </ScrollView>
+<!--    </ScrollView>-->
 
 </LinearLayout>

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity{
     private String lv;
     public String user_id;
     private int page;
+    private LinearLayout testbar;
     private long exitTime = 0;
 
     private SharedPreferences mSpf;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity{
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this,true,R.color.bg_huidi);
 
-
+        //testbar = findViewById(R.id.testbar);
         mSpf = super.getSharedPreferences("yejian",MODE_PRIVATE);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH");
@@ -305,7 +306,8 @@ public class MainActivity extends AppCompatActivity{
         mTabRadioGroup = findViewById(R.id.tabs_rg);
         // init fragment
         mFragments = new ArrayList<>(4);
-        mFragments.add(BlankFragment.newInstance("456","789"));
+        //mFragments.add(BlankFragment.newInstance("456","789"));
+        mFragments.add(onePageFragment.newInstance("456","789"));
         mFragments.add(BlankFragment2.newInstance("456","789"));
         mFragments.add(BlankFragment3.newInstance("123","1"));
         mFragments.add(BlankFragment4.newInstance(name,lv));
@@ -585,6 +587,16 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
+    }
+
+    public void Hide(){
+        LogUtils.d("隐藏了导航栏");
+        testbar.animate().translationY(testbar.getHeight());
+    }
+
+    public void Display(){
+        LogUtils.d("显示了导航栏");
+        testbar.animate().translationY(0);
     }
 
 }
