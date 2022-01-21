@@ -48,6 +48,7 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.compose.animation:animation-graphics:+'
     testImplementation 'junit:junit:4.13.2'
     implementation project(path: ':core')
     implementation 'com.zaaach:citypicker:2.0.3'
@@ -96,6 +97,7 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
     implementation 'com.github.wangfeng19930909:DragFloatingActionButton:1.0.1'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 MobSDK {

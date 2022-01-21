@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -7,7 +8,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <top.pcat.study.Fresh.CircleRefreshLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         app:AniBackColor="#ff8b90af"
         app:AniForeColor="@color/bg_huidi"
         app:CircleSmaller="6"
@@ -24,7 +24,6 @@
 
 
         <RelativeLayout
-            xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical"
             android:layout_marginTop="0dp"
             android:layout_width="match_parent"
@@ -78,45 +77,158 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="0dp"
-                    android:textColor="@color/white"/>
 
-                <TextView
-                    android:id="@+id/todaysize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="20dp"
-                    android:textSize="35dp"
-                    android:textColor="@color/text_black"
-                    android:text="+ 0 道"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_one"
+                    android:layout_marginBottom="0dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/usertext"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:text="成功的决心远胜于任何东西"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/text_black"
+                        android:layout_height="wrap_content">
+
+                        <top.pcat.study.View.CircleProgressView
+                            android:id="@+id/meiri_q"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            app:backColor="#347FCCDE"
+                            app:backWidth="15dp"
+                            app:progFirstColor="@color/pc_blue2"
+                            app:progStartColor="@color/pc_cyan"
+                            app:progWidth="15dp"
+                            app:progress="85" />
+
+                        <TextView
+                            android:id="@+id/meiri_bai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="85%"
+                            android:textColor="#ff4d4d4d"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/meiri"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="12 / 50 道"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/shape_one"
+                    android:layout_marginBottom="0dp"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <top.pcat.study.View.CircleProgressView
+                            android:id="@+id/meiri_q2"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            app:backColor="#347FCCDE"
+                            app:backWidth="15dp"
+                            app:progFirstColor="@color/pc_blue2"
+                            app:progStartColor="@color/pc_cyan"
+                            app:progWidth="15dp"
+                            app:progress="85" />
+
+                        <TextView
+                            android:id="@+id/meiri_fen_bai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:text="85%"
+                            android:textColor="#ff4d4d4d"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/meiri_fen"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:text="16 / 45 min"
                         android:layout_height="wrap_content"/>
 
-                    <ImageView
-                        android:id="@+id/editText"
-                        android:layout_marginLeft="4dp"
-                        android:layout_width="20dp"
-                        android:src="@drawable/edittext_hui"
-                        android:layout_height="20dp"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_one"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/todaysize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="+ 0 道"
+                        android:textColor="@color/text_black"
+                        android:textSize="35dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/usertext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="成功的决心远胜于任何东西"
+                            android:textColor="@color/text_black" />
+
+                        <ImageView
+                            android:id="@+id/editText"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="4dp"
+                            android:src="@drawable/edittext_hui" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -126,7 +238,7 @@
                     android:background="@drawable/shape_one"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_height="100dp">
                     <LinearLayout
                         android:layout_marginTop="15dp"
@@ -197,14 +309,14 @@
                             android:id="@+id/baitiao"
                             android:layout_width="match_parent"
                             android:layout_height="10dp"
-                            android:background="@drawable/one_jin2"
+                            android:background="@drawable/one_jin"
                             android:orientation="horizontal" />
 
                         <LinearLayout
                             android:id="@+id/lantiao"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
-                            android:background="@drawable/one_jin"
+                            android:background="@drawable/one_jin2"
                             android:orientation="horizontal" />
 
 

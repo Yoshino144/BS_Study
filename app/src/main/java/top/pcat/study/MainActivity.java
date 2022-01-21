@@ -1,12 +1,15 @@
 package top.pcat.study;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,12 +20,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.Interpolator;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,16 +32,17 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apkfuns.logutils.LogUtils;
+import com.flyco.tablayout.SlidingTabLayout;
+import com.google.android.material.appbar.AppBarLayout;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
+
+import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
-import top.pcat.study.Fragment.BlankFragment;
 import top.pcat.study.Fragment.BlankFragment2;
 import top.pcat.study.Fragment.BlankFragment3;
 import top.pcat.study.Fragment.BlankFragment4;
-import top.pcat.study.StartPage.StatusBar;
 import top.pcat.study.Utils.StatusBarUtil;
-import com.youth.banner.Banner;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONException;
@@ -66,12 +67,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Delayed;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
 
     private static boolean loginflag;
-    private ViewPager mViewPager;
+    private NoScrollViewPager mViewPager;
     private RadioGroup mTabRadioGroup;
     private List<Fragment> mFragments;
     private FragmentPagerAdapter mAdapter;
@@ -81,8 +83,16 @@ public class MainActivity extends AppCompatActivity{
     private int page;
     private LinearLayout testbar;
     private long exitTime = 0;
+    private LinearLayout pppccc;
+
+
 
     private SharedPreferences mSpf;
+    private AppBarLayout appBarLayout;
+
+
+
+
 
     private Handler handler2 = new Handler(){
         @Override
@@ -103,7 +113,7 @@ public class MainActivity extends AppCompatActivity{
 
 //        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        StatusBarUtil.setStatusBarMode(this,true,R.color.bg_huidi);
+        StatusBarUtil.setStatusBarMode(this,true,R.color.cw);
 
         //testbar = findViewById(R.id.testbar);
         mSpf = super.getSharedPreferences("yejian",MODE_PRIVATE);
@@ -123,6 +133,10 @@ public class MainActivity extends AppCompatActivity{
         };
         Timer timer = new Timer(true);
         timer.schedule(task,strToDateLong("2020-06-14 15:33:30"));
+appBarLayout = findViewById(R.id.appbar);
+
+        appBarLayout.addOnOffsetChangedListener(this);
+
 
         RadioButton today_tab = findViewById(R.id.today_tab);
         RadioButton record_tab = findViewById(R.id.record_tab);
@@ -175,6 +189,7 @@ public class MainActivity extends AppCompatActivity{
         //初始化
         initView();
         mViewPager.setCurrentItem(page);
+        mViewPager.setNoScroll(false);
         //隐藏标题栏
 
 
@@ -183,6 +198,39 @@ public class MainActivity extends AppCompatActivity{
         bar_wei.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, barsize));
 
 
+        pppccc = findViewById(R.id.ppccc);
+
+int i = 0X008080FF;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        
+
+                        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),0X008080FF,0XFFFFFFFF);
+
+                        valueAnimator.setDuration(5000);
+
+                        valueAnimator.start();
+
+                        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                            @Override
+
+                            public void onAnimationUpdate(ValueAnimator animation) {
+                                //findViewById(R.id.ppccc).setBackgroundColor((Integer)animation.getAnimatedValue());
+
+                            }
+
+                        });
+                    }
+                });
+
+            }
+        }, 100);
 
 
     }
@@ -307,7 +355,7 @@ public class MainActivity extends AppCompatActivity{
         // init fragment
         mFragments = new ArrayList<>(4);
         //mFragments.add(BlankFragment.newInstance("456","789"));
-        mFragments.add(onePageFragment.newInstance("456","789"));
+        mFragments.add(OnePageFragment.newInstance("456","789"));
         mFragments.add(BlankFragment2.newInstance("456","789"));
         mFragments.add(BlankFragment3.newInstance("123","1"));
         mFragments.add(BlankFragment4.newInstance(name,lv));
@@ -351,11 +399,12 @@ public class MainActivity extends AppCompatActivity{
         public void onPageSelected(int position) {
             RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             radioButton.setChecked(true);
-            Log.d("当前页数", String.valueOf(position));
+            LogUtils.d("当前页数", String.valueOf(position));
             if(position == 0){
 
+                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+                //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
 
-            }else{
             }
         }
 
@@ -412,6 +461,8 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
@@ -598,5 +649,22 @@ public class MainActivity extends AppCompatActivity{
         LogUtils.d("显示了导航栏");
         testbar.animate().translationY(0);
     }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+LogUtils.d("ver"+verticalOffset);
+int pp=-appBarLayout.getTotalScrollRange();
+View view = findViewById(R.id.tiaotiao);
+        LogUtils.d(verticalOffset > pp);
+    if(verticalOffset > pp) view.setVisibility(View.INVISIBLE);
+    else view.setVisibility(View.VISIBLE);
+
+//        SlidingTabLayout tabb = findViewById(R.id.tabb);
+//        if(verticalOffset<-50)
+//        tabb.setBackgroundColor(getResources().getColor(R.color.gray_color));
+//        else
+//            tabb.setBackgroundColor(getResources().getColor(R.color.cw));
+    }
+
 
 }

@@ -9,33 +9,22 @@
     android:orientation="vertical">
 
     <RadioGroup
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
         android:elevation="0dp"
-        android:background="@drawable/shape_fra3"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="30dp">
 
         <RadioButton
             android:id="@+id/bang_one"
             android:checked="true"
             android:button="@null"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_marginRight="6dp"
+            android:layout_width="90dp"
             android:gravity="center"
             android:text="今日榜"
             android:textColor="@drawable/bang_textcolor"
@@ -43,37 +32,11 @@
             android:layout_height="match_parent"/>
 
         <RadioButton
-            android:id="@+id/bang_two"
             android:button="@null"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_width="90dp"
             android:gravity="center"
-            android:text="七日榜"
-            android:textColor="@drawable/bang_textcolor"
-            android:background="@drawable/bang_tab"
-            android:layout_height="match_parent"/>
-
-        <RadioButton
-            android:button="@null"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="0dp"
-            android:gravity="center"
-            android:layout_weight="1"
             android:text="总数榜"
             android:textColor="@drawable/bang_textcolor"
             android:background="@drawable/bang_tab"
@@ -82,17 +45,10 @@
         <RadioButton
             android:id="@+id/bang_four"
             android:button="@null"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="6dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="90dp"
             android:text="本院榜"
             android:textColor="@drawable/bang_textcolor"
             android:background="@drawable/bang_tab"
@@ -110,21 +66,41 @@
 <!--        android:background="@drawable/shape_radius_banner"-->
 <!--        android:layout_height="match_parent">-->
 
-        <LinearLayout
+<!--        <LinearLayout-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/shape_radius_banner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/rank_recycler_view7"-->
+<!--                app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+<!--        </LinearLayout>-->
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollone"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/shape_radius_banner"
+            android:layout_marginBottom="-10dp"
+            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:background="@drawable/shape_one">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rank_recycler_view7"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rank_recycler_view7"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
 
 <!--    </ScrollView>-->

@@ -25,10 +25,9 @@ public class DataBean {
 
     public static List<DataBean> getTestData() {
         List<DataBean> list = new ArrayList<>();
-        list.add(new DataBean(R.drawable.image3, "相信自己,你努力的样子真的很美", 2));
+        list.add(new DataBean(R.drawable.image1, "相信自己,你努力的样子真的很美", 2));
         list.add(new DataBean(R.drawable.image2, "极致简约,梦幻小屋", 3));
-        list.add(new DataBean(R.drawable.image4, "夏季新搭配", 2));
-        list.add(new DataBean(R.drawable.image5, "绝美风格搭配", 1));
+        list.add(new DataBean(R.drawable.image3, "夏季新搭配", 2));
         return list;
     }
 }

@@ -29,4 +29,22 @@
     <color name="google_blue">#FF375BF1</color>
     <color name="google_yellow">#FFF7D23E</color>
     <color name="google_green">#FF34A350</color>
+    <color name="cw">#ffffff</color>
+
+    <!--PC-->
+    <color name="first_purple">#919EFF</color>
+    <color name="pc_green_two">#7abd9a</color>
+    <color name="pc_green_three">#97D8B6</color>
+    <color name="pc_green_one">#50c7a2</color>
+    <color name="pc_shan">#fe6f61</color>
+    <color name="pc_blue">#6698cb</color>
+    <color name="pc_blue2">#89B2DC</color>
+    <color name="pc_blue3">#116BC6</color>
+    <color name="pc_cyan">#7fccde</color>
+    <color name="pc_cyan2">#149ABA</color>
+    <color name="pc_green_text">#109d58</color>
+    <color name="pc_fen">#ffbfcd</color>
+    <color name="pc_fenshen">#FFB8B8</color>
+
+    <color name="zhuti"></color>
 </resources>

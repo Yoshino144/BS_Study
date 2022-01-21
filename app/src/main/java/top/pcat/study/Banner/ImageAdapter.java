@@ -19,7 +19,8 @@ public class ImageAdapter extends BannerAdapter<DataBean, ImageAdapter.BannerVie
 
     @Override
     public BannerViewHolder onCreateHolder(ViewGroup parent, int viewType) {
-        RoundImageView imageView = new RoundImageView(parent.getContext());
+        //RoundImageView imageView = new RoundImageView(parent.getContext());
+        ImageView imageView = new ImageView(parent.getContext());
         imageView.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
@@ -33,9 +34,9 @@ public class ImageAdapter extends BannerAdapter<DataBean, ImageAdapter.BannerVie
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
-        RoundImageView imageView;
+        ImageView imageView;
 
-        public BannerViewHolder(@NonNull RoundImageView view) {
+        public BannerViewHolder(@NonNull ImageView view) {
             super(view);
             this.imageView = view;
         }

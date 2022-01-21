@@ -34,6 +34,8 @@ import top.pcat.study.View.LogUtils;
 import top.pcat.study.user.SignActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.listener.OnPageChangeListener;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
@@ -65,7 +67,7 @@ import java.util.Random;
  * Use the {@link BlankFragment2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment2 extends Fragment {
+public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -94,6 +96,7 @@ public class BlankFragment2 extends Fragment {
     private DisplayUtil dipToPix;
     private String interres;
     private String tempTest;
+    private int nowPage = 0;
     private boolean signFlag;
     private LinearLayout cpp;
     private LinearLayout c;
@@ -643,10 +646,14 @@ public class BlankFragment2 extends Fragment {
         myBanner.setIndicator(new CircleIndicator(getActivity()));
         myBanner.setUserInputEnabled(true);
         myBanner.isAutoLoop(true);
+        myBanner.addOnPageChangeListener(this);
         //myBanner.setDelayTime(5000);
         myBanner.start();
 
     }
+
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -671,6 +678,23 @@ public class BlankFragment2 extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        //LogUtils.d("tag", "1"+position+"张轮播图");
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        //LogUtils.d("tag", "2"+position+"张轮播图");
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

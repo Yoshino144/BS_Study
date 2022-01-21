@@ -43,6 +43,7 @@ import top.pcat.study.Fresh.CircleRefreshLayout;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
 import top.pcat.study.Utils.PxToDp;
+import top.pcat.study.View.CircleProgressView;
 import top.pcat.study.View.LogUtils;
 import top.pcat.study.user.SignActivity;
 
@@ -97,6 +98,12 @@ public class BlankFragment extends Fragment {
     private TextView e;
     private TextView f;
     private TextView g;
+    private TextView meiri;
+    private TextView meiri_f;
+    private TextView meiri_b;
+    private TextView meiri_fb;
+    private CircleProgressView meiri_t;
+    private CircleProgressView meiri_t2;
     private CircleRefreshLayout circleRefreshLayout;
     private LinearLayout lin;
     private LinearLayout qwe;
@@ -229,6 +236,12 @@ public class BlankFragment extends Fragment {
             allsizetext = rootView.findViewById(R.id.allsizetext);
             todaysize = rootView.findViewById(R.id.todaysize);
             tt= rootView.findViewById(R.id.lantiao);
+            meiri = rootView.findViewById(R.id.meiri);
+            meiri_b = rootView.findViewById(R.id.meiri_bai);
+            meiri_f = rootView.findViewById(R.id.meiri_fen);
+            meiri_fb = rootView.findViewById(R.id.meiri_fen_bai);
+            meiri_t = rootView.findViewById(R.id.meiri_q);
+            meiri_t2 =  rootView.findViewById(R.id.meiri_q2);
             baitiao = rootView.findViewById(R.id.baitiao);
             TextView usertext2 = rootView.findViewById(R.id.usertext);
             todaySize = read("UserInfo");
@@ -269,6 +282,13 @@ public class BlankFragment extends Fragment {
             qwe.setVisibility(View.VISIBLE);
             todaysize.setText("+ " + "0 道");
             allsizetext.setText("0 道");
+
+            meiri.setText("0 / 50 道");
+            meiri_b.setText("0%");
+            meiri_f.setText("0 / 45 min");
+            meiri_fb.setText("0%");
+            meiri_t.setProgress(0);
+            meiri_t2.setProgress(0);
             timusizetext.setText("0 道");
             baifenbitext.setText("0.0 %");
             usertext2.setText("成功的决心远胜于任何东西");
@@ -317,6 +337,14 @@ public class BlankFragment extends Fragment {
             JSONObject jsonObject = new JSONObject(tempInfo);
 
             todaysize.setText("+ " + jsonObject.getString(LocalDate.now().toString()) + " 道");
+
+            //ToDo gai
+            meiri.setText(jsonObject.getString(LocalDate.now().toString())+" / 50 道");
+            meiri_b.setText("25%");
+            meiri_f.setText("33 / 45 min");
+            meiri_fb.setText("56%");
+            meiri_t.setProgress(25);
+            meiri_t2.setProgress(56);
 
             Sunday = jsonObject.getString(LocalDate.now().plusDays(-6).toString());
             Moonday = jsonObject.getString(LocalDate.now().plusDays(0).toString());
@@ -602,7 +630,7 @@ public class BlankFragment extends Fragment {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd");
         gtext.setText(LocalDate.now().plusDays(-6).format(formatter).toString());
         atext.setText(LocalDate.now().plusDays(0).format(formatter).toString());
-        atext.setTextColor(Color.parseColor("#65cefe"));
+        atext.setTextColor(Color.parseColor("#F1BDB6"));
         btext.setText(LocalDate.now().plusDays(-1).format(formatter).toString());
         ctext.setText(LocalDate.now().plusDays(-2).format(formatter).toString());
         dtext.setText(LocalDate.now().plusDays(-3).format(formatter).toString());
@@ -913,8 +941,8 @@ public class BlankFragment extends Fragment {
             set1.setCircleRadius(4f);
             set1.setCircleColor(Color.WHITE);
             set1.setHighLightColor(getResources().getColor(R.color.google_blue));
-            set1.setColor(Color.parseColor("#919EFF"));
-            set1.setFillColor(Color.parseColor("#61d0ff"));
+            set1.setColor(Color.parseColor("#6698cb"));//#FFB8B8
+            set1.setFillColor(Color.parseColor("#7fccde"));
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
             set1.setFillFormatter(new IFillFormatter() {

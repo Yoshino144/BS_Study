@@ -24,25 +24,63 @@
 
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
+            app:elevation="0dp"
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/ppccc"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="49dp"
+                android:orientation="horizontal"
                 android:background="#fff"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <Button
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="我是一个按钮" />
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_height="70dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/hearImg"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="30dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_gravity="center"
+                        android:layout_height="30dp"
+                        android:src="@drawable/user"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="#77000000"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_sousuo"
+                    android:layout_height="31dp">
+
+                    <EditText
+                        android:hint="搜索"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_width="match_parent"
+                        android:background="@color/bg_huidi"
+                        android:layout_height="30dp"/>
+
+                </LinearLayout>
 
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <top.pcat.study.Fragment.NoScrollViewPager
             android:id="@+id/fragment_vp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
