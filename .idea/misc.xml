@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable-v24/twopage_but.xml" value="0.2537037037037037" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/bang_radius5.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/bang_radius5_wei.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/bang_tab.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/bang_textcolor.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin2.xml" value="0.25833333333333336" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_f2jian.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_fra3.xml" value="0.24444444444444444" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_img.xml" value="0.2537037037037037" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_jishu.xml" value="0.21851851851851853" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_one.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_radius5.xml" value="0.18697916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_radius_banner.xml" value="0.2564814814814815" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_radius_banner_xia.xml" value="0.2564814814814815" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_sousuo.xml" value="0.21851851851851853" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_test.xml" value="0.24444444444444444" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_base.xml" value="0.24947916666666667" />
@@ -20,7 +25,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_chat.xml" value="0.13333333333333333" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_exercises.xml" value="0.1" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_im.xml" value="0.13333333333333333" />
-        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_sign.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_start.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/activity_wrong_question.xml" value="0.24947916666666667" />
@@ -31,7 +36,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/curriculum.xml" value="0.1" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/feed_relative.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank.xml" value="0.4446564885496183" />
-        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment2.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment2.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment3.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment4.xml" value="0.176" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_one_page.xml" value="0.264" />

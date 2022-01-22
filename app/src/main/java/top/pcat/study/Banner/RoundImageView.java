@@ -44,8 +44,8 @@ public class RoundImageView extends ImageView {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        leftTopRadius = 24;
-        rightTopRadius = 24;
+        leftTopRadius = 21;
+        rightTopRadius = 21;
         rightBottomRadius = 0;
         leftBottomRadius = 0;
 

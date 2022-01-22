@@ -1,7 +1,7 @@
 <ScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/bg_huidi"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:roundiv="http://schemas.android.com/apk/res-auto">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,24 +17,43 @@
 <!--            android:textColor="@color/black"/>-->
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:background="@drawable/shape_test"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_height="223dp">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@drawable/shape_radius_banner"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/banban"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="wrap_content">
 
                 <com.youth.banner.Banner
                     xmlns:banner="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp" />
+                    android:layout_height="180dp"
+                    banner:banner_indicator_normal_color="@android:color/white"
+                    banner:banner_indicator_selected_color="@color/colorPrimary"
+                    banner:banner_radius="7dp" />
+
+                <RelativeLayout
+                    android:layout_marginTop="-20dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <com.youth.banner.indicator.RoundLinesIndicator
+                        android:id="@+id/indicatorrr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+
 
 <!--                <androidx.viewpager.widget.ViewPager-->
 <!--                    android:id="@+id/banner_viewPager"-->
@@ -50,108 +69,107 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="-7dp"
+                android:background="@drawable/shape_radius_banner_xia"
+                android:layout_alignBottom="@id/banban"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="65dp">
+                android:layout_height="100dp">
 
                 <LinearLayout
-                    android:id="@+id/twoOne"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="70dp">
+                    android:layout_width="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/shape_img"
+                    android:layout_height="80dp">
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/two_one"/>
+                    <top.pcat.study.View.CustomRoundAngleImageView
+                        roundiv:left_bottom_radius="7dp"
+                        roundiv:left_top_radius="7dp"
+                        roundiv:right_bottom_radius="7dp"
+                        roundiv:right_top_radius="7dp"
+                        android:layout_width="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/image22"
+                        android:layout_height="match_parent"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="13dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text="我的课程"/>
                 </LinearLayout>
-
+                
                 <LinearLayout
-                    android:id="@+id/twoTwo"
+                    android:layout_gravity="center_vertical"
                     android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="70dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/two_two"/>
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
                     <TextView
+                        android:textSize="17sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="C语言"
+                        android:textColor="#000"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="13dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text="推荐课程"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/twoThree"
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="70dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/two_three"/>
+                        android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp"
+                        android:text="2022/1/22 17:38"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="13dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text="全部课程"/>
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/twoFour"
-                    android:orientation="vertical"
+                <View
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="70dp">
+                    android:layout_height="match_parent"/>
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_gravity="center_horizontal"
-                        android:src="@drawable/two_four"/>
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:background="@drawable/twopage_but"
+                    android:layout_marginRight="25dp"
+                    android:layout_width="95dp"
+                    android:layout_height="35dp">
 
                     <TextView
+                        android:textSize="15sp"
+                        android:textColor="#fff"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="13dp"
-                        android:layout_marginTop="6dp"
-                        android:layout_gravity="center_horizontal"
-                        android:text="我的收藏"/>
+                        android:text="继续学习"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
+
+
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/twoThree"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="70dp">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/two_three"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:layout_marginTop="6dp"
+                android:layout_gravity="center_horizontal"
+                android:text="全部课程"/>
 
         </LinearLayout>
 

@@ -1,154 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/bg_huidi"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/bar_wei_main"
-        android:layout_width="match_parent"
-        android:layout_height="64px"
-        android:background="#515151"
-        android:orientation="horizontal"
-        android:visibility="gone" />
 
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <ImageView
+            android:id="@+id/bar_wei_main"
             android:layout_width="match_parent"
-            app:elevation="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image11" />
 
-            <LinearLayout
-                android:id="@+id/ppccc"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:orientation="horizontal"
-                android:background="#fff"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_horizontal"
-                    android:layout_height="70dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/hearImg"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:layout_width="30dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_gravity="center"
-                        android:layout_height="30dp"
-                        android:src="@drawable/user"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="#77000000"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="center"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/shape_sousuo"
-                    android:layout_height="31dp">
-
-                    <EditText
-                        android:hint="搜索"
-                        android:textSize="14sp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_width="match_parent"
-                        android:background="@color/bg_huidi"
-                        android:layout_height="30dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <top.pcat.study.Fragment.NoScrollViewPager
-            android:id="@+id/fragment_vp"
+        <ImageView
+            android:id="@+id/bar_wei_main2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/tabs_rg"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image33" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <View
+            android:background="@drawable/shape_f2jian"
+            android:layout_marginTop="-50dp"
+            android:layout_below="@id/bar_wei_main"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
+
 
         <LinearLayout
+            android:id="@+id/shiyingxing"
             android:layout_width="match_parent"
-            android:layout_height="2px"
-            android:background="@color/tab_fen" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/tabs_rg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            android:background="@color/write_fan"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/today_tab"
-                style="@style/Custom.TabRadioButton"
-                android:layout_gravity="center"
-                android:checked="true"
-                android:drawableTop="@drawable/tab_sign_selector"
-                android:gravity="center"
-                android:text="学习"
-                android:textColor="@drawable/radiobutton_textcolor"
-                android:textSize="10dp" />
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
-            <RadioButton
-                android:id="@+id/record_tab"
-                style="@style/Custom.TabRadioButton"
-                android:layout_gravity="center"
-                android:drawableTop="@drawable/tab_ke_selector"
-                android:gravity="center"
-                android:text="课程"
-                android:textColor="@drawable/radiobutton_textcolor"
-                android:textSize="10dp" />
 
-            <RadioButton
-                android:id="@+id/pai_tab"
-                style="@style/Custom.TabRadioButton"
-                android:layout_gravity="center"
-                android:drawableTop="@drawable/tab_pai_selector"
-                android:gravity="center"
-                android:text="班级"
-                android:textColor="@drawable/radiobutton_textcolor"
-                android:textSize="10dp" />
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    app:elevation="0dp">
 
-            <RadioButton
-                android:id="@+id/settings_tab"
-                style="@style/Custom.TabRadioButton"
-                android:layout_gravity="center"
-                android:drawableTop="@drawable/tab_me_selector"
-                android:gravity="center"
-                android:text="我的"
-                android:textColor="@drawable/radiobutton_textcolor"
-                android:textSize="10dp" />
-        </RadioGroup>
-    </LinearLayout>
-</LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ppccc"
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:background="#00000000"
+                        android:orientation="horizontal"
+                        app:layout_scrollFlags="scroll|enterAlways">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="70dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/main_hearImg"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="15dp"
+                                android:src="@drawable/user"
+                                app:civ_border_color="#77000000"
+                                app:civ_border_width="0dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="31dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_sousuo">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="30dp"
+                                android:layout_marginRight="30dp"
+                                android:background="@color/bg_huidi"
+                                android:hint="搜索"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <top.pcat.study.Fragment.NoScrollViewPager
+                    android:id="@+id/fragment_vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/tabs_rg"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="@color/tab_fen" />
+
+                <RadioGroup
+                    android:id="@+id/tabs_rg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:background="@color/write_fan"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/today_tab"
+                        style="@style/Custom.TabRadioButton"
+                        android:layout_gravity="center"
+                        android:checked="true"
+                        android:drawableTop="@drawable/tab_sign_selector"
+                        android:gravity="center"
+                        android:text="学习"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/record_tab"
+                        style="@style/Custom.TabRadioButton"
+                        android:layout_gravity="center"
+                        android:drawableTop="@drawable/tab_ke_selector"
+                        android:gravity="center"
+                        android:text="课程"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/pai_tab"
+                        style="@style/Custom.TabRadioButton"
+                        android:layout_gravity="center"
+                        android:drawableTop="@drawable/tab_pai_selector"
+                        android:gravity="center"
+                        android:text="班级"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="10dp" />
+
+                    <RadioButton
+                        android:id="@+id/settings_tab"
+                        style="@style/Custom.TabRadioButton"
+                        android:layout_gravity="center"
+                        android:drawableTop="@drawable/tab_me_selector"
+                        android:gravity="center"
+                        android:text="我的"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="10dp" />
+                </RadioGroup>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+</RelativeLayout>

@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -20,9 +22,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +44,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Fragment.BlankFragment2;
@@ -70,8 +78,8 @@ import java.util.TimerTask;
 import java.util.concurrent.Delayed;
 
 
-public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
-
+public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+    private int pageId = 0;
     private static boolean loginflag;
     private NoScrollViewPager mViewPager;
     private RadioGroup mTabRadioGroup;
@@ -84,22 +92,69 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private LinearLayout testbar;
     private long exitTime = 0;
     private LinearLayout pppccc;
+    private ImageView bar_wei;
+    private ImageView bar_wei2;
+    private LinearLayout shiying;
 
+    private int nowPage = 0;
+
+    public int getNowPage() {
+        return nowPage;
+    }
+    private Integer imageRes;
+    private String startco = "#ffffff";
+    private String endco = "#ffffff";
+    private BlankFragment2 fragment2;
+
+    public void setNowPage(Integer imageRes) {
+        LogUtils.d("yeshu=="+ imageRes);
+        this.imageRes = imageRes;
+        if (pageId == 1) {
+            //shiying.setAccessibilityLiveRegion();
+
+
+
+            //bar_wei.setImageResource(imageRes);
+            //bar_wei2.
+            if(imageRes == R.drawable.image33){
+
+                ObjectAnimator.ofFloat(bar_wei2, "alpha",  0, 1).setDuration(400).start();
+            }else{
+
+                ObjectAnimator.ofFloat(bar_wei2, "alpha",  1, 0).setDuration(400).start();
+            }
+            //ObjectAnimator.ofFloat(bar_wei2, "alpha", 1, 0, 1).setDuration(2500).start();
+            pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+            bar_wei.setVisibility(View.VISIBLE);
+            StatusBarUtil.setTranslucentStatus(this);
+            //System.out.println(findViewById(R.id.cnm).getLayoutParams());
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            params.setMargins(0, getStatusBarHeight(this), 0, 0);
+            findViewById(R.id.shiyingxing).setLayoutParams(params);
+
+        }
+    }
+
+    public void ch(View view, String start, String end) {
+        ValueAnimator animator = ObjectAnimator.ofInt(view, "backgroundColor", Color.parseColor(start), Color.parseColor(end));//对背景色颜色进行改变，操作的属性为"backgroundColor",此处必须这样写，不能全小写,后面的颜色为在对应颜色间进行渐变
+        animator.setDuration(500);
+        animator.setEvaluator(new ArgbEvaluator());//如果要颜色渐变必须要ArgbEvaluator，来实现颜色之间的平滑变化，否则会出现颜色不规则跳动
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.start();
+    }
 
 
     private SharedPreferences mSpf;
     private AppBarLayout appBarLayout;
 
+    private FileTool ft;
 
-
-
-
-    private Handler handler2 = new Handler(){
+    private Handler handler2 = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
-                    Log.i("====","执行了");
+                    Log.i("====", "执行了");
                     //需要执行的代码放这里
                     break;
             }
@@ -110,21 +165,22 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        bar_wei = findViewById(R.id.bar_wei_main);
+        bar_wei2 = findViewById(R.id.bar_wei_main2);
 //        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        StatusBarUtil.setStatusBarMode(this,true,R.color.cw);
+        StatusBarUtil.setStatusBarMode(this, true, R.color.cw);
 
         //testbar = findViewById(R.id.testbar);
-        mSpf = super.getSharedPreferences("yejian",MODE_PRIVATE);
+        mSpf = super.getSharedPreferences("yejian", MODE_PRIVATE);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH");
         Date date = new Date(System.currentTimeMillis());
         String hour = simpleDateFormat.format(date);
         int hourNum = Integer.parseInt(hour);
-        Log.d("当前时间", hour+hourNum);
+        Log.d("当前时间", hour + hourNum);
 
-
+        shiying = findViewById(R.id.shiyingxing);
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -132,8 +188,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             }
         };
         Timer timer = new Timer(true);
-        timer.schedule(task,strToDateLong("2020-06-14 15:33:30"));
-appBarLayout = findViewById(R.id.appbar);
+        timer.schedule(task, strToDateLong("2020-06-14 15:33:30"));
+        appBarLayout = findViewById(R.id.appbar);
 
         appBarLayout.addOnOffsetChangedListener(this);
 
@@ -158,15 +214,31 @@ appBarLayout = findViewById(R.id.appbar);
         drawable_news4.setBounds(0, 0, 60, 60);
         pai_tab.setCompoundDrawables(null, drawable_news4, null, null);
 
+        initView();
+
+        File path = new File(getFilesDir().getAbsolutePath()+"/Login.txt");
+        if(ft.isFileExists(path.toString())){
+            File path2 = new File(getFilesDir().getAbsolutePath()+"/UserImg.png");
+            if(ft.isFileExists(path2.toString())){
+                //ImageView headImage = getActivity().findViewById(R.id.hearImg);
+
+                Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath()+"/UserImg.png");
+//            headImage.setImageBitmap(bitmap);
+
+                CircleImageView img = findViewById(R.id.main_hearImg);
+                img.setImageBitmap(bitmap);
+            }
+            else{
+            }
+        }
 
         //获取页数
-        Intent intent =getIntent();
-        page=intent.getIntExtra("page",0);
+        Intent intent = getIntent();
+        page = intent.getIntExtra("page", 0);
 
         submitPrivacyGrantResult(true);
 
-        File path = new File(getFilesDir().getAbsolutePath()+"/Login.txt");
-        if(FileTool.isFileExists(path.toString())){
+        if (FileTool.isFileExists(path.toString())) {
             lv = readInfo(readlv());
             name = read();
             try {
@@ -174,33 +246,25 @@ appBarLayout = findViewById(R.id.appbar);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            loginflag = true;
-
-
-        }
-        else{
-            name = "未登录 | 点击登录";
-            lv = "0";
-            //name =path.toString();
-            loginflag = false;
         }
 
 
         //初始化
-        initView();
         mViewPager.setCurrentItem(page);
         mViewPager.setNoScroll(false);
         //隐藏标题栏
 
 
-        int barsize=getStatusBarHeight(this);
-        LinearLayout bar_wei = findViewById(R.id.bar_wei_main);
-        bar_wei.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, barsize));
-
+        int barsize = 0;
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        params.setMargins(0, 0, 0, 0);
+        findViewById(R.id.shiyingxing).setLayoutParams(params);
 
         pppccc = findViewById(R.id.ppccc);
 
-int i = 0X008080FF;
+        pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+
+        int i = 0X008080FF;
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -209,9 +273,8 @@ int i = 0X008080FF;
                     @Override
                     public void run() {
 
-                        
 
-                        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(),0X008080FF,0XFFFFFFFF);
+                        ValueAnimator valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), 0X008080FF, 0XFFFFFFFF);
 
                         valueAnimator.setDuration(5000);
 
@@ -237,11 +300,12 @@ int i = 0X008080FF;
 
     public void writeInfo(String val) {
         SharedPreferences.Editor editor = mSpf.edit();
-        editor.putString("name",val);
+        editor.putString("name", val);
         editor.apply();
     }
+
     public String readSPInfo() {
-        return mSpf.getString("name","");
+        return mSpf.getString("name", "");
     }
 
     public static Date strToDateLong(String strDate) {
@@ -257,26 +321,26 @@ int i = 0X008080FF;
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238:12345/userdates/1/"+userid);
+                    URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
 
-                    LogUtils.d("/userdates/1/",url.toString());
+                    LogUtils.d("/userdates/1/", url.toString());
 
                     int responseCode = connection.getResponseCode();
-                    LogUtils.d("/userdates/1/+responseCode",responseCode);
+                    LogUtils.d("/userdates/1/+responseCode", responseCode);
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
-                        Log.d("kwwl","result============="+result);
+                        Log.d("kwwl", "result=============" + result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
                         while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
-                        LogUtils.d("/userdates/1/",response.toString());
+                        LogUtils.d("/userdates/1/", response.toString());
 
                         saveDatai(response.toString());
 //                        Looper.prepare();
@@ -317,7 +381,7 @@ int i = 0X008080FF;
             int length = fin.available();
             byte[] buffer = new byte[length];
             fin.read(buffer);
-            result = EncodingUtils.getString(buffer,"UTF-8");
+            result = EncodingUtils.getString(buffer, "UTF-8");
             fin.close();
             return result;
         } catch (FileNotFoundException e) {
@@ -336,7 +400,7 @@ int i = 0X008080FF;
             int length = fin.available();
             byte[] buffer = new byte[length];
             fin.read(buffer);
-            result = EncodingUtils.getString(buffer,"UTF-8");
+            result = EncodingUtils.getString(buffer, "UTF-8");
             fin.close();
             return result;
         } catch (FileNotFoundException e) {
@@ -353,12 +417,13 @@ int i = 0X008080FF;
         mViewPager = findViewById(R.id.fragment_vp);
         mTabRadioGroup = findViewById(R.id.tabs_rg);
         // init fragment
+        fragment2 = new BlankFragment2();
         mFragments = new ArrayList<>(4);
         //mFragments.add(BlankFragment.newInstance("456","789"));
-        mFragments.add(OnePageFragment.newInstance("456","789"));
-        mFragments.add(BlankFragment2.newInstance("456","789"));
-        mFragments.add(BlankFragment3.newInstance("123","1"));
-        mFragments.add(BlankFragment4.newInstance(name,lv));
+        mFragments.add(OnePageFragment.newInstance("456", "789"));
+        mFragments.add(fragment2.newInstance("456", "789"));
+        mFragments.add(BlankFragment3.newInstance("123", "1"));
+        mFragments.add(BlankFragment4.newInstance(name, lv));
         // init view pager
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mAdapter);
@@ -400,12 +465,31 @@ int i = 0X008080FF;
             RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             radioButton.setChecked(true);
             LogUtils.d("当前页数", String.valueOf(position));
-            if(position == 0){
+            pageId = position;
+            if (position != 1) {
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.setMargins(0, 0, 0, 0);
+                findViewById(R.id.shiyingxing).setLayoutParams(params);
 
                 pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
                 //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+                bar_wei.setVisibility(View.GONE);
+                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
 
             }
+            else{
+                int res = fragment2.activityChangeFragment("data");
+                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+                bar_wei.setVisibility(View.VISIBLE);
+                if(imageRes == null) imageRes =res;
+                bar_wei.setImageResource(imageRes);
+                StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                //System.out.println(findViewById(R.id.cnm).getLayoutParams());
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);
+                findViewById(R.id.shiyingxing).setLayoutParams(params);
+            }
+
         }
 
         @Override
@@ -434,15 +518,15 @@ int i = 0X008080FF;
         }
     };
 
-    public String readInfo(String tempInfo){
+    public String readInfo(String tempInfo) {
         try {
             JSONObject jsonArray = new JSONObject(tempInfo);
-                //lv = jsonArray.getString("lv");
-            lv="10";
-                user_id = jsonArray.getString("id");
-                return lv;
+            //lv = jsonArray.getString("lv");
+            lv = "10";
+            user_id = jsonArray.getString("id");
+            return lv;
         } catch (JSONException e) {
-            Toast.makeText(MainActivity.this,"信息读取错误",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "信息读取错误", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
         return "error";
@@ -461,7 +545,6 @@ int i = 0X008080FF;
             }
         });
     }
-
 
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -508,7 +591,7 @@ int i = 0X008080FF;
     }
 
 
-    public void UpData(String username,String json,int allSize) throws IOException {
+    public void UpData(String username, String json, int allSize) throws IOException {
 
         new Thread(new Runnable() {
             @Override
@@ -522,21 +605,21 @@ int i = 0X008080FF;
                     connection.setUseCaches(false);
                     connection.connect();
 
-                    String body = "username="+username+"&json="+json+"&allSize="+allSize;
-                    Log.d("======================",body);
+                    String body = "username=" + username + "&json=" + json + "&allSize=" + allSize;
+                    Log.d("======================", body);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
 
                     int responseCode = connection.getResponseCode();
-                    if(responseCode == HttpURLConnection.HTTP_OK){
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
                         //Log.d("kwwl","result============="+result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
-                        while((line = reader.readLine())!= null){
+                        while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
 
@@ -545,17 +628,16 @@ int i = 0X008080FF;
                         Looper.prepare();
                         //Toast.makeText(MainActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
                         Looper.loop();
-                    }
-                    else{
+                    } else {
                         Looper.prepare();
-                        Toast.makeText(MainActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
-                    Toast.makeText(MainActivity.this,"上传失败  请反馈开发者",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "上传失败  请反馈开发者", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
@@ -587,27 +669,26 @@ int i = 0X008080FF;
             public void run() {
                 try {
                     String uu = "http://192.168.31.238/web/Doc/timu_size.json";
-                    Log.d("url","url============="+uu);
+                    Log.d("url", "url=============" + uu);
                     URL url = new URL(uu);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
                     int responseCode = connection.getResponseCode();
-                    if(responseCode == HttpURLConnection.HTTP_OK){
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result1 = String.valueOf(inputStream);//将流转换为字符串。
-                        Log.d("kwwl","result============="+result1);
+                        Log.d("kwwl", "result=============" + result1);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
-                        while((line = reader.readLine())!= null){
+                        while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
 
-                        Log.d("as","aaaaaaaaaaaaaaaaa============="+response.toString());
+                        Log.d("as", "aaaaaaaaaaaaaaaaa=============" + response.toString());
                         saveccc(response.toString());
-                    }
-                    else{
+                    } else {
                         Looper.prepare();
                         //Toast.makeText(ChapterActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
                         Looper.loop();
@@ -640,24 +721,24 @@ int i = 0X008080FF;
 
     }
 
-    public void Hide(){
+    public void Hide() {
         LogUtils.d("隐藏了导航栏");
         testbar.animate().translationY(testbar.getHeight());
     }
 
-    public void Display(){
+    public void Display() {
         LogUtils.d("显示了导航栏");
         testbar.animate().translationY(0);
     }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-LogUtils.d("ver"+verticalOffset);
-int pp=-appBarLayout.getTotalScrollRange();
-View view = findViewById(R.id.tiaotiao);
+        LogUtils.d("ver" + verticalOffset);
+        int pp = -appBarLayout.getTotalScrollRange();
+        View view = findViewById(R.id.tiaotiao);
         LogUtils.d(verticalOffset > pp);
-    if(verticalOffset > pp) view.setVisibility(View.INVISIBLE);
-    else view.setVisibility(View.VISIBLE);
+        if (verticalOffset > pp) view.setVisibility(View.GONE);
+        else view.setVisibility(View.VISIBLE);
 
 //        SlidingTabLayout tabb = findViewById(R.id.tabb);
 //        if(verticalOffset<-50)

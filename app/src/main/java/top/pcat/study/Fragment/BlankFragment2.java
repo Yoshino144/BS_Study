@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -34,8 +35,9 @@ import top.pcat.study.View.LogUtils;
 import top.pcat.study.user.SignActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
-import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.indicator.RoundLinesIndicator;
 import com.youth.banner.listener.OnPageChangeListener;
+import com.youth.banner.util.BannerUtils;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
@@ -43,7 +45,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,12 +52,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -181,6 +180,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -193,6 +193,8 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
         blan = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_blank_fragment2, container, false);
 
+        initBanner();
+        //initBanner();
         File path = new File(requireActivity().getFilesDir().getAbsolutePath()+"/Login.txt");
         if(!FileTool.isFileExists(path.toString())){
             LinearLayout qwe = blan.findViewById(R.id.loginFlag);
@@ -206,7 +208,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                 startActivity(intent01);
             });
         }
-        initBanner();
 
 
         return blan;
@@ -272,56 +273,56 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         });
 
 
-        one = getActivity().findViewById(R.id.twoOne);
-        one.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
-
-                if(signFlag){
-
-                    try {
-                        GetYixuan("http://192.168.31.238:12345/subjects/"+readInfo(readId()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-//                    // TODO Auto-generated method stub
-//                    if (tempTest.contains("C++")) {
-//                        cpp.setVisibility(View.VISIBLE);
+//        one = getActivity().findViewById(R.id.twoOne);
+//        one.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("WrongConstant")
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(signFlag){
+//
+//                    try {
+//                        GetYixuan("http://192.168.31.238:12345/subjects/"+readInfo(readId()));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
 //                    }
-//                    if (tempTest.contains("C--")) {
-//                        c.setVisibility(View.VISIBLE);
-//                    }
-                    //add.setVisibility(View.VISIBLE);
-//                    Toast.makeText(getActivity(), "收藏", 0).show();
+////                    // TODO Auto-generated method stub
+////                    if (tempTest.contains("C++")) {
+////                        cpp.setVisibility(View.VISIBLE);
+////                    }
+////                    if (tempTest.contains("C--")) {
+////                        c.setVisibility(View.VISIBLE);
+////                    }
+//                    //add.setVisibility(View.VISIBLE);
+////                    Toast.makeText(getActivity(), "收藏", 0).show();
+//
+//                }else{
+//                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
+//
+//                }
+//            }
+//        });
 
-                }else{
-                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
-
-                }
-            }
-        });
-
-        two = getActivity().findViewById(R.id.twoTwo);
-        two.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-//                Intent intent01=new Intent();
-//                intent01.setClass(getActivity(), Recommend.class);
-//                startActivity(intent01);
-//                Toast.makeText(getActivity(), "推荐", 0).show();
-                    updata2();
-//                c.setVisibility(View.GONE);
-//                cpp.setVisibility(View.VISIBLE);
-//                add.setVisibility(View.GONE);
-//                    sjjg.setVisibility(View.GONE);
-//                    sjk.setVisibility(View.GONE);
-//                    sf.setVisibility(View.GONE);
-//                    yy.setVisibility(View.GONE);
-            }
-        });
+//        two = getActivity().findViewById(R.id.twoTwo);
+//        two.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("WrongConstant")
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+////                Intent intent01=new Intent();
+////                intent01.setClass(getActivity(), Recommend.class);
+////                startActivity(intent01);
+////                Toast.makeText(getActivity(), "推荐", 0).show();
+//                    updata2();
+////                c.setVisibility(View.GONE);
+////                cpp.setVisibility(View.VISIBLE);
+////                add.setVisibility(View.GONE);
+////                    sjjg.setVisibility(View.GONE);
+////                    sjk.setVisibility(View.GONE);
+////                    sf.setVisibility(View.GONE);
+////                    yy.setVisibility(View.GONE);
+//            }
+//        });
 
         three = getActivity().findViewById(R.id.twoThree);
         three.setOnClickListener(new View.OnClickListener() {
@@ -345,27 +346,27 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             }
         });
 
-        four = getActivity().findViewById(R.id.twoFour);
-        four.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongConstant")
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-
-                if(signFlag){
-                    Intent intent01 = new Intent();
-                    intent01.setClass(getActivity(), Collection.class);
-                    startActivity(intent01);
-                    //Toast.makeText(getActivity(), "收藏", 0).show();
-
-                }else{
-                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
-
-                }
-
-
-            }
-        });
+//        four = getActivity().findViewById(R.id.twoFour);
+//        four.setOnClickListener(new View.OnClickListener() {
+//            @SuppressLint("WrongConstant")
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//
+//                if(signFlag){
+//                    Intent intent01 = new Intent();
+//                    intent01.setClass(getActivity(), Collection.class);
+//                    startActivity(intent01);
+//                    //Toast.makeText(getActivity(), "收藏", 0).show();
+//
+//                }else{
+//                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
+//
+//                }
+//
+//
+//            }
+//        });
 //
 //        oneSize = getActivity().findViewById(R.id.oneSize);
 //        oneSize.setOnClickListener(v -> {
@@ -638,21 +639,30 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private void initBanner() {
 
         //CircleIndicator circleIndicator = new CircleIndicator(this.getActivity());
-
+        RoundLinesIndicator indicator = blan.findViewById(R.id.indicatorrr);
         myBanner = (Banner) blan.findViewById(R.id.banner);
 
         //默认直接设置adapter就行了
         myBanner.setAdapter(new ImageAdapter(DataBean.getTestData()));
-        myBanner.setIndicator(new CircleIndicator(getActivity()));
         myBanner.setUserInputEnabled(true);
         myBanner.isAutoLoop(true);
         myBanner.addOnPageChangeListener(this);
+
+        myBanner.setIndicator(indicator, false);
+        myBanner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
         //myBanner.setDelayTime(5000);
         myBanner.start();
 
+
     }
 
-
+    public Integer activityChangeFragment(String data) {
+//        if (myBanner == null){
+//            System.out.println("banner==null");
+//        }
+        //myBanner.setCurrentItem(0);
+        return DataBean.getTestData().get(nowPage).imageUrl;
+    }
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -681,13 +691,16 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        //LogUtils.d("tag", "1"+position+"张轮播图");
+        //nowPage = position;
+        //LogUtils.d("tag", "第"+position+"张轮播图");
     }
 
     @Override
     public void onPageSelected(int position) {
         //LogUtils.d("tag", "2"+position+"张轮播图");
+        nowPage = position;
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.setNowPage(DataBean.getTestData().get(position).imageUrl);
     }
 
     @Override
@@ -696,16 +709,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -713,11 +717,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
     public void GetData(String subject_id,String subject_name,String url) throws IOException {
 
-//        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-//        progressDialog.setTitle("请稍等");
-//        progressDialog.setMessage("首次加载数据...");
-//        progressDialog.setCancelable(true);
-//        progressDialog.show();
 
         new Thread(() -> {
 
@@ -768,12 +767,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
     //获取已选课程
     public void GetYixuan( String url) throws IOException {
-
-//        ProgressDialog progressDialog = new ProgressDialog(getActivity());
-//        progressDialog.setTitle("请稍等");
-//        progressDialog.setMessage("首次加载数据...");
-//        progressDialog.setCancelable(true);
-//        progressDialog.show();
 
         new Thread(() -> {
 
@@ -854,54 +847,10 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             exception.printStackTrace();
         }
 
-//
-//
-//        if (tempTest.contains(":")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("C++"), R.drawable.cpp,"0");
-//            itemFragment2s.add(apple);
-//        }
-//
-//        if (tempTest.contains("C--")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("C"), R.drawable.c,"0");
-//            itemFragment2s.add(apple);
-//        }
-//
-//
-//        if (tempTest.contains("数据结构")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("数据结构"), R.drawable.reg,"0");
-//            itemFragment2s.add(apple);
-//        }
-//
-//        if (tempTest.contains("数据库")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("数据库"), R.drawable.sql,"0");
-//            itemFragment2s.add(apple);
-//        }
-//
-//        if (tempTest.contains("算法分析与设计")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("算法分析与设计"), R.drawable.chm,"0");
-//            itemFragment2s.add(apple);
-//        }
-//
-//        if (tempTest.contains("英语")) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("英语"), R.drawable.otf,"0");
-//            itemFragment2s.add(apple);
-//        }
-
         ItemFragment2 apple = new ItemFragment2("0",
                 getRandomLengthName("添加课程"), R.drawable.aaaaaaadddddd,"0");
         itemFragment2s.add(apple);
-//
-//        for (int i = 0; i < 20; i++) {
-//            ItemFragment2 apple = new ItemFragment2(
-//                    getRandomLengthName("Apple"), R.drawable.aaa,"0");
-//            itemFragment2s.add(apple);
-//        }
+
     }
     private String getRandomLengthName(String name) {
         Random random = new Random();
