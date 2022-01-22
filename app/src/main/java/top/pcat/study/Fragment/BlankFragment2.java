@@ -89,7 +89,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private LinearLayout fourSize;
     private LinearLayout fiveSize;
     private LinearLayout sixSize;
-    private LinearLayout add;
     private Handler handler = new Handler();
     private int result;
     private DisplayUtil dipToPix;
@@ -97,12 +96,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private String tempTest;
     private int nowPage = 0;
     private boolean signFlag;
-    private LinearLayout cpp;
-    private LinearLayout c;
-    private LinearLayout sjjg;
-    private LinearLayout sjk;
-    private LinearLayout sf;
-    private LinearLayout yy;
     private final Handler cwjHandler = new Handler(){
         @SuppressLint("HandlerLeak")
         @Override
@@ -249,28 +242,28 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 //        recyclerView.setLayoutManager(layoutManager);
 //        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s);
 //        recyclerView.setAdapter(adapter);
+//
+//        cpp = getActivity().findViewById(R.id.cpp);
+//        c = getActivity().findViewById(R.id.c);
+//        add = getActivity().findViewById(R.id.add);
+//        sjjg = getActivity().findViewById(R.id.sjjg);
+//        sjk = getActivity().findViewById(R.id.sjk);
+//        sf = getActivity().findViewById(R.id.sf);
+//        yy = getActivity().findViewById(R.id.yy);
 
-        cpp = getActivity().findViewById(R.id.cpp);
-        c = getActivity().findViewById(R.id.c);
-        add = getActivity().findViewById(R.id.add);
-        sjjg = getActivity().findViewById(R.id.sjjg);
-        sjk = getActivity().findViewById(R.id.sjk);
-        sf = getActivity().findViewById(R.id.sf);
-        yy = getActivity().findViewById(R.id.yy);
 
-
-        add.setOnClickListener(v -> {
-            if(signFlag){
-                Intent intent01 = new Intent();
-                intent01.setClass(getActivity(), Curriculum.class);
-                startActivity(intent01);
-                //Toast.makeText(getActivity(), "全部", 0).show();
-
-            }else{
-                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
-
-            }
-        });
+//        add.setOnClickListener(v -> {
+//            if(signFlag){
+//                Intent intent01 = new Intent();
+//                intent01.setClass(getActivity(), Curriculum.class);
+//                startActivity(intent01);
+//                //Toast.makeText(getActivity(), "全部", 0).show();
+//
+//            }else{
+//                    Toast.makeText(getActivity(), "请先登录后操作", 0).show();
+//
+//            }
+//        });
 
 
 //        one = getActivity().findViewById(R.id.twoOne);
@@ -468,7 +461,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         }
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
         StaggeredGridLayoutManager layoutManager = new
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s,cwjHandler);
         recyclerView.setAdapter(adapter);
@@ -476,41 +469,41 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
     private void updateUI() {
 
-        if (tempTest.contains("Cpp")) {
-            cpp.setVisibility(View.VISIBLE);
-        }else {
-            cpp.setVisibility(View.GONE);
-        }
-
-        if (tempTest.contains("C--")) {
-            c.setVisibility(View.VISIBLE);
-        }else {
-            c.setVisibility(View.GONE);
-        }
-
-        if (tempTest.contains("数据结构")) {
-            sjjg.setVisibility(View.VISIBLE);
-        }else {
-            sjjg.setVisibility(View.GONE);
-        }
-
-        if (tempTest.contains("数据库")) {
-            sjk.setVisibility(View.VISIBLE);
-        }else {
-            sjk.setVisibility(View.GONE);
-        }
-
-        if (tempTest.contains("算法分析与设计")) {
-            sf.setVisibility(View.VISIBLE);
-        }else {
-            sf.setVisibility(View.GONE);
-        }
-
-        if (tempTest.contains("英语")) {
-            yy.setVisibility(View.VISIBLE);
-        }else {
-            yy.setVisibility(View.GONE);
-        }
+//        if (tempTest.contains("Cpp")) {
+//            cpp.setVisibility(View.VISIBLE);
+//        }else {
+//            cpp.setVisibility(View.GONE);
+//        }
+//
+//        if (tempTest.contains("C--")) {
+//            c.setVisibility(View.VISIBLE);
+//        }else {
+//            c.setVisibility(View.GONE);
+//        }
+//
+//        if (tempTest.contains("数据结构")) {
+//            sjjg.setVisibility(View.VISIBLE);
+//        }else {
+//            sjjg.setVisibility(View.GONE);
+//        }
+//
+//        if (tempTest.contains("数据库")) {
+//            sjk.setVisibility(View.VISIBLE);
+//        }else {
+//            sjk.setVisibility(View.GONE);
+//        }
+//
+//        if (tempTest.contains("算法分析与设计")) {
+//            sf.setVisibility(View.VISIBLE);
+//        }else {
+//            sf.setVisibility(View.GONE);
+//        }
+//
+//        if (tempTest.contains("英语")) {
+//            yy.setVisibility(View.VISIBLE);
+//        }else {
+//            yy.setVisibility(View.GONE);
+//        }
     }
 
     public String readId() {
@@ -840,16 +833,17 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 ItemFragment2 apple = new ItemFragment2(jsonObject.getString("idSubject"),
-                        getRandomLengthName(jsonObject.getString("nameSubject")), R.drawable.cpp,jsonObject.getString("sizeSubject"));
+                        getRandomLengthName(jsonObject.getString("nameSubject")), R.drawable.image11,jsonObject.getString("sizeSubject"));
                 itemFragment2s.add(apple);
+                //itemFragment2s.add(apple);
             }
         } catch(Exception exception){
             exception.printStackTrace();
         }
 
-        ItemFragment2 apple = new ItemFragment2("0",
-                getRandomLengthName("添加课程"), R.drawable.aaaaaaadddddd,"0");
-        itemFragment2s.add(apple);
+//        ItemFragment2 apple = new ItemFragment2("0",
+//                getRandomLengthName("添加课程"), R.drawable.aaaaaaadddddd,"0");
+//        itemFragment2s.add(apple);
 
     }
     private String getRandomLengthName(String name) {

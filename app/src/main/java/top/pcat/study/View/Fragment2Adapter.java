@@ -1,5 +1,6 @@
 package top.pcat.study.View;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -7,11 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+import com.lijiankun24.shadowlayout.ShadowLayout;
+
 import top.pcat.study.R;
+import top.pcat.study.Utils.PxToDp;
 
 import java.util.List;
 
@@ -19,17 +25,21 @@ public class Fragment2Adapter extends RecyclerView.Adapter<Fragment2Adapter.View
 
     private List<ItemFragment2> mFruitList;
     private Handler handler;
+    private Context context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView fruitImage;
+        CustomRoundAngleImageView fruitImage;
         String subject_id;
         TextView fruitName;
         View itemView;
+        ViewGroup.LayoutParams layoutParams;
+        LinearLayout kapian;
         public ViewHolder(View view) {
             super(view);
             itemView = view;
-            fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+            fruitImage = (CustomRoundAngleImageView) view.findViewById(R.id.fruit_image);
             fruitName = (TextView) view.findViewById(R.id.fruit_name);
+            kapian = view.findViewById(R.id.kapian_kuan);
         }
     }
 
@@ -43,6 +53,9 @@ public class Fragment2Adapter extends RecyclerView.Adapter<Fragment2Adapter.View
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_fragment2, parent, false);
         ViewHolder holder = new ViewHolder(view);
+
+
+        context = parent.getContext();
 
         holder.itemView.setOnClickListener(v->{
             int position = holder.getAdapterPosition();
@@ -63,6 +76,14 @@ public class Fragment2Adapter extends RecyclerView.Adapter<Fragment2Adapter.View
         ItemFragment2 fruit = mFruitList.get(position);
         holder.fruitImage.setImageResource(fruit.getImageId());
         holder.fruitName.setText(fruit.getName());
+
+//        ViewGroup.LayoutParams layoutParams = holder.kapian.getLayoutParams();
+//        layoutParams.width = (ScreenUtils.getScreenWidth() - PxToDp.dip2px(context, 70));
+
+
+
+//        holder.kapian.setLayoutParams(layoutParams);
+
     }
     @Override
     public int getItemCount() {

@@ -1,38 +1,114 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/bg_huidi"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:roundiv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/shape_test"
-        android:layout_height="75dp">
 
-        <ImageView
-            android:id="@+id/fruit_image"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_width="30dp"
-            android:layout_centerVertical="true"
-            android:layout_height="30dp"
-            android:alpha="0.2"
-            android:layout_gravity="center" />
 
-        <TextView
-            android:id="@+id/fruit_name"
-            android:text="的高房给"
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/kapian_kuan"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/kapian"
+            android:orientation="vertical"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:orientation="horizontal">
+
+
+                <top.pcat.study.View.CustomRoundAngleImageView
+                    android:id="@+id/fruit_image"
+                    android:layout_width="68dp"
+                    android:layout_height="91dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image33"
+                    roundiv:left_bottom_radius="7dp"
+                    roundiv:left_top_radius="7dp"
+                    roundiv:right_bottom_radius="7dp"
+                    roundiv:right_top_radius="7dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/fruit_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="C语言"
+                        android:textColor="#fff"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="作者：root"
+                        android:textColor="#9FFFFFFF"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="题数：256"
+                        android:textColor="#9FFFFFFF"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#3BFFFFFF" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="已完成 11%"
+                    android:textColor="#70FFFFFF"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
 
 </LinearLayout>

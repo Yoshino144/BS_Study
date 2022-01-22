@@ -79,7 +79,7 @@
                 <LinearLayout
                     android:layout_width="60dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="12dp"
                     android:background="@drawable/shape_img"
                     android:layout_height="80dp">
 
@@ -113,7 +113,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="8dp"
                         android:textSize="15sp"
                         android:text="2022/1/22 17:38"
                         android:layout_width="wrap_content"
@@ -149,118 +149,84 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/twoThree"
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="70dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="12dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/two_three"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="13dp"
-                android:layout_marginTop="6dp"
-                android:layout_gravity="center_horizontal"
-                android:text="全部课程"/>
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <include
-            android:id="@+id/cpp"
-            android:visibility="gone"
-            layout="@layout/problem_cpp"/>
-
-        <include
-            android:id="@+id/c"
-            android:visibility="gone"
-            layout="@layout/problem_c"/>
-
-        <include
-            android:id="@+id/sjjg"
-            android:visibility="gone"
-            layout="@layout/problem_sjjg"/>
-
-        <include
-            android:id="@+id/sjk"
-            android:visibility="gone"
-            layout="@layout/problem_sjk"/>
-
-        <include
-            android:id="@+id/sf"
-            android:visibility="gone"
-            layout="@layout/problem_sf"/>
-
-        <include
-            android:id="@+id/yy"
-            android:visibility="gone"
-            layout="@layout/problem_yy"/>
-
-        <LinearLayout
-            android:id="@+id/add"
-            android:visibility="gone"
-            android:layout_width="match_parent"
             android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/shape_one"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:gravity="center"
-            android:background="@drawable/class_radius2"
-            android:layout_height="70dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_gravity="center"
-                android:src="@drawable/add"
-                android:layout_height="45dp"/>
+
+            <LinearLayout
+                android:id="@+id/twoThree"
+                android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_height="35dp">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp">
+
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:text="我的课程"/>
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/pc_blue"
+                        android:textSize="13sp"
+                        android:text="全部课程 "/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:text="▶"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/pc_blue"
+                        android:textSize="8sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="-2dp"
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/loginFlag"
-            android:visibility="gone"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:background="@drawable/shape_one"
-            android:orientation="vertical">
+            android:background="#123456"
+            android:layout_height="500dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:textSize="17dp"
-                android:textColor="@color/text_black"
-                android:text="你还未登录   点击登录"/>
-
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:layout_height="70dp">
-
-    </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

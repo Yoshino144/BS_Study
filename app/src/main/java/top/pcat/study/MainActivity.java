@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
             //bar_wei.setImageResource(imageRes);
             //bar_wei2.
-            if(imageRes == R.drawable.image33){
+            if(imageRes == R.drawable.image55){
 
                 ObjectAnimator.ofFloat(bar_wei2, "alpha",  0, 1).setDuration(400).start();
             }else{
