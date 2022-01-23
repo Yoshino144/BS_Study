@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String token = "gZWy3AOlXHmZjzEH0rIK0+JuIhWSI2mOw/z1dKtSMNQi7H5LCbg9Ln4be8dxcjSmNFbNIRbuBfk=@7zkh.cn.rongnav.com;7zkh.cn.rongcfg.com";
+        String token = "gZWy3AOlXHmZjzEH0rIK0+JuIhWSI2mOw/z1dKtSMNQi7H5LCbg9Ln4be8dxcjSmeTsOmCDEo0Q=@7zkh.cn.rongnav.com;7zkh.cn.rongcfg.com";
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onSuccess(String userId) {

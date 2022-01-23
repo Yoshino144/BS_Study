@@ -1,27 +1,24 @@
 package top.pcat.study.Fragment;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.apkfuns.logutils.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 
-import es.dmoral.toasty.Toasty;
-import io.rong.imkit.RongIM;
+import io.rong.imkit.config.RongConfigCenter;
 import io.rong.imkit.conversationlist.ConversationListFragment;
-import io.rong.imkit.utils.RouteUtils;
-import io.rong.imlib.RongIMClient;
+import io.rong.imkit.conversationlist.model.BaseUiConversation;
+import io.rong.imkit.conversationlist.provider.PrivateConversationProvider;
+import io.rong.imkit.widget.adapter.ProviderManager;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
 
@@ -62,7 +59,8 @@ public class BlankFragment3 extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+//        ProviderManager<BaseUiConversation> providerManager = RongConfigCenter.conversationListConfig().getProviderManager(); //获取会话模板管理器
+//        providerManager.replaceProvider(PrivateConversationProvider.class, new CustomConversationProvider()); //用自定义模板替换 SDK 原有模板
 
         initView();
     }
