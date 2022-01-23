@@ -45,6 +45,10 @@ import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.utils.RouteUtils;
+import io.rong.imlib.RongIMClient;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Fragment.BlankFragment2;
@@ -165,6 +169,29 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String token = "gZWy3AOlXHmZjzEH0rIK0+JuIhWSI2mOw/z1dKtSMNQi7H5LCbg9Ln4be8dxcjSmNFbNIRbuBfk=@7zkh.cn.rongnav.com;7zkh.cn.rongcfg.com";
+        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+            @Override
+            public void onSuccess(String userId) {
+                Toasty.success(MainActivity.this,userId);
+                LogUtils.e("融云--登录成功"+String.valueOf(userId));
+                //RouteUtils.routeToConversationListActivity(MainActivity.this, "");
+            }
+
+            @Override
+            public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
+                LogUtils.e("融云--登录失败"+String.valueOf(connectionErrorCode.getValue()));
+                Toasty.error(MainActivity.this,String.valueOf(connectionErrorCode.getValue()));
+            }
+
+            @Override
+            public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
+
+                LogUtils.e("融云--登录失败"+String.valueOf(databaseOpenStatus.getValue()));
+            }
+        });
+
         bar_wei = findViewById(R.id.bar_wei_main);
         bar_wei2 = findViewById(R.id.bar_wei_main2);
 //        Objects.requireNonNull(getSupportActionBar()).hide();
@@ -733,13 +760,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        LogUtils.d("ver" + verticalOffset);
-        int pp = -appBarLayout.getTotalScrollRange();
-        View view = findViewById(R.id.tiaotiao);
-        LogUtils.d(verticalOffset > pp);
-        if (verticalOffset > pp) view.setVisibility(View.GONE);
-        else view.setVisibility(View.VISIBLE);
-
+        LogUtils.d("ver" + verticalOffset +" pageId"+String.valueOf(pageId));
+        if(pageId !=1) {
+            int pp = -appBarLayout.getTotalScrollRange();
+            View view = findViewById(R.id.tiaotiao);
+            LogUtils.d(verticalOffset > pp);
+            if (verticalOffset > pp) view.setVisibility(View.GONE);
+            else view.setVisibility(View.VISIBLE);
+        }
 //        SlidingTabLayout tabb = findViewById(R.id.tabb);
 //        if(verticalOffset<-50)
 //        tabb.setBackgroundColor(getResources().getColor(R.color.gray_color));

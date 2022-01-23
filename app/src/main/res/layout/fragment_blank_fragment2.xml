@@ -1,4 +1,4 @@
-<ScrollView android:layout_height="match_parent"
+<androidx.core.widget.NestedScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:roundiv="http://schemas.android.com/apk/res-auto">
@@ -291,5 +291,7 @@
                 android:layout_height="248dp"/>
 
         </LinearLayout>
+
+
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

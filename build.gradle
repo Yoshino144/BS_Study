@@ -2,6 +2,8 @@
 
 buildscript {
     repositories {
+
+        maven {url  "https://maven.rongcloud.cn/repository/maven-releases/"}
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
@@ -16,13 +18,14 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.0.4'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.novoda:bintray-release:0.9'
+        classpath 'com.novoda:bintray-release:0.9.1'
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
     }
 }
 
 allprojects {
     repositories {
+        maven {url  "https://maven.rongcloud.cn/repository/maven-releases/"}
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }

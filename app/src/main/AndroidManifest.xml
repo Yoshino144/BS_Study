@@ -15,12 +15,6 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <permission
-        android:name="top.pcat.study.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="top.pcat.study.permission.JPUSH_MESSAGE" />
-
     <application
         android:name="top.pcat.study.BaseApplication"
         android:allowBackup="true"
@@ -28,6 +22,7 @@
         android:grantUriPermissions="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:hardwareAccelerated="true"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -76,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity android:name="top.pcat.study.StartPage.InitAdvActivitye" />
-        <activity android:name="top.pcat.study.MainActivity" />
+        <activity android:name="top.pcat.study.MainActivity"/>
         <activity android:name="top.pcat.study.user.SignActivity" />
         <activity android:name="top.pcat.study.user.User" />
         <activity android:name="top.pcat.study.user.res" />

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import io.rong.imkit.RongIM;
 import top.pcat.study.Utils.FileTool;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -29,6 +30,7 @@ public class BaseApplication extends Application {
 
 
 
+        RongIM.init(this, "pvxdm17jpdhyr", true);
 
         Context context = getApplicationContext();
 // 获取当前包名

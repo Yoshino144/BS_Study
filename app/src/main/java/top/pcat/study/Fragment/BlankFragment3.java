@@ -1,18 +1,27 @@
 package top.pcat.study.Fragment;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.apkfuns.logutils.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
+
+import es.dmoral.toasty.Toasty;
+import io.rong.imkit.RongIM;
+import io.rong.imkit.conversationlist.ConversationListFragment;
+import io.rong.imkit.utils.RouteUtils;
+import io.rong.imlib.RongIMClient;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
 
@@ -20,21 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * aaa simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BlankFragment3.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link BlankFragment3#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BlankFragment3 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private SlidingTabLayout mTab;
@@ -46,26 +42,13 @@ public class BlankFragment3 extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private String[] mTitlesArrays ={"班级","排名"};
+    private String[] mTitlesArrays ={"消息","排名"};
 
-    public BlankFragment3() {
-        // Required empty public constructor
-    }
+    public BlankFragment3() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return aaa new instance of fragment BlankFragment3.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BlankFragment3 newInstance(String param1, String param2) {
         BlankFragment3 fragment = new BlankFragment3();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,10 +56,6 @@ public class BlankFragment3 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -86,9 +65,6 @@ public class BlankFragment3 extends Fragment {
 
 
         initView();
-
-
-
     }
 
     private void initView() {
@@ -96,9 +72,8 @@ public class BlankFragment3 extends Fragment {
         mVp = (ViewPager) getActivity().findViewById(R.id.vp);
 
         mFragments = new ArrayList<>();
-        mFragments.add(new BlankFragment6());
+        mFragments.add(new ConversationListFragment());
         mFragments.add(new BlankFragment7());
-
 
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mVp.setAdapter(pagerAdapter);
@@ -119,7 +94,6 @@ public class BlankFragment3 extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return mTitlesArrays[position];
-//            return position;
         }
 
         @Override
@@ -128,34 +102,13 @@ public class BlankFragment3 extends Fragment {
         }
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
 
         return inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
@@ -163,18 +116,8 @@ public class BlankFragment3 extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

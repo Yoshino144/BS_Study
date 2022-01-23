@@ -18,6 +18,7 @@ import com.hanks.htextview.HTextViewType;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
+import io.rong.imkit.RongIM;
 import top.pcat.study.R;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.MainActivity;
@@ -53,7 +54,6 @@ public class StartPageActivitye extends AppCompatActivity {
 
         //TextView textView = findViewById(R.id.start_text);
         //textView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/mm.ttf"));
-
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) == 0) {
             File path = new File(getFilesDir().getAbsolutePath() + "/privacyFlag");

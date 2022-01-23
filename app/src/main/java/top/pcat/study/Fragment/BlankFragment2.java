@@ -389,8 +389,8 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         myBanner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
 myBanner.setLoopTime(5000);
 myBanner.setUserInputEnabled(false);
-        myBanner.start();
-        myBanner.stop();
+//        myBanner.start();
+//        myBanner.stop();
 
 
     }
