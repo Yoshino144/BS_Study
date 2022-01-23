@@ -53,7 +53,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="C语言"
-                        android:textColor="#fff"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="作者：root"
-                        android:textColor="#9FFFFFFF"
+                        android:textColor="#9F000000"
                         android:textSize="14sp" />
 
                     <TextView
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
                         android:text="题数：256"
-                        android:textColor="#9FFFFFFF"
+                        android:textColor="#9F000000"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -82,7 +82,7 @@
                 android:layout_height="1px"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="#3BFFFFFF" />
+                android:background="#3B000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                     android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:text="已完成 11%"
-                    android:textColor="#70FFFFFF"
+                    android:textColor="#70000000"
                     android:textSize="12sp" />
 
 
