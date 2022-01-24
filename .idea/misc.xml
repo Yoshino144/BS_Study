@@ -53,7 +53,10 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/lastview.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/newf_item.xml" value="0.1609375" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversation_fragment.xml" value="0.23489583333333333" />
-        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_item.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_fragment.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_item.xml" value="0.264" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_notice_view.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_title_bar.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/setview.xml" value="0.353322528363047" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/user_info.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/userdadta.xml" value="0.264" />

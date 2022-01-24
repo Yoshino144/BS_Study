@@ -11,16 +11,16 @@
 
         <top.pcat.study.View.CustomRoundAngleImageView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="240dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/image44"
-            roundiv:left_bottom_radius="9dp"
-            roundiv:left_top_radius="9dp"
-            roundiv:right_bottom_radius="9dp"
-            roundiv:right_top_radius="9dp" >
+            roundiv:left_bottom_radius="10dp"
+            roundiv:left_top_radius="10dp"
+            roundiv:right_bottom_radius="10dp"
+            roundiv:right_top_radius="10dp">
 
         </top.pcat.study.View.CustomRoundAngleImageView>
 
@@ -32,10 +32,10 @@
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="240dp">
 
             <TextView
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="13dp"
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

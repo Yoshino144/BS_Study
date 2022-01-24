@@ -40,6 +40,7 @@ import top.pcat.study.View.ItemF2BangItem;
 import top.pcat.study.View.ItemFragment2;
 import top.pcat.study.View.LogUtils;
 import top.pcat.study.user.SignActivity;
+
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.indicator.RoundLinesIndicator;
@@ -94,40 +95,39 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private String tempTest;
     private int nowPage = 0;
     private boolean signFlag;
-    private final Handler cwjHandler = new Handler(){
+    private final Handler cwjHandler = new Handler() {
         @SuppressLint("HandlerLeak")
         @Override
-        public void handleMessage(Message msg){
-            switch (msg.what){
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
                 case 0:
                     Bundle bundle = msg.getData();
                     String bb = (String) bundle.get("Subject_id");
                     String subject_name = (String) bundle.get("Subject_name");
-                    if(bb.indexOf("0") !=-1){
-                        if(signFlag){
+                    if (bb.indexOf("0") != -1) {
+                        if (signFlag) {
                             Intent intent01 = new Intent();
                             intent01.setClass(getActivity(), Curriculum.class);
                             startActivity(intent01);
                             Toast.makeText(getActivity(), "全部", Toast.LENGTH_SHORT).show();
 
-                        }else{
-                            Toast.makeText(getActivity(), "请先登录后操作",  Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "请先登录后操作", Toast.LENGTH_SHORT).show();
 
                         }
-                    }
-                    else{
-                            try {
-                                GetData(bb,subject_name,"http://192.168.31.238:12345/chapters/getBySubjectId/"+bb);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                    } else {
+                        try {
+                            GetData(bb, subject_name, "http://192.168.31.238:12345/chapters/getBySubjectId/" + bb);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
 
 
-                    Toast.makeText(getActivity(),bb,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), bb, Toast.LENGTH_SHORT).show();
                     break;
                 case 1:
-                    Toast.makeText(getActivity(),"456",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "456", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -175,15 +175,15 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
         initBanner();
         //initBanner();
-        File path = new File(requireActivity().getFilesDir().getAbsolutePath()+"/Login.txt");
-        if(!FileTool.isFileExists(path.toString())){
+        File path = new File(requireActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
+        if (!FileTool.isFileExists(path.toString())) {
             LinearLayout qwe = blan.findViewById(R.id.loginFlag);
             qwe.setVisibility(View.VISIBLE);
             LogUtils.d("=============未登录-显示登录框=============");
             qwe.setOnClickListener(v -> {
-                Intent intent01=new Intent();
+                Intent intent01 = new Intent();
                 intent01.setClass(getActivity(), SignActivity.class);
-                intent01.putExtra("page",0);
+                intent01.putExtra("page", 0);
                 getActivity().finish();
                 startActivity(intent01);
             });
@@ -199,20 +199,19 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         // TODO Auto-generated method stub
         super.onActivityCreated(savedInstanceState);
 
-        File path = new File(getActivity().getFilesDir().getAbsolutePath()+"/Login.txt");
-        if(ft.isFileExists(path.toString())){
+        File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
+        if (ft.isFileExists(path.toString())) {
             //已登陆
-            signFlag=true;
+            signFlag = true;
             //读取string判断课程是否选中
             tempTest = "cpp,java";
             try {
-                GetYixuan("http://192.168.31.238:12345/subjects/"+readInfo(readId()));
+                GetYixuan("http://192.168.31.238:12345/subjects/" + readInfo(readId()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else{//未登录
-            signFlag=false;
+        } else {//未登录
+            signFlag = false;
         }
 
         nsv = getActivity().findViewById(R.id.nsv);
@@ -220,17 +219,18 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
 
             int now_pos = 0;
+
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                LogUtils.d(" x"+String.valueOf(scrollX)+" y"+String.valueOf(scrollY)
-                        +" ox"+String.valueOf(oldScrollX)+" oy"+String.valueOf(oldScrollY));
-                if (scrollY<=200){
+                LogUtils.d(" x" + String.valueOf(scrollX) + " y" + String.valueOf(scrollY)
+                        + " ox" + String.valueOf(oldScrollX) + " oy" + String.valueOf(oldScrollY));
+                if (scrollY <= 200) {
 
-                    Double i =((double)scrollY)/((double) 200);
-                    int a = (int) (i*255);
+                    Double i = ((double) scrollY) / ((double) 200);
+                    int a = (int) (i * 255);
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.setcolor(a);
-                }else{
+                } else {
 
                     MainActivity mainActivity = (MainActivity) getActivity();
                     mainActivity.setcolor(255);
@@ -250,13 +250,13 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
 
-                if(signFlag){
+                if (signFlag) {
                     Intent intent01 = new Intent();
                     intent01.setClass(getActivity(), Curriculum.class);
                     startActivity(intent01);
                     //Toast.makeText(getActivity(), "全部", 0).show();
 
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "请先登录后操作", 0).show();
 
                 }
@@ -269,7 +269,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     }
 
     //刷新界面
-    private void updata2(){
+    private void updata2() {
         List<ItemFragment2> itemFragment2s = new ArrayList<>();
 
         try {
@@ -279,7 +279,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         }
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new
-                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false){
+                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
                     @Override
                     public boolean canScrollHorizontally() {
                         return false;
@@ -291,13 +291,13 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     }
                 };
         recyclerView.setLayoutManager(layoutManager);
-        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s,cwjHandler);
+        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s, cwjHandler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
     }
 
-    private void updata_bang(){
+    private void updata_bang() {
         List<ItemF2Bang> itemFragment3 = new ArrayList<>();
 
         try {
@@ -307,7 +307,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         }
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_kechngbangdan);
         LinearLayoutManager layoutManager = new
-                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false){
+                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
                     @Override
                     public boolean canScrollHorizontally() {
                         return false;
@@ -319,7 +319,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     }
                 };
         recyclerView.setLayoutManager(layoutManager);
-        F2BangAdapter adapter = new F2BangAdapter(itemFragment3,cwjHandler){
+        F2BangAdapter adapter = new F2BangAdapter(itemFragment3, cwjHandler) {
 
         };
         recyclerView.setHasFixedSize(true);
@@ -330,15 +330,14 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private void initBang(List<ItemF2Bang> itemFragment3) throws JSONException {
 
         try {
-            for(int i =0 ; i < 1;i++){
+            for (int i = 0; i < 1; i++) {
                 ItemF2Bang apple = new ItemF2Bang(
-                        "人数榜",2);
+                        "人数榜", 2);
                 itemFragment3.add(apple);
             }
-        } catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
-
 
 
     }
@@ -383,7 +382,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             int length = fin.available();
             byte[] buffer = new byte[length];
             fin.read(buffer);
-            result = EncodingUtils.getString(buffer,"UTF-8");
+            result = EncodingUtils.getString(buffer, "UTF-8");
             fin.close();
             return result;
         } catch (FileNotFoundException e) {
@@ -395,13 +394,13 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     }
 
     //从读取的文件获取用户ID
-    public String readInfo(String tempInfo){
+    public String readInfo(String tempInfo) {
         try {
             JSONObject jsonArray = new JSONObject(tempInfo);
-                String id = jsonArray.getString("id");
+            String id = jsonArray.getString("id");
 
             //String lv ="10";
-                return id;
+            return id;
         } catch (JSONException e) {
             //Toast.makeText(getActivity(),"信息读取错误",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -439,8 +438,8 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
         myBanner.setIndicator(indicator, false);
         myBanner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
-myBanner.setLoopTime(5000);
-myBanner.setUserInputEnabled(false);
+        myBanner.setLoopTime(10000);
+//myBanner.setUserInputEnabled(false);
         myBanner.start();
 
 
@@ -483,38 +482,37 @@ myBanner.setUserInputEnabled(false);
     }
 
 
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    public void GetData(String subject_id,String subject_name,String url) throws IOException {
+    public void GetData(String subject_id, String subject_name, String url) throws IOException {
 
 
         new Thread(() -> {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类","url============="+uu);
+                Log.d("Internet类", "url=============" + uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
 
 
                 int responseCode = connection.getResponseCode();
-                if(responseCode == HttpURLConnection.HTTP_OK){
+                if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = connection.getInputStream();
                     String result = String.valueOf(inputStream);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder response = new StringBuilder();
                     String line;
-                    while((line = reader.readLine())!= null){
+                    while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
 
                     interres = response.toString();
-                    Log.d("列表内容传递======",interres);
+                    Log.d("列表内容传递======", interres);
 
 
                     Intent intent01 = new Intent();
@@ -522,15 +520,14 @@ myBanner.setUserInputEnabled(false);
                     intent01.putExtra("subject_name", subject_name);
                     intent01.putExtra("subject_id", subject_id);
                     intent01.putExtra("item", interres);
-                    Log.d("列表内容传递======",interres);
+                    Log.d("列表内容传递======", interres);
                     //getActivity().finish();
                     startActivity(intent01);
                     //getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     getActivity().finish();
 
 //                    progressDialog.dismiss();
-                }
-                else{
+                } else {
                 }
 
             } catch (Exception e) {
@@ -540,42 +537,41 @@ myBanner.setUserInputEnabled(false);
     }
 
     //获取已选课程
-    public void GetYixuan( String url) throws IOException {
+    public void GetYixuan(String url) throws IOException {
 
         new Thread(() -> {
 
             try {
                 URL uu = new URL(url);
-                Log.d("获取已选","url============="+url);
+                Log.d("获取已选", "url=============" + url);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
 
 
                 int responseCode = connection.getResponseCode();
-                if(responseCode == HttpURLConnection.HTTP_OK){
+                if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = connection.getInputStream();
                     String result = String.valueOf(inputStream);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder response = new StringBuilder();
                     String line;
-                    while((line = reader.readLine())!= null){
+                    while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
 
-                    tempTest  = response.toString();
+                    tempTest = response.toString();
                     cwjHandler.post(mUpdateResults);
 
-                   // Message message = null;
+                    // Message message = null;
                     //message.what = 0x11;
-                   // cwjHandler.sendMessage(message);
+                    // cwjHandler.sendMessage(message);
 
-                    Log.d("用户已选======",tempTest);
+                    Log.d("用户已选======", tempTest);
 
 
 //                    progressDialog.dismiss();
-                }
-                else{
+                } else {
                 }
 
             } catch (Exception e) {
@@ -590,9 +586,9 @@ myBanner.setUserInputEnabled(false);
 
         if (!isFirstLoading) {
             //如果不是第一次加载，刷新数据
-            if(signFlag) {
+            if (signFlag) {
                 try {
-                    GetYixuan( "http://192.168.31.238:12345/subjects/getById/"+readInfo(readId()));
+                    GetYixuan("http://192.168.31.238:12345/subjects/getById/" + readInfo(readId()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -606,25 +602,25 @@ myBanner.setUserInputEnabled(false);
     private void initFruits(List<ItemFragment2> itemFragment2s) throws JSONException {
 
         try {
-            LogUtils.d("获取到的已选列表==="+tempTest);
+            LogUtils.d("获取到的已选列表===" + tempTest);
             JSONArray jsonArray = new JSONArray(tempTest);
             int subject_size = jsonArray.length();
-            LogUtils.d("获取到的科目数量==="+subject_size);
-            for(int i =0 ; i < subject_size;i++){
+            LogUtils.d("获取到的科目数量===" + subject_size);
+            for (int i = 0; i < subject_size; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                 ItemFragment2 apple = new ItemFragment2(jsonObject.getString("idSubject"),
-                        getRandomLengthName(jsonObject.getString("nameSubject")), R.drawable.image11,jsonObject.getString("sizeSubject"));
+                        getRandomLengthName(jsonObject.getString("nameSubject")), R.drawable.image11, jsonObject.getString("sizeSubject"));
                 itemFragment2s.add(apple);
                 //itemFragment2s.add(apple);
             }
-        } catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
 
 
-
     }
+
     private String getRandomLengthName(String name) {
         Random random = new Random();
         int length = random.nextInt(20) + 1;

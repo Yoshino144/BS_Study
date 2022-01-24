@@ -11,7 +11,7 @@
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:AniBackColor="#ff8b90af"
+        app:AniBackColor="@color/pc_cyan"
         app:AniForeColor="@color/bg_huidi"
         app:CircleSmaller="6">
 

@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/bang_kapian"
             android:orientation="vertical"
             android:layout_width="220dp"
             android:layout_height="wrap_content">

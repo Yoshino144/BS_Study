@@ -88,16 +88,27 @@ public class F2BangAdapter extends RecyclerView.Adapter<F2BangAdapter.ViewHolder
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
 
-        LinearLayoutManager layoutManager = new
-                LinearLayoutManager(context){
-
-                    @Override
-                    public boolean canScrollVertically() {
-                        return false;
-                    }
-
-                };
+        };
+//        LinearLayoutManager layoutManager = new
+//                LinearLayoutManager(context){
+//
+//                    @Override
+//                    public boolean canScrollVertically() {
+//                        return false;
+//                    }
+//
+//                };
         holder.recyclerView.setLayoutManager(layoutManager);
         F2BangItemAdapter adapter = new F2BangItemAdapter(itemFragment4);
         holder.recyclerView.setAdapter(adapter);
@@ -120,11 +131,11 @@ public class F2BangAdapter extends RecyclerView.Adapter<F2BangAdapter.ViewHolder
     }
 
     private void initBang_item(List<ItemF2BangItem> itemFragment3) throws JSONException {
-
+        int [] arr=new int[]{1,4,2,5,3,6};
         try {
-            for(int i =0 ; i < 3;i++){
-                ItemF2BangItem apple = new ItemF2BangItem(
-                        "人数榜",2);
+            for(int i =0 ; i < 6;i++){
+                ItemF2BangItem apple = new ItemF2BangItem(arr[i],
+                        "人数榜",3);
                 itemFragment3.add(apple);
             }
         } catch(Exception exception){

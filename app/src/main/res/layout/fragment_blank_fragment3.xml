@@ -2,26 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_huidi"
+    android:background="#fff"
     android:orientation="vertical">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/bar_wei_main"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:background="@color/bg_huidi"-->
-<!--        android:layout_height="66px"-->
-<!--        android:orientation="horizontal" />-->
+
 
     <LinearLayout
-
+        android:orientation="horizontal"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:background="#fff"
-        android:layout_height="35dp">
+        android:layout_height="49dp">
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal">
+
+
+        </LinearLayout>
 
         <com.flyco.tablayout.SlidingTabLayout
+            android:layout_gravity="center_vertical"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tab"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="29dp"
             android:background="#fff"
             app:tl_textSelectColor="@color/pc_blue3"
@@ -34,12 +41,21 @@
             app:tl_indicator_color="@color/pc_blue3"
             app:tl_tab_space_equal="true" />
 
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal">
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:background="@color/tab_fen"-->
-<!--        android:layout_height="1px"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/renwulan2"
+        android:layout_height="2dp"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"

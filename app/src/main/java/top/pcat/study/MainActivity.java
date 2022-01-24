@@ -491,16 +491,19 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         }
 
+        @SuppressLint("WrongConstant")
         @Override
         public void onPageSelected(int position) {
             RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             radioButton.setChecked(true);
             pageId = position;
             LogUtils.d("当前页数", String.valueOf(position));
+            pppccc = findViewById(R.id.ppccc);
 
+            findViewById(R.id.main_edit).setVisibility(View.VISIBLE);
             if(position == 1){
+                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 StatusBarUtil.setTranslucentStatus(MainActivity.this);
-                pppccc = findViewById(R.id.ppccc);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
@@ -514,12 +517,35 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
                 mAppBarParams.setScrollFlags(0);
                 pppccc.setLayoutParams(mAppBarParams);
+                pppccc.setVisibility(View.VISIBLE);
 
                 pppccc.setBackgroundColor(Color.argb((int) toumingdu,255,255,255));
                 StatusBarUtil.setStatusBarColor2(MainActivity.this,Color.argb((int) toumingdu,255,255,255));
                 io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this,5,true);
             }
+            else if(position==2){
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
+                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
+                findViewById(R.id.appbar).setLayoutParams(params);
+//
+                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
+                params2.setMargins(0,-PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+//
+
+                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+                findViewById(R.id.main_edit).setVisibility(View.GONE);
+                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
+                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                mAppBarParams.setScrollFlags(0);
+                pppccc.setLayoutParams(mAppBarParams);
+
+                //findViewById(R.id.appbar).setVisibility(View.GONE);
+              //pppccc.setVisibility(View.GONE);
+            }
             else{
+                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
@@ -533,6 +559,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
                 pppccc.setLayoutParams(mAppBarParams);
                 pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+                pppccc.setVisibility(View.VISIBLE);
             }
 
 //            pageId = position;
@@ -810,7 +837,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             View view = findViewById(R.id.tiaotiao);
             LogUtils.d(verticalOffset > pp);
             if (verticalOffset > pp) view.setVisibility(View.GONE);
-            else view.setVisibility(View.VISIBLE);
+            else  view.setVisibility(View.VISIBLE);
         }
         else if(pageId == 1){
 

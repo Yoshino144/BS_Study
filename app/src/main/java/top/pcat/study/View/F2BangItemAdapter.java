@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.ScreenUtils;
+
 import java.util.List;
 
 import top.pcat.study.R;
+import top.pcat.study.Utils.PxToDp;
 
 public class F2BangItemAdapter extends RecyclerView.Adapter<F2BangItemAdapter.ViewHolder>{
 
@@ -26,12 +29,13 @@ public class F2BangItemAdapter extends RecyclerView.Adapter<F2BangItemAdapter.Vi
         TextView fruitName;
         View itemView;
         ViewGroup.LayoutParams layoutParams;
-        LinearLayout kapian;
+        LinearLayout bang_kapian;
         public ViewHolder(View view) {
             super(view);
             itemView = view;
             fruitName = (TextView) view.findViewById(R.id.fruit_name);
             bangid =  (TextView) view.findViewById(R.id.bang_idd);
+            bang_kapian = view.findViewById(R.id.bang_kapian);
         }
     }
 
@@ -66,14 +70,11 @@ public class F2BangItemAdapter extends RecyclerView.Adapter<F2BangItemAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
         ItemF2BangItem fruit = mFruitList.get(position);
         holder.fruitName.setText(fruit.getName());
-        holder.bangid.setText(String.valueOf(position));
+        holder.bangid.setText(String.valueOf(fruit.getPos()));
 
-//        ViewGroup.LayoutParams layoutParams = holder.kapian.getLayoutParams();
-//        layoutParams.width = (ScreenUtils.getScreenWidth() - PxToDp.dip2px(context, 70));
-
-
-
-//        holder.kapian.setLayoutParams(layoutParams);
+        ViewGroup.LayoutParams layoutParams = holder.bang_kapian.getLayoutParams();
+        layoutParams.width = ((ScreenUtils.getScreenWidth()/2) - PxToDp.dip2px(context, 10));
+        holder.bang_kapian.setLayoutParams(layoutParams);
 
     }
     @Override

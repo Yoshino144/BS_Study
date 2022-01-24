@@ -32,6 +32,7 @@ public class BaseApplication extends Application {
 
         RongIM.init(this, "pvxdm17jpdhyr", true);
 
+
         Context context = getApplicationContext();
 // 获取当前包名
         String packageName = context.getPackageName();
