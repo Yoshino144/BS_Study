@@ -12,6 +12,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/kapian.xml" value="0.2537037037037037" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin2.xml" value="0.25833333333333336" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/rc_send_background.xml" value="0.24166666666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/renwulan.xml" value="0.18697916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/renwulan2.xml" value="0.23425925925925925" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/shape_f2jian.xml" value="0.25833333333333336" />
@@ -52,10 +53,15 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_fragment2.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/lastview.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/newf_item.xml" value="0.1609375" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_base_activity.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_base_activity_layout.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversation_activity.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversation_fragment.xml" value="0.23489583333333333" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_item.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_conversationlist_notice_view.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_destruct_input_panel.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_extension_input_panel.xml" value="0.536" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_title_bar.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/setview.xml" value="0.353322528363047" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/user_info.xml" value="0.24947916666666667" />

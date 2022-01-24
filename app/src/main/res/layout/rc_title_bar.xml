@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/rc_title_bar_height"
+    android:background="#f8f6f9"
     android:orientation="horizontal">
 
     <TextView

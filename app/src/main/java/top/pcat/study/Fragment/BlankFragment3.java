@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.textclassifier.ConversationAction;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ import com.flyco.tablayout.SlidingTabLayout;
 
 import io.rong.imkit.GlideKitImageEngine;
 import io.rong.imkit.config.RongConfigCenter;
+import io.rong.imkit.conversation.ConversationFragment;
+import io.rong.imkit.conversation.RongConversationActivity;
 import io.rong.imkit.conversationlist.ConversationListFragment;
 import io.rong.imkit.conversationlist.model.BaseUiConversation;
 import io.rong.imkit.conversationlist.provider.PrivateConversationProvider;
@@ -70,7 +73,6 @@ public class BlankFragment3 extends Fragment {
 //        providerManager.replaceProvider(PrivateConversationProvider.class, new CustomConversationProvider()); //用自定义模板替换 SDK 原有模板
 
         initView();
-
     }
 
     private void initView() {
