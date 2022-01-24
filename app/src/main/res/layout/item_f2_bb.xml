@@ -10,17 +10,19 @@
         android:layout_height="wrap_content">
 
         <top.pcat.study.View.CustomRoundAngleImageView
-            android:src="@drawable/image44"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_width="235dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image44"
             roundiv:left_bottom_radius="9dp"
             roundiv:left_top_radius="9dp"
             roundiv:right_bottom_radius="9dp"
-            roundiv:right_top_radius="9dp"
-            android:layout_height="300dp"/>
+            roundiv:right_top_radius="9dp" >
+
+        </top.pcat.study.View.CustomRoundAngleImageView>
 
 
         <LinearLayout
@@ -28,13 +30,12 @@
             android:background="@drawable/tupianhui"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
             android:orientation="vertical"
-            android:layout_width="235dp"
-            android:layout_height="300dp">
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
 
             <TextView
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
 
 
             <TextView
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:id="@+id/bang_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:nestedScrollingEnabled="false"
                 android:layout_marginTop="10dp"
                 android:id="@+id/recycler_kechngbangdan_item"
                 android:layout_width="match_parent"

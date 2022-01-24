@@ -47,4 +47,9 @@
     <color name="pc_fenshen">#FFB8B8</color>
 
     <color name="zhuti"></color>
+
+    <array name="sample_progress_gradient">
+        <item>@color/pc_blue2</item>
+        <item>@color/pc_cyan</item>
+    </array>
 </resources>

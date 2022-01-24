@@ -21,6 +21,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -32,7 +33,9 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -54,6 +57,7 @@ import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Fragment.BlankFragment2;
 import top.pcat.study.Fragment.BlankFragment3;
 import top.pcat.study.Fragment.BlankFragment4;
+import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.Utils.StatusBarUtil;
 
 import org.apache.http.util.EncodingUtils;
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private ImageView bar_wei;
     private ImageView bar_wei2;
     private LinearLayout shiying;
-
+    private int toumingdu = 0;
     private int nowPage = 0;
 
     public int getNowPage() {
@@ -113,30 +117,30 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     public void setNowPage(Integer imageRes) {
         LogUtils.d("yeshu=="+ imageRes);
         this.imageRes = imageRes;
-        if (pageId == 1) {
-            //shiying.setAccessibilityLiveRegion();
-
-
-
-            //bar_wei.setImageResource(imageRes);
-            //bar_wei2.
-            if(imageRes == R.drawable.image55){
-
-                ObjectAnimator.ofFloat(bar_wei2, "alpha",  0, 1).setDuration(400).start();
-            }else{
-
-                ObjectAnimator.ofFloat(bar_wei2, "alpha",  1, 0).setDuration(400).start();
-            }
-            //ObjectAnimator.ofFloat(bar_wei2, "alpha", 1, 0, 1).setDuration(2500).start();
-            pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
-            bar_wei.setVisibility(View.VISIBLE);
-            StatusBarUtil.setTranslucentStatus(this);
-            //System.out.println(findViewById(R.id.cnm).getLayoutParams());
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            params.setMargins(0, getStatusBarHeight(this), 0, 0);
-            findViewById(R.id.shiyingxing).setLayoutParams(params);
-
-        }
+//        if (pageId == 1) {
+//            //shiying.setAccessibilityLiveRegion();
+//
+//
+//
+//            //bar_wei.setImageResource(imageRes);
+//            //bar_wei2.
+//            if(imageRes == R.drawable.image55){
+//
+//                ObjectAnimator.ofFloat(bar_wei2, "alpha",  0, 1).setDuration(400).start();
+//            }else{
+//
+//                ObjectAnimator.ofFloat(bar_wei2, "alpha",  1, 0).setDuration(400).start();
+//            }
+//            //ObjectAnimator.ofFloat(bar_wei2, "alpha", 1, 0, 1).setDuration(2500).start();
+//            pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+//            bar_wei.setVisibility(View.VISIBLE);
+//            StatusBarUtil.setTranslucentStatus(this);
+//            //System.out.println(findViewById(R.id.cnm).getLayoutParams());
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//            params.setMargins(0, getStatusBarHeight(this), 0, 0);
+//            findViewById(R.id.shiyingxing).setLayoutParams(params);
+//
+//        }
     }
 
     public void ch(View view, String start, String end) {
@@ -192,8 +196,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             }
         });
 
-        bar_wei = findViewById(R.id.bar_wei_main);
-        bar_wei2 = findViewById(R.id.bar_wei_main2);
+        //bar_wei = findViewById(R.id.bar_wei_main);
+        //bar_wei2 = findViewById(R.id.bar_wei_main2);
 //        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this, true, R.color.cw);
@@ -491,31 +495,70 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         public void onPageSelected(int position) {
             RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             radioButton.setChecked(true);
-            LogUtils.d("当前页数", String.valueOf(position));
             pageId = position;
-            if (position != 1) {
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                params.setMargins(0, 0, 0, 0);
-                findViewById(R.id.shiyingxing).setLayoutParams(params);
+            LogUtils.d("当前页数", String.valueOf(position));
 
-                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
-                //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-                bar_wei.setVisibility(View.GONE);
-                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
+            if(position == 1){
+                StatusBarUtil.setTranslucentStatus(MainActivity.this);
+                pppccc = findViewById(R.id.ppccc);
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
+                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);//left,top,right,bottom
+                findViewById(R.id.appbar).setLayoutParams(params);
 
+                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
+                params2.setMargins(0, -getStatusBarHeight(MainActivity.this)- PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+
+                LogUtils.d(-getStatusBarHeight(MainActivity.this)-49);
+
+                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                mAppBarParams.setScrollFlags(0);
+                pppccc.setLayoutParams(mAppBarParams);
+
+                pppccc.setBackgroundColor(Color.argb((int) toumingdu,255,255,255));
+                StatusBarUtil.setStatusBarColor2(MainActivity.this,Color.argb((int) toumingdu,255,255,255));
+                io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this,5,true);
             }
             else{
-                int res = fragment2.activityChangeFragment("data");
-                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
-                bar_wei.setVisibility(View.VISIBLE);
-                if(imageRes == null) imageRes =res;
-                bar_wei.setImageResource(imageRes);
-                StatusBarUtil.setTranslucentStatus(MainActivity.this);
-                //System.out.println(findViewById(R.id.cnm).getLayoutParams());
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);
-                findViewById(R.id.shiyingxing).setLayoutParams(params);
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
+                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
+                findViewById(R.id.appbar).setLayoutParams(params);
+
+                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
+                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+
+                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
+                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
+                pppccc.setLayoutParams(mAppBarParams);
+                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
             }
+
+//            pageId = position;
+//            if (position != 1) {
+//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//                params.setMargins(0, 0, 0, 0);
+//                findViewById(R.id.shiyingxing).setLayoutParams(params);
+//
+//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+//                //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+//                bar_wei.setVisibility(View.GONE);
+//                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
+//
+//            }
+//            else{
+//                int res = fragment2.activityChangeFragment("data");
+//                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+//                bar_wei.setVisibility(View.VISIBLE);
+//                if(imageRes == null) imageRes =res;
+//                bar_wei.setImageResource(imageRes);
+//                StatusBarUtil.setTranslucentStatus(MainActivity.this);
+//                //System.out.println(findViewById(R.id.cnm).getLayoutParams());
+//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);
+//                findViewById(R.id.shiyingxing).setLayoutParams(params);
+//            }
 
         }
 
@@ -758,15 +801,23 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         testbar.animate().translationY(0);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        LogUtils.d("ver" + verticalOffset +" pageId"+String.valueOf(pageId));
-        if(pageId !=1) {
+        LogUtils.d("ver" + verticalOffset +" pageId"+String.valueOf(pageId)+"TotalScrollRange"+String.valueOf(appBarLayout.getTotalScrollRange()));
+        if(pageId ==0) {
             int pp = -appBarLayout.getTotalScrollRange();
             View view = findViewById(R.id.tiaotiao);
             LogUtils.d(verticalOffset > pp);
             if (verticalOffset > pp) view.setVisibility(View.GONE);
             else view.setVisibility(View.VISIBLE);
+        }
+        else if(pageId == 1){
+
+
+
+
+
         }
 //        SlidingTabLayout tabb = findViewById(R.id.tabb);
 //        if(verticalOffset<-50)
@@ -775,5 +826,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 //            tabb.setBackgroundColor(getResources().getColor(R.color.cw));
     }
 
+    public void setcolor(int a){
+
+        toumingdu = a;
+
+        pppccc.setBackgroundColor(Color.argb((int) a,255,255,255));
+        StatusBarUtil.setStatusBarColor2(this,Color.argb((int) a,255,255,255));
+        io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(this,5,true);
+    }
 
 }

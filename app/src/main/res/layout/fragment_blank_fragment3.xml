@@ -12,20 +12,29 @@
 <!--        android:layout_height="66px"-->
 <!--        android:orientation="horizontal" />-->
 
-    <com.flyco.tablayout.SlidingTabLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tab"
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/bg_huidi"
-        app:tl_textSelectColor="@color/black"
-        app:tl_textUnselectColor="#9d9d9d"
-        app:tl_indicator_height="2dp"
-        app:tl_indicator_width="10dp"
-        app:tl_textsize="17dp"
-        app:tl_indicator_color="@color/black"
-        app:tl_tab_space_equal="true" />
+        android:background="#fff"
+        android:layout_height="35dp">
+
+        <com.flyco.tablayout.SlidingTabLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:background="#fff"
+            app:tl_textSelectColor="@color/pc_blue3"
+            app:tl_textUnselectColor="#937F7F"
+            app:tl_indicator_height="2dp"
+            app:tl_indicator_margin_top="3dp"
+            app:tl_indicator_corner_radius="1dp"
+            app:tl_indicator_width="10dp"
+            app:tl_textsize="17sp"
+            app:tl_indicator_color="@color/pc_blue3"
+            app:tl_tab_space_equal="true" />
+
+    </LinearLayout>
 
 <!--    <LinearLayout-->
 <!--        android:layout_width="match_parent"-->
@@ -34,7 +43,6 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"
-        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

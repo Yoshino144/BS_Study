@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.akexorcist:round-corner-progress-bar:2.1.2'
     implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
     //implementation 'cn.rongcloud.sdk:im_lib:5.1.8' // 即时通讯基础能力库
     api 'cn.rongcloud.sdk:im_kit:5.1.8' // 即时通讯 UI 基础组件

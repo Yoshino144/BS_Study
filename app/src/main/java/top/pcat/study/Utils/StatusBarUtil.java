@@ -75,6 +75,8 @@ public class StatusBarUtil {
             SystemBarTintManager tintManager = new SystemBarTintManager(activity);
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(colorId);
+            Window window = activity.getWindow();
+            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 
@@ -114,14 +116,12 @@ public class StatusBarUtil {
         }
     }
 
-    public static void setStatusBarMode2(Activity activity, boolean isTextDark, int colorId) {
+    public static void setStatusText(Activity activity, boolean isTextDark) {
 
         if(!isTextDark) {
             //文字、图标颜色不变，只修改状态栏颜色
-            setStatusBarColor2(activity, colorId);
         } else {
             //修改状态栏颜色和文字图标颜色
-            setStatusBarColor2(activity, colorId);
             //4.4以上才可以改文字图标颜色
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //                if(OSUtil.isMIUI()) {

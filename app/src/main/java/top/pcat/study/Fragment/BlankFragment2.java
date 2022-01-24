@@ -16,7 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -32,6 +34,7 @@ import top.pcat.study.Size.DisplayUtil;
 import top.pcat.study.View.F2BangAdapter;
 import top.pcat.study.View.F2BangItemAdapter;
 import top.pcat.study.View.Fragment2Adapter;
+import top.pcat.study.View.HengRecyclerView;
 import top.pcat.study.View.ItemF2Bang;
 import top.pcat.study.View.ItemF2BangItem;
 import top.pcat.study.View.ItemFragment2;
@@ -138,6 +141,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private boolean isFirstLoading = true;
 
     private OnFragmentInteractionListener mListener;
+    private NestedScrollView nsv;
 
     public BlankFragment2() {
     }
@@ -211,6 +215,29 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             signFlag=false;
         }
 
+        nsv = getActivity().findViewById(R.id.nsv);
+        nsv.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+
+
+            int now_pos = 0;
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                LogUtils.d(" x"+String.valueOf(scrollX)+" y"+String.valueOf(scrollY)
+                        +" ox"+String.valueOf(oldScrollX)+" oy"+String.valueOf(oldScrollY));
+                if (scrollY<=200){
+
+                    Double i =((double)scrollY)/((double) 200);
+                    int a = (int) (i*255);
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.setcolor(a);
+                }else{
+
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.setcolor(255);
+                }
+
+            }
+        });
 
         updata_bang();
         //updata_bang_item();
@@ -251,10 +278,22 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             e.printStackTrace();
         }
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        StaggeredGridLayoutManager layoutManager = new
-                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager = new
+                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false){
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
         recyclerView.setLayoutManager(layoutManager);
         Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s,cwjHandler);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
     }
 
@@ -267,17 +306,31 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             e.printStackTrace();
         }
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_kechngbangdan);
-        StaggeredGridLayoutManager layoutManager = new
-                StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL);
+        LinearLayoutManager layoutManager = new
+                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false){
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
         recyclerView.setLayoutManager(layoutManager);
-        F2BangAdapter adapter = new F2BangAdapter(itemFragment3,cwjHandler);
+        F2BangAdapter adapter = new F2BangAdapter(itemFragment3,cwjHandler){
+
+        };
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
     }
 
     private void initBang(List<ItemF2Bang> itemFragment3) throws JSONException {
 
         try {
-            for(int i =0 ; i < 2;i++){
+            for(int i =0 ; i < 1;i++){
                 ItemF2Bang apple = new ItemF2Bang(
                         "人数榜",2);
                 itemFragment3.add(apple);
@@ -381,7 +434,6 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
         //默认直接设置adapter就行了
         myBanner.setAdapter(new ImageAdapter(DataBean.getTestData()));
-        myBanner.setUserInputEnabled(true);
         myBanner.isAutoLoop(true);
         myBanner.addOnPageChangeListener(this);
 
@@ -389,8 +441,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         myBanner.setIndicatorSelectedWidth((int) BannerUtils.dp2px(15));
 myBanner.setLoopTime(5000);
 myBanner.setUserInputEnabled(false);
-//        myBanner.start();
-//        myBanner.stop();
+        myBanner.start();
 
 
     }
