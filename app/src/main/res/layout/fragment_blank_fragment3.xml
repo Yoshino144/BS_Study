@@ -22,24 +22,33 @@
 
 
         </LinearLayout>
+<LinearLayout
+    android:layout_gravity="center_vertical"
+    android:gravity="center"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content">
 
-        <com.flyco.tablayout.SlidingTabLayout
-            android:layout_gravity="center_vertical"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/tab"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="29dp"
-            android:background="#fff"
-            app:tl_textSelectColor="@color/pc_blue3"
-            app:tl_textUnselectColor="#937F7F"
-            app:tl_indicator_height="2dp"
-            app:tl_indicator_margin_top="3dp"
-            app:tl_indicator_corner_radius="1dp"
-            app:tl_indicator_width="10dp"
-            app:tl_textsize="17sp"
-            app:tl_indicator_color="@color/pc_blue3"
-            app:tl_tab_space_equal="true" />
+    <com.flyco.tablayout.SlidingTabLayout
+        android:layout_gravity="center_vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tab"
+        android:layout_width="200dp"
+        android:layout_height="29dp"
+        android:background="#fff"
+        app:tl_textSelectColor="@color/pc_blue3"
+        app:tl_textUnselectColor="#937F7F"
+        app:tl_indicator_height="2dp"
+        app:tl_indicator_margin_top="3dp"
+        app:tl_indicator_corner_radius="1dp"
+        app:tl_indicator_width="10dp"
+        app:tl_textsize="17sp"
+        app:tl_indicator_color="@color/pc_blue3"
+        app:tl_tab_space_equal="true" />
+
+
+</LinearLayout>
+
 
         <LinearLayout
             android:layout_width="30dp"

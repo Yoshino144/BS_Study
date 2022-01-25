@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="@string/text"
+        android:icon="@drawable/ic_home"
+        app:exb_color="#ff58a5f0" />
+
+    <item
+        android:id="@+id/shiyan"
+        android:title="@string/text2"
+        android:icon="@drawable/ic_shiyan"
+        app:exb_color="#ffff77a9" />
+
+    <item
+        android:id="@+id/kecheng"
+        android:title="@string/text5"
+        android:icon="@drawable/ic_kecheng"
+        app:exb_color="#7fccde" />
+
+    <item
+        android:id="@+id/mes"
+        android:title="@string/text3"
+        android:icon="@drawable/ic_mes"
+        app:exb_color="#FF888888" />
+
+    <item
+        android:id="@+id/own"
+        android:title="@string/text4"
+        android:icon="@drawable/ic_own"
+        app:exb_color="#ffbe9c91" />
+</menu>

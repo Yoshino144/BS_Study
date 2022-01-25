@@ -1,13 +1,16 @@
 package top.pcat.study.Fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.textclassifier.ConversationAction;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
@@ -21,6 +24,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 
 import io.rong.imkit.GlideKitImageEngine;
 import io.rong.imkit.config.RongConfigCenter;
@@ -31,8 +35,10 @@ import io.rong.imkit.conversationlist.model.BaseUiConversation;
 import io.rong.imkit.conversationlist.provider.PrivateConversationProvider;
 import io.rong.imkit.widget.adapter.ProviderManager;
 import top.pcat.study.MainActivity;
+import top.pcat.study.OnePageFragment;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
+import top.pcat.study.Utils.DisplayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,22 +83,10 @@ public class BlankFragment3 extends Fragment {
 
 
 
-        initView();
+
     }
 
-    private void initView() {
-        mTab = (SlidingTabLayout) getActivity().findViewById(R.id.tab);
-        mVp = (ViewPager) getActivity().findViewById(R.id.vp);
 
-        mFragments = new ArrayList<>();
-        mFragments.add(new ConversationListFragment());
-        mFragments.add(new BlankFragment7());
-
-        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
-        mVp.setAdapter(pagerAdapter);
-
-        mTab.setViewPager(mVp,mTitlesArrays,getActivity(),mFragments);//tab和ViewPager进行关联
-    }
 
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
@@ -120,7 +114,52 @@ public class BlankFragment3 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
+        mTab = (SlidingTabLayout) view.findViewById(R.id.tab);
+        mVp = (ViewPager) view.findViewById(R.id.vp);
 
+        mFragments = new ArrayList<>();
+        mFragments.add(new ConversationListFragment());
+        mFragments.add(new BlankFragment7());
+
+        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
+        mVp.setAdapter(pagerAdapter);
+
+        mTab.setViewPager(mVp,mTitlesArrays,getActivity(),mFragments);//tab和ViewPager进行关联
+
+        TextView title = mTab.getTitleView(0);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX,DisplayUtil.sp2px(getContext(),18));
+        title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+
+        mTab.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                updateTabView(position);
+
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
+        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                updateTabView(position);
+                ((MainActivity) requireActivity()).Display();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         return view;
     }
@@ -135,5 +174,21 @@ public class BlankFragment3 extends Fragment {
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void updateTabView(int position) {
+        int tabCount = mTab.getTabCount();
+        for (int i=0;i<tabCount;i++){
+            TextView title = mTab.getTitleView(i);
+            if (i==position){
+//                        TextView title = child.findViewById(com.flyco.tablayout.R.id.tv_tab_title);
+                title.setTextSize(TypedValue.COMPLEX_UNIT_PX, DisplayUtil.sp2px(getContext(),18));
+                title.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+            }else {
+//                        TextView title = child.findViewById(com.flyco.tablayout.R.id.tv_tab_title);
+                title.setTextSize(TypedValue.COMPLEX_UNIT_PX,DisplayUtil.sp2px(getContext(),17));
+                title.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+            }
+        }
     }
 }

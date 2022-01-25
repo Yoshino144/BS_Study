@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:layout_marginTop="49dp"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,6 +32,7 @@
             app:srlDrawableProgress="@drawable/ic_progress_puzzle"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/bg_huidi"

@@ -136,11 +136,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="61dp"
                     android:layout_margin="15dp"
+                    app:exb_items="@menu/bottom_bar"
                     app:exb_item_horizontal_margin="5dp"
                     app:exb_transitionDuration="90"
                     app:exb_backgroundCornerRadius="32.5dp"
                     app:exb_backgroundColor="#00FFFFFF"
-                    app:exb_itemInactiveColor="#000"
+                    app:exb_itemInactiveColor="#72000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />

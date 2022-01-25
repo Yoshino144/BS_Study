@@ -10,6 +10,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/bang_textcolor.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/banner_guodu.xml" value="0.26153846153846155" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/ic_home.xml" value="0.24166666666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/ic_kecheng.xml" value="0.2361111111111111" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/kapian.xml" value="0.2537037037037037" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin.xml" value="0.25833333333333336" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/drawable/one_jin2.xml" value="0.25833333333333336" />
@@ -50,7 +51,9 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment2.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment3.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment4.xml" value="0.176" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_com.xml" value="0.12132725430597771" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_one_page.xml" value="0.264" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/intro1.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_f2_bang.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_f2_bb.xml" value="0.24947916666666667" />
@@ -73,6 +76,10 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/userdadta.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/userview.xml" value="0.12132725430597771" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/webview_yixuan.xml" value="0.12132725430597771" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/menu/bottom_bar.xml" value="0.24947916666666667" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/size/drawable/ic_kecheng.xml" value="0.2361111111111111" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/size/drawable/ic_own.xml" value="0.2361111111111111" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/size/drawable/ic_shiyan.xml" value="0.2361111111111111" />
       </map>
     </option>
   </component>

@@ -190,25 +190,25 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         bottomBar = findViewById(R.id.expandable_bottom_bar);
         menu = bottomBar.getMenu();
 
-        menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, 0xff58a5f0).build()
-        );
-
-        menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_likes, R.drawable.ic_likes, R.string.text2, 0xffff77a9).build()
-        );
-
-        menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.shequ, R.drawable.ic_likes, R.string.text5, 0xffff77a9).build()
-        );
-
-        menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_bookmarks, R.string.text3, Color.GRAY).build()
-        );
-
-        menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_settings, R.drawable.ic_settings, R.string.text4, 0xffbe9c91).build()
-        );
+//        menu.add(
+//                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, 0xff58a5f0).build()
+//        );
+//
+//        menu.add(
+//                new MenuItemDescriptor.Builder(this, R.id.icon_likes, R.drawable.ic_shiyan, R.string.text2, 0xffff77a9).build()
+//        );
+//
+//        menu.add(
+//                new MenuItemDescriptor.Builder(this, R.id.icon_shequ, R.drawable.ic_kecheng, R.string.text5, 0x7fccde).build()
+//        );
+//
+//        menu.add(
+//                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_mes, R.string.text3, Color.GRAY).build()
+//        );
+//
+//        menu.add(
+//                new MenuItemDescriptor.Builder(this, R.id.icon_settings, R.drawable.ic_own, R.string.text4, 0xffbe9c91).build()
+//        );
 
         bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
             LogUtils.d("selected: " + String.valueOf(item.getText()));
@@ -216,12 +216,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 mViewPager.setCurrentItem(0);
             else if (item.getText().equals("课程"))
                 mViewPager.setCurrentItem(1);
+            else if (item.getText().equals("动态"))
+                mViewPager.setCurrentItem(2);
             else if (item.getText().equals("班级"))
                 mViewPager.setCurrentItem(3);
             else if (item.getText().equals("我的"))
                 mViewPager.setCurrentItem(4);
-            else if (item.getText().equals("动态"))
-                mViewPager.setCurrentItem(2);
             return null;
         });
 
