@@ -85,7 +85,7 @@
 
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollone"
+            android:id="@+id/scrollone2"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"

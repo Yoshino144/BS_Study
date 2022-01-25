@@ -7,6 +7,11 @@
         <item>俄语</item>
         <item>法语</item>
     </string-array>
+
+    <string name="text">Home</string>
+    <string name="text2">Likes</string>
+    <string name="text3">Bookmarks</string>
+    <string name="text4">Settings</string>
     <string-array name="language_values">
         <item>mandarin</item>
         <item>cantonese</item>

@@ -139,6 +139,7 @@ public class OnePageFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 updateTabView(position);
+                ((MainActivity) requireActivity()).Display();
             }
 
             @Override

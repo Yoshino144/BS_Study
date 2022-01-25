@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -40,6 +41,7 @@ import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import top.pcat.study.Fresh.CircleRefreshLayout;
+import top.pcat.study.MainActivity;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
 import top.pcat.study.Utils.PxToDp;
@@ -69,6 +71,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.TimeZone;
 
 import okhttp3.OkHttpClient;
@@ -136,7 +139,7 @@ public class BlankFragment extends Fragment {
     private String userdata;
     private LinearLayout  tt;
     private TextView todaysize;
-    private ScrollView scrollone;
+    private NestedScrollView scrollone;
 
     private TextView baifenbitext;
     private TextView timusizetext;
@@ -221,6 +224,13 @@ public class BlankFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
+
+        meiri = rootView.findViewById(R.id.meiri);
+        meiri_b = rootView.findViewById(R.id.meiri_bai);
+        meiri_f = rootView.findViewById(R.id.meiri_fen);
+        meiri_fb = rootView.findViewById(R.id.meiri_fen_bai);
+        meiri_t = rootView.findViewById(R.id.meiri_q);
+        meiri_t2 =  rootView.findViewById(R.id.meiri_q2);
         File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
         if (ft.isFileExists(path.toString())) {
 
@@ -236,16 +246,24 @@ public class BlankFragment extends Fragment {
             allsizetext = rootView.findViewById(R.id.allsizetext);
             todaysize = rootView.findViewById(R.id.todaysize);
             tt= rootView.findViewById(R.id.lantiao);
-            meiri = rootView.findViewById(R.id.meiri);
-            meiri_b = rootView.findViewById(R.id.meiri_bai);
-            meiri_f = rootView.findViewById(R.id.meiri_fen);
-            meiri_fb = rootView.findViewById(R.id.meiri_fen_bai);
-            meiri_t = rootView.findViewById(R.id.meiri_q);
-            meiri_t2 =  rootView.findViewById(R.id.meiri_q2);
             baitiao = rootView.findViewById(R.id.baitiao);
+            scrollone = rootView.findViewById(R.id.scrollone);
             TextView usertext2 = rootView.findViewById(R.id.usertext);
             todaySize = read("UserInfo");
             readSj(todaySize);
+
+            scrollone.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    ((MainActivity) requireActivity()).Hide();
+                }
+                if (scrollY < oldScrollY) {
+                    ((MainActivity) requireActivity()).Display();
+                }}
+
+
+            });
 
             userdata = read("UserData");
             readtb(userdata);

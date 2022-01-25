@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,8 +11,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/shiyingxing"
@@ -105,69 +104,31 @@
 
 
             <LinearLayout
+                android:id="@+id/testbar"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="-3dp"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
+                    android:id="@+id/expandable_bottom_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@drawable/renwulan" />
+                    android:layout_height="65dp"
+                    android:layout_margin="15dp"
+                    android:background="#57FFFFFF"
+                    app:exb_item_horizontal_margin="5dp"
+                    app:exb_transitionDuration="100"
+                    app:exb_backgroundCornerRadius="32.5dp"
+                    app:exb_backgroundColor="#57FFFFFF"
+                    app:exb_itemInactiveColor="#000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <RadioGroup
-                    android:id="@+id/tabs_rg"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center"
-                    android:background="@color/write_fan"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/today_tab"
-                        style="@style/Custom.TabRadioButton"
-                        android:layout_gravity="center"
-                        android:checked="true"
-                        android:drawableTop="@drawable/tab_sign_selector"
-                        android:gravity="center"
-                        android:text="学习"
-                        android:textColor="@drawable/radiobutton_textcolor"
-                        android:textSize="10dp" />
-
-                    <RadioButton
-                        android:id="@+id/record_tab"
-                        style="@style/Custom.TabRadioButton"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/tab_ke_selector"
-                        android:gravity="center"
-                        android:text="课程"
-                        android:textColor="@drawable/radiobutton_textcolor"
-                        android:textSize="10dp" />
-
-                    <RadioButton
-                        android:id="@+id/pai_tab"
-                        style="@style/Custom.TabRadioButton"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/tab_pai_selector"
-                        android:gravity="center"
-                        android:text="班级"
-                        android:textColor="@drawable/radiobutton_textcolor"
-                        android:textSize="10dp" />
-
-                    <RadioButton
-                        android:id="@+id/settings_tab"
-                        style="@style/Custom.TabRadioButton"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/tab_me_selector"
-                        android:gravity="center"
-                        android:text="我的"
-                        android:textColor="@drawable/radiobutton_textcolor"
-                        android:textSize="10dp" />
-                </RadioGroup>
             </LinearLayout>
 
 
 
-</LinearLayout>
+</RelativeLayout>

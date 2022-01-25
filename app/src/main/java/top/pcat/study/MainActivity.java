@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,9 +50,15 @@ import com.mob.OperationCallback;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
+import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
+import github.com.st235.lib_expandablebottombar.Menu;
+import github.com.st235.lib_expandablebottombar.MenuItemDescriptor;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.userinfo.RongUserInfoManager;
+import io.rong.imkit.userinfo.UserDataProvider;
 import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Fragment.BlankFragment2;
@@ -86,7 +93,7 @@ import java.util.TimerTask;
 import java.util.concurrent.Delayed;
 
 
-public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
     private int pageId = 0;
     private static boolean loginflag;
     private NoScrollViewPager mViewPager;
@@ -169,10 +176,59 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
     };
 
+    private ExpandableBottomBar bottomBar;
+    private Menu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        testbar =findViewById(R.id.testbar);
+        bottomBar = findViewById(R.id.expandable_bottom_bar);
+        menu = bottomBar.getMenu();
+
+        menu.add(
+                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, Color.GRAY).build()
+        );
+
+        menu.add(
+                new MenuItemDescriptor.Builder(this, R.id.icon_likes, R.drawable.ic_likes, R.string.text2, 0xffff77a9).build()
+        );
+
+        menu.add(
+                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_bookmarks, R.string.text3, 0xff58a5f0).build()
+        );
+
+        menu.add(
+                new MenuItemDescriptor.Builder(this, R.id.icon_settings, R.drawable.ic_settings, R.string.text4, 0xffbe9c91).build()
+        );
+
+        bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
+            LogUtils.d("selected: " +String.valueOf( item.getText()));
+            if(item.getText().equals("Home"))
+                    mViewPager.setCurrentItem(0);
+            else if(item.getText().equals("Likes"))
+                mViewPager.setCurrentItem(1);
+                else if(item.getText().equals("Bookmarks"))
+                mViewPager.setCurrentItem(2);
+                    else if(item.getText().equals("Settings"))
+                mViewPager.setCurrentItem(3);
+            return null;
+        });
+
+        bottomBar.setOnItemReselectedListener((view, item, byUser) -> {
+            LogUtils.d("reselected: " + item.toString());
+            return null;
+        });
+        UserDataProvider.UserInfoProvider userInfoProvider = new UserDataProvider.UserInfoProvider() {
+            @Override
+            public UserInfo getUserInfo(String userId) {
+                UserInfo userInfo = new UserInfo(userId, "root", Uri.parse("https://s3.bmp.ovh/imgs/2022/01/f2af36fd8a17eb69.jpeg"));
+                return userInfo;
+            }
+        };
+        RongUserInfoManager.getInstance().setUserInfoProvider(userInfoProvider, true);
 
         String token = "gZWy3AOlXHmZjzEH0rIK0+JuIhWSI2mOw/z1dKtSMNQi7H5LCbg9Ln4be8dxcjSmeTsOmCDEo0Q=@7zkh.cn.rongnav.com;7zkh.cn.rongcfg.com";
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
@@ -192,7 +248,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
 
-                LogUtils.e("融云--登录失败"+String.valueOf(databaseOpenStatus.getValue()));
+                LogUtils.e("融云--数据库"+String.valueOf(databaseOpenStatus.getValue())
+                        +databaseOpenStatus.toString());
             }
         });
 
@@ -225,25 +282,25 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         appBarLayout.addOnOffsetChangedListener(this);
 
 
-        RadioButton today_tab = findViewById(R.id.today_tab);
-        RadioButton record_tab = findViewById(R.id.record_tab);
-        RadioButton settings_tab = findViewById(R.id.pai_tab);
-        RadioButton pai_tab = findViewById(R.id.settings_tab);
-        Drawable drawable_news = getResources().getDrawable(R.drawable.tab_sign_selector);
-        drawable_news.setBounds(0, 0, 60, 60);
-        today_tab.setCompoundDrawables(null, drawable_news, null, null);
-
-        Drawable drawable_news2 = getResources().getDrawable(R.drawable.tab_ke_selector);
-        drawable_news2.setBounds(0, 0, 60, 60);
-        record_tab.setCompoundDrawables(null, drawable_news2, null, null);
-
-        Drawable drawable_news3 = getResources().getDrawable(R.drawable.tab_pai_selector);
-        drawable_news3.setBounds(0, 0, 60, 60);
-        settings_tab.setCompoundDrawables(null, drawable_news3, null, null);
-
-        Drawable drawable_news4 = getResources().getDrawable(R.drawable.tab_me_selector);
-        drawable_news4.setBounds(0, 0, 60, 60);
-        pai_tab.setCompoundDrawables(null, drawable_news4, null, null);
+//        RadioButton today_tab = findViewById(R.id.today_tab);
+//        RadioButton record_tab = findViewById(R.id.record_tab);
+//        RadioButton settings_tab = findViewById(R.id.pai_tab);
+//        RadioButton pai_tab = findViewById(R.id.settings_tab);
+//        Drawable drawable_news = getResources().getDrawable(R.drawable.tab_sign_selector);
+//        drawable_news.setBounds(0, 0, 60, 60);
+//        today_tab.setCompoundDrawables(null, drawable_news, null, null);
+//
+//        Drawable drawable_news2 = getResources().getDrawable(R.drawable.tab_ke_selector);
+//        drawable_news2.setBounds(0, 0, 60, 60);
+//        record_tab.setCompoundDrawables(null, drawable_news2, null, null);
+//
+//        Drawable drawable_news3 = getResources().getDrawable(R.drawable.tab_pai_selector);
+//        drawable_news3.setBounds(0, 0, 60, 60);
+//        settings_tab.setCompoundDrawables(null, drawable_news3, null, null);
+//
+//        Drawable drawable_news4 = getResources().getDrawable(R.drawable.tab_me_selector);
+//        drawable_news4.setBounds(0, 0, 60, 60);
+//        pai_tab.setCompoundDrawables(null, drawable_news4, null, null);
 
         initView();
 
@@ -461,7 +518,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         mViewPager.setOffscreenPageLimit(4);
         // register listener
         mViewPager.addOnPageChangeListener(mPageChangeListener);
-        mTabRadioGroup.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        //mTabRadioGroup.setOnCheckedChangeListener(mOnCheckedChangeListener);
     }
 
     @Override
@@ -494,10 +551,10 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         @SuppressLint("WrongConstant")
         @Override
         public void onPageSelected(int position) {
-            RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
-            radioButton.setChecked(true);
+            //RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
+            //radioButton.setChecked(true);
             pageId = position;
-            LogUtils.d("当前页数", String.valueOf(position));
+            LogUtils.d("当前页数"+ String.valueOf(position));
             pppccc = findViewById(R.id.ppccc);
 
             findViewById(R.id.main_edit).setVisibility(View.VISIBLE);
@@ -853,6 +910,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 //            tabb.setBackgroundColor(getResources().getColor(R.color.cw));
     }
 
+    @SuppressLint("WrongConstant")
     public void setcolor(int a){
 
         toumingdu = a;

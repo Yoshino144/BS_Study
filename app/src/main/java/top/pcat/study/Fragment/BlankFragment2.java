@@ -177,16 +177,16 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         //initBanner();
         File path = new File(requireActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
         if (!FileTool.isFileExists(path.toString())) {
-            LinearLayout qwe = blan.findViewById(R.id.loginFlag);
-            qwe.setVisibility(View.VISIBLE);
-            LogUtils.d("=============未登录-显示登录框=============");
-            qwe.setOnClickListener(v -> {
-                Intent intent01 = new Intent();
-                intent01.setClass(getActivity(), SignActivity.class);
-                intent01.putExtra("page", 0);
-                getActivity().finish();
-                startActivity(intent01);
-            });
+//            LinearLayout qwe = blan.findViewById(R.id.loginFlag);
+//            qwe.setVisibility(View.VISIBLE);
+//            LogUtils.d("=============未登录-显示登录框=============");
+//            qwe.setOnClickListener(v -> {
+//                Intent intent01 = new Intent();
+//                intent01.setClass(getActivity(), SignActivity.class);
+//                intent01.putExtra("page", 0);
+//                getActivity().finish();
+//                startActivity(intent01);
+//            });
         }
 
 

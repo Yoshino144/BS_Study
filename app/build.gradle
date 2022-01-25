@@ -5,7 +5,7 @@ android {
     buildToolsVersion '31.0.0'
     defaultConfig {
         applicationId 'top.pcat.study'
-        minSdkVersion 21
+        minSdkVersion 27
         targetSdkVersion 31
         versionCode 3
         versionName "4.1.0"
@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    implementation "net.zetetic:android-database-sqlcipher:4.5.0"
+    implementation "androidx.sqlite:sqlite:2.0.1"
+    implementation 'com.github.st235:expandablebottombar:1.4.0' //导航栏
     implementation 'com.facebook.fresco:fresco:0.12.0' //图片加载
     implementation 'com.akexorcist:round-corner-progress-bar:2.1.2' //进度条
     implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
