@@ -8,10 +8,12 @@
         <item>法语</item>
     </string-array>
 
-    <string name="text">Home</string>
-    <string name="text2">Likes</string>
-    <string name="text3">Bookmarks</string>
-    <string name="text4">Settings</string>
+    <string name="text">学习</string>
+    <string name="text2">课程</string>
+    <string name="text3">班级</string>
+    <string name="text4">我的</string>
+    <string name="text5">动态</string>
+
     <string-array name="language_values">
         <item>mandarin</item>
         <item>cantonese</item>

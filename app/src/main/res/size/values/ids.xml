@@ -2,6 +2,7 @@
 <resources>
     <item name="icon_home" type="id" />
     <item name="icon_likes" type="id" />
+    <item name="shequ" type="id" />
     <item name="icon_bookmarks" type="id" />
     <item name="icon_settings" type="id" />
 </resources>

@@ -33,6 +33,9 @@ android {
 }
 
 dependencies {
+    implementation 'in.arjsna:swipecardlib:1.0.2'
+    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
+    implementation 'com.github.dhaval2404:android-form-validation:1.0'//表单
     implementation "net.zetetic:android-database-sqlcipher:4.5.0"
     implementation "androidx.sqlite:sqlite:2.0.1"
     implementation 'com.github.st235:expandablebottombar:1.4.0' //导航栏
@@ -50,6 +53,22 @@ dependencies {
     implementation "com.zhihu.android:matisse:0.5.2"
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'pub.devrel:easypermissions:3.0.0'
+
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
+    implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
+    implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
+    // PictureSelector 基础 (必须)
+    implementation 'io.github.lucksiege:pictureselector:v3.0.2'
+
+    // 图片压缩 (按需引入)
+    implementation 'io.github.lucksiege:compress:v3.0.2'
+
+    // 图片裁剪 (按需引入)
+    implementation 'io.github.lucksiege:ucrop:v3.0.2'
+
+    // 自定义相机 (按需引入)
+    implementation 'io.github.lucksiege:camerax:v3.0.2'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'androidx.compose.animation:animation-graphics:+'

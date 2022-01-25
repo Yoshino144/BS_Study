@@ -23,11 +23,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.knowledge.mnlin.RollTextView;
+
+import in.arjsna.swipecardlib.SwipeCardView;
 import top.pcat.study.FastBlur.FastBlurActivity;
 import top.pcat.study.Setting.SettingsActivity;
 import top.pcat.study.Utils.FileTool;
-import top.pcat.study.NewExercisesActitity.NewExercisesActitity;
 import top.pcat.study.R;
+import top.pcat.study.View.CardsAdapter;
+import top.pcat.study.View.LogUtils;
 import top.pcat.study.WrongQuestion.WrongQuestion;
 import top.pcat.study.user.SignActivity;
 import top.pcat.study.user.User;
@@ -41,13 +44,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class BlankFragment4 extends Fragment {
+public class BlankFragment4 extends Fragment  {
     private static final String ARG_SHOW_TEXT = "text";
     private static final String LV_SHOW_TEXT = "lvtext";
 
@@ -83,16 +87,53 @@ public class BlankFragment4 extends Fragment {
             mLvText = getArguments().getString(LV_SHOW_TEXT);
         }
     }
-
+    private ArrayList<CardsAdapter.Card> al = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_blank_fragment4, container, false);
+        getDummyData(al);
+        CardsAdapter arrayAdapter = new CardsAdapter(getContext(), al );
+        SwipeCardView swipeCardView = (SwipeCardView) rootView.findViewById(R.id.swipe_card_view);
+        swipeCardView.setAdapter(arrayAdapter);
+        swipeCardView.setFlingListener(new SwipeCardView.OnCardFlingListener() {
+            @Override
+            public void onCardExitLeft(Object dataObject) {
+                LogUtils.i( "Left Exit");
+            }
+
+            @Override
+            public void onCardExitRight(Object dataObject) {
+                LogUtils.i( "Right Exit");
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int itemsInAdapter) {
+                LogUtils.i( "Adater to be empty");
+                //add more items to adapter and call notifydatasetchanged
+            }
+
+            @Override
+            public void onScroll(float scrollProgressPercent) {
+                LogUtils.i("Scroll");
+            }
+
+            @Override
+            public void onCardExitTop(Object dataObject) {
+                LogUtils.i( "Top Exit");
+            }
+
+            @Override
+            public void onCardExitBottom(Object dataObject) {
+                LogUtils.i("Bottom Exit");
+            }
+        });
+
         TextView contentTv = rootView.findViewById(R.id.usernameshow);
         contentTv.setText(mContentText);
         yejian = rootView.findViewById(R.id.yejian);
-        TextView banben = rootView.findViewById(R.id.banben);
+        //TextView banben = rootView.findViewById(R.id.banben);
         mSpf = super.getActivity().getSharedPreferences("yejian",MODE_PRIVATE);
         PackageInfo pi = null;
         try {
@@ -101,7 +142,7 @@ public class BlankFragment4 extends Fragment {
             e.printStackTrace();
         }
         Log.d("版本号：",pi.versionName);
-        banben.setText("当前版本号："+pi.versionName);
+        //banben.setText("当前版本号："+pi.versionName);
         LinearLayout lvView = rootView.findViewById(R.id.lvView);
 
         File path = new File(getActivity().getFilesDir().getAbsolutePath()+"/Login.txt");
@@ -144,6 +185,25 @@ public class BlankFragment4 extends Fragment {
         return rootView;
     }
 
+    private void getDummyData(ArrayList<CardsAdapter.Card> al) {
+        CardsAdapter.Card card = new CardsAdapter.Card();
+        card.name = "Card1";
+        card.imageId = R.drawable.image1;
+        al.add(card);
+
+        CardsAdapter.Card card2 = new CardsAdapter.Card();
+        card2.name = "Card2";
+        card2.imageId = R.drawable.image1;
+        al.add(card2);
+        CardsAdapter.Card card3 = new CardsAdapter.Card();
+        card3.name = "Card3";
+        card3.imageId = R.drawable.image1;
+        al.add(card3);
+        CardsAdapter.Card card4 = new CardsAdapter.Card();
+        card4.name = "Card4";
+        card4.imageId = R.drawable.image1;
+        al.add(card4);
+    }
 
     public String readInfo(String tempInfo){
         try {
@@ -220,19 +280,19 @@ public class BlankFragment4 extends Fragment {
         if(loginflag == true) a="true";
         else a="false";
 
-        LinearLayout youhui = getActivity().findViewById(R.id.youhui);
-        youhui.setOnClickListener(v->{
-            Intent intent01=new Intent();
-            intent01.setClass(getActivity(), NewExercisesActitity.class);
-            startActivity(intent01);
-        });
-
-        upData_but = getActivity().findViewById(R.id.upData_but);
-        upData_but.setOnClickListener(v -> {
+//        LinearLayout youhui = getActivity().findViewById(R.id.youhui);
+//        youhui.setOnClickListener(v->{
 //            Intent intent01=new Intent();
-//            intent01.setClass(getActivity(), UpData.class);
+//            intent01.setClass(getActivity(), NewExercisesActitity.class);
 //            startActivity(intent01);
-        });
+//        });
+
+//        upData_but = getActivity().findViewById(R.id.upData_but);
+//        upData_but.setOnClickListener(v -> {
+////            Intent intent01=new Intent();
+////            intent01.setClass(getActivity(), UpData.class);
+////            startActivity(intent01);
+//        });
 
         user = getActivity().findViewById(R.id.user);
         user.setOnClickListener(v -> {
@@ -338,4 +398,6 @@ public class BlankFragment4 extends Fragment {
         }
 
     }
+
+
 }

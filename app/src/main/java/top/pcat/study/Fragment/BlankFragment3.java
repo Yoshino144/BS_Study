@@ -10,6 +10,7 @@ import android.view.textclassifier.ConversationAction;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -29,6 +30,7 @@ import io.rong.imkit.conversationlist.ConversationListFragment;
 import io.rong.imkit.conversationlist.model.BaseUiConversation;
 import io.rong.imkit.conversationlist.provider.PrivateConversationProvider;
 import io.rong.imkit.widget.adapter.ProviderManager;
+import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
 
@@ -65,12 +67,15 @@ public class BlankFragment3 extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
 //        ProviderManager<BaseUiConversation> providerManager = RongConfigCenter.conversationListConfig().getProviderManager(); //获取会话模板管理器
 //        providerManager.replaceProvider(PrivateConversationProvider.class, new CustomConversationProvider()); //用自定义模板替换 SDK 原有模板
+
+
 
         initView();
     }
@@ -114,7 +119,10 @@ public class BlankFragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
+        View view= inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
+
+
+        return view;
     }
 
 

@@ -236,6 +236,13 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     mainActivity.setcolor(255);
                 }
 
+                if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()+10)) {
+                    ((MainActivity) requireActivity()).Hide();
+                }
+                if (scrollY < oldScrollY) {
+                    ((MainActivity) requireActivity()).Display();
+                }
+
             }
         });
 

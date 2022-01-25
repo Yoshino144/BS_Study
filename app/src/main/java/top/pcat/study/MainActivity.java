@@ -59,6 +59,7 @@ import io.rong.imkit.userinfo.UserDataProvider;
 import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
+import top.pcat.study.Community.CommunityFragment;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Fragment.BlankFragment2;
@@ -93,7 +94,7 @@ import java.util.TimerTask;
 import java.util.concurrent.Delayed;
 
 
-public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener{
+public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
     private int pageId = 0;
     private static boolean loginflag;
     private NoScrollViewPager mViewPager;
@@ -116,13 +117,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     public int getNowPage() {
         return nowPage;
     }
+
     private Integer imageRes;
     private String startco = "#ffffff";
     private String endco = "#ffffff";
     private BlankFragment2 fragment2;
 
     public void setNowPage(Integer imageRes) {
-        LogUtils.d("yeshu=="+ imageRes);
+        LogUtils.d("yeshu==" + imageRes);
         this.imageRes = imageRes;
 //        if (pageId == 1) {
 //            //shiying.setAccessibilityLiveRegion();
@@ -184,12 +186,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testbar =findViewById(R.id.testbar);
+        testbar = findViewById(R.id.testbar);
         bottomBar = findViewById(R.id.expandable_bottom_bar);
         menu = bottomBar.getMenu();
 
         menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, Color.GRAY).build()
+                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, 0xff58a5f0).build()
         );
 
         menu.add(
@@ -197,7 +199,11 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         );
 
         menu.add(
-                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_bookmarks, R.string.text3, 0xff58a5f0).build()
+                new MenuItemDescriptor.Builder(this, R.id.shequ, R.drawable.ic_likes, R.string.text5, 0xffff77a9).build()
+        );
+
+        menu.add(
+                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_bookmarks, R.string.text3, Color.GRAY).build()
         );
 
         menu.add(
@@ -205,15 +211,17 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         );
 
         bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
-            LogUtils.d("selected: " +String.valueOf( item.getText()));
-            if(item.getText().equals("Home"))
-                    mViewPager.setCurrentItem(0);
-            else if(item.getText().equals("Likes"))
+            LogUtils.d("selected: " + String.valueOf(item.getText()));
+            if (item.getText().equals("学习"))
+                mViewPager.setCurrentItem(0);
+            else if (item.getText().equals("课程"))
                 mViewPager.setCurrentItem(1);
-                else if(item.getText().equals("Bookmarks"))
-                mViewPager.setCurrentItem(2);
-                    else if(item.getText().equals("Settings"))
+            else if (item.getText().equals("班级"))
                 mViewPager.setCurrentItem(3);
+            else if (item.getText().equals("我的"))
+                mViewPager.setCurrentItem(4);
+            else if (item.getText().equals("动态"))
+                mViewPager.setCurrentItem(2);
             return null;
         });
 
@@ -221,6 +229,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             LogUtils.d("reselected: " + item.toString());
             return null;
         });
+
+
         UserDataProvider.UserInfoProvider userInfoProvider = new UserDataProvider.UserInfoProvider() {
             @Override
             public UserInfo getUserInfo(String userId) {
@@ -234,22 +244,22 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         RongIM.connect(token, new RongIMClient.ConnectCallback() {
             @Override
             public void onSuccess(String userId) {
-                Toasty.success(MainActivity.this,userId);
-                LogUtils.e("融云--登录成功"+String.valueOf(userId));
+                Toasty.success(MainActivity.this, userId);
+                LogUtils.e("融云--登录成功" + String.valueOf(userId));
                 //RouteUtils.routeToConversationListActivity(MainActivity.this, "");
             }
 
             @Override
             public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
-                LogUtils.e("融云--登录失败"+String.valueOf(connectionErrorCode.getValue()));
-                Toasty.error(MainActivity.this,String.valueOf(connectionErrorCode.getValue()));
+                LogUtils.e("融云--登录失败" + String.valueOf(connectionErrorCode.getValue()));
+                Toasty.error(MainActivity.this, String.valueOf(connectionErrorCode.getValue()));
             }
 
             @Override
             public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
 
-                LogUtils.e("融云--数据库"+String.valueOf(databaseOpenStatus.getValue())
-                        +databaseOpenStatus.toString());
+                LogUtils.e("融云--数据库" + String.valueOf(databaseOpenStatus.getValue())
+                        + databaseOpenStatus.toString());
             }
         });
 
@@ -304,19 +314,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         initView();
 
-        File path = new File(getFilesDir().getAbsolutePath()+"/Login.txt");
-        if(ft.isFileExists(path.toString())){
-            File path2 = new File(getFilesDir().getAbsolutePath()+"/UserImg.png");
-            if(ft.isFileExists(path2.toString())){
+        File path = new File(getFilesDir().getAbsolutePath() + "/Login.txt");
+        if (ft.isFileExists(path.toString())) {
+            File path2 = new File(getFilesDir().getAbsolutePath() + "/UserImg.png");
+            if (ft.isFileExists(path2.toString())) {
                 //ImageView headImage = getActivity().findViewById(R.id.hearImg);
 
-                Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath()+"/UserImg.png");
+                Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath() + "/UserImg.png");
 //            headImage.setImageBitmap(bitmap);
 
                 CircleImageView img = findViewById(R.id.main_hearImg);
                 img.setImageBitmap(bitmap);
-            }
-            else{
+            } else {
             }
         }
 
@@ -508,10 +517,11 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         fragment2 = new BlankFragment2();
         mFragments = new ArrayList<>(4);
         //mFragments.add(BlankFragment.newInstance("456","789"));
-        mFragments.add(OnePageFragment.newInstance("456", "789"));
-        mFragments.add(fragment2.newInstance("456", "789"));
-        mFragments.add(BlankFragment3.newInstance("123", "1"));
-        mFragments.add(BlankFragment4.newInstance(name, lv));
+        mFragments.add(OnePageFragment.newInstance("456", "789"));//0
+        mFragments.add(fragment2.newInstance("456", "789"));//1
+        mFragments.add(new CommunityFragment());//2
+        mFragments.add(BlankFragment3.newInstance("123", "1"));//3
+        mFragments.add(BlankFragment4.newInstance(name, lv));//4
         // init view pager
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mAdapter);
@@ -554,11 +564,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             //RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             //radioButton.setChecked(true);
             pageId = position;
-            LogUtils.d("当前页数"+ String.valueOf(position));
+            LogUtils.d("当前页数" + String.valueOf(position));
             pppccc = findViewById(R.id.ppccc);
 
             findViewById(R.id.main_edit).setVisibility(View.VISIBLE);
-            if(position == 1){
+
+            findViewById(R.id.main_hearImg).setVisibility(View.VISIBLE);
+            if (position == 1) {
                 findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 StatusBarUtil.setTranslucentStatus(MainActivity.this);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
@@ -566,53 +578,69 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 findViewById(R.id.appbar).setLayoutParams(params);
 
                 CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -getStatusBarHeight(MainActivity.this)- PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                params2.setMargins(0, -getStatusBarHeight(MainActivity.this) - PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
                 findViewById(R.id.fragment_vp).setLayoutParams(params2);
 
-                LogUtils.d(-getStatusBarHeight(MainActivity.this)-49);
+                LogUtils.d(-getStatusBarHeight(MainActivity.this) - 49);
 
-                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
                 mAppBarParams.setScrollFlags(0);
                 pppccc.setLayoutParams(mAppBarParams);
                 pppccc.setVisibility(View.VISIBLE);
 
-                pppccc.setBackgroundColor(Color.argb((int) toumingdu,255,255,255));
-                StatusBarUtil.setStatusBarColor2(MainActivity.this,Color.argb((int) toumingdu,255,255,255));
-                io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this,5,true);
-            }
-            else if(position==2){
+                pppccc.setBackgroundColor(Color.argb((int) toumingdu, 255, 255, 255));
+                StatusBarUtil.setStatusBarColor2(MainActivity.this, Color.argb((int) toumingdu, 255, 255, 255));
+                io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this, 5, true);
+            } else if (position == 3) {
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
 //
                 CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0,-PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
                 findViewById(R.id.fragment_vp).setLayoutParams(params2);
 //
 
                 pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
 //                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
-                findViewById(R.id.main_edit).setVisibility(View.GONE);
+                findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
                 StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
-                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
                 mAppBarParams.setScrollFlags(0);
                 pppccc.setLayoutParams(mAppBarParams);
 
                 //findViewById(R.id.appbar).setVisibility(View.GONE);
-              //pppccc.setVisibility(View.GONE);
+                //pppccc.setVisibility(View.GONE);
+            }else if(position == 4){
+                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
+                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
+                findViewById(R.id.appbar).setLayoutParams(params);
+                findViewById(R.id.main_hearImg).setVisibility(View.INVISIBLE);
+
+                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
+                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
+                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+
+                pppccc.setBackgroundColor(Color.parseColor("#00000000"));
+//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+                findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
+                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.bg_huidi);
+                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                mAppBarParams.setScrollFlags(0);
+                pppccc.setLayoutParams(mAppBarParams);
             }
-            else{
+            else {
                 findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
 
                 CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this,49), 0, 0);//left,top,right,bottom
+                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
                 findViewById(R.id.fragment_vp).setLayoutParams(params2);
 
                 StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
-                AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
                 mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
                 pppccc.setLayoutParams(mAppBarParams);
                 pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
@@ -888,18 +916,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        LogUtils.d("ver" + verticalOffset +" pageId"+String.valueOf(pageId)+"TotalScrollRange"+String.valueOf(appBarLayout.getTotalScrollRange()));
-        if(pageId ==0) {
+        LogUtils.d("ver" + verticalOffset + " pageId" + String.valueOf(pageId) + "TotalScrollRange" + String.valueOf(appBarLayout.getTotalScrollRange()));
+        if (pageId == 0) {
             int pp = -appBarLayout.getTotalScrollRange();
             View view = findViewById(R.id.tiaotiao);
             LogUtils.d(verticalOffset > pp);
             if (verticalOffset > pp) view.setVisibility(View.GONE);
-            else  view.setVisibility(View.VISIBLE);
-        }
-        else if(pageId == 1){
-
-
-
+            else view.setVisibility(View.VISIBLE);
+        } else if (pageId == 1) {
 
 
         }
@@ -911,13 +935,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     @SuppressLint("WrongConstant")
-    public void setcolor(int a){
+    public void setcolor(int a) {
 
         toumingdu = a;
 
-        pppccc.setBackgroundColor(Color.argb((int) a,255,255,255));
-        StatusBarUtil.setStatusBarColor2(this,Color.argb((int) a,255,255,255));
-        io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(this,5,true);
+        pppccc.setBackgroundColor(Color.argb((int) a, 255, 255, 255));
+        StatusBarUtil.setStatusBarColor2(this, Color.argb((int) a, 255, 255, 255));
+        io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(this, 5, true);
     }
 
 }

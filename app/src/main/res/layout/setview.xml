@@ -4,110 +4,110 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--    <LinearLayout-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:background="@drawable/shape_radius_banner"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_marginTop="2dp"-->
-    <!--        android:layout_marginLeft="10dp"-->
-    <!--        android:layout_marginRight="10dp"-->
-    <!--        android:layout_height="58dp">-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/shape_radius_banner"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="58dp">
 
-    <!--        <LinearLayout-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:gravity="center"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_height="wrap_content">-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="29"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:textColor="@color/black"-->
-    <!--                android:layout_marginTop="4dp"-->
-    <!--                android:textSize="23dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="29"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"
+                    android:textSize="23dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="动态"-->
-    <!--                android:textColor="#8a8a8a"-->
-    <!--                android:textSize="13dp"-->
-    <!--                android:layout_marginTop="-1dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="动态"
+                    android:textColor="#8a8a8a"
+                    android:textSize="13dp"
+                    android:layout_marginTop="-1dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--        </LinearLayout>-->
+            </LinearLayout>
 
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="1dp"-->
-    <!--            android:background="#bfbfbf"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_height="20dp"></LinearLayout>-->
+            <LinearLayout
+                android:layout_width="1dp"
+                android:background="#bfbfbf"
+                android:layout_gravity="center"
+                android:layout_height="20dp"></LinearLayout>
 
-    <!--        <LinearLayout-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:gravity="center"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_height="wrap_content">-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="71"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:textColor="@color/black"-->
-    <!--                android:layout_marginTop="4dp"-->
-    <!--                android:textSize="23dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="71"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="4dp"
+                    android:textSize="23dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="关注"-->
-    <!--                android:textColor="#8a8a8a"-->
-    <!--                android:textSize="13dp"-->
-    <!--                android:layout_marginTop="-1dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="关注"
+                    android:textColor="#8a8a8a"
+                    android:textSize="13dp"
+                    android:layout_marginTop="-1dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--        </LinearLayout>-->
+            </LinearLayout>
 
-    <!--        <LinearLayout-->
-    <!--            android:layout_width="1dp"-->
-    <!--            android:background="#bfbfbf"-->
-    <!--            android:layout_gravity="center"-->
-    <!--            android:layout_height="20dp"></LinearLayout>-->
+            <LinearLayout
+                android:layout_width="1dp"
+                android:background="#bfbfbf"
+                android:layout_gravity="center"
+                android:layout_height="20dp"></LinearLayout>
 
-    <!--        <LinearLayout-->
-    <!--            android:orientation="vertical"-->
-    <!--            android:gravity="center"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_weight="1"-->
-    <!--            android:layout_height="wrap_content">-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="32"-->
-    <!--                android:textStyle="bold"-->
-    <!--                android:layout_marginTop="4dp"-->
-    <!--                android:textColor="@color/black"-->
-    <!--                android:textSize="23dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="32"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="23dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--            <TextView-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:text="粉丝"-->
-    <!--                android:textColor="#8a8a8a"-->
-    <!--                android:textSize="13dp"-->
-    <!--                android:layout_marginTop="-1dp"-->
-    <!--                android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="粉丝"
+                    android:textColor="#8a8a8a"
+                    android:textSize="13dp"
+                    android:layout_marginTop="-1dp"
+                    android:layout_height="wrap_content"/>
 
-    <!--        </LinearLayout>-->
+            </LinearLayout>
 
-    <!--    </LinearLayout>-->
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="29dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
@@ -124,214 +124,106 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/wrongQuestion"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/four_wrong" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="错题本"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/youhui"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/you_img" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="优惠券"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/shape_test"
         android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="75dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/four_four" />
+            <LinearLayout
+                android:id="@+id/wrongQuestion"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="缓存管理"
-                android:textColor="@color/black" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/four_wrong" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="错题本"
+                    android:textColor="@color/black" />
 
-        <LinearLayout
-            android:id="@+id/yejian"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
+            </LinearLayout>
 
-            <ImageView
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                android:id="@+id/ye_img"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/four_night" />
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/four_four" />
 
-            <TextView
-                android:id="@+id/ye_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="夜间模式"
-                android:textColor="@color/black" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="缓存管理"
+                    android:textColor="@color/black" />
 
-        </LinearLayout>
+            </LinearLayout>
 
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/yejian"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
+                <ImageView
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
+                    android:id="@+id/ye_img"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/four_night" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/four_zt" />
+                <TextView
+                    android:id="@+id/ye_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="夜间模式"
+                    android:textColor="@color/black" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="主题风格"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/set"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_test"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/four_set" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:text="应用设置"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal">
-
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/shape"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_test"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="22dp"
@@ -343,41 +235,121 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
                     android:text="分享推荐"
                     android:textColor="@color/black" />
 
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="horizontal">
+
 
 
             <LinearLayout
-                android:id="@+id/upData_but"
+                android:id="@+id/set"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_test"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/updata_img" />
+                    android:src="@drawable/four_set" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:text="关于更新"
+                    android:text="应用设置"
                     android:textColor="@color/black" />
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/soucang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/soucang" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="我的收藏"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/feedback"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/feddback" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="反馈与建议"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/more"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_test"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="更多"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+
+
+
+
+
 
 </LinearLayout>

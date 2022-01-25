@@ -1,42 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+<androidx.core.widget.NestedScrollView xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/bg_huidi"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_marginTop="69dp"
-        android:layout_height="160dp">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="69dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:background="@color/bg_huidi"
         android:orientation="vertical">
-        <TextView
+
+
+        <LinearLayout
+            android:layout_marginTop="39dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="  "
-            tools:ignore="Suspicious0dp" />
-        <include layout="@layout/userview"/>
-        <include layout="@layout/setview"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="  "
+                tools:ignore="Suspicious0dp" />
+            <include layout="@layout/userview"/>
+            <include layout="@layout/setview"/>
+        </LinearLayout>
+
+<!--        <TextView-->
+<!--            android:id="@+id/banben"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:gravity="center"-->
+<!--            android:textColor="@color/text_hui"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:textSize="11dp"-->
+<!--            android:text="当前版本号：3.11.1"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/f2px"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="最近错题"
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="更多错题 "
+                        android:textColor="@color/pc_blue"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:text="▶"
+                        android:textColor="@color/pc_blue"
+                        android:textSize="8sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <in.arjsna.swipecardlib.SwipeCardView
+                android:visibility="gone"
+                android:id="@+id/swipe_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:rotation_degrees="15.5"
+                app:bottom_swipe_detect="false"
+                app:top_swipe_detect="false"
+                tools:context=".CardSwipeActivity" />
+
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/banben"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:textColor="@color/text_hui"
-        android:layout_height="30dp"
-        android:textSize="11dp"
-        android:text="当前版本号：3.11.1"/>
-</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

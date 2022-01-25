@@ -42,6 +42,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/blank_fragment5_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/blank_fragment6_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/blank_fragment7_fragment.xml" value="0.264" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/card_layout.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/chap_item.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/curriculum.xml" value="0.1" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/feed_relative.xml" value="0.264" />
@@ -50,9 +51,11 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment3.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment4.xml" value="0.176" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/fragment_one_page.xml" value="0.264" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_f2_bang.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_f2_bb.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_fragment2.xml" value="0.264" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/item_spot.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/lastview.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/newf_item.xml" value="0.1609375" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_base_activity.xml" value="0.24947916666666667" />
@@ -65,7 +68,7 @@
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_destruct_input_panel.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_extension_input_panel.xml" value="0.536" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/rc_title_bar.xml" value="0.24947916666666667" />
-        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/setview.xml" value="0.353322528363047" />
+        <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/setview.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/user_info.xml" value="0.24947916666666667" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/userdadta.xml" value="0.264" />
         <entry key="..\:/Work/bishe/ItemBank-master/app/src/main/res/layout/userview.xml" value="0.12132725430597771" />

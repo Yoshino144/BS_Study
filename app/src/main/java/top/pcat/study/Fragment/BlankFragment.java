@@ -220,7 +220,6 @@ public class BlankFragment extends Fragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
@@ -231,6 +230,23 @@ public class BlankFragment extends Fragment {
         meiri_fb = rootView.findViewById(R.id.meiri_fen_bai);
         meiri_t = rootView.findViewById(R.id.meiri_q);
         meiri_t2 =  rootView.findViewById(R.id.meiri_q2);
+
+        scrollone = rootView.findViewById(R.id.scrollone);
+        scrollone.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                LogUtils.d("f1==="+String.valueOf(scrollX)+"  "+String.valueOf(scrollY)
+                        +"  "+String.valueOf(oldScrollX)+"  "+String.valueOf(oldScrollY));
+
+                if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    ((MainActivity) requireActivity()).Hide();
+                }
+                if (scrollY < oldScrollY) {
+                    ((MainActivity) requireActivity()).Display();
+                }}
+
+
+        });
         File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
         if (ft.isFileExists(path.toString())) {
 
@@ -247,23 +263,11 @@ public class BlankFragment extends Fragment {
             todaysize = rootView.findViewById(R.id.todaysize);
             tt= rootView.findViewById(R.id.lantiao);
             baitiao = rootView.findViewById(R.id.baitiao);
-            scrollone = rootView.findViewById(R.id.scrollone);
             TextView usertext2 = rootView.findViewById(R.id.usertext);
             todaySize = read("UserInfo");
             readSj(todaySize);
 
-            scrollone.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-                @Override
-                public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                    if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                    ((MainActivity) requireActivity()).Hide();
-                }
-                if (scrollY < oldScrollY) {
-                    ((MainActivity) requireActivity()).Display();
-                }}
 
-
-            });
 
             userdata = read("UserData");
             readtb(userdata);

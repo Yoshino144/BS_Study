@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rc_conversation_item"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/rc_conversation_item_height">
+    android:background="#ffffff"
+    android:layout_height="72dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="#ffffff"
         android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/rc_conversation_portrait_rl"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="@dimen/rc_margin_size_12"
-            android:layout_marginTop="@dimen/rc_margin_size_12"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -33,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/rc_margin_size_12"
-            android:layout_marginTop="@dimen/rc_margin_size_16"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="@dimen/rc_margin_size_12"
             android:ellipsize="end"
             android:singleLine="true"
@@ -67,7 +68,7 @@
             style="@style/TextStyle.Alignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/rc_margin_size_16"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="@dimen/rc_margin_size_12"
             android:text="3 月 22 日"
             android:textColor="@color/rc_auxiliary_color"
@@ -80,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="13.5dp"
+            android:layout_marginBottom="14dp"
             app:layout_constraintRight_toLeftOf="@+id/rc_conversation_unread"
             app:layout_constraintBottom_toBottomOf="parent"
             app:srcCompat="@drawable/rc_no_disturb" />
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/rc_margin_size_12"
-            android:layout_marginBottom="@dimen/rc_margin_size_12"
+            android:layout_marginBottom="14dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true">
 
@@ -127,13 +128,13 @@
             app:srcCompat="@drawable/rc_read_receipt" />
 
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_marginTop="71.5dp"
-            android:background="@color/rc_divider_color"
-            app:layout_constraintStart_toStartOf="@id/rc_conversation_title"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <View-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0.5dp"-->
+<!--            android:layout_marginTop="71.5dp"-->
+<!--            android:background="@color/rc_divider_color"-->
+<!--            app:layout_constraintStart_toStartOf="@id/rc_conversation_title"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
