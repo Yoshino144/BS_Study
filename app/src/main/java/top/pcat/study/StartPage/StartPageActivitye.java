@@ -38,7 +38,7 @@ public class StartPageActivitye extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+       super.onCreate(savedInstanceState);
 
 //        boolean isFirstOpen = SpUtils.getBoolean(this, AppConstants.FIRST_OPEN);
 //        Log.d("TAG", "onCreate: " + isFirstOpen);
