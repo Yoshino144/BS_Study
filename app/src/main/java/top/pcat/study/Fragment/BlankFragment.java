@@ -40,6 +40,7 @@ import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import es.dmoral.toasty.Toasty;
 import top.pcat.study.Fresh.CircleRefreshLayout;
 import top.pcat.study.MainActivity;
 import top.pcat.study.Utils.FileTool;
@@ -220,6 +221,7 @@ public class BlankFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
@@ -346,6 +348,7 @@ public class BlankFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                Toasty.error(getContext(),"网络异常");
             }
         }).start();
 
@@ -362,11 +365,48 @@ public class BlankFragment extends Fragment {
 
             //ToDo gai
             meiri.setText(jsonObject.getString(LocalDate.now().toString())+" / 50 道");
-            meiri_b.setText("25%");
             meiri_f.setText("33 / 45 min");
             meiri_fb.setText("56%");
-            meiri_t.setProgress(25);
             meiri_t2.setProgress(56);
+
+            try {
+                if(jsonObject.getInt(LocalDate.now().toString())>50){
+
+                    meiri_fb.setText("100%");
+                    meiri_t2.setProgress(100);
+                }else if(jsonObject.getInt(LocalDate.now().toString())==0){
+
+                    meiri_fb.setText("0%");
+                    meiri_t2.setProgress(0);
+                }else{
+                    meiri_fb.setText(50/(jsonObject.getInt(LocalDate.now().toString()))+"%");
+                    meiri_t2.setProgress(50/jsonObject.getInt(LocalDate.now().toString()));
+                }
+            }catch (Exception e){
+                meiri_fb.setText("0%");
+                meiri_t2.setProgress(0);
+                LogUtils.w("百分比异常" + e);
+            }
+
+            try {
+                if(jsonObject.getInt(LocalDate.now().toString())>50){
+
+                    meiri_b.setText("100%");
+                    meiri_t.setProgress(100);
+                }else if(jsonObject.getInt(LocalDate.now().toString())==0){
+
+                    meiri_b.setText("0%");
+                    meiri_t.setProgress(0);
+                }else{
+                    meiri_b.setText(50/(jsonObject.getInt(LocalDate.now().toString()))+"%");
+                    meiri_t.setProgress(50/jsonObject.getInt(LocalDate.now().toString()));
+                }
+            }catch (Exception e){
+                meiri_b.setText("0%");
+                meiri_t.setProgress(0);
+                LogUtils.w("百分比异常" + e);
+            }
+
 
             Sunday = jsonObject.getString(LocalDate.now().plusDays(-6).toString());
             Moonday = jsonObject.getString(LocalDate.now().plusDays(0).toString());
@@ -814,6 +854,7 @@ public class BlankFragment extends Fragment {
             @Override
             public void run() {
                 try {
+                    LogUtils.d("http://192.168.31.238:12345/userdates/1/" + userid);
                     URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
@@ -853,7 +894,7 @@ public class BlankFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
-                    //Toast.makeText(getActivity(), "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }

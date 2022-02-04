@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 32
-    buildToolsVersion '32.0.0'
+    buildToolsVersion '32.1.0-rc1'
     defaultConfig {
         applicationId 'top.pcat.study'
         minSdkVersion 23
@@ -33,21 +33,22 @@ android {
 }
 
 dependencies {
+    implementation 'com.eightbitlab:blurview:1.6.6'
     implementation 'in.arjsna:swipecardlib:1.0.2'
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
     implementation 'com.github.dhaval2404:android-form-validation:1.0'//表单
     implementation "net.zetetic:android-database-sqlcipher:4.5.0"
     implementation "androidx.sqlite:sqlite:2.2.0"
     implementation 'com.github.st235:expandablebottombar:1.4.0' //导航栏
-    implementation 'com.facebook.fresco:fresco:0.12.0' //图片加载
+    implementation 'com.facebook.fresco:fresco:2.6.0' //图片加载
     implementation 'com.akexorcist:round-corner-progress-bar:2.1.2' //进度条
     implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
     //implementation 'cn.rongcloud.sdk:im_lib:5.1.8' // 即时通讯基础能力库
     api 'cn.rongcloud.sdk:im_kit:5.1.8' // 即时通讯 UI 基础组件
     implementation 'com.github.lihangleo2:ShadowLayout:3.2.4' // 阴影
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.3' // 网络
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4' // 网络
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5' //刷新框架
-    implementation 'com.blankj:utilcodex:1.30.6' // 工具库
+    implementation 'com.blankj:utilcodex:1.31.0' // 工具库
     implementation 'hanks.xyz:htextview-library:0.1.5' //
     implementation 'androidx.work:work-runtime:2.7.1'
     implementation "com.zhihu.android:matisse:0.5.2"
@@ -58,16 +59,19 @@ dependencies {
     implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
     implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
     // PictureSelector 基础 (必须)
-    implementation 'io.github.lucksiege:pictureselector:v3.0.2'
+    // https://mvnrepository.com/artifact/io.github.lucksiege/pictureselector
+    //noinspection GradleDependency
+    implementation 'io.github.lucksiege:pictureselector:v3.0.3'
+
 
     // 图片压缩 (按需引入)
-    implementation 'io.github.lucksiege:compress:v3.0.2'
+    implementation 'io.github.lucksiege:compress:v3.0.3'
 
     // 图片裁剪 (按需引入)
-    implementation 'io.github.lucksiege:ucrop:v3.0.2'
+    implementation 'io.github.lucksiege:ucrop:v3.0.3'
 
     // 自定义相机 (按需引入)
-    implementation 'io.github.lucksiege:camerax:v3.0.2'
+    implementation 'io.github.lucksiege:camerax:v3.0.3'
     implementation 'com.github.czy1121:loadinglayout:1.0.1'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
@@ -97,7 +101,7 @@ dependencies {
     implementation 'org.java-websocket:Java-WebSocket:1.5.2'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
     implementation 'com.github.CodingEnding:PopupLayout:v1.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
@@ -113,7 +117,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.github.KilleTom:BangScreenToolsMaster:v1.0.0'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.4'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'

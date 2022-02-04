@@ -28,10 +28,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dou361.dialogui.DialogUIUtils;
 import com.google.gson.Gson;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import es.dmoral.toasty.Toasty;
 import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Utils.Req;
@@ -42,6 +45,7 @@ import top.pcat.study.View.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -82,7 +86,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_sign);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this, true, R.color.write_fan);
-
+        InitializeSQLCipher();
         Touch();
 
         TextView wx = findViewById(R.id.wx);
@@ -187,6 +191,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent1);
         });
 
+        //点击登录
         Button cc = findViewById(R.id.come);
         cc.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ShowToast")
@@ -516,6 +521,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         return hex.toString();
     }
 
+    //执行登录
     public void Login(String username, String pass) throws IOException {
 
 
@@ -525,7 +531,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
 
                 try {
-
+                    LogUtils.d("进行登录："+"http://192.168.31.238:12345/users/0/"+username+"/"+md5Decode32(pass));
                     URL url = new URL("http://192.168.31.238:12345/users/0/"+username+"/"+md5Decode32(pass));
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
@@ -542,39 +548,43 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                         while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
-                        Log.d("pccp", response.toString());
+                        //Log.d("pccp", response.toString());
 
                         if (response.toString().contains(username)) {
 
-                            com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+response.toString());
+                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+response.toString());
                             JSONObject jsonObject1 = new JSONObject(response.toString());
 
-                            com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.toString());
-                            com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.getJSONObject("data").toString());
+                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.toString());
+                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.getJSONObject("data").toString());
 
                             JSONObject jsonObject2 = new JSONObject(jsonObject1.getJSONObject("data").toString());
 
                             String id = jsonObject2.getString("id");
 
+                            //保存头像
                             GetImg(id);
+                            //保存id
                             save(id);
+                            //保存用户信息
                             saveInfo(jsonObject2.toString());
+
                             UpData(id);
 
                             finish();
                             Looper.prepare();
-                            Toast.makeText(SignActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Toasty.success(SignActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             Looper.loop();
 
 
                         } else {
                             Looper.prepare();
-                            Toast.makeText(SignActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                            Toasty.warning(SignActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                             Looper.loop();
                         }
                     } else {
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        Toasty.error(SignActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
 
@@ -587,6 +597,58 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
             }
         }).start();
 
+    }
+//初始化数据库
+    private void InitializeSQLCipher() {
+        SQLiteDatabase.loadLibs(this);
+        File databaseFile = getDatabasePath("user.db");
+        databaseFile.mkdirs();
+        databaseFile.delete();
+        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "ppcc", null);
+        database.execSQL("CREATE TABLE `user`  ( id varchar(40)  ,\n" +
+                "  `name` varchar(40)  ,\n" +
+                "  `password` varchar(255)  ,\n" +
+                "  `phone` varchar(20)  ,\n" +
+                "  `sex` int  ,\n" +
+                "  `birthday` datetime(0)  ,\n" +
+                "  `city` varchar(50) ,\n" +
+                "  `school` varchar(20),\n" +
+                "  `college` varchar(20) ,\n" +
+                "  `major` varchar(20) ,\n" +
+                "  `grade` int ,\n" +
+                "  `position` varchar(50) ,\n" +
+                "  `delete` int ,\n" +
+                "  `pic` varchar(255) ,\n" +
+                "  `registration_time` datetime(0) ,\n" +
+                "  `text` varchar(255) ,\n" +
+                "  PRIMARY KEY (`id`) )");
+//        database.execSQL("insert into t1(a, b) values(?, ?)", new Object[]{"one for the money",
+//                "two for the show"});
+    }
+
+    private void InsertSql(){
+        SQLiteDatabase.loadLibs(this);
+        File databaseFile = getDatabasePath("user.db");
+        databaseFile.mkdirs();
+        databaseFile.delete();
+        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "ppcc", null);
+        database.execSQL("CREATE TABLE `user`  ( id varchar(40)  ,\n" +
+                "  `name` varchar(40)  ,\n" +
+                "  `password` varchar(255)  ,\n" +
+                "  `phone` varchar(20)  ,\n" +
+                "  `sex` int  ,\n" +
+                "  `birthday` datetime(0)  ,\n" +
+                "  `city` varchar(50) ,\n" +
+                "  `school` varchar(20),\n" +
+                "  `college` varchar(20) ,\n" +
+                "  `major` varchar(20) ,\n" +
+                "  `grade` int ,\n" +
+                "  `position` varchar(50) ,\n" +
+                "  `delete` int ,\n" +
+                "  `pic` varchar(255) ,\n" +
+                "  `registration_time` datetime(0) ,\n" +
+                "  `text` varchar(255) ,\n" +
+                "  PRIMARY KEY (`id`) )");
     }
 
 
