@@ -114,7 +114,7 @@ dependencies {
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.github.KilleTom:BangScreenToolsMaster:v1.0.0'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
