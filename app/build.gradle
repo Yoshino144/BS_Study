@@ -24,7 +24,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/size'] } }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res', 'src/main/res/size']
+        }
+    }
     ndkVersion '23.1.7779620'
     lint {
         abortOnError false
@@ -33,66 +37,41 @@ android {
 }
 
 dependencies {
-    implementation 'com.eightbitlab:blurview:1.6.6'
-    implementation 'in.arjsna:swipecardlib:1.0.2'
-    implementation "com.yuyakaido.android:card-stack-view:2.3.4"
-    implementation 'com.github.dhaval2404:android-form-validation:1.0'//表单
-    implementation "net.zetetic:android-database-sqlcipher:4.5.0"
-    implementation "androidx.sqlite:sqlite:2.2.0"
-    implementation 'com.github.st235:expandablebottombar:1.4.0' //导航栏
-    implementation 'com.facebook.fresco:fresco:2.6.0' //图片加载
-    implementation 'com.akexorcist:round-corner-progress-bar:2.1.2' //进度条
-    implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
-    //implementation 'cn.rongcloud.sdk:im_lib:5.1.8' // 即时通讯基础能力库
     api 'cn.rongcloud.sdk:im_kit:5.1.8' // 即时通讯 UI 基础组件
-    implementation 'com.github.lihangleo2:ShadowLayout:3.2.4' // 阴影
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4' // 网络
-    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5' //刷新框架
-    implementation 'com.blankj:utilcodex:1.31.0' // 工具库
-    implementation 'hanks.xyz:htextview-library:0.1.5' //
-    implementation 'androidx.work:work-runtime:2.7.1'
-    implementation "com.zhihu.android:matisse:0.5.2"
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'pub.devrel:easypermissions:3.0.0'
-
-    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5'      //核心必须依赖
-    implementation 'io.github.scwang90:refresh-header-classics:2.0.5'    //经典刷新头
-    implementation 'io.github.scwang90:refresh-footer-classics:2.0.5'    //经典加载
-    // PictureSelector 基础 (必须)
-    // https://mvnrepository.com/artifact/io.github.lucksiege/pictureselector
-    //noinspection GradleDependency
-    implementation 'io.github.lucksiege:pictureselector:v3.0.3'
-
-
-    // 图片压缩 (按需引入)
-    implementation 'io.github.lucksiege:compress:v3.0.3'
-
-    // 图片裁剪 (按需引入)
-    implementation 'io.github.lucksiege:ucrop:v3.0.3'
-
-    // 自定义相机 (按需引入)
-    implementation 'io.github.lucksiege:camerax:v3.0.3'
-    implementation 'com.github.czy1121:loadinglayout:1.0.1'
-    implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
-    implementation 'androidx.compose.animation:animation-graphics:1.2.0-alpha01'
-    testImplementation 'junit:junit:4.13.2'
     implementation project(path: ':core')
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.blankj:utilcodex:1.31.0' // 工具库
     implementation 'com.zaaach:citypicker:2.0.3'
+    implementation 'in.arjsna:swipecardlib:1.0.2'
+    implementation 'androidx.sqlite:sqlite:2.2.0'
+    implementation 'com.youth.banner:banner:2.1.0'
     implementation 'com.mylhyl:circleDialog:4.0.0'
     implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'com.eightbitlab:blurview:1.6.6'
     implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.zhihu.android:matisse:0.5.2'
+    implementation 'androidx.work:work-runtime:2.7.1'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
+    implementation 'io.github.lucksiege:ucrop:v3.0.3' // 图片裁剪
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.facebook.fresco:fresco:2.6.0' //图片加载
+    implementation 'hanks.xyz:htextview-library:0.1.5' //
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.lijiankun24:shadowlayout:1.1.0'
+    implementation 'io.github.lucksiege:camerax:v3.0.3' // 自定义相机
     implementation 'com.apkfuns.logutils:library:1.0.6'
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
+    implementation 'io.github.lucksiege:compress:v3.0.3' // 图片压缩
     implementation 'com.tencent.bugly:crashreport:4.0.0'
-    implementation 'com.youth.banner:banner:2.1.0'
     implementation 'io.github.rockerhieu:emojicon:1.4.2'
     implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'com.knowledge.mnlin:rolltextview:0.0.1'
     implementation 'com.github.Liberuman:ShadowDrawable:0.1'
@@ -104,26 +83,38 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
     implementation 'com.github.CodingEnding:PopupLayout:v1.0'
+    implementation 'com.github.lihangleo2:ShadowLayout:3.2.4' // 阴影
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'org.apache.httpcomponents:httpcore:4.4.15'
     implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4' // 网络
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'com.github.florent37:materialviewpager:1.2.3'
+    implementation 'io.github.lucksiege:pictureselector:v3.0.3' // PictureSelector 基础
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
+    implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
+    implementation 'com.github.florent37:materialviewpager:1.2.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.akexorcist:round-corner-progress-bar:2.1.2' //进度条
+    implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5' //刷新框架
+    implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5' //核心必须依赖
+    implementation 'io.github.scwang90:refresh-header-classics:2.0.5' //经典刷新头
+    implementation 'io.github.scwang90:refresh-footer-classics:2.0.5' //经典加载
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.github.KilleTom:BangScreenToolsMaster:v1.0.0'
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.github.dhaval2404:android-form-validation:1.0'//表单
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.4'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
     implementation 'com.github.wangfeng19930909:DragFloatingActionButton:1.0.1'
+    implementation 'androidx.compose.animation:animation-graphics:1.2.0-alpha01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 MobSDK {
@@ -141,36 +132,36 @@ MobSDK {
                 appId "101854470"
                 appKey "6e5c01702805e7fe307db35769022f92"
             }
-            SinaWeibo {
-                appKey "568898243"
-                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
-                callbackUri "http://www.sharesdk.cn"
-            }
-            Wechat {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                userName "gh_afb25ac019c9"
-                path "pages/index/index.html?id=1"
-                withShareTicket true
-                miniprogramType 2
-            }
-            WechatMoments {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-            }
-            WechatFavorite {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-            }
-            QZone {
-                appId "100371282"
-                appKey "aed9b0303e3ed1e27bae87c33761161d"
-            }
+//            SinaWeibo {
+//                appKey "568898243"
+//                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+//                callbackUri "http://www.sharesdk.cn"
+//            }
+//            Wechat {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//                userName "gh_afb25ac019c9"
+//                path "pages/index/index.html?id=1"
+//                withShareTicket true
+//                miniprogramType 2
+//            }
+//            WechatMoments {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//            }
+//            WechatFavorite {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//            }
+//            QZone {
+//                appId "100371282"
+//                appKey "aed9b0303e3ed1e27bae87c33761161d"
+//            }
         }
     }
 
     MobPush {
-//        devInfo {
+        devInfo {
 //            HUAWEI {
 //                appId "华为的appid"
 //            }
@@ -193,6 +184,6 @@ MobSDK {
 //                appId "VIVO的appId"
 //                appKey  "VIVO的appSecret"
 //            }
-//        }
+        }
     }
 }
