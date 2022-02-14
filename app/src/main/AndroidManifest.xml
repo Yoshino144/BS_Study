@@ -73,9 +73,9 @@
         </activity>
         <activity android:name=".StartPage.InitAdvActivitye" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".user.SignActivity" />
-        <activity android:name=".user.User" />
-        <activity android:name=".user.res" />
+        <activity android:name=".User.LoginActivity" />
+        <activity android:name=".User.UserInfoActivity" />
+        <activity android:name=".User.RegisterActivity" />
         <activity android:name=".Size.ExercisesActivity" />
         <activity android:name=".Search.SearchActivity" />
         <activity android:name=".Search.MesActivity" />
@@ -98,7 +98,6 @@
         <activity android:name=".WrongQuestion.WrongOne" />
         <activity android:name=".Size.Examination" />
         <activity android:name=".NewExercisesActitity.NewExercisesActitity" />
-        <activity android:name=".user.UserDisplay" />
         <activity android:name=".Size.AHHHHHH" />
         <activity android:name=".Size.OHHHHHH" />
         <activity android:name=".PushService.NewFriendActivity" />

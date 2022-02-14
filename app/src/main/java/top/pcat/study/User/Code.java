@@ -1,4 +1,4 @@
-package top.pcat.study.user;
+package top.pcat.study.User;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

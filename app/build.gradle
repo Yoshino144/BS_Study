@@ -92,6 +92,7 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'io.github.lucksiege:pictureselector:v3.0.3' // PictureSelector 基础
+    implementation 'com.github.st235:expandablebottombar:1.4.0'
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
     implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
     implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
@@ -132,31 +133,31 @@ MobSDK {
                 appId "101854470"
                 appKey "6e5c01702805e7fe307db35769022f92"
             }
-//            SinaWeibo {
-//                appKey "568898243"
-//                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
-//                callbackUri "http://www.sharesdk.cn"
-//            }
-//            Wechat {
-//                appId "wx4868b35061f87885"
-//                appSecret "64020361b8ec4c99936c0e3999a9f249"
-//                userName "gh_afb25ac019c9"
-//                path "pages/index/index.html?id=1"
-//                withShareTicket true
-//                miniprogramType 2
-//            }
-//            WechatMoments {
-//                appId "wx4868b35061f87885"
-//                appSecret "64020361b8ec4c99936c0e3999a9f249"
-//            }
-//            WechatFavorite {
-//                appId "wx4868b35061f87885"
-//                appSecret "64020361b8ec4c99936c0e3999a9f249"
-//            }
-//            QZone {
-//                appId "100371282"
-//                appKey "aed9b0303e3ed1e27bae87c33761161d"
-//            }
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            WechatMoments {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            WechatFavorite {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+            QZone {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+            }
         }
     }
 

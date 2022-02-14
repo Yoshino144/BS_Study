@@ -15,17 +15,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -48,7 +45,7 @@ import top.pcat.study.R;
 import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CircleProgressView;
 import top.pcat.study.View.LogUtils;
-import top.pcat.study.user.SignActivity;
+import top.pcat.study.User.LoginActivity;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
@@ -72,7 +69,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.TimeZone;
 
 import okhttp3.OkHttpClient;
@@ -481,7 +477,7 @@ public class BlankFragment extends Fragment {
         qwe = getActivity().findViewById(R.id.loginFlag);
         qwe.setOnClickListener(v -> {
             Intent intent01 = new Intent();
-            intent01.setClass(getActivity(), SignActivity.class);
+            intent01.setClass(getActivity(), LoginActivity.class);
             intent01.putExtra("page", 0);
             getActivity().finish();
             startActivity(intent01);

@@ -1,4 +1,4 @@
-package top.pcat.study.user;
+package top.pcat.study.User;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,9 +25,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dou361.dialogui.DialogUIUtils;
-import com.google.gson.Gson;
-
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.json.JSONArray;
@@ -37,9 +34,7 @@ import org.json.JSONObject;
 import es.dmoral.toasty.Toasty;
 import top.pcat.study.MainActivity;
 import top.pcat.study.R;
-import top.pcat.study.Utils.Req;
 import top.pcat.study.Utils.StatusBarUtil;
-import top.pcat.study.Utils.Userpojo;
 import top.pcat.study.View.LogUtils;
 
 
@@ -71,7 +66,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SignActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener {
 
     private int page = 3;
     private LinearLayout loginWechat;
@@ -83,7 +78,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign);
+        setContentView(R.layout.activity_login);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this, true, R.color.write_fan);
         InitializeSQLCipher();
@@ -187,7 +182,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         EditText editText2 = findViewById(R.id.password);
         Button go = findViewById(R.id.gores);
         go.setOnClickListener(v -> {
-            Intent intent1 = new Intent(SignActivity.this, res.class);
+            Intent intent1 = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent1);
         });
 
@@ -208,11 +203,11 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                     //DialogUIUtils.showLoading(SignActivity.this, "登录中...", true, true, true, true).show();
                     Login(username, password);
                     //DialogUIUtils.dismiss();
-                    Intent it = new Intent(SignActivity.this, MainActivity.class);
+                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
                     it.putExtra("page", page);
                     startActivity(it);
                 } catch (IOException e) {
-                    Toast.makeText(SignActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT);
                     e.printStackTrace();
                 }
             }
@@ -221,7 +216,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         ImageView img = findViewById(R.id.loginback);
         img.setOnClickListener(v -> {
             finish();
-            Intent it = new Intent(SignActivity.this, MainActivity.class);
+            Intent it = new Intent(LoginActivity.this, MainActivity.class);
             it.putExtra("page", page);
             startActivity(it);
         });
@@ -310,7 +305,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             finish();
-            Intent it = new Intent(SignActivity.this, MainActivity.class);
+            Intent it = new Intent(LoginActivity.this, MainActivity.class);
             it.putExtra("page", page);
             startActivity(it);
         }
@@ -433,18 +428,18 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                         saveData(response.toString());
                         finish();
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "同步成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "同步成功", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     } else {
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
-                    Toast.makeText(SignActivity.this, "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
@@ -523,16 +518,13 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
     //执行登录
     public void Login(String username, String pass) throws IOException {
-
-
-
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 try {
-                    LogUtils.d("进行登录："+"http://192.168.31.238:12345/users/0/"+username+"/"+md5Decode32(pass));
-                    URL url = new URL("http://192.168.31.238:12345/users/0/"+username+"/"+md5Decode32(pass));
+                    LogUtils.d("进行登录："+"http://192.168.31.238:12345/users/"+username+"/"+md5Decode32(pass));
+                    URL url = new URL("http://192.168.31.238:12345/users/"+username+"/"+md5Decode32(pass));
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
@@ -573,25 +565,25 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                             finish();
                             Looper.prepare();
-                            Toasty.success(SignActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Toasty.success(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                             Looper.loop();
 
 
                         } else {
                             Looper.prepare();
-                            Toasty.warning(SignActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                            Toasty.warning(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                             Looper.loop();
                         }
                     } else {
                         Looper.prepare();
-                        Toasty.error(SignActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        Toasty.error(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
-                    Toast.makeText(SignActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
@@ -738,24 +730,24 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                         saveInfo(response.toString());
                         UpData(username);
 
-                        Intent it = new Intent(SignActivity.this, MainActivity.class);
+                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
                         it.putExtra("page", 3);
                         startActivity(it);
 
                         finish();
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     } else {
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         Looper.loop();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                     Looper.prepare();
-                    Toast.makeText(SignActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
@@ -826,13 +818,13 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                         saveInfo(responseData);
                         UpData(username);
 
-                        Intent it = new Intent(SignActivity.this, MainActivity.class);
+                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
                         it.putExtra("page", 3);
                         startActivity(it);
 
                         finish();
                         Looper.prepare();
-                        Toast.makeText(SignActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Looper.loop();
 
                     }

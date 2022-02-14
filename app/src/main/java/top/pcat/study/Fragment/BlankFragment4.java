@@ -32,8 +32,8 @@ import top.pcat.study.R;
 import top.pcat.study.View.CardsAdapter;
 import top.pcat.study.View.LogUtils;
 import top.pcat.study.WrongQuestion.WrongQuestion;
-import top.pcat.study.user.SignActivity;
-import top.pcat.study.user.User;
+import top.pcat.study.User.LoginActivity;
+import top.pcat.study.User.UserInfoActivity;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONException;
@@ -299,14 +299,14 @@ public class BlankFragment4 extends Fragment  {
             // TODO Auto-generated method stub
             if(!loginflag){
                 Intent intent01=new Intent();
-                intent01.setClass(getActivity(), SignActivity.class);
+                intent01.setClass(getActivity(), LoginActivity.class);
                 intent01.putExtra("page",3);
                 getActivity().finish();
                 startActivity(intent01);
             }
             else{
                 Intent intent01=new Intent();
-                intent01.setClass(getActivity(), User.class);
+                intent01.setClass(getActivity(), UserInfoActivity.class);
                 getActivity().finish();
                 startActivity(intent01);
             }

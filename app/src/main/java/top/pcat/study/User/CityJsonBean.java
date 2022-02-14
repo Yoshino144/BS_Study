@@ -1,4 +1,4 @@
-package top.pcat.study.user;
+package top.pcat.study.User;
 
 
 import com.contrarywind.interfaces.IPickerViewData;
@@ -12,7 +12,7 @@ import java.util.List;
  * @date: 2017/3/16 15:36
  */
 
-public class JsonBean implements IPickerViewData {
+public class CityJsonBean implements IPickerViewData {
 
 
     /**

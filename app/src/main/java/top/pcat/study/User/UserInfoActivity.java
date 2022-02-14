@@ -1,4 +1,4 @@
-package top.pcat.study.user;
+package top.pcat.study.User;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -90,7 +90,7 @@ import okhttp3.Response;
 
 import static top.pcat.study.Utils.FileUtil.getRealFilePathFromUri;
 
-public class User extends AppCompatActivity implements View.OnClickListener {
+public class UserInfoActivity extends AppCompatActivity implements View.OnClickListener {
     //请求相机
     private static final int REQUEST_CAPTURE = 100;
     //请求相册
@@ -110,7 +110,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     private FileTool ft;
     // 1: qq, 2: weixin
     private int type;
-    private List<JsonBean> options1Items = new ArrayList<>();
+    private List<CityJsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
     private Thread thread;
@@ -360,7 +360,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                 setInfo();
 //            }
         } catch (JSONException e) {
-            Toast.makeText(User.this,"信息读取错误",Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserInfoActivity.this,"信息读取错误",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
@@ -436,7 +436,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                                 File path2 = new File(getFilesDir().getAbsolutePath());
                                 FileTool.deleteFile(path2);
                                 finish();
-                                Intent it = new Intent(User.this, MainActivity.class);
+                                Intent it = new Intent(UserInfoActivity.this, MainActivity.class);
                                 it.putExtra("page",2);
                                 startActivity(it);
 
@@ -447,7 +447,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.birSet:
                 initData();
-                DatePickerDialog datePickerDialog = new DatePickerDialog(User.this, onDateSetListener, mYear, mMonth, mDay);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(UserInfoActivity.this, onDateSetListener, mYear, mMonth, mDay);
                 long timeStamp = System.currentTimeMillis();
                 datePickerDialog.getDatePicker().setMaxDate(timeStamp);
                 datePickerDialog.show();
@@ -459,7 +459,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                 if (isLoaded) {
                     showPickerView();
                 } else {
-                    Toast.makeText(User.this, "正在加载数据", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserInfoActivity.this, "正在加载数据", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.setName:
@@ -635,30 +635,30 @@ public class User extends AppCompatActivity implements View.OnClickListener {
 
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(User.this); //定义一个AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoActivity.this); //定义一个AlertDialog
         String[] strarr = {"拍照","从相册选择","取消"};
         builder.setItems(strarr, (arg0, arg1) -> {
             if (arg1 == 0) {
                                 //权限判断
-                if (ContextCompat.checkSelfPermission(User.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED
-                        || ContextCompat.checkSelfPermission(User.this, Manifest.permission.CAMERA)
+                        || ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
                     //申请WRITE_EXTERNAL_STORAGE权限
-                    ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,
+                    ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             WRITE_EXTERNAL_STORAGE_REQUEST_CODE);
-                    ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.CAMERA,
+                    ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
                 } else {
                     gotoCamera();
                 }
             }else if(arg1 == 1){
                                 //权限判断
-                if (ContextCompat.checkSelfPermission(User.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                if (ContextCompat.checkSelfPermission(UserInfoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     //申请READ_EXTERNAL_STORAGE权限
-                    ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                             READ_EXTERNAL_STORAGE_REQUEST_CODE);
                 } else {
                     //跳转到相册
@@ -689,12 +689,12 @@ public class User extends AppCompatActivity implements View.OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //设置7.0中共享文件，分享路径定义在xml/file_paths.xml
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(User.this, BuildConfig.APPLICATION_ID + ".fileProvider", tempFile);
+            Uri contentUri = FileProvider.getUriForFile(UserInfoActivity.this, BuildConfig.APPLICATION_ID + ".fileProvider", tempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         } else {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
         }
-            ActivityCompat.requestPermissions(User.this, new String[]{Manifest.permission.CAMERA,
+            ActivityCompat.requestPermissions(UserInfoActivity.this, new String[]{Manifest.permission.CAMERA,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             startActivityForResult(intent, REQUEST_CAPTURE);
 
@@ -792,7 +792,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
 
 
     public void change_sex(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(User.this); //定义一个AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(UserInfoActivity.this); //定义一个AlertDialog
         String[] strarr = {"男","女","未设置"};
         builder.setItems(strarr, (arg0, arg1) -> {
             String sex = "2";
@@ -864,12 +864,12 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                     if(responseCode == HttpURLConnection.HTTP_OK){
                     }
                     else{
-                        Toast.makeText(User.this,"网络连接失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserInfoActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(User.this,"登录失败  请联系开发者",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserInfoActivity.this,"登录失败  请联系开发者",Toast.LENGTH_SHORT).show();
                 }
             }
         }).start();
@@ -997,7 +997,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK){
             finish();
-            Intent it = new Intent(User.this, MainActivity.class);
+            Intent it = new Intent(UserInfoActivity.this, MainActivity.class);
             it.putExtra("page",3);
             startActivity(it);
         }
@@ -1122,7 +1122,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                     break;
 
                 case MSG_LOAD_FAILED:
-                    Toast.makeText(User.this, "Parse Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserInfoActivity.this, "Parse Failed", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -1143,7 +1143,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
                     options3Items.get(options1).get(options2).get(options3) : "";
 
             String tx = opt1tx + opt2tx + opt3tx;
-            Toast.makeText(User.this, tx, Toast.LENGTH_SHORT).show();
+            Toast.makeText(UserInfoActivity.this, tx, Toast.LENGTH_SHORT).show();
 
             TextView textCity = findViewById(R.id.cityText);
 
@@ -1178,7 +1178,7 @@ public class User extends AppCompatActivity implements View.OnClickListener {
 
     private void initJsonData() {
         String JsonData = new GetJsonDataUtil().getJson(this, "province.json");
-        ArrayList<JsonBean> jsonBean = parseData(JsonData);
+        ArrayList<CityJsonBean> jsonBean = parseData(JsonData);
         options1Items = jsonBean;
 
         for (int i = 0; i < jsonBean.size(); i++) {//遍历省份
@@ -1217,13 +1217,13 @@ public class User extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    public ArrayList<JsonBean> parseData(String result) {//Gson 解析
-        ArrayList<JsonBean> detail = new ArrayList<>();
+    public ArrayList<CityJsonBean> parseData(String result) {//Gson 解析
+        ArrayList<CityJsonBean> detail = new ArrayList<>();
         try {
             JSONArray data = new JSONArray(result);
             Gson gson = new Gson();
             for (int i = 0; i < data.length(); i++) {
-                JsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), JsonBean.class);
+                CityJsonBean entity = gson.fromJson(data.optJSONObject(i).toString(), CityJsonBean.class);
                 detail.add(entity);
             }
         } catch (Exception e) {
