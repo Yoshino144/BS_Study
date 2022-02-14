@@ -8,7 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,24 +25,32 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.FileIOUtils;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import es.dmoral.toasty.Toasty;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import top.pcat.study.MainActivity;
+import top.pcat.study.Pojo.LoginReq;
 import top.pcat.study.R;
+import top.pcat.study.Pojo.Msg;
 import top.pcat.study.Utils.StatusBarUtil;
-import top.pcat.study.View.LogUtils;
 
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -68,21 +78,39 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, PlatformActionListener {
 
-    private int page = 3;
+    //返回到第几页
+    private int page = 4;
+    private String uuid = "";
     private LinearLayout loginWechat;
     private LinearLayout loginSina;
     private LinearLayout loginQQ;
     RelativeLayout mTouchLayout;
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+        @SuppressLint("HandlerLeak")
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    LogUtils.d("获取用户信息:" + uuid);
+                    try {
+                        GetUserInfo();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+    };
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "CheckResult"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this, true, R.color.write_fan);
-        InitializeSQLCipher();
-        Touch();
+
 
         TextView wx = findViewById(R.id.wx);
         wx.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
@@ -118,10 +146,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             eeeee.setVisibility(View.GONE);
         });
 
+        //空白处左右滑动
         mTouchLayout = findViewById(R.id.main_touch_layout);
-
         final int[] pageIndex = {0};
-
         mTouchLayout.setOnTouchListener(new View.OnTouchListener() {
             float startX;
             float startY;//没有用到
@@ -188,31 +215,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //点击登录
         Button cc = findViewById(R.id.come);
-        cc.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ShowToast")
-            @Override
-            public void onClick(View v) {
-                // TODO LOGIN
-
-                String username = editText1.getText().toString();
-                String password = editText2.getText().toString();
-
-
-                try {
-                    //DialogUIUtils dialogUIUtils = null;
-                    //DialogUIUtils.showLoading(SignActivity.this, "登录中...", true, true, true, true).show();
-                    Login(username, password);
-                    //DialogUIUtils.dismiss();
-                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                    it.putExtra("page", page);
-                    startActivity(it);
-                } catch (IOException e) {
-                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT);
-                    e.printStackTrace();
-                }
+        cc.setOnClickListener(v -> {
+            String phoneCode = editText1.getText().toString();
+            String password = editText2.getText().toString();
+            try {
+                LogUtils.d("手机号+密码登录:code:" + phoneCode + " pw:" + password);
+                Login(phoneCode, password);
+                Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                it.putExtra("page", page);
+                LogUtils.d("跳转:MainActivity：page：" + page);
+                startActivity(it);
+            } catch (IOException e) {
+                Toasty.error(LoginActivity.this, "登录失败 请联系开发者", Toast.LENGTH_SHORT);
+                e.printStackTrace();
             }
         });
 
+        //返回按钮
         ImageView img = findViewById(R.id.loginback);
         img.setOnClickListener(v -> {
             finish();
@@ -221,6 +240,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(it);
         });
 
+        //快速登录栏
         loginWechat = findViewById(R.id.login_wechat);
         loginSina = findViewById(R.id.login_sina);
         loginQQ = findViewById(R.id.login_qq);
@@ -230,11 +250,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void Touch() {
-
-
-    }
-
+    /**
+     * 点击监听
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -254,6 +274,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * qq登录
+     */
     private void QQ() {
         Platform plat = ShareSDK.getPlatform(QQ.NAME);
         ShareSDK.setEnableAuthTag(true);
@@ -269,6 +292,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         plat.showUser(null);    //要数据不要功能，主要体现在不会重复出现授权界面
     }
 
+    /**
+     * 微信
+     */
     private void WeChat() {
         Platform plat = ShareSDK.getPlatform(Wechat.NAME);
         ShareSDK.setEnableAuthTag(true);
@@ -285,6 +311,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         plat.showUser(null);    //要数据不要功能，主要体现在不会重复出现授权界面
     }
 
+    /**
+     * 新浪登录
+     */
     private void Sina() {
         ShareSDK.setEnableAuthTag(true);
         Platform plat = ShareSDK.getPlatform("SinaWeibo");
@@ -301,6 +330,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         plat.showUser(null);    //要数据不要功能，主要体现在不会重复出现授权界面
     }
 
+    /**
+     * 返回键
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -312,348 +348,103 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return super.onKeyDown(keyCode, event);
     }
 
-    public void GetImg(String username) throws IOException {
-
-        new Thread(() -> {
-            try {
-                URL url = new URL("http://192.168.31.238/web/GetImg.php");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-                connection.setUseCaches(false);
-                connection.connect();
-
-                String body = "username=" + username;
-                //Log.d(username,password);
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
-                writer.write(body);
-                writer.close();
-
-                int responseCode = connection.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream inputStream = connection.getInputStream();
-                    String result = String.valueOf(inputStream);//将流转换为字符串。
-                    //Log.d("kwwl","result============="+result);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    StringBuilder response = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        response.append(line);
-                    }
-                    //Log.d("pccp",response.toString());
-                    if (response.toString().indexOf("/9j/") != -1) {
-
-                        Bitmap bitmap = base64ToBitmap(response.toString());
-                        saveImg(bitmap);
-                    }
-
-                    //saveData(response.toString());
-                    //finish();
-//                        Looper.prepare();
-//                        Toast.makeText(SignActivity.this,"同步成功",Toast.LENGTH_SHORT).show();
-//                        Looper.loop();
-                } else {
-                    Looper.prepare();
-                    //Toast.makeText(SignActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Looper.prepare();
-                // Toast.makeText(SignActivity.this,"同步失败  请反馈开发者",Toast.LENGTH_SHORT).show();
-                Looper.loop();
-            }
-        }).start();
-
-    }
-
-    public void saveImg(Bitmap bitmap) {
-        String FILENAME = "UserImg.png";
-        FileOutputStream fos = null;
-        try {
-            //文件路径  /data/data/com.example.myapplication/files/
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-            fos.flush();
-            fos.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static Bitmap base64ToBitmap(String base64Data) {
-        byte[] bytes = Base64.decode(base64Data, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-    }
-
-    public void UpData(String username) throws IOException {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://192.168.31.238/web/GetUserData.php");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setDoOutput(true);
-                    connection.setDoInput(true);
-                    connection.setUseCaches(false);
-                    connection.connect();
-
-                    String body = "username=" + username;
-                    //Log.d(username,password);
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
-                    writer.write(body);
-                    writer.close();
-
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        //Log.d("pccp",response.toString());
-
-                        saveData(response.toString());
-                        finish();
-                        Looper.prepare();
-                        Toast.makeText(LoginActivity.this, "同步成功", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    } else {
-                        Looper.prepare();
-                        Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Looper.prepare();
-                    Toast.makeText(LoginActivity.this, "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-            }
-        }).start();
-
-    }
-
-    public void saveData(String temp) {
-        String FILENAME = "UserData";
-        FileOutputStream fos = null;
-        try {
-            //文件路径  /data/data/com.example.myapplication/files/
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(temp.getBytes());
-            fos.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void save(String temp) {
-        String FILENAME = "Login.txt";
-        FileOutputStream fos = null;
-        try {
-            //文件路径  /data/data/com.example.myapplication/files/
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(temp.getBytes());
-            fos.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void saveInfo(String temp) {
-        String FILENAME = "UserInfo";
-        FileOutputStream fos = null;
-        try {
-            //文件路径  /data/data/com.example.myapplication/files/
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(temp.getBytes());
-            fos.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String md5Decode32(String content) {
-        byte[] hash;
-        try {
-            hash = MessageDigest.getInstance("MD5").digest(content.getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("NoSuchAlgorithmException", e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UnsupportedEncodingException", e);
-        }
-        StringBuilder hex = new StringBuilder(hash.length * 2);
-        for (byte b : hash) {
-            if ((b & 0xFF) < 0x10) {
-                hex.append("0");
-            }
-            hex.append(Integer.toHexString(b & 0xFF));
-        }
-        return hex.toString();
-    }
 
     //执行登录
     public void Login(String username, String pass) throws IOException {
-        new Thread(new Runnable() {
+
+        String pwMd5 = EncryptUtils.encryptMD5ToString(pass);
+        LogUtils.d("进行登录：" + "http://192.168.31.238:12345/users/" + username + "/" + pwMd5);
+        Request request = new Request.Builder()
+                .url("http://192.168.31.238:12345/users/" + username + "/" + pwMd5)
+                .get()
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
             @Override
-            public void run() {
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Toasty.error(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
 
-                try {
-                    LogUtils.d("进行登录："+"http://192.168.31.238:12345/users/"+username+"/"+md5Decode32(pass));
-                    URL url = new URL("http://192.168.31.238:12345/users/"+username+"/"+md5Decode32(pass));
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        //Log.d("pccp", response.toString());
-
-                        if (response.toString().contains(username)) {
-
-                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+response.toString());
-                            JSONObject jsonObject1 = new JSONObject(response.toString());
-
-                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.toString());
-                            //com.apkfuns.logutils.LogUtils.d("++++++++++++++++"+jsonObject1.getJSONObject("data").toString());
-
-                            JSONObject jsonObject2 = new JSONObject(jsonObject1.getJSONObject("data").toString());
-
-                            String id = jsonObject2.getString("id");
-
-                            //保存头像
-                            GetImg(id);
-                            //保存id
-                            save(id);
-                            //保存用户信息
-                            saveInfo(jsonObject2.toString());
-
-                            UpData(id);
-
-                            finish();
-                            Looper.prepare();
-                            Toasty.success(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                            Looper.loop();
-
-
-                        } else {
-                            Looper.prepare();
-                            Toasty.warning(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-                            Looper.loop();
-                        }
-                    } else {
-                        Looper.prepare();
-                        Toasty.error(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                String rr = response.body().string();
+                LogUtils.d("登录请求返回内容" + rr);
+                Msg msg = gson.fromJson(rr, Msg.class);
+                if (msg.getStatus() == 200) {
+                    LoginReq loginReq = gson.fromJson(msg.getData().toString(), LoginReq.class);
+                    LogUtils.d("用户数据" + loginReq);
                     Looper.prepare();
-                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
+                    LogUtils.d("登录成功");
+                    LogUtils.d(FileIOUtils.writeFileFromString(
+                            getFilesDir().getAbsolutePath() + "/userToken", String.valueOf(msg.getData())));
+
+                    Message m = new Message();
+                    m.what = 0;
+                    uuid = loginReq.getUuid();
+                    handler.sendMessage(m);
+
+                    Toasty.success(LoginActivity.this, msg.getMessage(), Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    Looper.prepare();
+                    Toasty.error(LoginActivity.this, msg.getMessage(), Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
             }
-        }).start();
-
-    }
-//初始化数据库
-    private void InitializeSQLCipher() {
-        SQLiteDatabase.loadLibs(this);
-        File databaseFile = getDatabasePath("user.db");
-        databaseFile.mkdirs();
-        databaseFile.delete();
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "ppcc", null);
-        database.execSQL("CREATE TABLE `user`  ( id varchar(40)  ,\n" +
-                "  `name` varchar(40)  ,\n" +
-                "  `password` varchar(255)  ,\n" +
-                "  `phone` varchar(20)  ,\n" +
-                "  `sex` int  ,\n" +
-                "  `birthday` datetime(0)  ,\n" +
-                "  `city` varchar(50) ,\n" +
-                "  `school` varchar(20),\n" +
-                "  `college` varchar(20) ,\n" +
-                "  `major` varchar(20) ,\n" +
-                "  `grade` int ,\n" +
-                "  `position` varchar(50) ,\n" +
-                "  `delete` int ,\n" +
-                "  `pic` varchar(255) ,\n" +
-                "  `registration_time` datetime(0) ,\n" +
-                "  `text` varchar(255) ,\n" +
-                "  PRIMARY KEY (`id`) )");
-//        database.execSQL("insert into t1(a, b) values(?, ?)", new Object[]{"one for the money",
-//                "two for the show"});
+        });
     }
 
-    private void InsertSql(){
-        SQLiteDatabase.loadLibs(this);
-        File databaseFile = getDatabasePath("user.db");
-        databaseFile.mkdirs();
-        databaseFile.delete();
-        SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(databaseFile, "ppcc", null);
-        database.execSQL("CREATE TABLE `user`  ( id varchar(40)  ,\n" +
-                "  `name` varchar(40)  ,\n" +
-                "  `password` varchar(255)  ,\n" +
-                "  `phone` varchar(20)  ,\n" +
-                "  `sex` int  ,\n" +
-                "  `birthday` datetime(0)  ,\n" +
-                "  `city` varchar(50) ,\n" +
-                "  `school` varchar(20),\n" +
-                "  `college` varchar(20) ,\n" +
-                "  `major` varchar(20) ,\n" +
-                "  `grade` int ,\n" +
-                "  `position` varchar(50) ,\n" +
-                "  `delete` int ,\n" +
-                "  `pic` varchar(255) ,\n" +
-                "  `registration_time` datetime(0) ,\n" +
-                "  `text` varchar(255) ,\n" +
-                "  PRIMARY KEY (`id`) )");
+    /**
+     * 获取用户信息
+     *
+     * @throws IOException
+     */
+    public void GetUserInfo() throws IOException {
+        Request request = new Request.Builder()
+                .url("http://192.168.31.238:12345/" + uuid + "/infos")
+                .get()
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Toasty.error(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                String rr = response.body().string();
+                LogUtils.d("获取用户信息返回内容" + rr);
+                Msg msg = gson.fromJson(rr, Msg.class);
+                if (msg.getStatus() == 200) {
+
+
+                    LogUtils.d(FileIOUtils.writeFileFromString(
+                            getFilesDir().getAbsolutePath() + "/userInfo", String.valueOf(msg.getData())));
+
+
+                    Looper.prepare();
+                    LogUtils.d("用户信息成功");
+                    Toasty.success(LoginActivity.this, "用户信息" + msg.getMessage(), Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    Looper.prepare();
+                    Toasty.error(LoginActivity.this, "用户信息" + msg.getMessage(), Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+            }
+        });
     }
 
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-//        hashMap.put("userTags", platform.getDb().get("userTags")); //SDK+ tags
-//        Log.e("SDK+", " SdkTagsMainActivity platform: " + platform +
-//                " i: " + i + " hashMap " + hashMap);
-////        Intent inent = new Intent();
-////        SerializableHashMap serMap = new SerializableHashMap();
-////        serMap.setMap(hashMap);
-////        Bundle bundle = new Bundle();
-////        bundle.putSerializable("serMap", serMap);
 
         Log.d("=========", " _QQ: -->> onComplete: Platform:" + platform.toString());
         Log.d("=========", " _QQ: -->> onComplete: hashMap:" + hashMap);
@@ -675,7 +466,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        checkQQUser(userId, name, sex, year);
+        //checkQQUser(userId, name, sex, year);
         //inent.putExtras(bundle);
         //inent.setClass(this, TagsItemActivity.class);
         //startActivity(inent);
@@ -692,81 +483,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.e("SDK+", " SdkTagsMainActivity onCancel platform: " + platform +
                 " i: " + i);
     }
-
-    void checkQQUser(String userId, String name, String sex, String year) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://192.168.31.238/web/CheckUser.php");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setDoOutput(true);
-                    connection.setDoInput(true);
-                    connection.setUseCaches(false);
-                    connection.connect();
-
-                    String body = "appName=QQ&" + "userAppId=" + userId + "&username=" + name + "&sex=" + sex + "&year=" + year;
-                    //Log.d(username,password);
-                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
-                    writer.write(body);
-                    writer.close();
-
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        //Log.d("pccp",response.toString());
-                        String username = readSj(response.toString(), 0);
-                        GetImg(username);
-                        save(username);
-                        saveInfo(response.toString());
-                        UpData(username);
-
-                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                        it.putExtra("page", 3);
-                        startActivity(it);
-
-                        finish();
-                        Looper.prepare();
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    } else {
-                        Looper.prepare();
-                        Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Looper.prepare();
-                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-            }
-        }).start();
-    }
-
-    public String readSj(String tempInfo, int postion) {
-        try {
-            JSONArray jsonArray = new JSONArray(tempInfo);
-            JSONObject jsonObject = jsonArray.getJSONObject(postion);
-
-            return jsonObject.getString("user_name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return tempInfo;
-    }
+//
+//    void checkQQUser(String userId, String name, String sex, String year) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    URL url = new URL("http://192.168.31.238/web/CheckUser.php");
+//                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//                    connection.setRequestMethod("POST");
+//                    connection.setDoOutput(true);
+//                    connection.setDoInput(true);
+//                    connection.setUseCaches(false);
+//                    connection.connect();
+//
+//                    String body = "appName=QQ&" + "userAppId=" + userId + "&username=" + name + "&sex=" + sex + "&year=" + year;
+//                    //Log.d(username,password);
+//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
+//                    writer.write(body);
+//                    writer.close();
+//
+//                    int responseCode = connection.getResponseCode();
+//                    if (responseCode == HttpURLConnection.HTTP_OK) {
+//                        InputStream inputStream = connection.getInputStream();
+//                        String result = String.valueOf(inputStream);//将流转换为字符串。
+//                        //Log.d("kwwl","result============="+result);
+//                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//                        StringBuilder response = new StringBuilder();
+//                        String line;
+//                        while ((line = reader.readLine()) != null) {
+//                            response.append(line);
+//                        }
+//                        //Log.d("pccp",response.toString());
+//                        String username = readSj(response.toString(), 0);
+//                        GetImg(username);
+//                        save(username);
+//                        saveInfo(response.toString());
+//                        UpData(username);
+//
+//                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
+//                        it.putExtra("page", 3);
+//                        startActivity(it);
+//
+//                        finish();
+//                        Looper.prepare();
+//                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+//                        Looper.loop();
+//                    } else {
+//                        Looper.prepare();
+//                        Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+//                        Looper.loop();
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    Looper.prepare();
+//                    Toast.makeText(LoginActivity.this, "登录失败  请联系开发者", Toast.LENGTH_SHORT).show();
+//                    Looper.loop();
+//                }
+//            }
+//        }).start();
+//    }
 
 
+    /**
+     * 短信验证码
+     *
+     * @param context
+     */
     public void sendCode(Context context) {
         RegisterPage page = new RegisterPage();
         //如果使用我们的ui，没有申请模板编号的情况下需传null
@@ -793,44 +577,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         page.show(context);
     }
 
+    /**
+     * 检查手机号
+     *
+     * @param phone
+     */
     private void sendPhone(String phone) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
-                    Request request = new Request.Builder()
-                            .url("http://192.168.31.238:8888/pccp_war/phone?phone=" + phone)
-                            .build();//创建一个Request对象
-                    Response response = client.newCall(request).execute();//发送请求获取返回数据
-                    String responseData = response.body().string();//处理返回的数据
-                    LogUtils.d(responseData);
-                    if (responseData.contains("null user")) {
-                        Log.d("=======" + phone, "手机号登录失败-未注册" + responseData);
-                    } else if (responseData.contains("request null error")) {
-                        Log.d("=======" + phone, "请求异常" + responseData);
-                    } else {
-                        Log.d("=======" + phone, "手机号登录成功" + responseData);
+        new Thread(() -> {
+            try {
+                Gson gson = new Gson();
+                OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
+                Request request = new Request.Builder()
+                        .url("http://192.168.31.238:12345/users/" + phone)
+                        .get()
+                        .build();//创建一个Request对象
+                Response response = client.newCall(request).execute();//发送请求获取返回数据
+                String responseData = response.body().string();//处理返回的数据
+                Msg msg = gson.fromJson(responseData, Msg.class);
+                LogUtils.d(responseData);
+                if (msg.getStatus() != 200) {
+                    Log.d("=======" + phone, "手机号登录失败-未注册" + responseData);
+                    Looper.prepare();
+                    Toasty.error(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    Log.d("=======" + phone, "手机号登录成功" + responseData);
 
-                        String username = readSjph(responseData, 0);
-                        GetImg(username);
-                        save(username);
-                        saveInfo(responseData);
-                        UpData(username);
 
-                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                        it.putExtra("page", 3);
-                        startActivity(it);
+                    LoginReq loginReq = gson.fromJson(msg.getData().toString(), LoginReq.class);
+                    Message m = new Message();
+                    m.what = 0;
+                    uuid = loginReq.getUuid();
+                    handler.sendMessage(m);
 
-                        finish();
-                        Looper.prepare();
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
+                    Looper.prepare();
+                    Toasty.success(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
 
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }).start();
     }

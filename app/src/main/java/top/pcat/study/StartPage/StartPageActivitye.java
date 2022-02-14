@@ -18,8 +18,12 @@ import com.hanks.htextview.HTextViewType;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
+import net.sqlcipher.Cursor;
+import net.sqlcipher.database.SQLiteDatabase;
+
 import io.rong.imkit.RongIM;
 import top.pcat.study.R;
+import top.pcat.study.Utils.DatabaseHelper;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.MainActivity;
 import top.pcat.study.Utils.FontManager;
@@ -40,20 +44,7 @@ public class StartPageActivitye extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
 
-//        boolean isFirstOpen = SpUtils.getBoolean(this, AppConstants.FIRST_OPEN);
-//        Log.d("TAG", "onCreate: " + isFirstOpen);
-//        // 如果是第一次启动，则先进入功能引导页
-//        if (!isFirstOpen) {
-//            Intent intent = new Intent(getApplicationContext(), AppIntroActivity.class);
-//            startActivity(intent);
-//            finish();
-////            return;
-//        }
-        //setContentView(R.layout.activity_start);
 
-
-        //TextView textView = findViewById(R.id.start_text);
-        //textView.setTypeface(FontManager.getInstance(getAssets()).getFont("fonts/mm.ttf"));
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) == 0) {
             File path = new File(getFilesDir().getAbsolutePath() + "/privacyFlag");
@@ -140,11 +131,9 @@ public class StartPageActivitye extends AppCompatActivity {
         String FILENAME = "privacyFlag";
         FileOutputStream fos = null;
         try {
-            //文件路径  /data/data/com.example.myapplication/files/
             fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
             fos.write(temp.getBytes());
             fos.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -152,4 +141,5 @@ public class StartPageActivitye extends AppCompatActivity {
         }
 
     }
+
 }

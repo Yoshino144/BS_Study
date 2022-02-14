@@ -3,7 +3,6 @@ package top.pcat.study.User;
 import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,29 +18,15 @@ import com.google.gson.Gson;
 import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import top.pcat.study.R;
-import top.pcat.study.Utils.Msg;
-import top.pcat.study.Utils.Req;
+import top.pcat.study.Pojo.Msg;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -168,7 +153,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Headers headers = response.headers();
                 Gson gson = new Gson();
                 String rr = response.body().string();
                 LogUtils.d("注册请求返回内容" + rr);
@@ -187,5 +171,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
     }
+
+
 
 }
