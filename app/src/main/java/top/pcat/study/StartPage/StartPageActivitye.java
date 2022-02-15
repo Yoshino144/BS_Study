@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.apkfuns.logutils.LogUtils;
 import com.hanks.htextview.HTextView;
 import com.hanks.htextview.HTextViewType;
 import com.mob.MobSDK;
@@ -117,12 +118,12 @@ public class StartPageActivitye extends AppCompatActivity {
         MobSDK.submitPolicyGrantResult(granted, new OperationCallback<Void>() {
             @Override
             public void onComplete(Void data) {
-                Log.d("", "隐私协议授权结果提交：成功");
+                LogUtils.d("", "隐私协议授权结果提交：成功");
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.d("", "隐私协议授权结果提交：失败");
+                LogUtils.d("", "隐私协议授权结果提交：失败");
             }
         });
     }

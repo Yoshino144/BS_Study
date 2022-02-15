@@ -2,6 +2,8 @@ package top.pcat.study.Internet;
 
 import android.util.Log;
 
+import com.apkfuns.logutils.LogUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class Internet {
             public void run() {
                 try {
                     URL uu = new URL(url);
-                    Log.d("Internet类","url============="+uu);
+                    LogUtils.d("Internet类","url============="+uu);
                     HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
@@ -40,7 +42,7 @@ public class Internet {
                     connection.connect();
 
                     String body = key + "="+val;
-                    //Log.d(username,password);
+                    //LogUtils.d(username,password);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
@@ -57,7 +59,7 @@ public class Internet {
                         }
 
                         res = response.toString();
-                        Log.d("Internet类","res============="+res);
+                        LogUtils.d("Internet类","res============="+res);
                     }
                     else{
                     }

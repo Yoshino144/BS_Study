@@ -10,6 +10,8 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 
 public class CustomRoundAngleImageView extends AppCompatImageView {

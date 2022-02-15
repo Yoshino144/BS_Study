@@ -39,18 +39,18 @@ public class RadarImageView extends androidx.appcompat.widget.AppCompatImageView
         setBorderWidth(mWidth);
         setBorderColor(mColor);
 //        final int N = typedArray.getIndexCount();
-//        Log.d("Test", "CircleImageView.N = " + N);
+//        LogUtils.d("Test", "CircleImageView.N = " + N);
 //        for (int i = 0; i < N; i++) {
 //            int attr = typedArray.getIndex(i);
 //            if (attr == R.styleable.CircleImageView_borderWidth) {
 //                final int borderWidth = typedArray.getDimensionPixelSize(R.styleable.CircleImageView_borderWidth, 3);
 //                setBorderWidth(borderWidth);
-//                Log.d("Test", "CircleImageView.setBorderWidth");
+//                LogUtils.d("Test", "CircleImageView.setBorderWidth");
 //            } else if (attr == R.styleable.CircleImageView_borderColor) {
 //                final int borderColor = typedArray.getDimensionPixelSize(R.styleable.CircleImageView_borderColor,
 //                        Color.RED);
 //                setBorderColor(borderColor);
-//                Log.d("Test", "CircleImageView.setBorderColor");
+//                LogUtils.d("Test", "CircleImageView.setBorderColor");
 //            }
 //        }
     }

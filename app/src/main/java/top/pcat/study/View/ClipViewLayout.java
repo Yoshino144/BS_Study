@@ -26,6 +26,8 @@ import java.io.IOException;
 
 import static top.pcat.study.Utils.FileUtil.getRealFilePathFromUri;
 
+import com.apkfuns.logutils.LogUtils;
+
 /**
  * 头像上传原图裁剪容器
  */
@@ -131,9 +133,9 @@ public class ClipViewLayout extends RelativeLayout {
         if (uri == null) {
             return;
         }
-        Log.d("evan", "**********clip_view uri*******  " + uri);
+        LogUtils.d("evan", "**********clip_view uri*******  " + uri);
         String path = getRealFilePathFromUri(getContext(), uri);
-        Log.d("evan", "**********clip_view path*******  " + path);
+        LogUtils.d("evan", "**********clip_view path*******  " + path);
         if (TextUtils.isEmpty(path)) {
             return;
         }

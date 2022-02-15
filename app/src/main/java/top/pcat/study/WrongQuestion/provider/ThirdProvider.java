@@ -3,6 +3,7 @@ package top.pcat.study.WrongQuestion.provider;
 import android.util.Log;
 import android.view.View;
 
+import com.apkfuns.logutils.LogUtils;
 import com.chad.library.adapter.base.entity.node.BaseNode;
 import com.chad.library.adapter.base.provider.BaseNodeProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -33,7 +34,7 @@ public class ThirdProvider extends BaseNodeProvider {
     public void onClick(@NotNull BaseViewHolder helper, @NotNull View view, BaseNode data, int position) {
         ThirdNode entity = (ThirdNode) data;
         int aa =getAdapter().findParentNode(entity);
-        Log.d(aa+"ThirdProvider=====",(position)+entity.getTitle());
+        LogUtils.d(aa+"ThirdProvider=====",(position)+entity.getTitle());
 
     }
 }

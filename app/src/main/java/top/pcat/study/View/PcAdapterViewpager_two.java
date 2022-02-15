@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.Utils.ReadAssets;
 import top.pcat.study.R;
 import top.pcat.study.Size.Examination;
@@ -99,7 +101,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                 if (msg.what == 0x11) {
                     Bundle bundle = msg.getData();
                     String date = bundle.getString("msg");
-                    Log.d("===========",date);
+                    LogUtils.d("===========",date);
                 }
             }
         };
@@ -126,7 +128,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
         String path = data + ".json";
         //String json = getFromAssets("c++.json");
         String json = read(data+".json");
-        Log.d("PcAda======","加载科目====="+data);
+        LogUtils.d("PcAda======","加载科目====="+data);
         readSj(json,position);
 
         //查看解析
@@ -137,7 +139,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
 
 
 
-            //Log.d("页数==============", String.valueOf(position));
+            //LogUtils.d("页数==============", String.valueOf(position));
             //判断题型
             //选择题
             if (type.matches("Choice")) {
@@ -152,14 +154,14 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                 //            private String[] flag =  new String[5000];  选的啥
                 //            private boolean[] Done = new boolean[5000]; 做没做
                 //判断是否语音选择
-                Log.d("判断语音选项",tihao + "===" + xuanxiang);
+                LogUtils.d("判断语音选项",tihao + "===" + xuanxiang);
                 if (tihao.matches("null") && xuanxiang.matches("null")) {
-                    Log.d("没有语音选项"," ");
+                    LogUtils.d("没有语音选项"," ");
 //                    if (!Done[position]) {
 //                    } else {
                         getAnswer(json, position);
 
-                        Log.d("===================", "没做" + position);
+                        LogUtils.d("===================", "没做" + position);
                         //选择
                         hold.aaa.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -181,7 +183,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                                     hold.text_C.setTextColor(Color.parseColor("#9a9a9a"));
                                     hold.image_D.setImageResource(R.drawable.ddd);
                                     hold.text_D.setTextColor(Color.parseColor("#9a9a9a"));
-                                    Log.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
+                                    LogUtils.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
                                     if (answer.matches("A")) {
 //                                        hold.trueaa.setVisibility(View.VISIBLE);
 //                                        hold.image_A.setImageResource(R.drawable.ttrue);
@@ -222,7 +224,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
 
                                 if (true) {
                                     allSize += 1;
-                                    Log.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
+                                    LogUtils.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
                                     Done[position] = true;
                                     mContext.setDone(position);
 
@@ -275,7 +277,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
 
                                 if (true) {
                                     allSize += 1;
-                                    Log.d("点击了C选项，题号" + position, flag[position] + "答案" + answer);
+                                    LogUtils.d("点击了C选项，题号" + position, flag[position] + "答案" + answer);
                                     Done[position] = true;
                                     mContext.setDone(position);
 
@@ -340,7 +342,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                                     hold.image_D.setImageResource(R.drawable.dooo);
                                     hold.text_D.setTextColor(Color.parseColor("#1cabfa"));
 
-                                    Log.d("点击了D选项，题号" + position, flag[position] + "答案" + answer);
+                                    LogUtils.d("点击了D选项，题号" + position, flag[position] + "答案" + answer);
                                     if (answer.matches("D")) {
 //                                        hold.trueaa.setVisibility(View.VISIBLE);
 //                                        hold.image_D.setImageResource(R.drawable.ttrue);
@@ -374,21 +376,21 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                 }
                 else{
                     //语音选择了
-                    Log.d("语音选择了", String.valueOf(position) + "===== "+tihao + xuanxiang );
+                    LogUtils.d("语音选择了", String.valueOf(position) + "===== "+tihao + xuanxiang );
                     int tiNum = Integer.parseInt(tihao);
                     if(tiNum-1 == position){
                         getAnswer(json, position);
                         getId(json, position);
                         if(xuanxiang.matches("a")){
-                            Log.d("语音选择了" + xuanxiang, "答案" +answer);
-                            Log.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
+                            LogUtils.d("语音选择了" + xuanxiang, "答案" +answer);
+                            LogUtils.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
                             flag[position] = "A";
                             mContext.setFlag(position,"A");
                             if (Done[position] == false) {
                                 allSize += 1;
                                 Done[position] = true;
                                 mContext.setDone(position);
-                                Log.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
+                                LogUtils.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
                                 if (answer.matches("A")) {
 //                                    hold.trueaa.setVisibility(View.VISIBLE);
                                     hold.image_A.setImageResource(R.drawable.ttrue);
@@ -419,13 +421,13 @@ public class PcAdapterViewpager_two extends PagerAdapter {
 
                         }else if(xuanxiang.matches("b")){
 
-                            Log.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
+                            LogUtils.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
                             flag[position] = "B";
                             mContext.setFlag(position,"B");
 
                             if (Done[position] == false) {
                                 allSize += 1;
-                                Log.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
+                                LogUtils.d("点击了B选项，题号" + position, flag[position] + "答案" + answer);
                                 Done[position] = true;
                                 mContext.setDone(position);
                                 if (answer.matches("B")) {
@@ -463,7 +465,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
 
                             if (Done[position] == false) {
                                 allSize += 1;
-                                Log.d("点击了C选项，题号" + position, flag[position] + "答案" + answer);
+                                LogUtils.d("点击了C选项，题号" + position, flag[position] + "答案" + answer);
                                 Done[position] = true;
                                 mContext.setDone(position);
                                 if (answer.matches("C")) {
@@ -503,7 +505,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
                                 Done[position] = true;
                                 mContext.setDone(position);
 
-                                Log.d("点击了D选项，题号" + position, flag[position] + "答案" + answer);
+                                LogUtils.d("点击了D选项，题号" + position, flag[position] + "答案" + answer);
                                 if (answer.matches("D")) {
 //                                    hold.trueaa.setVisibility(View.VISIBLE);
                                     hold.image_D.setImageResource(R.drawable.ttrue);
@@ -563,7 +565,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
             JSONObject jsonObject = jsonArray.getJSONObject(postion);
             answer  = jsonObject.getString("problem_answer");
             String id = jsonObject.getString("problem_id");
-            Log.d(id+"题答案",  answer);
+            LogUtils.d(id+"题答案",  answer);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -575,7 +577,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
             JSONObject jsonObject = jsonArray.getJSONObject(postion);
             idsize  = Integer.parseInt(jsonObject.getString("problem_id"));
 
-            Log.d(postion+"题答案",  answer);
+            LogUtils.d(postion+"题答案",  answer);
         } catch (JSONException e) {
             e.printStackTrace();//rr
         }
@@ -596,7 +598,7 @@ public class PcAdapterViewpager_two extends PagerAdapter {
             analysis = jsonObject.getString("problem_analysis");
             cha_id = Integer.parseInt(jsonObject.getString("chapter_id"));
 
-           // Log.d("pcpc", tid + type + answer + subject + A + B + C + D + analysis);
+           // LogUtils.d("pcpc", tid + type + answer + subject + A + B + C + D + analysis);
         } catch (JSONException e) {
             e.printStackTrace();
         }

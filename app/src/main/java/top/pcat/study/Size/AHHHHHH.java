@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
 import top.pcat.study.Utils.StatusBarUtil;
@@ -210,7 +212,7 @@ public class AHHHHHH extends AppCompatActivity {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类","url============="+uu);
+                LogUtils.d("Internet类","url============="+uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -219,7 +221,7 @@ public class AHHHHHH extends AppCompatActivity {
                 connection.connect();
 
                 String body = key + "="+val + "&" + key1 + "=" + val1;
-                //Log.d(username,password);
+                //LogUtils.d(username,password);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -236,9 +238,9 @@ public class AHHHHHH extends AppCompatActivity {
                     }
 
                     saveccc(response.toString());
-                    Log.d("列表内容传递======",response.toString());
+                    LogUtils.d("列表内容传递======",response.toString());
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 }
                 else{
                 }

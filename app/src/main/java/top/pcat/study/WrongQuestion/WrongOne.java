@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 
 import org.apache.http.util.EncodingUtils;
@@ -72,7 +74,7 @@ public class WrongOne extends AppCompatActivity {
         Intent intent = getIntent();
         String kemu = intent.getStringExtra("kemu_name");
         String ti = intent.getStringExtra("ti");
-        Log.d("科目", kemu+ti);
+        LogUtils.d("科目", kemu+ti);
         if(ti==null || ti.equals("null")) ti="1";
         String titi = String.valueOf(ti.charAt(8));
         int tiHao = Integer.parseInt(titi);
@@ -244,7 +246,7 @@ public class WrongOne extends AppCompatActivity {
             analysis = jsonObject.getString("problem_analysis");
             answer = jsonObject.getString("problem_answer");
 
-            Log.d("daan========",answer);
+            LogUtils.d("daan========",answer);
 
 
         } catch (JSONException e) {

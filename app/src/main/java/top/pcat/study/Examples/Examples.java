@@ -2,6 +2,8 @@ package top.pcat.study.Examples;
 
 import android.util.Log;
 
+import com.apkfuns.logutils.LogUtils;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class Examples {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类","url============="+uu);
+                LogUtils.d("Internet类","url============="+uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -28,7 +30,7 @@ public class Examples {
                 connection.connect();
 
                 String body = key + "="+val;
-                Log.d("key=========val====",body);
+                LogUtils.d("key=========val====",body);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -47,10 +49,10 @@ public class Examples {
 //                    tempTest  = response.toString();
 //                    cwjHandler.post(mUpdateResults);
 //
-//                    Log.d("用户已选======",tempTest);
+//                    LogUtils.d("用户已选======",tempTest);
 
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 }
                 else{
                 }

@@ -300,7 +300,7 @@ public class LogUtils {
                     Log.w(tag, subMsg, tr);
                     break;
                 case 'd':
-                    Log.d(tag, subMsg, tr);
+                    LogUtils.d(tag, subMsg, tr);
                     break;
                 case 'i':
                     Log.i(tag, subMsg, tr);

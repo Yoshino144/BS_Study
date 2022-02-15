@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.apkfuns.logutils.LogUtils;
 import com.baidu.aip.asrwakeup3.core.inputstream.InFileStream;
 import com.baidu.aip.asrwakeup3.core.util.MyLogger;
 import com.google.android.material.tabs.TabLayout;
@@ -181,7 +182,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
 
         //语音识别-结束-------------------------------------
 
-        Log.d("当前科目=="+kemu_name,"当前章节=="+zhang_size+"题目数量=="+aa);
+        LogUtils.d("当前科目=="+kemu_name,"当前章节=="+zhang_size+"题目数量=="+aa);
         File flagpath = new File(getFilesDir().getAbsolutePath()+"/"+kemu_name+"Flag.json");
         if(ft.isFileExists(flagpath.toString())){
         }
@@ -191,7 +192,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         }
 
         json = read(kemu_name+"Flag.json");
-        Log.d("ExerActi============","开始加载"+kemu_name);
+        LogUtils.d("加载题目"+kemu_name);
         initView2();
         back();
         size();
@@ -271,7 +272,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         Message message = Message.obtain();
         message.setData(bundle);   //message.obj=bundle  传值也行
         message.what = 0x11;
-        Log.d("===============","send");
+        LogUtils.d("===============","send");
         handler.sendMessage(message);
     }
 
@@ -342,7 +343,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
             list.add(getLayoutInflater().inflate(R.layout.lastview,null));
         }
         long endTime = System.currentTimeMillis();
-        Log.d("time1===============",(endTime - startTime) + "ms");
+        LogUtils.d("time1===============",(endTime - startTime) + "ms");
         pc= read(file_name+".json");
         adapterView = new PcAdapterViewpager(ExercisesActivity.this,Done,flag,list,file_name,pc,"null","null",handlerXuan);
         viewPager.setOffscreenPageLimit(3);
@@ -350,7 +351,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         mTabLayout.addOnTabSelectedListener(mTabSelectedListener);
         viewPager.addOnPageChangeListener(mPageChangeListener);
         long endTime2 = System.currentTimeMillis();
-        Log.d("time2===============",(endTime2 - endTime) + "ms");
+        LogUtils.d("time2===============",(endTime2 - endTime) + "ms");
     }
 
 
@@ -363,7 +364,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         wrongSize += 1;
         allSize +=1;
         size();
-        Log.d("错误"+String.valueOf(id),"================");
+        LogUtils.d("错误"+String.valueOf(id),"================");
         saveRes(String.valueOf(id),"wrong");
     }
 
@@ -371,7 +372,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         trueSize += 1;
         allSize +=1;
         size();
-        Log.d("正确"+String.valueOf(id),"==============");
+        LogUtils.d("正确"+String.valueOf(id),"==============");
         saveRes(String.valueOf(id),"true");
     }
 
@@ -387,12 +388,12 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
             for (int i = 0; i < jsonArray.length(); i++) {
                 jsonObject = jsonArray.getJSONObject(i);
                 jsonObject.put(id,flag);
-                Log.d("jsonObject=============", String.valueOf(jsonObject));
+                LogUtils.d("jsonObject=============", String.valueOf(jsonObject));
             }
             String zxc = "["+ jsonObject +"]";
             json = zxc;
             save(zxc);
-            Log.d("=============", zxc);
+            LogUtils.d("=============", zxc);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -469,17 +470,17 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
 
     public void GetData(String key, String val, String url) throws IOException {
 
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("请稍等");
-        progressDialog.setMessage("首次加载数据...");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
+//        ProgressDialog progressDialog = new ProgressDialog(this);
+//        progressDialog.setTitle("请稍等");
+//        progressDialog.setMessage("首次加载数据...");
+//        progressDialog.setCancelable(true);
+//        progressDialog.show();
 
         new Thread(() -> {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类","url============="+uu);
+                LogUtils.d("Internet类","url============="+uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -488,7 +489,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                 connection.connect();
 
                 String body = key + "="+val;
-                //Log.d(username,password);
+                //LogUtils.d(username,password);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -505,7 +506,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                     }
 
                     interres = response.toString();
-                    Log.d("列表内容传递======",interres);
+                    LogUtils.d("列表内容传递======",interres);
 
 
 
@@ -516,7 +517,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                     startActivity(it);
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
-                    progressDialog.dismiss();
+                    //progressDiaLogUtils.dismiss();
                 }
                 else{
                 }
@@ -560,7 +561,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                     connection.connect();
 
                     String body = "username="+username+"&json="+json+"&allSize="+allSize+"&kemu_name="+kemu_name+"&id="+readInfo(readId());
-                    Log.d("======================",body);
+                    LogUtils.d("======================",body);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
@@ -569,14 +570,14 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                     if(responseCode == HttpURLConnection.HTTP_OK){
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
+                        //LogUtils.d("kwwl","result============="+result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
                         while((line = reader.readLine())!= null){
                             response.append(line);
                         }
-                        //Log.d("pccp",response.toString());
+                        //LogUtils.d("pccp",response.toString());
 
                             saveData(response.toString());
 //                            finish();

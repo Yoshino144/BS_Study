@@ -27,6 +27,9 @@ import androidx.annotation.RequiresApi;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
+import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -40,11 +43,12 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import es.dmoral.toasty.Toasty;
 import top.pcat.study.Fresh.CircleRefreshLayout;
 import top.pcat.study.MainActivity;
+import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
+import top.pcat.study.Utils.GetUser;
 import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CircleProgressView;
-import top.pcat.study.View.LogUtils;
 import top.pcat.study.User.LoginActivity;
 
 import org.apache.http.util.EncodingUtils;
@@ -78,12 +82,12 @@ import okhttp3.Response;
 /**
  * aaa simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link BlankFragment2.OnFragmentInteractionListener} interface
+ * {@link StudyFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link BlankFragment2#newInstance} factory method to
+ * Use the {@link StudyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BlankFragment extends Fragment {
+public class HomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -137,7 +141,7 @@ public class BlankFragment extends Fragment {
     private LinearLayout  tt;
     private TextView todaysize;
     private NestedScrollView scrollone;
-
+    private UserInfo userInfo;
     private TextView baifenbitext;
     private TextView timusizetext;
     private TextView allsizetext;
@@ -153,7 +157,7 @@ public class BlankFragment extends Fragment {
                         allsize = threeSize.getString("yiXuanAllSize");
 
                     timusize = threeSize.getString("yiXuanDoSize");
-                    LogUtils.d(allsize + " fghdrfcgvbn " + timusize);
+                    LogUtils.d(allsize + " 总题数|已选 " + timusize);
 
 
                     allsizetext.setText(allsize + " 道");
@@ -186,7 +190,7 @@ public class BlankFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public BlankFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 
@@ -199,8 +203,8 @@ public class BlankFragment extends Fragment {
      * @return aaa new instance of fragment BlankFragment2.
      */
     // TODO: Rename and change types and number of parameters
-    public static BlankFragment newInstance(String param1, String param2) {
-        BlankFragment fragment = new BlankFragment();
+    public static HomeFragment newInstance(String param1, String param2) {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -233,8 +237,8 @@ public class BlankFragment extends Fragment {
         scrollone.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                LogUtils.d("f1==="+String.valueOf(scrollX)+"  "+String.valueOf(scrollY)
-                        +"  "+String.valueOf(oldScrollX)+"  "+String.valueOf(oldScrollY));
+//                LogUtils.d("f1==="+String.valueOf(scrollX)+"  "+String.valueOf(scrollY)
+//                        +"  "+String.valueOf(oldScrollX)+"  "+String.valueOf(oldScrollY));
 
                 if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
                     ((MainActivity) requireActivity()).Hide();
@@ -245,16 +249,15 @@ public class BlankFragment extends Fragment {
 
 
         });
-        File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
-        if (ft.isFileExists(path.toString())) {
+        if ( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken") ) {
 
             try {
-                UpData(userId);
+                getData(GetUser.getUserId(getContext()));
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
             //登录
-            Log.d("登录状态=============", "已登录");
+            LogUtils.d("登录状态=============", "已登录");
             baifenbitext = rootView.findViewById(R.id.baifenbi);
             timusizetext = rootView.findViewById(R.id.timusize);
             allsizetext = rootView.findViewById(R.id.allsizetext);
@@ -262,15 +265,18 @@ public class BlankFragment extends Fragment {
             tt= rootView.findViewById(R.id.lantiao);
             baitiao = rootView.findViewById(R.id.baitiao);
             TextView usertext2 = rootView.findViewById(R.id.usertext);
-            todaySize = read("UserInfo");
-            readSj(todaySize);
+            //todaySize = read("UserInfo");
+            userInfo = GetUser.getUserInfo(getContext());
+            readSj();
 
 
-
-            userdata = read("UserData");
+            userdata = FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData");
+            LogUtils.w("/UserData存在？："+FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/UserData"));
+            com.apkfuns.logutils.LogUtils.d(  "/UserData内容："+userdata);
+            LogUtils.d(  "/UserData内容："+FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData"));
             readtb(userdata);
 //
-//            Log.d("今天日期=============",mWay);
+//            LogUtils.d("今天日期=============",mWay);
 //            if(mWay.matches("Monday")){
 //                todaysize.setText("+ "+Moonday+" 道");
 //            }else if(mWay.matches("Tuesday")){
@@ -281,7 +287,7 @@ public class BlankFragment extends Fragment {
 //                todaysize.setText("+ "+Thursday+" 道");
 //            }else if(mWay.matches("Friday")){
 //                todaysize.setText("+ "+Friday+" 道");
-//                Log.d("今日题数===========",Friday);
+//                LogUtils.d("今日题数===========",Friday);
 //            }else if(mWay.matches("Saturday")){
 //                todaysize.setText("+ "+Saturday+" 道");
 //            }else if(mWay.matches("Sunday")){
@@ -292,7 +298,7 @@ public class BlankFragment extends Fragment {
             usertext2.setText("成功的决心远胜于任何东西");
             usertext2.setText(usertext);
         } else {
-            Log.d("登录状态=============", "未登录");
+            LogUtils.d("登录状态=============", "未登录");
             TextView baifenbitext = rootView.findViewById(R.id.baifenbi);
             TextView timusizetext = rootView.findViewById(R.id.timusize);
             TextView allsizetext = rootView.findViewById(R.id.allsizetext);
@@ -317,6 +323,52 @@ public class BlankFragment extends Fragment {
 
 
         return rootView;
+    }
+
+
+    public void getData(String userid) throws IOException {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+
+                    LogUtils.d("/userdates/1/", url.toString());
+
+                    int responseCode = connection.getResponseCode();
+                    LogUtils.d("/userdates/1/+responseCode", responseCode);
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        InputStream inputStream = connection.getInputStream();
+                        String result = String.valueOf(inputStream);//将流转换为字符串。
+                        LogUtils.d("kwwl", "result=============" + result);
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                        StringBuilder response = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            response.append(line);
+                        }
+                        LogUtils.d("/userdates/1/", response.toString());
+
+                        FileIOUtils.writeFileFromString(getActivity().getFilesDir().getAbsolutePath() + "/UserData",response.toString());
+//                        Looper.prepare();
+//                        Toast.makeText(getActivity(), "同步成功", Toast.LENGTH_SHORT).show();
+//                        Looper.loop();
+                    } else {
+                        Looper.prepare();
+                        Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
 
@@ -436,12 +488,12 @@ public class BlankFragment extends Fragment {
                             @Override
                             public void run() {
                                 try {
-                                    UpData(userId);
-                                    todaySize = read("UserInfo");
-                                    readSj(todaySize);
+                                    getData(userId);
+                                    readSj();
                                     StringData();
 
-                                    userdata = read("UserData");
+                                    userdata = FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData");
+
                                     readtb(userdata);
                                     getBaiFenBi();
 
@@ -586,8 +638,7 @@ public class BlankFragment extends Fragment {
 
         int sum = 0;
 
-        File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
-        if (ft.isFileExists(path.toString())) {
+        if (GetUser.isLogin(getActivity())) {
             num[0] = Integer.parseInt(Sunday);
             num[1] = Integer.parseInt(Moonday);
             num[2] = Integer.parseInt(Tuesday);
@@ -628,7 +679,7 @@ public class BlankFragment extends Fragment {
             maxnum.setText(String.valueOf(max));
 
             int avg = sum / 7;
-            Log.d("avg=" + avg, "sum==" + sum);
+            LogUtils.d("avg=" + avg, "sum==" + sum);
             LinearLayout avg1 = getActivity().findViewById(R.id.avg1);
             LinearLayout avg2 = getActivity().findViewById(R.id.avg2);
             avg1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, max));
@@ -638,7 +689,7 @@ public class BlankFragment extends Fragment {
 
         }
 
-        //Log.d("sun1=======" + sun1num + Sunday + num[0],"sun2=========="+ sun2num);
+        //LogUtils.d("sun1=======" + sun1num + Sunday + num[0],"sun2=========="+ sun2num);
         //
         LinearLayout sun1 = getActivity().findViewById(R.id.sun1);
         sun1.setLayoutParams(new LinearLayout.LayoutParams(dip2px(getActivity(), 26), LinearLayout.LayoutParams.WRAP_CONTENT, sun1num));
@@ -703,15 +754,11 @@ public class BlankFragment extends Fragment {
         return (int) (dpValue * scale + 0.5f);
     }
 
-    public void readSj(String tempInfo) {
-        try {
-            JSONObject jsonObject = new JSONObject(tempInfo);
-            userId = jsonObject.getString("id");
-            username = jsonObject.getString("name");
-            usertext = jsonObject.getString("text");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+    public void readSj() {
+        userId = userInfo.getId();
+        username = userInfo.getName();
+        usertext = userInfo.getText();
+        if (usertext == null) usertext = "未填";
     }
 
     public interface OnFragmentInteractionListener {
@@ -719,24 +766,6 @@ public class BlankFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public String read(String file) {
-        String result = "";
-        try {
-            FileInputStream fin = getActivity().openFileInput(file);
-            int length = fin.available();
-            byte[] buffer = new byte[length];
-            fin.read(buffer);
-            result = EncodingUtils.getString(buffer, "UTF-8");
-            fin.close();
-            return result;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return "error";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
-        }
-    }
 
     public String readId() {
         String result = "";
@@ -773,7 +802,7 @@ public class BlankFragment extends Fragment {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类", "url=============" + uu);
+                LogUtils.d("Internet类", "url=============" + uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -782,7 +811,7 @@ public class BlankFragment extends Fragment {
                 connection.connect();
 
                 String body = key + "=" + val + "&" + text + "=" + valll;
-                Log.d("key=========val====", body);
+                LogUtils.d("key=========val====", body);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -813,12 +842,12 @@ public class BlankFragment extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 jsonObject = jsonArray.getJSONObject(i);
                 jsonObject.put(id, flag);
-                Log.d("jsonObject=============", String.valueOf(jsonObject));
+                LogUtils.d("jsonObject=============", String.valueOf(jsonObject));
             }
             String zxc = "[" + jsonObject + "]";
             todaySize = zxc;
             save(zxc);
-            Log.d("=============", zxc);
+            LogUtils.d("=============", zxc);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -844,59 +873,6 @@ public class BlankFragment extends Fragment {
     //下拉刷新-----------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------
 
-    public void UpData(String userid) throws IOException {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    LogUtils.d("http://192.168.31.238:12345/userdates/1/" + userid);
-                    URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-
-                    String body = "userId=" + userid;
-
-//
-//                    Log.d("getuserdata====", username);
-//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
-//                    writer.write(body);
-//                    writer.close();
-
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
-                        }
-                        Log.d("pccp", response.toString());
-
-                        saveData(response.toString());
-//                        Looper.prepare();
-//                        Toast.makeText(getActivity(), "同步成功", Toast.LENGTH_SHORT).show();
-//                        Looper.loop();
-                    } else {
-                        Looper.prepare();
-                        Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Looper.prepare();
-                    Toast.makeText(getActivity(), "同步失败  请反馈开发者", Toast.LENGTH_SHORT).show();
-                    Looper.loop();
-                }
-            }
-        }).start();
-
-    }
 
     public void saveData(String temp) {
         String FILENAME = "UserData";

@@ -126,7 +126,7 @@ public class WrongQuestion extends BaseActivity2 {
             //int size= jsonObject.getInt("chapterSize");
             //String subject_name = jsonObject.getString("chapterName");
             //sum += size;
-            //Log.d("一类科目===========",size + subject_name);
+            //LogUtils.d("一类科目===========",size + subject_name);
             //initChaps(subject_name);
 
             Chap one = new Chap(jsonObject.getString("chapterId"),jsonObject.getString("chapterName"), R.drawable.do_do);
@@ -166,13 +166,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("C++"+q) && readInfo(alljson,"C++"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"C++"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                             if(aajson.indexOf("error") !=-1) break;
                             if(aajson==null || aajson.indexOf("null") !=-1) continue;
                             try {
                                 JSONArray jsonArray = new JSONArray(aajson);
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                Log.d("================","C++"+q+"===="+jsonObject.length());
+                                LogUtils.d("================","C++"+q+"===="+jsonObject.length());
                                 if(jsonObject.length()==0) break;
                                 boolean flag = true;
                                 for(int o=1;o<=jsonObject.length();o++){
@@ -211,13 +211,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("C--"+q) && readInfo(alljson,"C--"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"C--"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                         if(aajson.indexOf("error") !=-1) break;
                         if(aajson==null || aajson.indexOf("null") !=-1) continue;
                         try {
                             JSONArray jsonArray = new JSONArray(aajson);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Log.d("================","C--"+q+"===="+jsonObject.length());
+                            LogUtils.d("================","C--"+q+"===="+jsonObject.length());
                             if(jsonObject.length()==0) break;
                             boolean flag = true;
                             for(int o=1;o<=jsonObject.length();o++){
@@ -254,13 +254,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("sjjg"+q) && readInfo(alljson,"sjjg"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"sjjg"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                         if(aajson.indexOf("error") !=-1) break;
                         if(aajson==null || aajson.indexOf("null") !=-1) continue;
                         try {
                             JSONArray jsonArray = new JSONArray(aajson);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Log.d("================","sjjg"+q+"===="+jsonObject.length());
+                            LogUtils.d("================","sjjg"+q+"===="+jsonObject.length());
                             if(jsonObject.length()==0) break;
                             boolean flag = true;
                             for(int o=1;o<=jsonObject.length();o++){
@@ -299,13 +299,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("sjk"+q) && readInfo(alljson,"sjk"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"sjk"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                         if(aajson.indexOf("error") !=-1) break;
                         if(aajson==null || aajson.indexOf("null") !=-1) continue;
                         try {
                             JSONArray jsonArray = new JSONArray(aajson);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Log.d("================","sjk_"+q+"===="+jsonObject.length());
+                            LogUtils.d("================","sjk_"+q+"===="+jsonObject.length());
                             if(jsonObject.length()==0) break;
                             boolean flag = true;
                             for(int o=1;o<=jsonObject.length();o++){
@@ -344,13 +344,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("sf"+q) && readInfo(alljson,"sf"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"sf"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                         if(aajson.indexOf("error") !=-1) break;
                         if(aajson==null || aajson.indexOf("null") !=-1) continue;
                         try {
                             JSONArray jsonArray = new JSONArray(aajson);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Log.d("================","sf"+q+"===="+jsonObject.length());
+                            LogUtils.d("================","sf"+q+"===="+jsonObject.length());
                             if(jsonObject.length()==0) break;
                             boolean flag = true;
                             for(int o=1;o<=jsonObject.length();o++){
@@ -389,13 +389,13 @@ public class WrongQuestion extends BaseActivity2 {
                     if(alljson.contains("yy"+q) && readInfo(alljson,"yy"+q) != null){
                         List<BaseNode> thirdNodeList = new ArrayList<>();
                         String aajson = readInfo(alljson,"yy"+q) ;
-                        Log.d("=======",aajson);
+                        LogUtils.d("=======",aajson);
                         if(aajson.indexOf("error") !=-1) break;
                         if(aajson==null || aajson.indexOf("null") !=-1) continue;
                         try {
                             JSONArray jsonArray = new JSONArray(aajson);
                             JSONObject jsonObject = jsonArray.getJSONObject(0);
-                            Log.d("================","yy"+q+"===="+jsonObject.length());
+                            LogUtils.d("================","yy"+q+"===="+jsonObject.length());
                             if(jsonObject.length()==0) break;
                             boolean flag = true;
                             for(int o=1;o<=jsonObject.length();o++){
@@ -444,7 +444,7 @@ public class WrongQuestion extends BaseActivity2 {
 
                 try {
                     URL uu = new URL(url);
-                    Log.d("Internet类","url============="+uu);
+                    LogUtils.d("Internet类","url============="+uu);
                     HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
@@ -465,7 +465,7 @@ public class WrongQuestion extends BaseActivity2 {
 
                         String res = response.toString();
                         alljson =res;
-                        Log.d("alljson========",alljson);
+                        LogUtils.d("alljson========",alljson);
                         ke=readInfo(alljson,"yixuan");
                         initItem(response.toString());
 

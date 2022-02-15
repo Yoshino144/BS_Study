@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.apkfuns.logutils.LogUtils;
 import com.google.android.material.tabs.TabLayout;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
@@ -130,7 +131,7 @@ public class Examination extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_exa);
-        Log.d("当前科目=="+timuName,"当前章节=="+timuSize+"题目数量=="+timuSize);
+        LogUtils.d("当前科目=="+timuName,"当前章节=="+timuSize+"题目数量=="+timuSize);
         File flagpath = new File(getFilesDir().getAbsolutePath()+"/"+"random"+"Flag.json");
         if(ft.isFileExists(flagpath.toString())){
         }
@@ -140,7 +141,7 @@ public class Examination extends AppCompatActivity {
         }
 
         //json = read("random"+"Flag.json");
-        Log.d("ExerActi============","开始加载"+timuName);
+        LogUtils.d("ExerActi============","开始加载"+timuName);
         initView2();
         timus = findViewById(R.id.textView);
         timun = findViewById(R.id.textView2);
@@ -221,7 +222,7 @@ public class Examination extends AppCompatActivity {
             list.add(getLayoutInflater().inflate(R.layout.lastview_two,null));
         }
         long endTime = System.currentTimeMillis();
-        Log.d("time1===============",(endTime - startTime) + "ms");
+        LogUtils.d("time1===============",(endTime - startTime) + "ms");
         pc= read("random"+".json");
         adapterView = new PcAdapterViewpager_two(this,Done,flag,list,"random",pc,"null","null",handlerXuan);
         viewPager.setOffscreenPageLimit(3);
@@ -229,7 +230,7 @@ public class Examination extends AppCompatActivity {
         mTabLayout.addOnTabSelectedListener(mTabSelectedListener);
         viewPager.addOnPageChangeListener(mPageChangeListener);
         long endTime2 = System.currentTimeMillis();
-        Log.d("time2===============",(endTime2 - endTime) + "ms");
+        LogUtils.d("time2===============",(endTime2 - endTime) + "ms");
     }
 
     private int allSize = 0;
@@ -237,7 +238,7 @@ public class Examination extends AppCompatActivity {
         wrongSize += 1;
         allSize +=1;
         //size();
-        Log.d("错误"+String.valueOf(id),"================");
+        LogUtils.d("错误"+String.valueOf(id),"================");
         saveRes(String.valueOf(id),"wrong "+res);
     }
 
@@ -245,7 +246,7 @@ public class Examination extends AppCompatActivity {
         trueSize += 1;
         allSize +=1;
         //size();
-        Log.d("正确"+String.valueOf(id),"==============");
+        LogUtils.d("正确"+String.valueOf(id),"==============");
         saveRes(String.valueOf(id),"true");
     }
 
@@ -256,12 +257,12 @@ public class Examination extends AppCompatActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 jsonObject = jsonArray.getJSONObject(i);
                 jsonObject.put(id,flag);
-                Log.d("jsonObject=============", String.valueOf(jsonObject));
+                LogUtils.d("jsonObject=============", String.valueOf(jsonObject));
             }
             String zxc = "["+ jsonObject +"]";
             json = zxc;
             save(zxc);
-            Log.d("=============", zxc);
+            LogUtils.d("=============", zxc);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -359,7 +360,7 @@ public class Examination extends AppCompatActivity {
                 String time_show = (int)mHour + ":" + (int)mMinute + ":" + (int)mSecond;
                 exa_time.setText(time_show);
 
-                //Log.d("jsonObject=============", json);
+                //LogUtils.d("jsonObject=============", json);
 
                 mSecondDegree = mSecond;
                 mMinuteDegree = mMinute;

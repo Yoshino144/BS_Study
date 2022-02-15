@@ -12,7 +12,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,14 +21,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -43,8 +37,10 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apkfuns.logutils.LogUtils;
-import com.flyco.tablayout.SlidingTabLayout;
+import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
@@ -52,19 +48,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
 import github.com.st235.lib_expandablebottombar.Menu;
-import github.com.st235.lib_expandablebottombar.MenuItemDescriptor;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.userinfo.RongUserInfoManager;
 import io.rong.imkit.userinfo.UserDataProvider;
-import io.rong.imkit.utils.RouteUtils;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
 import top.pcat.study.Community.CommunityFragment;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.Utils.FileTool;
-import top.pcat.study.Fragment.BlankFragment2;
+import top.pcat.study.Fragment.StudyFragment;
 import top.pcat.study.Fragment.BlankFragment3;
-import top.pcat.study.Fragment.BlankFragment4;
+import top.pcat.study.Fragment.MineFragment;
 import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.Utils.StatusBarUtil;
 
@@ -91,7 +85,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Delayed;
 
 
 public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
@@ -114,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private int toumingdu = 0;
     private int nowPage = 0;
 
+    private BottomNavigationView bottomNavigationView;
     public int getNowPage() {
         return nowPage;
     }
@@ -121,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private Integer imageRes;
     private String startco = "#ffffff";
     private String endco = "#ffffff";
-    private BlankFragment2 fragment2;
+    private StudyFragment fragment2;
 
     public void setNowPage(Integer imageRes) {
-        LogUtils.d("yeshu==" + imageRes);
+        //LogUtils.d("yeshu==" + imageRes);
         this.imageRes = imageRes;
 //        if (pageId == 1) {
 //            //shiying.setAccessibilityLiveRegion();
@@ -187,8 +181,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         setContentView(R.layout.activity_main);
 
         testbar = findViewById(R.id.testbar);
-        bottomBar = findViewById(R.id.expandable_bottom_bar);
-        menu = bottomBar.getMenu();
+        //bottomBar = findViewById(R.id.expandable_bottom_bar);
+        //menu = bottomBar.getMenu();
 
 //        menu.add(
 //                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, 0xff58a5f0).build()
@@ -210,25 +204,51 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 //                new MenuItemDescriptor.Builder(this, R.id.icon_settings, R.drawable.ic_own, R.string.text4, 0xffbe9c91).build()
 //        );
 
-        bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
-            LogUtils.d("selected: " + String.valueOf(item.getText()));
-            if (item.getText().equals("学习"))
-                mViewPager.setCurrentItem(0);
-            else if (item.getText().equals("课程"))
-                mViewPager.setCurrentItem(1);
-            else if (item.getText().equals("动态"))
-                mViewPager.setCurrentItem(2);
-            else if (item.getText().equals("班级"))
-                mViewPager.setCurrentItem(3);
-            else if (item.getText().equals("我的"))
-                mViewPager.setCurrentItem(4);
-            return null;
-        });
 
-        bottomBar.setOnItemReselectedListener((view, item, byUser) -> {
-            LogUtils.d("reselected: " + item.toString());
-            return null;
-        });
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                item -> {
+                    switch (item.getItemId()) {
+                        case R.id.home:
+                            mViewPager.setCurrentItem(0);
+                            return true;
+                        case R.id.shiyan:
+                            mViewPager.setCurrentItem(1);
+                            return true;
+                        case R.id.kecheng:
+                            mViewPager.setCurrentItem(2);
+                            return true;
+                        case R.id.mes:
+                            mViewPager.setCurrentItem(3);
+                            return true;
+                        case R.id.own:
+                            mViewPager.setCurrentItem(4);
+                            return true;
+                    }
+                    return false;
+                }
+        );
+
+//        bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
+//            LogUtils.d("selected: " + String.valueOf(item.getText()));
+//            if (item.getText().equals("学习"))
+//                mViewPager.setCurrentItem(0);
+//            else if (item.getText().equals("课程"))
+//                mViewPager.setCurrentItem(1);
+//            else if (item.getText().equals("动态"))
+//                mViewPager.setCurrentItem(2);
+//            else if (item.getText().equals("班级"))
+//                mViewPager.setCurrentItem(3);
+//            else if (item.getText().equals("我的"))
+//                mViewPager.setCurrentItem(4);
+//            return null;
+//        });
+//
+//        bottomBar.setOnItemReselectedListener((view, item, byUser) -> {
+//            LogUtils.d("reselected: " + item.toString());
+//            return null;
+//        });
 
 
         UserDataProvider.UserInfoProvider userInfoProvider = new UserDataProvider.UserInfoProvider() {
@@ -276,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         Date date = new Date(System.currentTimeMillis());
         String hour = simpleDateFormat.format(date);
         int hourNum = Integer.parseInt(hour);
-        Log.d("当前时间", hour + hourNum);
+        LogUtils.d("当前时间", hour + hourNum);
 
         shiying = findViewById(R.id.shiyingxing);
         TimerTask task = new TimerTask() {
@@ -314,8 +334,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         initView();
 
-        File path = new File(getFilesDir().getAbsolutePath() + "/Login.txt");
-        if (ft.isFileExists(path.toString())) {
+        if (FileUtils.isFileExists(getFilesDir().getAbsolutePath() + "/userToken")) {
             File path2 = new File(getFilesDir().getAbsolutePath() + "/UserImg.png");
             if (ft.isFileExists(path2.toString())) {
                 //ImageView headImage = getActivity().findViewById(R.id.hearImg);
@@ -329,24 +348,26 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             }
         }
 
-        //获取页数
-        Intent intent = getIntent();
-        page = intent.getIntExtra("page", 0);
 
         submitPrivacyGrantResult(true);
 
-        if (FileTool.isFileExists(path.toString())) {
-            lv = readInfo(readlv());
-            name = read();
-            try {
-                UpData(String.valueOf(user_id));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (FileUtils.isFileExists(getFilesDir().getAbsolutePath() + "/userToken")) {
+
+//            try {
+//                //UpData(String.valueOf(user_id));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
 
+        //获取页数
+        Intent intent = getIntent();
+        page = intent.getIntExtra("page", 0);
         //初始化
+
+        LogUtils.d("设置页数" + String.valueOf(page));
+        bottomNavigationView.getMenu().getItem(page).setChecked(true);
         mViewPager.setCurrentItem(page);
         mViewPager.setNoScroll(false);
         //隐藏标题栏
@@ -393,6 +414,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }, 100);
 
 
+
     }
 
     public void writeInfo(String val) {
@@ -430,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
-                        Log.d("kwwl", "result=============" + result);
+                        LogUtils.d("kwwl", "result=============" + result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
@@ -439,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                         }
                         LogUtils.d("/userdates/1/", response.toString());
 
-                        saveDatai(response.toString());
+                        FileIOUtils.writeFileFromString(getFilesDir().getAbsolutePath() + "/UserData",response.toString());
 //                        Looper.prepare();
 //                        Toast.makeText(getActivity(), "同步成功", Toast.LENGTH_SHORT).show();
 //                        Looper.loop();
@@ -514,14 +536,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         mViewPager = findViewById(R.id.fragment_vp);
         mTabRadioGroup = findViewById(R.id.tabs_rg);
         // init fragment
-        fragment2 = new BlankFragment2();
+        fragment2 = new StudyFragment();
         mFragments = new ArrayList<>(4);
         //mFragments.add(BlankFragment.newInstance("456","789"));
         mFragments.add(OnePageFragment.newInstance("456", "789"));//0
         mFragments.add(fragment2.newInstance("456", "789"));//1
         mFragments.add(new CommunityFragment());//2
         mFragments.add(BlankFragment3.newInstance("123", "1"));//3
-        mFragments.add(BlankFragment4.newInstance(name, lv));//4
+        mFragments.add(MineFragment.newInstance("123", "1"));//4
         // init view pager
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mAdapter);
@@ -564,13 +586,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             //RadioButton radioButton = (RadioButton) mTabRadioGroup.getChildAt(position);
             //radioButton.setChecked(true);
             pageId = position;
-            LogUtils.d("当前页数" + String.valueOf(position));
+            LogUtils.d("当前页数，" + String.valueOf(position));
             pppccc = findViewById(R.id.ppccc);
 
             findViewById(R.id.main_edit).setVisibility(View.VISIBLE);
 
             findViewById(R.id.main_hearImg).setVisibility(View.VISIBLE);
             if (position == 1) {
+                LogUtils.d("更换主题11");
                 findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 StatusBarUtil.setTranslucentStatus(MainActivity.this);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
@@ -592,6 +615,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 StatusBarUtil.setStatusBarColor2(MainActivity.this, Color.argb((int) toumingdu, 255, 255, 255));
                 io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this, 5, true);
             } else if (position == 3) {
+                LogUtils.d("更换主题33");
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
@@ -609,9 +633,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 mAppBarParams.setScrollFlags(0);
                 pppccc.setLayoutParams(mAppBarParams);
 
+                pppccc.setVisibility(View.VISIBLE);
+                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 //findViewById(R.id.appbar).setVisibility(View.GONE);
                 //pppccc.setVisibility(View.GONE);
             }else if(position == 4){
+                LogUtils.d("更换主题44");
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
                 findViewById(R.id.appbar).setLayoutParams(params);
@@ -624,12 +651,16 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 pppccc.setBackgroundColor(Color.parseColor("#00000000"));
 //                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
                 findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
-                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.bg_huidi);
                 AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
                 mAppBarParams.setScrollFlags(0);
                 pppccc.setLayoutParams(mAppBarParams);
+                pppccc.setVisibility(View.INVISIBLE);
+                findViewById(R.id.appbar).setVisibility(View.INVISIBLE);
+                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.bg_huidi);
+
             }
             else {
+                LogUtils.d("更换主题**");
                 findViewById(R.id.appbar).setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
                 params.setMargins(0, 0, 0, 0);//left,top,right,bottom
@@ -700,30 +731,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
     };
 
-    public String readInfo(String tempInfo) {
-        try {
-            JSONObject jsonArray = new JSONObject(tempInfo);
-            //lv = jsonArray.getString("lv");
-            lv = "10";
-            user_id = jsonArray.getString("id");
-            return lv;
-        } catch (JSONException e) {
-            Toast.makeText(MainActivity.this, "信息读取错误", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        return "error";
-    }
+
 
     private void submitPrivacyGrantResult(boolean granted) {
         MobSDK.submitPolicyGrantResult(granted, new OperationCallback<Void>() {
             @Override
             public void onComplete(Void data) {
-                Log.d("yinsiquanx", "隐私协议授权结果提交：成功");
+                LogUtils.d("yinsiquanx", "隐私协议授权结果提交：成功");
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.d("yinsiquanx", "隐私协议授权结果提交：失败");
+                LogUtils.d("yinsiquanx", "隐私协议授权结果提交：失败");
             }
         });
     }
@@ -788,7 +807,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                     connection.connect();
 
                     String body = "username=" + username + "&json=" + json + "&allSize=" + allSize;
-                    Log.d("======================", body);
+                    LogUtils.d("======================", body);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
@@ -797,7 +816,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
-                        //Log.d("kwwl","result============="+result);
+                        //LogUtils.d("kwwl","result============="+result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
@@ -851,7 +870,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             public void run() {
                 try {
                     String uu = "http://192.168.31.238/web/Doc/timu_size.json";
-                    Log.d("url", "url=============" + uu);
+                    LogUtils.d("url", "url=============" + uu);
                     URL url = new URL(uu);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
@@ -860,7 +879,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result1 = String.valueOf(inputStream);//将流转换为字符串。
-                        Log.d("kwwl", "result=============" + result1);
+                        LogUtils.d("kwwl", "result=============" + result1);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
@@ -868,7 +887,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                             response.append(line);
                         }
 
-                        Log.d("as", "aaaaaaaaaaaaaaaaa=============" + response.toString());
+                        LogUtils.d("as", "aaaaaaaaaaaaaaaaa=============" + response.toString());
                         saveccc(response.toString());
                     } else {
                         Looper.prepare();
@@ -904,23 +923,23 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     public void Hide() {
-        LogUtils.d("隐藏了导航栏");
+        //LogUtils.d("隐藏了导航栏");
         testbar.animate().translationY(testbar.getHeight());
     }
 
     public void Display() {
-        LogUtils.d("显示了导航栏");
+        //LogUtils.d("显示了导航栏");
         testbar.animate().translationY(0);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        LogUtils.d("ver" + verticalOffset + " pageId" + String.valueOf(pageId) + "TotalScrollRange" + String.valueOf(appBarLayout.getTotalScrollRange()));
+        //LogUtils.d("ver" + verticalOffset + " pageId" + String.valueOf(pageId) + "TotalScrollRange" + String.valueOf(appBarLayout.getTotalScrollRange()));
         if (pageId == 0) {
             int pp = -appBarLayout.getTotalScrollRange();
             View view = findViewById(R.id.tiaotiao);
-            LogUtils.d(verticalOffset > pp);
+            //LogUtils.d(verticalOffset > pp);
             if (verticalOffset > pp) view.setVisibility(View.GONE);
             else view.setVisibility(View.VISIBLE);
         } else if (pageId == 1) {

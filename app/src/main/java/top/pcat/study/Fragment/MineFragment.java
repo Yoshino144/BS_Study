@@ -22,15 +22,19 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.FileUtils;
+import com.google.gson.Gson;
 import com.knowledge.mnlin.RollTextView;
 
 import in.arjsna.swipecardlib.SwipeCardView;
 import top.pcat.study.FastBlur.FastBlurActivity;
+import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.Setting.SettingsActivity;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
 import top.pcat.study.View.CardsAdapter;
-import top.pcat.study.View.LogUtils;
+import com.apkfuns.logutils.LogUtils;
 import top.pcat.study.WrongQuestion.WrongQuestion;
 import top.pcat.study.User.LoginActivity;
 import top.pcat.study.User.UserInfoActivity;
@@ -51,7 +55,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class BlankFragment4 extends Fragment  {
+public class MineFragment extends Fragment  {
     private static final String ARG_SHOW_TEXT = "text";
     private static final String LV_SHOW_TEXT = "lvtext";
 
@@ -67,11 +71,13 @@ public class BlankFragment4 extends Fragment  {
     private LinearLayout set;
     private LinearLayout wrongQuestion;
     private LinearLayout yejian;
+    private UserInfo userInfo;
+    private Gson gosn = new Gson();
 
-    public BlankFragment4() {}
+    public MineFragment() {}
 
-    public static BlankFragment4 newInstance(String param1,String lv) {
-        BlankFragment4 fragment = new BlankFragment4();
+    public static MineFragment newInstance(String param1, String lv) {
+        MineFragment fragment = new MineFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SHOW_TEXT, param1);
         args.putString(LV_SHOW_TEXT,lv);
@@ -130,8 +136,6 @@ public class BlankFragment4 extends Fragment  {
             }
         });
 
-        TextView contentTv = rootView.findViewById(R.id.usernameshow);
-        contentTv.setText(mContentText);
         yejian = rootView.findViewById(R.id.yejian);
         //TextView banben = rootView.findViewById(R.id.banben);
         mSpf = super.getActivity().getSharedPreferences("yejian",MODE_PRIVATE);
@@ -141,13 +145,16 @@ public class BlankFragment4 extends Fragment  {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        Log.d("版本号：",pi.versionName);
+        LogUtils.d("版本号：",pi.versionName);
         //banben.setText("当前版本号："+pi.versionName);
         LinearLayout lvView = rootView.findViewById(R.id.lvView);
 
-        File path = new File(getActivity().getFilesDir().getAbsolutePath()+"/Login.txt");
-        if(ft.isFileExists(path.toString())){
-            lv = readInfo(readlv());
+        if( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken")  ){
+
+            String userInfoJson = FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/userInfo");
+            com.apkfuns.logutils.LogUtils.d("读取的用户信息"+userInfoJson);
+            userInfo = gosn.fromJson(userInfoJson, UserInfo.class);
+
             //name = read();
             JSONObject jsonObject = null;
 //            try {
@@ -178,10 +185,10 @@ public class BlankFragment4 extends Fragment  {
         }
 
         TextView nametext = rootView.findViewById(R.id.usernameshow);
-        nametext.setText(name);
+        nametext.setText(userInfo.getName());
 
         TextView lvtext = rootView.findViewById(R.id.lvtext);
-        lvtext.setText("Lv."+lv);
+        lvtext.setText("Lv."+userInfo.getId().substring(1,6));
         return rootView;
     }
 
@@ -271,7 +278,7 @@ public class BlankFragment4 extends Fragment  {
                 .setLayoutResource(R.layout.item_roll_text_view)
                 .setRollDirection(0)
 
-                .setOnItemClickListener((parent, view, position, id) -> Log.d("点击位置：=========", String.valueOf(position)))
+                .setOnItemClickListener((parent, view, position, id) -> LogUtils.d("点击位置：=========", String.valueOf(position)))
         .refreshData(Arrays.asList("服务器测试中"
                 , "可能遇到不稳定状况"
                 , "你正在使用测试版"));
@@ -300,7 +307,7 @@ public class BlankFragment4 extends Fragment  {
             if(!loginflag){
                 Intent intent01=new Intent();
                 intent01.setClass(getActivity(), LoginActivity.class);
-                intent01.putExtra("page",3);
+                intent01.putExtra("page",4);
                 getActivity().finish();
                 startActivity(intent01);
             }

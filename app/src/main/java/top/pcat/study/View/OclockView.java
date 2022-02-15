@@ -23,6 +23,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 import top.pcat.study.Size.Examination;
 

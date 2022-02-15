@@ -131,20 +131,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <github.com.st235.lib_expandablebottombar.ExpandableBottomBar
-                    android:id="@+id/expandable_bottom_bar"
+                <com.google.android.material.bottomnavigation.BottomNavigationView
+                    android:id="@+id/nav_view"
                     android:layout_width="match_parent"
                     android:layout_height="61dp"
-                    android:layout_margin="15dp"
-                    app:exb_items="@menu/bottom_bar"
-                    app:exb_item_horizontal_margin="5dp"
-                    app:exb_transitionDuration="90"
-                    app:exb_backgroundCornerRadius="32.5dp"
-                    app:exb_backgroundColor="#00FFFFFF"
-                    app:exb_itemInactiveColor="#72000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_alignParentBottom="true"
+                    app:labelVisibilityMode="unlabeled"
+                    app:itemIconTint="@drawable/bottom_color"
+                    android:background="#ffffffff"
+                    app:menu="@menu/bottom_bar" />
+
+<!--                <github.com.st235.lib_expandablebottombar.ExpandableBottomBar-->
+<!--                    android:id="@+id/expandable_bottom_bar"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="61dp"-->
+<!--                    android:layout_margin="15dp"-->
+<!--                    app:exb_items="@menu/bottom_bar"-->
+<!--                    app:exb_item_horizontal_margin="5dp"-->
+<!--                    app:exb_transitionDuration="90"-->
+<!--                    app:exb_backgroundCornerRadius="32.5dp"-->
+<!--                    app:exb_backgroundColor="#00FFFFFF"-->
+<!--                    app:exb_itemInactiveColor="#72000000"-->
+<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent" />-->
 
             </LinearLayout>
 

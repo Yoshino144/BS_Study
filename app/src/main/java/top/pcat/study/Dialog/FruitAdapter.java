@@ -50,7 +50,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder> 
 //                        Toast.LENGTH_SHORT).show();
                 listener.addClick(position);
 
-               // Log.d("点击的=======","============="+position);
+               // LogUtils.d("点击的=======","============="+position);
                // ex.setCurrentView(Integer.parseInt(fruit.getName()));
                 //aa(Integer.parseInt(fruit.getName()));
             }

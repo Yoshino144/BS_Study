@@ -9,6 +9,8 @@ import android.util.SparseArray;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 
 import java.util.ArrayList;
@@ -70,17 +72,17 @@ public class CircleRippleView extends androidx.appcompat.widget.AppCompatImageVi
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        Log.d("Test", "onLayout.changed = " + changed);
+        LogUtils.d("Test", "onLayout.changed = " + changed);
         if (changed) {
             mMaxWidth = (right - left) / 2;
             mCenterX = left + (right - left) / 2;
             mCenterY = top + (bottom - top) / 2;
             mNormalCircleR = mMinWidth;
             floatRadius = (mMaxWidth % circleInterval);
-//            Log.d("Test", "onLayout.mMaxWidth = " + mMaxWidth);
-//            Log.d("Test", "onLayout.mCenterX = " + mCenterX);
-//            Log.d("Test", "onLayout.mCenterY = " + mCenterY);
-//            Log.d("Test", "onLayout.mCurCircleR = " + mNormalCircleR);
+//            LogUtils.d("Test", "onLayout.mMaxWidth = " + mMaxWidth);
+//            LogUtils.d("Test", "onLayout.mCenterX = " + mCenterX);
+//            LogUtils.d("Test", "onLayout.mCenterY = " + mCenterY);
+//            LogUtils.d("Test", "onLayout.mCurCircleR = " + mNormalCircleR);
         }
     }
 
@@ -109,7 +111,7 @@ public class CircleRippleView extends androidx.appcompat.widget.AppCompatImageVi
         int id = (int) thread.getId();
         int minWidth = mMinWidth - 30;
         int maxWidth = mMaxWidth;
-        Log.d("Test", "Thread id = " + thread.getId());
+        LogUtils.d("Test", "Thread id = " + thread.getId());
         while (true) {
             minWidth = minWidth + 6;
             mHashMap.put(id, minWidth);
@@ -173,7 +175,7 @@ public class CircleRippleView extends androidx.appcompat.widget.AppCompatImageVi
 
     private void setCurModelData(ScrollerModel model) {
         Scroller curScroll = model.getScroller();
-        Log.d("Test", "setCurModelData.getCurrx = " + curScroll.getCurrX());
+        LogUtils.d("Test", "setCurModelData.getCurrx = " + curScroll.getCurrX());
         Paint paint = model.getPaint();
         int moveX = mMaxWidth - mMinWidth;
         if (0 == model.getCurX())
@@ -196,7 +198,7 @@ public class CircleRippleView extends androidx.appcompat.widget.AppCompatImageVi
             ScrollerModel model = mScrollArray.get(i);
             if (null == model)
                 continue;
-            // Log.d("Test", "onDraw.model = " + model + " curR = " +
+            // LogUtils.d("Test", "onDraw.model = " + model + " curR = " +
             // model.getCurR());
             canvas.drawCircle(mCenterX, mCenterY, model.getCurR(), model.getPaint());
         }

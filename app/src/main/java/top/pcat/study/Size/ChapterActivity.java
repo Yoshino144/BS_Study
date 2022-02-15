@@ -31,7 +31,7 @@ import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.SpeechRecognition.ActivityOnlineRecog;
 import top.pcat.study.Utils.StatusBarUtil;
-import top.pcat.study.View.LogUtils;
+import com.apkfuns.logutils.LogUtils;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
@@ -87,6 +87,7 @@ public class ChapterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
 
+        LogUtils.d("启动ChapterActivity");
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         StatusBarUtil.setStatusBarMode(this,true,R.color.white);
 
@@ -195,13 +196,15 @@ public class ChapterActivity extends AppCompatActivity {
             Chap posion = chapList.get(position);
             //Toast.makeText(ChapterActivity.this, String.valueOf(position+1),
             //Toast.LENGTH_SHORT).show();
-            LogUtils.d("你点击了第"+String.valueOf(position)+"__"+posion.getChapter_id());
+            LogUtils.d("你点击了第"+String.valueOf(position+1)+"章，科目id："+posion.getChapter_id());
             String chapter_id = posion.getChapter_id();
 
             timu_name = subject_id +"_"+ chapter_id;
+            LogUtils.d("你点击了第"+timu_name);
+
             try {
                 timu_size = getTiMuSize(position);
-                Log.d("题目数量===========", String.valueOf(timu_size));
+                LogUtils.d("题目数量===========", String.valueOf(timu_size));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -220,7 +223,7 @@ public class ChapterActivity extends AppCompatActivity {
                     intent01.putExtra("kemu_right_name", subject_name );
                     finish();
                     startActivity(intent01);
-                    //Log.d("跳转========","JAVA"+(position+1)+String.valueOf(position+1));
+                    //LogUtils.d("跳转========","JAVA"+(position+1)+String.valueOf(position+1));
                     //overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 } else {
                     ProgressDialog progressDialog = new ProgressDialog(ChapterActivity.this);
@@ -245,7 +248,7 @@ public class ChapterActivity extends AppCompatActivity {
                             try {
                                 //要耗时运行的程序
 //                                GetJson(timu_name);
-                                Log.d("开始网络加载-============","====");
+                                LogUtils.d("开始网络加载-============","====");
                                 GetData("subject_name",subject_name,"zhang_size",
                                         String.valueOf(position + 1),"http://192.168.31.238:12345/problems/"+subject_id+"/"+chapter_id);
                                 //saveItem(item);
@@ -293,7 +296,7 @@ public class ChapterActivity extends AppCompatActivity {
             int size= jsonObject.getInt("chapterSize");
             //String subject_name = jsonObject.getString("chapterName");
             sum += size;
-            //Log.d("一类科目===========",size + subject_name);
+            //LogUtils.d("一类科目===========",size + subject_name);
             //initChaps(subject_name);
 
             Chap one = new Chap(jsonObject.getString("chapterId"),jsonObject.getString("chapterName"), R.drawable.do_do);
@@ -370,7 +373,7 @@ public class ChapterActivity extends AppCompatActivity {
             public void run() {
                 try {
                     String uu = "http://192.168.31.238:8888/pccp_war/getProblem";
-                    Log.d("url", "url=============" + uu);
+                    LogUtils.d("url", "url=============" + uu);
                     URL url = new URL(uu);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
@@ -379,7 +382,7 @@ public class ChapterActivity extends AppCompatActivity {
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result1 = String.valueOf(inputStream);//将流转换为字符串。
-                        Log.d("kwwl", "result=============" + result1);
+                        LogUtils.d("kwwl", "result=============" + result1);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
@@ -387,7 +390,7 @@ public class ChapterActivity extends AppCompatActivity {
                             response.append(line);
                         }
 
-                        Log.d("as", "aaaaaaaaaaaaaaaaa=============" + response.toString());
+                        LogUtils.d("as", "aaaaaaaaaaaaaaaaa=============" + response.toString());
                         saveccc(response.toString());
                         result = 1;
                     } else {
@@ -418,7 +421,7 @@ public class ChapterActivity extends AppCompatActivity {
 
             try {
                 URL uu = new URL(url);
-                Log.d("获取题目by章节科目","url============="+uu);
+                LogUtils.d("获取题目by章节科目","url============="+uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -437,9 +440,9 @@ public class ChapterActivity extends AppCompatActivity {
 
                     saveccc(response.toString());
                     result = 1;
-                    Log.d("列表内容传递======",response.toString());
+                    LogUtils.d("列表内容传递======",response.toString());
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 }
                 else{
                 }
@@ -551,7 +554,7 @@ public class ChapterActivity extends AppCompatActivity {
 //        String temp=readitemfile();
 //        int flag= getItemSize(temp,po);
 //        int newflag = getNewItemSize(temp,po);
-//        Log.d("旧题目版本===="+flag,"新题目版本===="+newflag);
+//        LogUtils.d("旧题目版本===="+flag,"新题目版本===="+newflag);
 //        if(flag == newflag) return true;
 //        else return false;
         return true;

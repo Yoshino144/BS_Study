@@ -26,7 +26,7 @@ import top.pcat.study.R;
 import top.pcat.study.Utils.StatusBarUtil;
 import top.pcat.study.View.Item;
 import top.pcat.study.View.ItemAdapter;
-import top.pcat.study.View.LogUtils;
+import com.apkfuns.logutils.LogUtils;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;
@@ -189,7 +189,7 @@ public class Curriculum extends AppCompatActivity {
     }
 
     private void Do() throws JSONException {
-        Log.d("题目加载结果===========", subject_json);
+        LogUtils.d("题目加载结果===========", subject_json);
 
         //专业课类
         initItem();
@@ -201,26 +201,26 @@ public class Curriculum extends AppCompatActivity {
         if (kemu.equals("C")) {
             if (set) {
                 tempTest += "C--";
-                Log.d("选课结果+++=========", tempTest);
+                LogUtils.d("选课结果+++=========", tempTest);
             } else {
                 tempTest = deleteSubString(tempTest, "C--");
-                Log.d("选课结果---=========", tempTest);
+                LogUtils.d("选课结果---=========", tempTest);
             }
         } else if (kemu.equals("C++")) {
             if (set) {
                 tempTest += "Cpp";
-                Log.d("选课结果+++=========", tempTest);
+                LogUtils.d("选课结果+++=========", tempTest);
             } else {
                 tempTest = deleteSubString(tempTest, "Cpp");
-                Log.d("选课结果---=========", tempTest);
+                LogUtils.d("选课结果---=========", tempTest);
             }
         } else {
             if (set) {
                 tempTest += kemu;
-                Log.d("选课结果+++=========", tempTest);
+                LogUtils.d("选课结果+++=========", tempTest);
             } else {
                 tempTest = deleteSubString(tempTest, kemu);
-                Log.d("选课结果---=========", tempTest);
+                LogUtils.d("选课结果---=========", tempTest);
             }
         }
         //修改已选科目
@@ -248,7 +248,7 @@ public class Curriculum extends AppCompatActivity {
             int id = jsonObject.getInt("subjectId");
             if (id < 1000) {
                 String subject_name = jsonObject.getString("subjectName");
-                Log.d("一类科目===========", id + subject_name);
+                LogUtils.d("一类科目===========", id + subject_name);
                 Item pear;
                 if (subject_name.equals("C")) {
                     if (tempTest.contains("C--")) {
@@ -278,7 +278,7 @@ public class Curriculum extends AppCompatActivity {
             int id = jsonObject.getInt("subjectId");
             if (id > 1000) {
                 String subject_name = jsonObject.getString("subjectName");
-                Log.d("二类科目===========", id + subject_name);
+                LogUtils.d("二类科目===========", id + subject_name);
                 Item aa;
                 if (tempTest.contains(subject_name)) {
                     aa = new Item(subject_name, true);
@@ -304,7 +304,7 @@ public class Curriculum extends AppCompatActivity {
 
                 try {
                     URL uu = new URL(url);
-                    Log.d("Internet类", "url=============" + uu);
+                    LogUtils.d("Internet类", "url=============" + uu);
                     HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
@@ -313,7 +313,7 @@ public class Curriculum extends AppCompatActivity {
                     connection.connect();
 
                     String body = key + "=" + val;
-                    //Log.d(username,password);
+                    //LogUtils.d(username,password);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
@@ -358,7 +358,7 @@ public class Curriculum extends AppCompatActivity {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类", "url=============" + uu);
+                LogUtils.d("Internet类", "url=============" + uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -367,7 +367,7 @@ public class Curriculum extends AppCompatActivity {
                 connection.connect();
 
                 String body = key + "=" + val;
-                Log.d("key=========val====", body);
+                LogUtils.d("key=========val====", body);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -385,14 +385,14 @@ public class Curriculum extends AppCompatActivity {
 
                     tempTest = response.toString();
                     LogUtils.d(tempTest);
-                    Log.d("已选题目列表", tempTest);
+                    LogUtils.d("已选题目列表", tempTest);
                     Do();
                     cwjHandler.post(mUpdateResults);
 
-                    Log.d("用户已选======", tempTest);
+                    LogUtils.d("用户已选======", tempTest);
 
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 } else {
                 }
 
@@ -439,7 +439,7 @@ public class Curriculum extends AppCompatActivity {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类", "url=============" + uu);
+                LogUtils.d("Internet类", "url=============" + uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("POST");
                 connection.setDoOutput(true);
@@ -448,7 +448,7 @@ public class Curriculum extends AppCompatActivity {
                 connection.connect();
 
                 String body = key + "=" + val + "&" + key2 + "=" + val2;
-                Log.d("key=========val====", body);
+                LogUtils.d("key=========val====", body);
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                 writer.write(body);
                 writer.close();
@@ -457,14 +457,14 @@ public class Curriculum extends AppCompatActivity {
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     InputStream inputStream = connection.getInputStream();
                     String result = String.valueOf(inputStream);//将流转换为字符串。
-                    //Log.d("kwwl","result============="+result);
+                    //LogUtils.d("kwwl","result============="+result);
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     StringBuilder response = new StringBuilder();
                     String line;
                     while ((line = reader.readLine()) != null) {
                         response.append(line);
                     }
-                    //Log.d("pccp",response.toString());
+                    //LogUtils.d("pccp",response.toString());
 
                     //saveData(response.toString());
 //                            finish();

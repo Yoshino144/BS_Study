@@ -52,7 +52,7 @@ public class SecondProvider extends BaseNodeProvider {
         }
 
         int aa =getAdapter().findParentNode(entity);
-        //Log.d(entity.getTitle().charAt(8)+"ThirdProvider=====",(position)+entity.getTitle());
+        //LogUtils.d(entity.getTitle().charAt(8)+"ThirdProvider=====",(position)+entity.getTitle());
 
         Intent intent01 = new Intent();
         intent01.setClass(wrongQuestion, WrongOne.class);

@@ -17,7 +17,7 @@ import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.ClassAdapter;
 import top.pcat.study.Ranking.ClassList;
-import top.pcat.study.View.LogUtils;
+import com.apkfuns.logutils.LogUtils;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;

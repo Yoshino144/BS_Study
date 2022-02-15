@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.apkfuns.logutils.LogUtils;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -111,11 +112,11 @@ public class GoodsDialogFragment extends BottomSheetDialogFragment implements ad
 
     private void initFruits() {
         String json = read(timu_name+"Flag.json");
-        Log.d("列表加载json读取结果",json);
+        LogUtils.d("列表加载json读取结果",json);
         for (int i = 1; i <= timu_size; i++) {
             String flag = "no";
             flag = readSj(json,i);
-            Log.d("列表加载第"+i+"是",flag);
+            LogUtils.d("列表加载第"+i+"是",flag);
             Fruit apple = new Fruit(
                     getRandomLengthName(String.valueOf(i)), R.drawable.abc,flag);
             fruitList.add(apple);

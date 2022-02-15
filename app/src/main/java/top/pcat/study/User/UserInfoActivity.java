@@ -1,5 +1,7 @@
 package top.pcat.study.User;
 
+import static java.text.DateFormat.getDateInstance;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -48,12 +50,17 @@ import androidx.core.content.FileProvider;
 import com.apkfuns.logutils.LogUtils;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.dou361.dialogui.DialogUIUtils;
 import com.dou361.dialogui.bean.TieBean;
 import com.dou361.dialogui.listener.DialogUIItemListener;
 import com.google.gson.Gson;
 import top.pcat.study.BuildConfig;
 import top.pcat.study.FastBlur.FastBlur;
+import top.pcat.study.Http.GetUserInfoToFile;
+import top.pcat.study.Pojo.Msg;
+import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.Utils.FileUtil;
 import top.pcat.study.MainActivity;
@@ -77,6 +84,8 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -132,7 +141,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout setMajor;
     private LinearLayout setGrade;
     private LinearLayout setOccupation;
-    private String id = null;
+    private String uuid = null;
     private String name = null;
     private String sex =null;
     private String birthday =null;
@@ -149,11 +158,13 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     boolean changeFlag = false;
     private String ttInfo;
     private int occuFlag = 0;
+    private Gson gosn = new Gson();
+    private UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.userdadta);
+        setContentView(R.layout.activity_user_info);
         DialogUIUtils.init(this);
 //        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -185,11 +196,19 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         setOccupation = findViewById(R.id.setoccu);
         setOccupation.setOnClickListener(this);
 
-        //读取用户信息
-        String tempInfo = read("UserInfo");
-        ttInfo = tempInfo;
-        readInfo(tempInfo);
-
+        //从文件读取用户信息
+        if( !FileUtils.isFileExists(getFilesDir().getAbsolutePath() + "/userInfo") ){
+            try {
+                GetUserInfoToFile.getUserInfo(FileIOUtils.readFile2String(getFilesDir().getAbsolutePath() + "/userToken"),this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        String userInfoJson = FileIOUtils.readFile2String(getFilesDir().getAbsolutePath() + "/userInfo");
+        LogUtils.d("读取的用户信息"+userInfoJson);
+        userInfo = gosn.fromJson(userInfoJson,UserInfo.class);
+        setUserInfo(userInfo);
+        uuid = userInfo.getId();
 //        //设置不同身份显示不同数据
 //        if(ocuu.equals("0")){
 //            setSchool.setVisibility(View.GONE);
@@ -238,11 +257,11 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         View aa = findViewById(R.id.userbg);
         aa.getHeight();
         aa.getWidth();
-        Log.d(""+bmp1.getWidth(),""+aa.getWidth());
-        Log.d(""+bmp1.getHeight(),""+aa.getHeight());
+        //LogUtils.d(""+bmp1.getWidth(),""+aa.getWidth());
+        //LogUtils.d(""+bmp1.getHeight(),""+aa.getHeight());
         float bei= aa.getHeight()/bmp1.getHeight();
         int cha = (int) (bmp1.getHeight() - aa.getWidth()/bei)/2;
-        Log.d(aa.getHeight()+"=="+cha,""+bmp1.getHeight()*bei);
+        //LogUtils.d(aa.getHeight()+"=="+cha,""+bmp1.getHeight()*bei);
         Bitmap bmp2 = Bitmap.createBitmap(bmp1, cha, 0, (int) (aa.getWidth()/bei), bmp1.getHeight());
         blur(bmp2, aa);
     }
@@ -264,7 +283,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
     @SuppressLint("NewApi")
     private void blur(Bitmap bkg, View view) {
-        //Log.d("ov=","bkg" + bkg.getWidth()+" "+bkg.getHeight());
+        //LogUtils.d("ov=","bkg" + bkg.getWidth()+" "+bkg.getHeight());
 
         long startMs = System.currentTimeMillis();
         float scaleFactor = 1;//图片缩放比例；
@@ -283,7 +302,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
 
         overlay = FastBlur.doBlur(overlay, (int) radius, true);
-        //Log.d("ov="+overlay.getWidth()+" "+overlay.getHeight(),"bkg" + bkg.getWidth()+" "+bkg.getHeight());
+        //LogUtils.d("ov="+overlay.getWidth()+" "+overlay.getHeight(),"bkg" + bkg.getWidth()+" "+bkg.getHeight());
 //        Bitmap oo = Bitmap.createBitmap(overlay, 0, 0,bkg.getWidth(), bkg.getHeight());
         view.setBackground(new BitmapDrawable(getResources(), overlay));
         /**
@@ -341,53 +360,41 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         return statusBarHeight + titleBarHeight;
     }
 
-    public void readInfo(String tempInfo){
-        try {
-            Log.d("读取文件结果============",tempInfo);
-//            JSONArray jsonArray = new JSONArray(tempInfo);
-//            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = new JSONObject(tempInfo);
-                id = jsonObject.getString("id");
-                name = jsonObject.getString("name");
-                sex  = jsonObject.getString("sex");
-                birthday  = jsonObject.getString("birthday");
-                city = jsonObject.getString("city");
-                school = jsonObject.getString("school");
-                college = jsonObject.getString("college");
-                major = jsonObject.getString("major");
-                grade = jsonObject.getString("grade");
-                ocuu = jsonObject.getString("position");
-                setInfo();
-//            }
-        } catch (JSONException e) {
-            Toast.makeText(UserInfoActivity.this,"信息读取错误",Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    public void setInfo(){
-        Log.d("JSON读取结果========",id +name +sex +birthday +city +school +college +major +grade +ocuu);
+    /**
+     * 设置用户信息
+     * @param userInfo
+     */
+    public void setUserInfo(UserInfo userInfo){
         TextView textId = findViewById(R.id.idText);
-        if(!id.matches("null"))textId.setText(id);
+        textId.setText(userInfo.getId());
+
         TextView textName= findViewById(R.id.nameText);
-        if(!name.matches("null"))textName.setText(name);
+        textName.setText(userInfo.getName());
+
         TextView textSex = findViewById(R.id.sexText);
-        if(!sex.matches("null"))textSex.setText(sex);
+        textSex.setText(userInfo.getSex() == 0.0 ? "男" : "女");
+
         TextView textBir = findViewById(R.id.birText);
-        if(!birthday.matches("null"))textBir.setText(birthday);
+        DateFormat df = getDateInstance();
+        textBir.setText(df.format(userInfo.getBirthday()));
+
         TextView textCity = findViewById(R.id.cityText);
-        if(!city.matches("null"))textCity.setText(city);
+        textCity.setText(userInfo.getCity());
 
         TextView textSchool = findViewById(R.id.schoolText);
-        textSchool.setText(school);
+        textSchool.setText(userInfo.getSchool());
+
         TextView textCollege= findViewById(R.id.collegeText);
-        textCollege.setText(college);
+        textCollege.setText(userInfo.getCollege());
+
         TextView textMajor = findViewById(R.id.majorText);
-        textMajor.setText(major);
+        textMajor.setText(userInfo.getMajor());
+
         TextView textGrade = findViewById(R.id.gradeText);
-        textGrade.setText(grade);
+        textGrade.setText(String.valueOf(userInfo.getGrade()));
+
         TextView textOccupation = findViewById(R.id.occuText);
-        textOccupation.setText(ocuu);
+        textOccupation.setText(userInfo.getPosition());
     }
 
 
@@ -402,7 +409,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 //                DialogUIUtils.showSheet(this, strings, "取消", Gravity.BOTTOM, true, true, new DialogUIItemListener() {
 //                    @Override
 //                    public void onItemClick(CharSequence text, int position) {
-//                        Log.d("===============",text + "---" + position);
+//                        LogUtils.d("===============",text + "---" + position);
 //                        if(position == 0){
                             uploadHeadImage();
 //                        }
@@ -410,7 +417,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 //
 //                    @Override
 //                    public void onBottomBtnClick() {
-//                        Log.d("===============","取消");
+//                        LogUtils.d("===============","取消");
 //                    }
 //                }).show();
                 break;
@@ -673,14 +680,14 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void gotoPhoto() {
-        Log.d("evan", "*****************打开图库********************");
+        LogUtils.d("evan", "*****************打开图库********************");
         //跳转到调用系统图库
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(Intent.createChooser(intent, "请选择图片"), REQUEST_PICK);
     }
 
     private void gotoCamera() {
-        Log.d("evan", "*****************打开相机********************");
+        LogUtils.d("evan", "*****************打开相机********************");
         //创建拍照存储的图片文件
         tempFile = new File(FileUtil.checkDirPath(Environment.getExternalStorageDirectory().getPath() + "Android/com.pc.pc/image/"), System.currentTimeMillis() + ".jpg");
 
@@ -832,7 +839,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             String zxc = "["+ jsonObject +"]";
             ttInfo = zxc;
             saveInfo(zxc);
-            Log.d("=============", zxc);
+            LogUtils.d("=============", zxc);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -852,13 +859,13 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
                     connection.setUseCaches(false);
                     connection.connect();
 
-                    String body = "id="+id+"&key="+key + "&val=" + val;
-                    //Log.d(username,password);
+                    String body = "id="+uuid+"&key="+key + "&val=" + val;
+                    //LogUtils.d(username,password);
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
                     writer.write(body);
                     writer.close();
 
-                    Log.d("PUT====================",body);
+                    LogUtils.d("PUT====================",body);
 
                     int responseCode = connection.getResponseCode();
                     if(responseCode == HttpURLConnection.HTTP_OK){
@@ -879,17 +886,17 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
     public void uploadImg(Bitmap bitmap2) throws MalformedURLException {
 
         String imgString = bitmapToBase64(bitmap2);
-        Log.d("Base64================",imgString);
+        LogUtils.d("Base64================",imgString);
         OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
         //上传图片参数需要与服务端沟通，我就不多做解释了，我添加的都是我们服务端需要的
         //你们根据情况自行更改
         //另外网络请求我就不多做解释了
 
-        Log.d("url================","http://192.168.31.238:12345/users/"+id);
-        URL url = new URL("http://192.168.31.238:12345/users/"+id);
+        LogUtils.d("url================","http://192.168.31.238:12345/users/"+uuid+"/infos/profile.photo");
+        URL url = new URL("http://192.168.31.238:12345/users/"+uuid+"/infos/profile.photo");
         FormBody body = new FormBody.Builder().add("base64",imgString)
                 .build();
-        Request request = new Request.Builder().url(url).post(body).build();
+        Request request = new Request.Builder().url(url).put(body).build();
         okHttpClient.newCall(request).enqueue(new Callback() {
 
             @Override
@@ -899,10 +906,15 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onResponse(okhttp3.Call call, Response response) throws IOException {
+
+                String responseData = response.body().string();//处理返回的数据
+                Gson gson = new Gson();
+                Msg msg = gson.fromJson(responseData, Msg.class);
+                LogUtils.d(msg);
 //                final String data = response.body().string();
 //                Gson gson = new Gson();
 //                final Beans bean = gson.fromJson(data, Beans.class);
-//                Log.d(TAG, "onResponse: " + data);
+//                LogUtils.d(TAG, "onResponse: " + data);
 //                mHandler.post(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -998,7 +1010,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         if (keyCode==KeyEvent.KEYCODE_BACK){
             finish();
             Intent it = new Intent(UserInfoActivity.this, MainActivity.class);
-            it.putExtra("page",3);
+            it.putExtra("page",4);
             startActivity(it);
         }
         return super.onKeyDown(keyCode, event);

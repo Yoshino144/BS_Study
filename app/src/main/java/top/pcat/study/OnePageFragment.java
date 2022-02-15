@@ -16,15 +16,12 @@ import android.widget.TextView;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.hanks.htextview.util.DisplayUtils;
 
 import java.util.ArrayList;
 
-import top.pcat.study.Fragment.BlankFragment;
-import top.pcat.study.Fragment.BlankFragment3;
+import top.pcat.study.Fragment.HomeFragment;
 import top.pcat.study.Fragment.BlankFragment7;
 import top.pcat.study.Utils.DisplayUtil;
-import top.pcat.study.Utils.PxToDp;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,7 +101,7 @@ public class OnePageFragment extends Fragment {
         mVp = (ViewPager) getActivity().findViewById(R.id.vpp);
 
         mFragments = new ArrayList<>();
-        mFragments.add(new BlankFragment());
+        mFragments.add(new HomeFragment());
         mFragments.add(new BlankFragment7());
 
 

@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 import top.pcat.study.Utils.StatusBarUtil;
 
@@ -105,7 +107,7 @@ public class NewExercisesActitity extends AppCompatActivity implements View.OnCl
 
         @Override
         public void onPageSelected(int position) {
-            Log.d("当前页数", String.valueOf(position));
+            LogUtils.d("当前页数", String.valueOf(position));
             if(position == 0){
 
 //                LinearLayout layouttwo=(LinearLayout)MainActivity.this.findViewById(R.id.barcolor);

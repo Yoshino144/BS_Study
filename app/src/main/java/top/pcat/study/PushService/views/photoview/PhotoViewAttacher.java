@@ -31,6 +31,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
+import com.apkfuns.logutils.LogUtils;
+
 import java.lang.ref.WeakReference;
 
 
@@ -272,7 +274,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 	public final void onDrag(float dx, float dy) {
 		if (DEBUG) {
-			Log.d(LOG_TAG, String.format("onDrag: dx: %.2f. dy: %.2f", dx, dy));
+			LogUtils.d(LOG_TAG, String.format("onDrag: dx: %.2f. dy: %.2f", dx, dy));
 		}
 
 		ImageView imageView = getImageView();
@@ -302,7 +304,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 	@Override
 	public final void onFling(float startX, float startY, float velocityX, float velocityY) {
 		if (DEBUG) {
-			Log.d(LOG_TAG, "onFling. sX: " + startX + " sY: " + startY + " Vx: " + velocityX + " Vy: " + velocityY);
+			LogUtils.d(LOG_TAG, "onFling. sX: " + startX + " sY: " + startY + " Vx: " + velocityX + " Vy: " + velocityY);
 		}
 
 		ImageView imageView = getImageView();
@@ -345,7 +347,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 	public final void onScale(float scaleFactor, float focusX, float focusY) {
 		if (DEBUG) {
-			Log.d(LOG_TAG, String.format("onScale: scale: %.2f. fX: %.2f. fY: %.2f", scaleFactor, focusX, focusY));
+			LogUtils.d(LOG_TAG, String.format("onScale: scale: %.2f. fX: %.2f. fY: %.2f", scaleFactor, focusX, focusY));
 		}
 
 		if (hasDrawable(getImageView()) && (getScale() < mMaxScale || scaleFactor < 1f)) {
@@ -877,7 +879,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 
 		public void cancelFling() {
 			if (DEBUG) {
-				Log.d(LOG_TAG, "Cancel Fling");
+				LogUtils.d(LOG_TAG, "Cancel Fling");
 			}
 			mScroller.forceFinished(true);
 		}
@@ -910,7 +912,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 			mCurrentY = startY;
 
 			if (DEBUG) {
-				Log.d(LOG_TAG, "fling. StartX:" + startX + " StartY:" + startY + " MaxX:" + maxX + " MaxY:" + maxY);
+				LogUtils.d(LOG_TAG, "fling. StartX:" + startX + " StartY:" + startY + " MaxX:" + maxX + " MaxY:" + maxY);
 			}
 
 			// If we actually can move, fling the scroller
@@ -928,7 +930,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
 				final int newY = mScroller.getCurrY();
 
 				if (DEBUG) {
-					Log.d(LOG_TAG, "fling run(). CurrentX:" + mCurrentX + " CurrentY:" + mCurrentY + " NewX:" + newX
+					LogUtils.d(LOG_TAG, "fling run(). CurrentX:" + mCurrentX + " CurrentY:" + mCurrentY + " NewX:" + newX
 							+ " NewY:" + newY);
 				}
 

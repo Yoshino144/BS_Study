@@ -32,6 +32,7 @@ import com.apkfuns.logutils.LogUtils;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +45,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import top.pcat.study.MainActivity;
 import top.pcat.study.Pojo.LoginReq;
+import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.R;
 import top.pcat.study.Pojo.Msg;
 import top.pcat.study.Utils.StatusBarUtil;
@@ -92,9 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    LogUtils.d("获取用户信息:" + uuid);
+                    LogUtils.d("获取用户id:" + uuid);
                     try {
-                        GetUserInfo();
+                        getUserInfo();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -221,10 +223,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             try {
                 LogUtils.d("手机号+密码登录:code:" + phoneCode + " pw:" + password);
                 Login(phoneCode, password);
-                Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                it.putExtra("page", page);
-                LogUtils.d("跳转:MainActivity：page：" + page);
-                startActivity(it);
             } catch (IOException e) {
                 Toasty.error(LoginActivity.this, "登录失败 请联系开发者", Toast.LENGTH_SHORT);
                 e.printStackTrace();
@@ -379,7 +377,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Looper.prepare();
                     LogUtils.d("登录成功");
                     LogUtils.d(FileIOUtils.writeFileFromString(
-                            getFilesDir().getAbsolutePath() + "/userToken", String.valueOf(msg.getData())));
+                            getFilesDir().getAbsolutePath() + "/userToken", gson.toJson(msg.getData())));
 
                     Message m = new Message();
                     m.what = 0;
@@ -402,9 +400,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      *
      * @throws IOException
      */
-    public void GetUserInfo() throws IOException {
+    public void getUserInfo() throws IOException {
         Request request = new Request.Builder()
-                .url("http://192.168.31.238:12345/" + uuid + "/infos")
+                .url("http://192.168.31.238:12345/users/" + uuid + "/infos")
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -424,13 +422,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Msg msg = gson.fromJson(rr, Msg.class);
                 if (msg.getStatus() == 200) {
 
-
                     LogUtils.d(FileIOUtils.writeFileFromString(
-                            getFilesDir().getAbsolutePath() + "/userInfo", String.valueOf(msg.getData())));
+                            getFilesDir().getAbsolutePath() + "/userInfo", gson.toJson(msg.getData())));
 
 
                     Looper.prepare();
                     LogUtils.d("用户信息成功");
+                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                    it.putExtra("page", page);
+                    LogUtils.d("跳转:MainActivity：page：" + page);
+                    startActivity(it);
+                    finish();
                     Toasty.success(LoginActivity.this, "用户信息" + msg.getMessage(), Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 } else {
@@ -446,13 +448,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
 
-        Log.d("=========", " _QQ: -->> onComplete: Platform:" + platform.toString());
-        Log.d("=========", " _QQ: -->> onComplete: hashMap:" + hashMap);
-        Log.d("=========", " _QQ: -->> onComplete: token:" + platform.getDb().getToken());
+        LogUtils.d("=========", " _QQ: -->> onComplete: Platform:" + platform.toString());
+        LogUtils.d("=========", " _QQ: -->> onComplete: hashMap:" + hashMap);
+        LogUtils.d("=========", " _QQ: -->> onComplete: token:" + platform.getDb().getToken());
         String userId = platform.getDb().getUserId();
-        Log.d("getUserId============", userId);
+        LogUtils.d("getUserId============", userId);
 
-        Log.d("Sign类登录后信息获取======", String.valueOf(hashMap));
+        LogUtils.d("Sign类登录后信息获取======", String.valueOf(hashMap));
 
         JSONObject jsonObject = new JSONObject(hashMap);
         String name = null;
@@ -462,7 +464,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             name = jsonObject.getString("nickname");
             sex = jsonObject.getString("gender");
             year = jsonObject.getString("year") + "-01-01 00:00:00";
-            Log.d("-============", name + sex + year);
+            LogUtils.d("-============", name + sex + year);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -498,7 +500,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                    connection.connect();
 //
 //                    String body = "appName=QQ&" + "userAppId=" + userId + "&username=" + name + "&sex=" + sex + "&year=" + year;
-//                    //Log.d(username,password);
+//                    //LogUtils.d(username,password);
 //                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), "UTF-8"));
 //                    writer.write(body);
 //                    writer.close();
@@ -507,14 +509,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                    if (responseCode == HttpURLConnection.HTTP_OK) {
 //                        InputStream inputStream = connection.getInputStream();
 //                        String result = String.valueOf(inputStream);//将流转换为字符串。
-//                        //Log.d("kwwl","result============="+result);
+//                        //LogUtils.d("kwwl","result============="+result);
 //                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 //                        StringBuilder response = new StringBuilder();
 //                        String line;
 //                        while ((line = reader.readLine()) != null) {
 //                            response.append(line);
 //                        }
-//                        //Log.d("pccp",response.toString());
+//                        //LogUtils.d("pccp",response.toString());
 //                        String username = readSj(response.toString(), 0);
 //                        GetImg(username);
 //                        save(username);
@@ -596,12 +598,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Msg msg = gson.fromJson(responseData, Msg.class);
                 LogUtils.d(responseData);
                 if (msg.getStatus() != 200) {
-                    Log.d("=======" + phone, "手机号登录失败-未注册" + responseData);
+                    LogUtils.d("=======" + phone, "手机号登录失败-未注册" + responseData);
                     Looper.prepare();
                     Toasty.error(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 } else {
-                    Log.d("=======" + phone, "手机号登录成功" + responseData);
+                    LogUtils.d("=======" + phone, "手机号登录成功" + responseData);
 
 
                     LoginReq loginReq = gson.fromJson(msg.getData().toString(), LoginReq.class);

@@ -27,12 +27,14 @@ import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Size.ChapterActivity;
 import top.pcat.study.Size.DisplayUtil;
+import top.pcat.study.Utils.GetUser;
 import top.pcat.study.View.F2BangAdapter;
 import top.pcat.study.View.Fragment2Adapter;
 import top.pcat.study.View.ItemF2Bang;
 import top.pcat.study.View.ItemFragment2;
-import top.pcat.study.View.LogUtils;
 
+import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.RoundLinesIndicator;
 import com.youth.banner.listener.OnPageChangeListener;
@@ -58,7 +60,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class BlankFragment2 extends Fragment implements OnPageChangeListener {
+public class StudyFragment extends Fragment implements OnPageChangeListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Banner myBanner;
@@ -134,11 +136,11 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
     private OnFragmentInteractionListener mListener;
     private NestedScrollView nsv;
 
-    public BlankFragment2() {
+    public StudyFragment() {
     }
 
-    public static BlankFragment2 newInstance(String param1, String param2) {
-        BlankFragment2 fragment = new BlankFragment2();
+    public static StudyFragment newInstance(String param1, String param2) {
+        StudyFragment fragment = new StudyFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -167,7 +169,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         initBanner();
         //initBanner();
         File path = new File(requireActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
-        if (!FileTool.isFileExists(path.toString())) {
+        if ( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken") ) {
 //            LinearLayout qwe = blan.findViewById(R.id.loginFlag);
 //            qwe.setVisibility(View.VISIBLE);
 //            LogUtils.d("=============未登录-显示登录框=============");
@@ -190,14 +192,14 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
         // TODO Auto-generated method stub
         super.onActivityCreated(savedInstanceState);
 
-        File path = new File(getActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
-        if (ft.isFileExists(path.toString())) {
+        if ( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken") ) {
             //已登陆
             signFlag = true;
             //读取string判断课程是否选中
             tempTest = "cpp,java";
             try {
-                GetYixuan("http://192.168.31.238:12345/subjects/" + readInfo(readId()));
+                com.apkfuns.logutils.LogUtils.d("用户id："+GetUser.getUserId(getContext()));
+                GetYixuan("http://192.168.31.238:12345/subjects/" + GetUser.getUserId(getContext()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -492,7 +494,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
             try {
                 URL uu = new URL(url);
-                Log.d("Internet类", "url=============" + uu);
+                LogUtils.d("Internet类", "url=============" + uu);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -510,7 +512,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     }
 
                     interres = response.toString();
-                    Log.d("列表内容传递======", interres);
+                    LogUtils.d("列表内容传递======", interres);
 
 
                     Intent intent01 = new Intent();
@@ -518,13 +520,13 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     intent01.putExtra("subject_name", subject_name);
                     intent01.putExtra("subject_id", subject_id);
                     intent01.putExtra("item", interres);
-                    Log.d("列表内容传递======", interres);
+                    LogUtils.d("列表内容传递======", interres);
                     //getActivity().finish();
                     startActivity(intent01);
                     //getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     getActivity().finish();
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 } else {
                 }
 
@@ -541,7 +543,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
 
             try {
                 URL uu = new URL(url);
-                Log.d("获取已选", "url=============" + url);
+                LogUtils.d("获取已选", "url=============" + url);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -565,10 +567,10 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
                     //message.what = 0x11;
                     // cwjHandler.sendMessage(message);
 
-                    Log.d("用户已选======", tempTest);
+                    LogUtils.d("用户已选======", tempTest);
 
 
-//                    progressDialog.dismiss();
+//                    progressDiaLogUtils.dismiss();
                 } else {
                 }
 
@@ -586,7 +588,7 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             //如果不是第一次加载，刷新数据
             if (signFlag) {
                 try {
-                    GetYixuan("http://192.168.31.238:12345/subjects/getById/" + readInfo(readId()));
+                    GetYixuan("http://192.168.31.238:12345/subjects/getById/" + GetUser.getUserId(getContext()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -607,8 +609,8 @@ public class BlankFragment2 extends Fragment implements OnPageChangeListener {
             for (int i = 0; i < subject_size; i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                ItemFragment2 apple = new ItemFragment2(jsonObject.getString("idSubject"),
-                        getRandomLengthName(jsonObject.getString("nameSubject")), R.drawable.image11, jsonObject.getString("sizeSubject"));
+                ItemFragment2 apple = new ItemFragment2(jsonObject.getString("subjectId"),
+                        getRandomLengthName(jsonObject.getString("subjectName")), R.drawable.image11, jsonObject.getString("subjectSize"));
                 itemFragment2s.add(apple);
                 //itemFragment2s.add(apple);
             }

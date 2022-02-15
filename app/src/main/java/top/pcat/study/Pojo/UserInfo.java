@@ -4,21 +4,21 @@ package top.pcat.study.Pojo;
 
 public class UserInfo {
 
-  private String id;
-  private String name;
-  private String phone;
+  private String id ="null";
+  private String name="null";
+  private String phone="null";
   private long sex;
   private java.sql.Timestamp birthday;
-  private String city;
-  private String school;
-  private String college;
-  private String major;
-  private long grade;
-  private String position;
+  private String city="null";
+  private String school="null";
+  private String college="null";
+  private String major="null";
+  private long grade=1000;
+  private String position="null";
   private long delFlag;
-  private String pic;
+  private String pic="null";
   private java.sql.Timestamp registrationTime;
-  private String text;
+  private String text="null";
 
   public UserInfo(){}
 

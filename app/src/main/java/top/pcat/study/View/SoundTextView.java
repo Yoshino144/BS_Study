@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.apkfuns.logutils.LogUtils;
+
 import top.pcat.study.R;
 
 import java.io.File;
@@ -174,7 +176,7 @@ public class SoundTextView extends AppCompatTextView {
             try {
                 recorder.stop();
             } catch (Exception e) {
-                Log.d("RecordVoice", "Catch exception: stop recorder failed!");
+                LogUtils.d("RecordVoice", "Catch exception: stop recorder failed!");
             } finally {
                 recorder.release();
                 recorder = null;
