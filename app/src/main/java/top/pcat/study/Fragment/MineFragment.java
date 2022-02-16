@@ -1,5 +1,6 @@
 package top.pcat.study.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -33,6 +34,7 @@ import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.Setting.SettingsActivity;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
+import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CardsAdapter;
 import com.apkfuns.logutils.LogUtils;
 import top.pcat.study.WrongQuestion.WrongQuestion;
@@ -93,12 +95,27 @@ public class MineFragment extends Fragment  {
             mLvText = getArguments().getString(LV_SHOW_TEXT);
         }
     }
+
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
+    }
+
     private ArrayList<CardsAdapter.Card> al = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_blank_fragment4, container, false);
+
+
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) rootView.findViewById(R.id.mine_bar).getLayoutParams();
+        params2.setMargins(0, getStatusBarHeight(rootView.getContext()) + PxToDp.dip2px(rootView.getContext(), 49), 0, 0);//left,top,right,bottom
+        rootView.findViewById(R.id.mine_bar).setLayoutParams(params2);
+
+
         getDummyData(al);
         CardsAdapter arrayAdapter = new CardsAdapter(getContext(), al );
         SwipeCardView swipeCardView = (SwipeCardView) rootView.findViewById(R.id.swipe_card_view);
@@ -145,7 +162,7 @@ public class MineFragment extends Fragment  {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        LogUtils.d("版本号：",pi.versionName);
+        LogUtils.d("版本号："+pi.versionName);
         //banben.setText("当前版本号："+pi.versionName);
         LinearLayout lvView = rootView.findViewById(R.id.lvView);
 

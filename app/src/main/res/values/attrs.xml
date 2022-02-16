@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
     <!--    圆形进度条-->
     <declare-styleable name="CircularProgressView">
         <attr name="backWidth" format="dimension" />    <!--背景圆环宽度-->

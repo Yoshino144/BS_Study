@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -221,10 +223,26 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
+
+//        rootView.findViewById(R.id.pai_bt).setOnClickListener(v->{
+//            getFragmentManager().get
+//        });
+
+        FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams) rootView.findViewById(R.id.scrollfirst).getLayoutParams();
+        params2.setMargins(0, getStatusBarHeight(rootView.getContext()) + PxToDp.dip2px(rootView.getContext(), 49), 0, 0);//left,top,right,bottom
+        rootView.findViewById(R.id.scrollfirst).setLayoutParams(params2);
+
 
         meiri = rootView.findViewById(R.id.meiri);
         meiri_b = rootView.findViewById(R.id.meiri_bai);
@@ -257,7 +275,7 @@ public class HomeFragment extends Fragment {
                 ioException.printStackTrace();
             }
             //登录
-            LogUtils.d("登录状态=============", "已登录");
+            LogUtils.d("登录状态============="+ "已登录");
             baifenbitext = rootView.findViewById(R.id.baifenbi);
             timusizetext = rootView.findViewById(R.id.timusize);
             allsizetext = rootView.findViewById(R.id.allsizetext);
@@ -273,7 +291,7 @@ public class HomeFragment extends Fragment {
             userdata = FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData");
             LogUtils.w("/UserData存在？："+FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/UserData"));
             com.apkfuns.logutils.LogUtils.d(  "/UserData内容："+userdata);
-            LogUtils.d(  "/UserData内容："+FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData"));
+            //LogUtils.d(  "/UserData内容："+FileIOUtils.readFile2String(getActivity().getFilesDir().getAbsolutePath() + "/UserData"));
             readtb(userdata);
 //
 //            LogUtils.d("今天日期=============",mWay);
@@ -294,9 +312,12 @@ public class HomeFragment extends Fragment {
 //                todaysize.setText("+ "+Sunday+" 道");
 //            }
             getSize(userId);
+            if(usertext == null || usertext.equals("null")){
+                usertext2.setText("成功的决心远胜于任何东西");
+            }else{
 
-            usertext2.setText("成功的决心远胜于任何东西");
-            usertext2.setText(usertext);
+                usertext2.setText(usertext);
+            }
         } else {
             LogUtils.d("登录状态=============", "未登录");
             TextView baifenbitext = rootView.findViewById(R.id.baifenbi);
@@ -332,26 +353,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
+                    URL url = new URL("http://192.168.31.238:12345/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
 
-                    LogUtils.d("/userdates/1/", url.toString());
+                    LogUtils.d("请求访问userdates/1/："+ url.toString());
 
                     int responseCode = connection.getResponseCode();
-                    LogUtils.d("/userdates/1/+responseCode", responseCode);
+                    //LogUtils.d("/userdates/week/+responseCode", responseCode);
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
-                        LogUtils.d("kwwl", "result=============" + result);
+                        //LogUtils.d("kwwl", "result=============" + result);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                         StringBuilder response = new StringBuilder();
                         String line;
                         while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
-                        LogUtils.d("/userdates/1/", response.toString());
+                        LogUtils.d("/userdates/week/结果"+response.toString());
 
                         FileIOUtils.writeFileFromString(getActivity().getFilesDir().getAbsolutePath() + "/UserData",response.toString());
 //                        Looper.prepare();
@@ -377,7 +398,7 @@ public class HomeFragment extends Fragment {
             try {
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://192.168.31.238:12345/userdates/4/" + userId)
+                        .url("http://192.168.31.238:12345/userdates/three/" + userId)
                         .get()
                         .build();//创建一个Request对象
                 Response response = client.newCall(request).execute();//发送请求获取返回数据
@@ -396,7 +417,9 @@ public class HomeFragment extends Fragment {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                Looper.prepare();
                 Toasty.error(getContext(),"网络异常");
+                Looper.loop();
             }
         }).start();
 
@@ -409,7 +432,11 @@ public class HomeFragment extends Fragment {
         try {
             JSONObject jsonObject = new JSONObject(tempInfo);
 
-            todaysize.setText("+ " + jsonObject.getString(LocalDate.now().toString()) + " 道");
+            try{
+                todaysize.setText("+ " + jsonObject.getString(LocalDate.now().toString()) + " 道");
+            }catch (Exception e){
+                todaysize.setText("+ " + "0" + " 道");
+            }
 
             //ToDo gai
             meiri.setText(jsonObject.getString(LocalDate.now().toString())+" / 50 道");
@@ -569,7 +596,9 @@ public class HomeFragment extends Fragment {
                 .setPositiveButton("确认",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+
                                 name.setText(userInput.getText());
+
                                 try {
                                     saveJson("text", String.valueOf(userInput.getText()));
                                     UpText("id", readInfo(readId()), "text", String.valueOf(userInput.getText()), "http://192.168.31.238/web/UpText.php");
@@ -679,7 +708,7 @@ public class HomeFragment extends Fragment {
             maxnum.setText(String.valueOf(max));
 
             int avg = sum / 7;
-            LogUtils.d("avg=" + avg, "sum==" + sum);
+            //LogUtils.d("avg=" + avg, "sum==" + sum);
             LinearLayout avg1 = getActivity().findViewById(R.id.avg1);
             LinearLayout avg2 = getActivity().findViewById(R.id.avg2);
             avg1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, max));

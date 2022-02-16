@@ -110,7 +110,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                         }
                     } else {
                         try {
-                            GetData(bb, subject_name, "http://192.168.31.238:12345/chapters/getBySubjectId/" + bb);
+                            GetData(bb, subject_name, "http://192.168.31.238:12345/chapters/" + bb);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -169,7 +169,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
         initBanner();
         //initBanner();
         File path = new File(requireActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
-        if ( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken") ) {
+        if (FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken")) {
 //            LinearLayout qwe = blan.findViewById(R.id.loginFlag);
 //            qwe.setVisibility(View.VISIBLE);
 //            LogUtils.d("=============未登录-显示登录框=============");
@@ -192,13 +192,13 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
         // TODO Auto-generated method stub
         super.onActivityCreated(savedInstanceState);
 
-        if ( FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken") ) {
+        if (FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken")) {
             //已登陆
             signFlag = true;
             //读取string判断课程是否选中
             tempTest = "cpp,java";
             try {
-                com.apkfuns.logutils.LogUtils.d("用户id："+GetUser.getUserId(getContext()));
+                com.apkfuns.logutils.LogUtils.d("获取该id的已选的科目：" + GetUser.getUserId(getContext()));
                 GetYixuan("http://192.168.31.238:12345/subjects/" + GetUser.getUserId(getContext()));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -215,21 +215,25 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
 
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                LogUtils.d(" x" + String.valueOf(scrollX) + " y" + String.valueOf(scrollY)
-                        + " ox" + String.valueOf(oldScrollX) + " oy" + String.valueOf(oldScrollY));
+                //LogUtils.d(" x" + String.valueOf(scrollX) + " y" + String.valueOf(scrollY)
+                //  + " ox" + String.valueOf(oldScrollX) + " oy" + String.valueOf(oldScrollY));
                 if (scrollY <= 200) {
 
                     Double i = ((double) scrollY) / ((double) 200);
-                    int a = (int) (i * 255);
+                    float a = (float) (i * 10);
                     MainActivity mainActivity = (MainActivity) getActivity();
-                    mainActivity.setcolor(a);
+                    if (a == 0.0) {
+                        mainActivity.setcolor((float) 0.1);
+                    } else {
+                        mainActivity.setcolor(a);
+                    }
                 } else {
 
                     MainActivity mainActivity = (MainActivity) getActivity();
-                    mainActivity.setcolor(255);
+                    mainActivity.setcolor(10);
                 }
 
-                if ((scrollY+100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()+10)) {
+                if ((scrollY + 100) >= (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight() + 10)) {
                     ((MainActivity) requireActivity()).Hide();
                 }
                 if (scrollY < oldScrollY) {
@@ -588,7 +592,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             //如果不是第一次加载，刷新数据
             if (signFlag) {
                 try {
-                    GetYixuan("http://192.168.31.238:12345/subjects/getById/" + GetUser.getUserId(getContext()));
+                    GetYixuan("http://192.168.31.238:12345/subjects/" + GetUser.getUserId(getContext()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

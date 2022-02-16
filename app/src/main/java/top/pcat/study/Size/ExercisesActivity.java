@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import com.apkfuns.logutils.LogUtils;
 import com.baidu.aip.asrwakeup3.core.inputstream.InFileStream;
 import com.baidu.aip.asrwakeup3.core.util.MyLogger;
+import com.blankj.utilcode.util.FileIOUtils;
 import com.google.android.material.tabs.TabLayout;
 import top.pcat.study.Dialog.GoodsDialogFragment;
 import top.pcat.study.Dialog.ICallBack;
@@ -156,7 +157,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         subject_id=intent.getStringExtra("subject_id");
         file_name=intent.getStringExtra("file_name");
         chapter_id=intent.getStringExtra("chapter_id");
-
+        kemu_name=file_name;
         timu_size = Integer.parseInt(aa);
 
         //语音识别-----------------
@@ -182,7 +183,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
 
         //语音识别-结束-------------------------------------
 
-        LogUtils.d("当前科目=="+kemu_name,"当前章节=="+zhang_size+"题目数量=="+aa);
+        LogUtils.d("当前科目=="+kemu_name+"当前章节=="+zhang_size+"题目数量=="+aa);
         File flagpath = new File(getFilesDir().getAbsolutePath()+"/"+kemu_name+"Flag.json");
         if(ft.isFileExists(flagpath.toString())){
         }
@@ -343,7 +344,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
             list.add(getLayoutInflater().inflate(R.layout.lastview,null));
         }
         long endTime = System.currentTimeMillis();
-        LogUtils.d("time1===============",(endTime - startTime) + "ms");
+        //LogUtils.d("time1===============",(endTime - startTime) + "ms");
         pc= read(file_name+".json");
         adapterView = new PcAdapterViewpager(ExercisesActivity.this,Done,flag,list,file_name,pc,"null","null",handlerXuan);
         viewPager.setOffscreenPageLimit(3);
@@ -351,7 +352,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
         mTabLayout.addOnTabSelectedListener(mTabSelectedListener);
         viewPager.addOnPageChangeListener(mPageChangeListener);
         long endTime2 = System.currentTimeMillis();
-        LogUtils.d("time2===============",(endTime2 - endTime) + "ms");
+        //LogUtils.d("time2===============",(endTime2 - endTime) + "ms");
     }
 
 
@@ -400,22 +401,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
     }
 
     public String read(String file) {
-        String result = "";
-        try {
-            FileInputStream fin = openFileInput(file);
-            int length = fin.available();
-            byte[] buffer = new byte[length];
-            fin.read(buffer);
-            result = EncodingUtils.getString(buffer,"UTF-8");
-            fin.close();
-            return result;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return "error";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
-        }
+        return FileIOUtils.readFile2String(getFilesDir().getAbsolutePath() + "/problems/"+file);
     }
 
     public void save(String temp) {

@@ -8,40 +8,65 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:layout_marginTop="49dp"
-        android:id="@+id/refreshLayout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlAccentColor="@color/colorTextContent"
-        app:srlPrimaryColor="@android:color/transparent"
-        app:srlEnableLoadMore="true"
-        app:srlEnableAutoLoadMore="false">
-        <com.scwang.smart.refresh.header.ClassicsHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlFinishDuration="500"
-            app:srlEnableLastTime="true"
-            app:srlClassicsSpinnerStyle="FixedBehind"
-            app:srlTextSizeTitle="16sp"
-            app:srlTextSizeTime="10dp"
-            app:srlTextTimeMarginTop="2dp"
-            app:srlDrawableArrowSize="20dp"
-            app:srlDrawableProgressSize="20dp"
-            app:srlDrawableMarginRight="20dp"
-            app:srlDrawableProgress="@drawable/ic_progress_puzzle"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg_huidi"
-            android:overScrollMode="never"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:orientation="vertical"
-            tools:listitem="@android:layout/simple_list_item_2"/>
-        <com.scwang.smart.refresh.footer.ClassicsFooter
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"/>
+
+
+            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+                android:layout_marginTop="0dp"
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlAccentColor="@color/colorTextContent"
+                app:srlPrimaryColor="@android:color/transparent"
+                app:srlEnableLoadMore="true"
+                app:srlEnableAutoLoadMore="false">
+
+                <com.scwang.smart.refresh.header.ClassicsHeader
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srlFinishDuration="500"
+                    app:srlEnableLastTime="true"
+                    app:srlClassicsSpinnerStyle="FixedBehind"
+                    app:srlTextSizeTitle="16sp"
+                    app:srlTextSizeTime="10dp"
+                    app:srlTextTimeMarginTop="2dp"
+                    app:srlDrawableArrowSize="20dp"
+                    app:srlDrawableProgressSize="20dp"
+                    app:srlDrawableMarginRight="20dp"
+                    app:srlDrawableProgress="@drawable/ic_progress_puzzle"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_huidi"
+                    android:overScrollMode="never"
+                    android:orientation="vertical"
+                    tools:listitem="@android:layout/simple_list_item_2"/>
+
+
+                <com.scwang.smart.refresh.footer.ClassicsFooter
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

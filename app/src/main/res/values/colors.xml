@@ -15,41 +15,26 @@
     <color name="gray_color">#4b4b58</color>
     <color name="radar_circle_color">#F10C0C</color>
     <color name="aa">#505050</color>
-    <color name="bg_huidi2">#f7f7f7</color>
-    <color name="bg_huidi">#f2f1f6</color>
+    <color name="bg_huidi">#f7f7f7</color>
+<!--    #f2f1f6-->
+
     <color name="text_black">#000000</color>
     <color name="write_fan">#ffffff</color>
     <color name="write_black">#ffffff</color>
     <color name="tab_fen">#e9e9eb</color>
     <color name="moren_text">#8A000000</color>
-    <color name="chat_title_bg">#427BED</color>
     <color name="text_hui">#959595</color>
     <color name="random">#ccffffff</color>
-    <color name="google_red">#FFC93437</color>
     <color name="google_blue">#FF375BF1</color>
-    <color name="google_yellow">#FFF7D23E</color>
-    <color name="google_green">#FF34A350</color>
-    <color name="cw">#ffffff</color>
 
     <!--PC-->
-    <color name="first_purple">#919EFF</color>
-    <color name="pc_green_two">#7abd9a</color>
-    <color name="pc_green_three">#97D8B6</color>
-    <color name="pc_green_one">#50c7a2</color>
-    <color name="pc_shan">#fe6f61</color>
     <color name="pc_blue">#6698cb</color>
     <color name="kk">#00000000</color>
     <color name="colorTextContent">#444444</color>
     <color name="pc_blue2">#89B2DC</color>
     <color name="pc_blue3">#116BC6</color>
     <color name="pc_cyan">#7fccde</color>
-    <color name="pc_cyan2">#149ABA</color>
-    <color name="pc_green_text">#109d58</color>
-    <color name="pc_fen">#ffbfcd</color>
-    <color name="pc_fenshen">#FFB8B8</color>
 
-
-    <color name="rc_white_color">#f8f6f9</color>
 
     <array name="sample_progress_gradient">
         <item>@color/pc_blue2</item>

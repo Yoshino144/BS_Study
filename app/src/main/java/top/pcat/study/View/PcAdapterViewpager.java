@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.FileIOUtils;
 
 import top.pcat.study.Utils.ReadAssets;
 import top.pcat.study.R;
@@ -137,9 +138,9 @@ public class PcAdapterViewpager extends PagerAdapter {
 
         String path = data + ".json";
         //String json = getFromAssets("c++.json");
-        String json = read(data + ".json");
-        LogUtils.d("PcAda======", "加载科目=====" + data);
-        LogUtils.d("json===========", json);
+        String json = read(data );
+        LogUtils.d("PcAda======"+"加载科目=====" + data);
+        LogUtils.d("json==========="+json);
         readSj(json, position);
 
         //查看解析
@@ -164,9 +165,9 @@ public class PcAdapterViewpager extends PagerAdapter {
             //            private String[] flag =  new String[5000];  选的啥
             //            private boolean[] Done = new boolean[5000]; 做没做
             //判断是否语音选择
-            LogUtils.d("判断语音选项", tihao + "===" + xuanxiang);
+            LogUtils.d("判断语音选项"+tihao + "===" + xuanxiang);
             if (tihao.matches("null") && xuanxiang.matches("null")) {
-                LogUtils.d("没有语音选项", " ");
+                LogUtils.d("没有语音选项"+ " ");
                 if (Done[position] == true) {
                     hold.trueaa.setVisibility(View.VISIBLE);
                     getAnswer(json, position);
@@ -581,7 +582,7 @@ public class PcAdapterViewpager extends PagerAdapter {
             JSONObject jsonObject = jsonArray.getJSONObject(postion);
             answer = jsonObject.getString("problemAnswer");
             String id = jsonObject.getString("problemId");
-            LogUtils.d(id + "题答案", answer);
+            LogUtils.d(id + "题答案"+answer);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -629,7 +630,7 @@ public class PcAdapterViewpager extends PagerAdapter {
             D = jsonObject.getString("d");
             analysis = jsonObject.getString("problemAnalysis");
 
-            // LogUtils.d("pcpc", tid + type + answer + subject + A + B + C + D + analysis);
+            LogUtils.d("加载题目：题号："+tid+" 类型" + type + answer + subject + A + B + C + D + analysis);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -651,22 +652,10 @@ public class PcAdapterViewpager extends PagerAdapter {
     }
 
     public String read(String file) {
-        String result = "";
-        try {
-            FileInputStream fin = mContext.openFileInput(file);
-            int length = fin.available();
-            byte[] buffer = new byte[length];
-            fin.read(buffer);
-            result = EncodingUtils.getString(buffer, "UTF-8");
-            fin.close();
-            return result;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return "error";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
-        }
+        LogUtils.d("读取"+mContext.getFilesDir().getAbsolutePath() + "/problems/"+file);
+        String json = FileIOUtils.readFile2String(mContext.getFilesDir().getAbsolutePath() + "/problems/"+file);
+        LogUtils.d("结果"+json);
+        return json;
     }
 
 

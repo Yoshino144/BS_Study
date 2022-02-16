@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer-array name="google_colors">
-        <item>@color/google_red</item>
-        <item>@color/google_blue</item>
-        <item>@color/google_yellow</item>
-        <item>@color/google_green</item>
-    </integer-array>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
-    </string-array>
-
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
-    </string-array>
 
 </resources>

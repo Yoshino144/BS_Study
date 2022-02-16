@@ -1,8 +1,11 @@
 package top.pcat.study;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -12,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.flyco.tablayout.SlidingTabLayout;
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 import top.pcat.study.Fragment.HomeFragment;
 import top.pcat.study.Fragment.BlankFragment7;
 import top.pcat.study.Utils.DisplayUtil;
+import top.pcat.study.Utils.PxToDp;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,13 +79,23 @@ public class OnePageFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_one_page, container, false);
+
+//        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) view.findViewById(R.id.one_page_bar).getLayoutParams();
+//        params2.setMargins(0, getStatusBarHeight(view.getContext()) + PxToDp.dip2px(view.getContext(), 49), 0, 0);//left,top,right,bottom
+//        view.findViewById(R.id.one_page_bar).setLayoutParams(params2);
+
+        return view;
     }
 
     @Override
@@ -163,6 +178,10 @@ public class OnePageFragment extends Fragment {
         }
     }
 
+    public void setOnePage(int i){
+        mVp.setCurrentItem(i);
+    }
+
     private class MyPagerAdapter extends FragmentPagerAdapter {
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -183,5 +202,12 @@ public class OnePageFragment extends Fragment {
         public Fragment getItem(int position) {
             return mFragments.get(position);
         }
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 }

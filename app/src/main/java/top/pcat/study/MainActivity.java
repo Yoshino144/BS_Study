@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -37,6 +39,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.google.android.material.appbar.AppBarLayout;
@@ -45,6 +48,8 @@ import com.mob.MobSDK;
 import com.mob.OperationCallback;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 import es.dmoral.toasty.Toasty;
 import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
 import github.com.st235.lib_expandablebottombar.Menu;
@@ -104,10 +109,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private ImageView bar_wei;
     private ImageView bar_wei2;
     private LinearLayout shiying;
-    private int toumingdu = 0;
+    private float toumingdu = 0;
     private int nowPage = 0;
 
+    private BlurView bottomBlurView;
+    private BlurView topBlurView;
     private BottomNavigationView bottomNavigationView;
+
     public int getNowPage() {
         return nowPage;
     }
@@ -118,40 +126,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private StudyFragment fragment2;
 
     public void setNowPage(Integer imageRes) {
-        //LogUtils.d("yeshu==" + imageRes);
         this.imageRes = imageRes;
-//        if (pageId == 1) {
-//            //shiying.setAccessibilityLiveRegion();
-//
-//
-//
-//            //bar_wei.setImageResource(imageRes);
-//            //bar_wei2.
-//            if(imageRes == R.drawable.image55){
-//
-//                ObjectAnimator.ofFloat(bar_wei2, "alpha",  0, 1).setDuration(400).start();
-//            }else{
-//
-//                ObjectAnimator.ofFloat(bar_wei2, "alpha",  1, 0).setDuration(400).start();
-//            }
-//            //ObjectAnimator.ofFloat(bar_wei2, "alpha", 1, 0, 1).setDuration(2500).start();
-//            pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
-//            bar_wei.setVisibility(View.VISIBLE);
-//            StatusBarUtil.setTranslucentStatus(this);
-//            //System.out.println(findViewById(R.id.cnm).getLayoutParams());
-//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//            params.setMargins(0, getStatusBarHeight(this), 0, 0);
-//            findViewById(R.id.shiyingxing).setLayoutParams(params);
-//
-//        }
-    }
-
-    public void ch(View view, String start, String end) {
-        ValueAnimator animator = ObjectAnimator.ofInt(view, "backgroundColor", Color.parseColor(start), Color.parseColor(end));//对背景色颜色进行改变，操作的属性为"backgroundColor",此处必须这样写，不能全小写,后面的颜色为在对应颜色间进行渐变
-        animator.setDuration(500);
-        animator.setEvaluator(new ArgbEvaluator());//如果要颜色渐变必须要ArgbEvaluator，来实现颜色之间的平滑变化，否则会出现颜色不规则跳动
-        animator.setRepeatMode(ValueAnimator.REVERSE);
-        animator.start();
     }
 
 
@@ -165,44 +140,51 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Log.i("====", "执行了");
+                    //Log.i("====", "执行了");
                     //需要执行的代码放这里
                     break;
             }
         }
     };
 
-    private ExpandableBottomBar bottomBar;
-    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testbar = findViewById(R.id.testbar);
-        //bottomBar = findViewById(R.id.expandable_bottom_bar);
-        //menu = bottomBar.getMenu();
 
-//        menu.add(
-//                new MenuItemDescriptor.Builder(this, R.id.icon_home, R.drawable.ic_home, R.string.text, 0xff58a5f0).build()
-//        );
-//
-//        menu.add(
-//                new MenuItemDescriptor.Builder(this, R.id.icon_likes, R.drawable.ic_shiyan, R.string.text2, 0xffff77a9).build()
-//        );
-//
-//        menu.add(
-//                new MenuItemDescriptor.Builder(this, R.id.icon_shequ, R.drawable.ic_kecheng, R.string.text5, 0x7fccde).build()
-//        );
-//
-//        menu.add(
-//                new MenuItemDescriptor.Builder(this, R.id.icon_bookmarks, R.drawable.ic_mes, R.string.text3, Color.GRAY).build()
-//        );
-//
-//        menu.add(
-//                new MenuItemDescriptor.Builder(this, R.id.icon_settings, R.drawable.ic_own, R.string.text4, 0xffbe9c91).build()
-//        );
+        BarUtils.setStatusBarLightMode(MainActivity.this,true);
+        FrameLayout.LayoutParams state = (FrameLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
+        state.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);//left,top,right,bottom
+        //state.height=getStatusBarHeight(MainActivity.this);
+        findViewById(R.id.ppccc).setLayoutParams(state);
+
+        bottomBlurView = findViewById(R.id.bottomBlurView);
+        //testbar = findViewById(R.id.testbar);
+        final Drawable windowBackground = getWindow().getDecorView().getBackground();
+
+
+        RelativeLayout root = findViewById(R.id.root);
+        bottomBlurView.setupWith(root)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(15f)
+                .setHasFixedTransformationMatrix(true);
+
+
+        topBlurView = findViewById(R.id.topBlurView);
+        //testbar = findViewById(R.id.testbar);
+
+        topBlurView.setupWith(root)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(15f)
+                .setHasFixedTransformationMatrix(true);
+
+
+        topBlurView.setBlurRadius((float) 17);
+        topBlurView.setOverlayColor(Color.argb((int) 0, 255, 255, 255));
 
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.nav_view);
@@ -230,27 +212,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 }
         );
 
-//        bottomBar.setOnItemSelectedListener((view, item, byUser) -> {
-//            LogUtils.d("selected: " + String.valueOf(item.getText()));
-//            if (item.getText().equals("学习"))
-//                mViewPager.setCurrentItem(0);
-//            else if (item.getText().equals("课程"))
-//                mViewPager.setCurrentItem(1);
-//            else if (item.getText().equals("动态"))
-//                mViewPager.setCurrentItem(2);
-//            else if (item.getText().equals("班级"))
-//                mViewPager.setCurrentItem(3);
-//            else if (item.getText().equals("我的"))
-//                mViewPager.setCurrentItem(4);
-//            return null;
-//        });
-//
-//        bottomBar.setOnItemReselectedListener((view, item, byUser) -> {
-//            LogUtils.d("reselected: " + item.toString());
-//            return null;
-//        });
-
-
         UserDataProvider.UserInfoProvider userInfoProvider = new UserDataProvider.UserInfoProvider() {
             @Override
             public UserInfo getUserInfo(String userId) {
@@ -265,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void onSuccess(String userId) {
                 Toasty.success(MainActivity.this, userId);
-                LogUtils.e("融云--登录成功" + String.valueOf(userId));
+                LogUtils.d("融云--登录成功" + String.valueOf(userId));
                 //RouteUtils.routeToConversationListActivity(MainActivity.this, "");
             }
 
@@ -278,27 +239,32 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
 
-                LogUtils.e("融云--数据库" + String.valueOf(databaseOpenStatus.getValue())
+                LogUtils.d("融云--数据库" + String.valueOf(databaseOpenStatus.getValue())
                         + databaseOpenStatus.toString());
             }
         });
 
-        //bar_wei = findViewById(R.id.bar_wei_main);
-        //bar_wei2 = findViewById(R.id.bar_wei_main2);
-//        Objects.requireNonNull(getSupportActionBar()).hide();
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        StatusBarUtil.setStatusBarMode(this, true, R.color.cw);
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+//        StatusBarUtil.setStatusBarMode(this, true, R.color.cw);
 
-        //testbar = findViewById(R.id.testbar);
+        //透明状态栏
+        BarUtils.transparentStatusBar(this);
+        //StatusBarUtil.setTranslucentStatus(MainActivity.this);
+        findViewById(R.id.ppccc).setBackgroundColor(Color.argb(0, 255, 255, 255));
+//        //testbar = findViewById(R.id.testbar);
+
+        CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
+        params2.setMargins(0, -getStatusBarHeight(MainActivity.this) - PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
+        findViewById(R.id.fragment_vp).setLayoutParams(params2);
+
         mSpf = super.getSharedPreferences("yejian", MODE_PRIVATE);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH");
         Date date = new Date(System.currentTimeMillis());
         String hour = simpleDateFormat.format(date);
         int hourNum = Integer.parseInt(hour);
-        LogUtils.d("当前时间", hour + hourNum);
+        LogUtils.d("当前时间" + hour + hourNum);
 
-        shiying = findViewById(R.id.shiyingxing);
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
@@ -311,36 +277,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         appBarLayout.addOnOffsetChangedListener(this);
 
-
-//        RadioButton today_tab = findViewById(R.id.today_tab);
-//        RadioButton record_tab = findViewById(R.id.record_tab);
-//        RadioButton settings_tab = findViewById(R.id.pai_tab);
-//        RadioButton pai_tab = findViewById(R.id.settings_tab);
-//        Drawable drawable_news = getResources().getDrawable(R.drawable.tab_sign_selector);
-//        drawable_news.setBounds(0, 0, 60, 60);
-//        today_tab.setCompoundDrawables(null, drawable_news, null, null);
-//
-//        Drawable drawable_news2 = getResources().getDrawable(R.drawable.tab_ke_selector);
-//        drawable_news2.setBounds(0, 0, 60, 60);
-//        record_tab.setCompoundDrawables(null, drawable_news2, null, null);
-//
-//        Drawable drawable_news3 = getResources().getDrawable(R.drawable.tab_pai_selector);
-//        drawable_news3.setBounds(0, 0, 60, 60);
-//        settings_tab.setCompoundDrawables(null, drawable_news3, null, null);
-//
-//        Drawable drawable_news4 = getResources().getDrawable(R.drawable.tab_me_selector);
-//        drawable_news4.setBounds(0, 0, 60, 60);
-//        pai_tab.setCompoundDrawables(null, drawable_news4, null, null);
-
         initView();
 
         if (FileUtils.isFileExists(getFilesDir().getAbsolutePath() + "/userToken")) {
             File path2 = new File(getFilesDir().getAbsolutePath() + "/UserImg.png");
             if (ft.isFileExists(path2.toString())) {
-                //ImageView headImage = getActivity().findViewById(R.id.hearImg);
 
                 Bitmap bitmap = BitmapFactory.decodeFile(getFilesDir().getAbsolutePath() + "/UserImg.png");
-//            headImage.setImageBitmap(bitmap);
+
 
                 CircleImageView img = findViewById(R.id.main_hearImg);
                 img.setImageBitmap(bitmap);
@@ -351,27 +295,16 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         submitPrivacyGrantResult(true);
 
-        if (FileUtils.isFileExists(getFilesDir().getAbsolutePath() + "/userToken")) {
-
-//            try {
-//                //UpData(String.valueOf(user_id));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-        }
-
-
         //获取页数
         Intent intent = getIntent();
         page = intent.getIntExtra("page", 0);
-        //初始化
+
 
         LogUtils.d("设置页数" + String.valueOf(page));
         bottomNavigationView.getMenu().getItem(page).setChecked(true);
         mViewPager.setCurrentItem(page);
         mViewPager.setNoScroll(false);
         //隐藏标题栏
-
 
         int barsize = 0;
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -380,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
         pppccc = findViewById(R.id.ppccc);
 
-        pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+        //pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
 
         int i = 0X008080FF;
 
@@ -414,7 +347,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }, 100);
 
 
-
     }
 
     public void writeInfo(String val) {
@@ -440,15 +372,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238:12345/userdates/1/" + userid);
+                    URL url = new URL("http://192.168.31.238:12345/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
 
-                    LogUtils.d("/userdates/1/", url.toString());
+                    LogUtils.d("/userdates/week/", url.toString());
 
                     int responseCode = connection.getResponseCode();
-                    LogUtils.d("/userdates/1/+responseCode", responseCode);
+                    LogUtils.d("/userdates/week/+responseCode", responseCode);
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         InputStream inputStream = connection.getInputStream();
                         String result = String.valueOf(inputStream);//将流转换为字符串。
@@ -459,9 +391,9 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                         while ((line = reader.readLine()) != null) {
                             response.append(line);
                         }
-                        LogUtils.d("/userdates/1/", response.toString());
+                        LogUtils.d("/userdates/week/", response.toString());
 
-                        FileIOUtils.writeFileFromString(getFilesDir().getAbsolutePath() + "/UserData",response.toString());
+                        FileIOUtils.writeFileFromString(getFilesDir().getAbsolutePath() + "/UserData", response.toString());
 //                        Looper.prepare();
 //                        Toast.makeText(getActivity(), "同步成功", Toast.LENGTH_SHORT).show();
 //                        Looper.loop();
@@ -593,115 +525,81 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
             findViewById(R.id.main_hearImg).setVisibility(View.VISIBLE);
             if (position == 1) {
-                LogUtils.d("更换主题11");
-                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
-                StatusBarUtil.setTranslucentStatus(MainActivity.this);
-                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
-                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);//left,top,right,bottom
-                findViewById(R.id.appbar).setLayoutParams(params);
+                LogUtils.d("更换主题11，题目页");
+                if(toumingdu == 0){
 
-                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -getStatusBarHeight(MainActivity.this) - PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
-                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+                    topBlurView.setBlurRadius((float) 0.1);
+                    topBlurView.setOverlayColor(Color.argb((int) (0.1 * 5.5), 255, 255, 255));
+                }else{
 
-                LogUtils.d(-getStatusBarHeight(MainActivity.this) - 49);
+                    topBlurView.setBlurRadius((float) toumingdu);
+                    topBlurView.setOverlayColor(Color.argb((int) (toumingdu * 5.5), 255, 255, 255));
+                }
+                findViewById(R.id.state).setVisibility(View.INVISIBLE);
+                topBlurView.setBlurEnabled(true);
+                BarUtils.setStatusBarLightMode(MainActivity.this,true);
 
-                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
-                mAppBarParams.setScrollFlags(0);
-                pppccc.setLayoutParams(mAppBarParams);
-                pppccc.setVisibility(View.VISIBLE);
+            } else if (position == 2) {
+                LogUtils.d("更换主题22，社区页"+toumingdu);
 
-                pppccc.setBackgroundColor(Color.argb((int) toumingdu, 255, 255, 255));
-                StatusBarUtil.setStatusBarColor2(MainActivity.this, Color.argb((int) toumingdu, 255, 255, 255));
-                io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(MainActivity.this, 5, true);
+                findViewById(R.id.state).setVisibility(View.INVISIBLE);
+                topBlurView.setBlurRadius((float) 15);
+                topBlurView.setOverlayColor(Color.argb((int) 0, 255, 255, 255));
+
+                topBlurView.setBlurEnabled(true);
+                BarUtils.setStatusBarLightMode(MainActivity.this,true);
+
             } else if (position == 3) {
-                LogUtils.d("更换主题33");
-                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
-                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
-                findViewById(R.id.appbar).setLayoutParams(params);
-//
-                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
-                findViewById(R.id.fragment_vp).setLayoutParams(params2);
-//
-
-                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
-//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+                LogUtils.d("更换主题33,聊天页");
+                BarUtils.setStatusBarLightMode(MainActivity.this, true);
+                topBlurView.setBlurRadius((float) 0.1);
+                topBlurView.setBlurEnabled(false);
                 findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
-                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
-                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
-                mAppBarParams.setScrollFlags(0);
-                pppccc.setLayoutParams(mAppBarParams);
+                topBlurView.setOverlayColor(Color.argb((int) 0, 255, 255, 255));
 
-                pppccc.setVisibility(View.VISIBLE);
-                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
-                //findViewById(R.id.appbar).setVisibility(View.GONE);
-                //pppccc.setVisibility(View.GONE);
-            }else if(position == 4){
-                LogUtils.d("更换主题44");
-                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
-                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
-                findViewById(R.id.appbar).setLayoutParams(params);
+            } else if (position == 4) {
+                LogUtils.d("更换主题44，我的页");
+                BarUtils.setStatusBarLightMode(MainActivity.this, true);
+                topBlurView.setBlurRadius((float) 15);
+                topBlurView.setOverlayColor(Color.argb((int) 0, 255, 255, 255));
+
+                findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
                 findViewById(R.id.main_hearImg).setVisibility(View.INVISIBLE);
 
-                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
-                findViewById(R.id.fragment_vp).setLayoutParams(params2);
+            } else {
+                LogUtils.d("更换主题**，首页");
+                findViewById(R.id.state).setVisibility(View.INVISIBLE);
+                topBlurView.setBlurRadius((float) 17);
+                topBlurView.setOverlayColor(Color.argb((int) 0, 255, 255, 255));
 
-                pppccc.setBackgroundColor(Color.parseColor("#00000000"));
-//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
-                findViewById(R.id.main_edit).setVisibility(View.INVISIBLE);
-                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
-                mAppBarParams.setScrollFlags(0);
-                pppccc.setLayoutParams(mAppBarParams);
-                pppccc.setVisibility(View.INVISIBLE);
-                findViewById(R.id.appbar).setVisibility(View.INVISIBLE);
-                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.bg_huidi);
-
+                topBlurView.setBlurEnabled(true);
+                BarUtils.setStatusBarLightMode(MainActivity.this,true);
             }
-            else {
-                LogUtils.d("更换主题**");
-                findViewById(R.id.appbar).setVisibility(View.VISIBLE);
-                CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) findViewById(R.id.appbar).getLayoutParams();
-                params.setMargins(0, 0, 0, 0);//left,top,right,bottom
-                findViewById(R.id.appbar).setLayoutParams(params);
-
-                CoordinatorLayout.LayoutParams params2 = (CoordinatorLayout.LayoutParams) findViewById(R.id.fragment_vp).getLayoutParams();
-                params2.setMargins(0, -PxToDp.dip2px(MainActivity.this, 49), 0, 0);//left,top,right,bottom
-                findViewById(R.id.fragment_vp).setLayoutParams(params2);
-
-                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
-                AppBarLayout.LayoutParams mAppBarParams = (AppBarLayout.LayoutParams) findViewById(R.id.ppccc).getLayoutParams();
-                mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS);
-                pppccc.setLayoutParams(mAppBarParams);
-                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
-                pppccc.setVisibility(View.VISIBLE);
-            }
-
-//            pageId = position;
-//            if (position != 1) {
-//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//                params.setMargins(0, 0, 0, 0);
-//                findViewById(R.id.shiyingxing).setLayoutParams(params);
 //
-//                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
-//                //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
-//                bar_wei.setVisibility(View.GONE);
-//                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
-//
-//            }
-//            else{
-//                int res = fragment2.activityChangeFragment("data");
-//                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
-//                bar_wei.setVisibility(View.VISIBLE);
-//                if(imageRes == null) imageRes =res;
-//                bar_wei.setImageResource(imageRes);
-//                StatusBarUtil.setTranslucentStatus(MainActivity.this);
-//                //System.out.println(findViewById(R.id.cnm).getLayoutParams());
-//                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-//                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);
-//                findViewById(R.id.shiyingxing).setLayoutParams(params);
-//            }
+////            pageId = position;
+////            if (position != 1) {
+////                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+////                params.setMargins(0, 0, 0, 0);
+////                findViewById(R.id.shiyingxing).setLayoutParams(params);
+////
+////                pppccc.setBackgroundColor(Color.parseColor("#ffffff"));
+////                //appBarLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+////                bar_wei.setVisibility(View.GONE);
+////                StatusBarUtil.setStatusBarMode(MainActivity.this, true, R.color.cw);
+////
+////            }
+////            else{
+////                int res = fragment2.activityChangeFragment("data");
+////                pppccc.setBackgroundColor(Color.parseColor("#00ffffff"));
+////                bar_wei.setVisibility(View.VISIBLE);
+////                if(imageRes == null) imageRes =res;
+////                bar_wei.setImageResource(imageRes);
+////                StatusBarUtil.setTranslucentStatus(MainActivity.this);
+////                //System.out.println(findViewById(R.id.cnm).getLayoutParams());
+////                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+////                params.setMargins(0, getStatusBarHeight(MainActivity.this), 0, 0);
+////                findViewById(R.id.shiyingxing).setLayoutParams(params);
+////            }
 
         }
 
@@ -732,17 +630,16 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     };
 
 
-
     private void submitPrivacyGrantResult(boolean granted) {
         MobSDK.submitPolicyGrantResult(granted, new OperationCallback<Void>() {
             @Override
             public void onComplete(Void data) {
-                LogUtils.d("yinsiquanx", "隐私协议授权结果提交：成功");
+                LogUtils.d("隐私协议授权结果提交：成功");
             }
 
             @Override
             public void onFailure(Throwable t) {
-                LogUtils.d("yinsiquanx", "隐私协议授权结果提交：失败");
+                LogUtils.d("隐私协议授权结果提交：失败");
             }
         });
     }
@@ -924,12 +821,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     public void Hide() {
         //LogUtils.d("隐藏了导航栏");
-        testbar.animate().translationY(testbar.getHeight());
+        //testbar.animate().translationY(testbar.getHeight());
     }
 
     public void Display() {
         //LogUtils.d("显示了导航栏");
-        testbar.animate().translationY(0);
+        //testbar.animate().translationY(0);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -954,13 +851,14 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     @SuppressLint("WrongConstant")
-    public void setcolor(int a) {
-
+    public void setcolor(float a) {
+        LogUtils.d("模糊程度" + a);
         toumingdu = a;
-
-        pppccc.setBackgroundColor(Color.argb((int) a, 255, 255, 255));
-        StatusBarUtil.setStatusBarColor2(this, Color.argb((int) a, 255, 255, 255));
-        io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(this, 5, true);
+        topBlurView.setBlurRadius(a);
+        topBlurView.setOverlayColor(Color.argb((int) (a * 5.5), 255, 255, 255));
+        //pppccc.setBackgroundColor(Color.argb((int) a, 255, 255, 255));
+        //StatusBarUtil.setStatusBarColor2(this, Color.argb((int) a, 255, 255, 255));
+        //io.rong.imkit.utils.StatusBarUtil.setStatusBarFontIconDark(this, 5, true);
     }
 
 }

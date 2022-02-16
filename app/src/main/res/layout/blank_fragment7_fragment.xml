@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <RadioGroup
+        android:id="@+id/pai_bar"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center"

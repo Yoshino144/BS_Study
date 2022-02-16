@@ -68,7 +68,7 @@ public class WrongQuestion extends BaseActivity2 {
         //TODO 增加用户ID，识别每个用户错题
 
         try {
-            GetData("http://192.168.31.238:12345/userdates/3/"+readInfo(readlv())+"/0");
+            GetData("http://192.168.31.238:12345/wrongProblems/"+readInfo(readlv())+"/0");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,7 +129,7 @@ public class WrongQuestion extends BaseActivity2 {
             //LogUtils.d("一类科目===========",size + subject_name);
             //initChaps(subject_name);
 
-            Chap one = new Chap(jsonObject.getString("chapterId"),jsonObject.getString("chapterName"), R.drawable.do_do);
+            Chap one = new Chap(jsonObject.getString("chapterId"),jsonObject.getString("chapterName"), R.drawable.do_do,jsonObject.getString("chapterVersion"));
 //            if(i>1){
 //                one = new Chap(jsonObject.getString("chapterId"),jsonObject.getString("chapterName"),R.drawable.do_do );
 //

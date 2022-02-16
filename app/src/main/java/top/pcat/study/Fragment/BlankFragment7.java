@@ -1,10 +1,14 @@
 package top.pcat.study.Fragment;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +23,7 @@ import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingAdapter;
 import top.pcat.study.Ranking.RankingList;
+import top.pcat.study.Utils.PxToDp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +36,13 @@ public class BlankFragment7 extends Fragment {
 
     public static BlankFragment7 newInstance() {
         return new BlankFragment7();
+    }
+
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
     }
 
     @Override
@@ -50,6 +62,11 @@ public class BlankFragment7 extends Fragment {
 
 
         });
+
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) view.findViewById(R.id.pai_bar).getLayoutParams();
+        params2.setMargins(0, getStatusBarHeight(view.getContext()) + PxToDp.dip2px(view.getContext(), 59), 0, 0);//left,top,right,bottom
+        view.findViewById(R.id.pai_bar).setLayoutParams(params2);
+
         return view;
     }
 

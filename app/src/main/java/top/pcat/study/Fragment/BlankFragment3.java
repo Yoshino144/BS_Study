@@ -1,6 +1,7 @@
 package top.pcat.study.Fragment;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.textclassifier.ConversationAction;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,7 @@ import top.pcat.study.OnePageFragment;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
 import top.pcat.study.Utils.DisplayUtil;
+import top.pcat.study.Utils.PxToDp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +112,13 @@ public class BlankFragment3 extends Fragment {
         }
     }
 
+    public static int getStatusBarHeight(Context context) {
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        int height = resources.getDimensionPixelSize(resourceId);
+        return height;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,6 +126,10 @@ public class BlankFragment3 extends Fragment {
         View view= inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
         mTab = (SlidingTabLayout) view.findViewById(R.id.tab);
         mVp = (ViewPager) view.findViewById(R.id.vp);
+
+        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) view.findViewById(R.id.f3_bar).getLayoutParams();
+        params2.setMargins(0, getStatusBarHeight(view.getContext()) , 0, 0);//left,top,right,bottom
+        view.findViewById(R.id.f3_bar).setLayoutParams(params2);
 
         mFragments = new ArrayList<>();
         mFragments.add(new ConversationListFragment());

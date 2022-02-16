@@ -2,40 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".OnePageFragment">
 
     <LinearLayout
-android:layout_marginTop="49dp"
+        android:id="@+id/one_page_bar"
         android:layout_width="match_parent"
-        android:background="#fff"
-        android:layout_height="35dp">
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp">
 
-        <com.flyco.tablayout.SlidingTabLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.flyco.tablayout.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tabb"
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:background="#fff"
-            app:tl_textSelectColor="@color/pc_blue3"
-            app:tl_textUnselectColor="#937F7F"
+            app:tl_indicator_color="@color/pc_blue3"
+            app:tl_indicator_corner_radius="1dp"
             app:tl_indicator_height="2dp"
             app:tl_indicator_margin_top="3dp"
-            app:tl_indicator_corner_radius="1dp"
             app:tl_indicator_width="10dp"
-            app:tl_textsize="17sp"
-            app:tl_indicator_color="@color/pc_blue3"
-            app:tl_tab_space_equal="true" />
+            app:tl_tab_space_equal="true"
+            android:visibility="gone"
+            app:tl_textSelectColor="@color/pc_blue3"
+            app:tl_textUnselectColor="#937F7F"
+            app:tl_textsize="17sp" />
 
     </LinearLayout>
 
-        <View
-            android:id="@+id/tiaotiao"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#D8D8D8"/>
+    <View
+        android:id="@+id/tiaotiao"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#D8D8D8"
+        android:visibility="gone" />
 
     <!--    <LinearLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -49,13 +49,13 @@ android:layout_marginTop="49dp"
 
 
     <TextView
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:text="排行"
-        android:textSize="25dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="8dp"
+        android:text="排行"
         android:textColor="#000000"
-        android:layout_height="wrap_content"/>
+        android:textSize="25dp"
+        android:visibility="gone" />
 
 </LinearLayout>
