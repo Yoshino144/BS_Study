@@ -1,11 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/root"
     android:layout_height="match_parent">
 
-    <WebView
-        android:id="@+id/wv_webview"
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/cur_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <eightbitlab.com.blurview.BlurView
+            android:id="@+id/cur_blu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.flyco.tablayout.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cur_tab"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:layout_marginBottom="10dp"
+                android:background="#00ffffff"
+                app:tl_indicator_color="@color/pc_blue3"
+                app:tl_indicator_corner_radius="1dp"
+                app:tl_indicator_height="2dp"
+                app:tl_indicator_margin_top="3dp"
+                app:tl_indicator_width="10dp"
+                app:tl_tab_space_equal="true"
+                app:tl_textSelectColor="@color/pc_blue3"
+                app:tl_textUnselectColor="#937F7F"
+                app:tl_textsize="17sp" />
+
+        </eightbitlab.com.blurview.BlurView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

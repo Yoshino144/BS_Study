@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"/>
@@ -53,16 +52,14 @@
 
 
 
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/bg_huidi"
-                        android:overScrollMode="never"
-                        android:orientation="vertical"
-                        tools:listitem="@android:layout/simple_list_item_2"/>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_o"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_huidi"
+        android:overScrollMode="never"
+        android:orientation="vertical"
+        tools:listitem="@android:layout/simple_list_item_2"/>
 
 
                 <com.scwang.smart.refresh.footer.ClassicsFooter
@@ -71,10 +68,6 @@
             </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="yyyyyyyyyyyyyy"
-                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

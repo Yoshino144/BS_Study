@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="90dp"/>
@@ -53,9 +52,8 @@
 
 
 
-
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView"
+                        android:id="@+id/recyclerView_u"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/bg_huidi"
@@ -71,10 +69,6 @@
             </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="yyyyyyyyyyyyyy"
-                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

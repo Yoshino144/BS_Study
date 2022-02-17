@@ -60,14 +60,7 @@ public class ItemAdapter  extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 int position = holder.getAdapterPosition();
                 Item item = mItemList.get(position);
-                if(isChecked){
-                    context.change(item.getName(), true);
-                    Toast.makeText(view.getContext(),"选择了"+ item.getName(),Toast.LENGTH_SHORT).show();
-                }
-                else if(!isChecked) {
-                    context.change(item.getName(), false);
-                    Toast.makeText(view.getContext(), "取消了" + item.getName(), Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

@@ -1,7 +1,6 @@
 package top.pcat.study;
 
 import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,7 +18,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -51,25 +49,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import es.dmoral.toasty.Toasty;
-import github.com.st235.lib_expandablebottombar.ExpandableBottomBar;
-import github.com.st235.lib_expandablebottombar.Menu;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.userinfo.RongUserInfoManager;
 import io.rong.imkit.userinfo.UserDataProvider;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
-import top.pcat.study.Community.CommunityFragment;
+import top.pcat.study.TabCommunity.CommunityFragment;
 import top.pcat.study.Fragment.NoScrollViewPager;
+import top.pcat.study.TabHome.HomeFragment;
 import top.pcat.study.Utils.FileTool;
-import top.pcat.study.Fragment.StudyFragment;
-import top.pcat.study.Fragment.BlankFragment3;
-import top.pcat.study.Fragment.MineFragment;
+import top.pcat.study.TabStudy.StudyFragment;
+import top.pcat.study.TabChat.ChatFragment;
+import top.pcat.study.TabMine.MineFragment;
 import top.pcat.study.Utils.PxToDp;
-import top.pcat.study.Utils.StatusBarUtil;
 
 import org.apache.http.util.EncodingUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -471,10 +465,10 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         fragment2 = new StudyFragment();
         mFragments = new ArrayList<>(4);
         //mFragments.add(BlankFragment.newInstance("456","789"));
-        mFragments.add(OnePageFragment.newInstance("456", "789"));//0
+        mFragments.add(HomeFragment.newInstance("456", "789"));//0
         mFragments.add(fragment2.newInstance("456", "789"));//1
         mFragments.add(new CommunityFragment());//2
-        mFragments.add(BlankFragment3.newInstance("123", "1"));//3
+        mFragments.add(ChatFragment.newInstance("123", "1"));//3
         mFragments.add(MineFragment.newInstance("123", "1"));//4
         // init view pager
         mAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
