@@ -26,6 +26,7 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -35,8 +36,10 @@ import es.dmoral.toasty.Toasty;
 import ezy.ui.layout.LoadingLayout;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import top.pcat.study.Curriculum.Adapter.CurItemAdapter;
 import top.pcat.study.Pojo.Subject;
@@ -58,7 +61,7 @@ public class ItemFragment extends Fragment {
     private final Random random = new Random();
     private CurItemAdapter adapter;
     private LoadingLayout mLoadingLayout;
-    private List<Subject> subjectList ;
+    private List<Subject> subjectList = new ArrayList<>();
     private String flag;
 
     private Handler handler =  new Handler(new Handler.Callback() {
@@ -134,7 +137,7 @@ public class ItemFragment extends Fragment {
 
 
     private void initFruits() {
-
+        subjectList.clear();
         try {
             getData(url);
         } catch (IOException e) {
@@ -151,17 +154,20 @@ public class ItemFragment extends Fragment {
         adapter = new CurItemAdapter(subjectList);
         recyclerView.setAdapter(adapter);
 
-        adapter.buttonSetOnclick(new CurItemAdapter.ButtonInterface() {
-            @Override
-            public void onclick(View view, long position) {
-                Toast.makeText(getContext(), "点击条目上的按钮"+position, Toast.LENGTH_SHORT).show();
+        adapter.buttonSetOnclick((isChecked, subjectId) -> {
+            if (isChecked){
+                LogUtils.d("选择了"+subjectId);
+                upChoose("http://192.168.31.238:12345/subjects/"+subjectId+"/users/"+uuid);
+            }else{
+                LogUtils.d("取消了"+subjectId);
+                delChoose("http://192.168.31.238:12345/subjects/"+subjectId+"/users/"+uuid);
             }
         });
     }
 
 
     private void loadMore(RefreshLayout layout) {
-        Toast.makeText(getActivity(), "loadMore", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "loadMore", Toast.LENGTH_SHORT).show();
         layout.getLayout().postDelayed(() -> {
             if (random.nextBoolean()) {
                 //如果刷新成功
@@ -184,28 +190,73 @@ public class ItemFragment extends Fragment {
     }
 
     private void refresh(RefreshLayout refresh) {
-        Toasty.info(getActivity(), "refresh").show();
+        //Toasty.info(getActivity(), "refresh").show();
+        LogUtils.d("下拉刷新");
         refresh.getLayout().postDelayed(() -> {
-            if (random.nextBoolean()) {
                 //如果刷新成功
+                //LogUtils.d("下拉刷新+加载数据");
                 initFruits();
                 adapter.notifyDataSetChanged();
-                if (adapter.getItemCount() <= 30) {
-                    //还有多的数据
                     refresh.finishRefresh();
-                } else {
-                    //没有更多数据（上拉加载功能将显示没有更多数据）
-                    refresh.finishRefreshWithNoMoreData();
-                }
-            } else {
-                //刷新失败
-                refresh.finishRefresh(false);
-//                if (fruitList.size() == 0) {
-//                    mLoadingLayout.showError();
-//                    mLoadingLayout.setErrorText("随机触发刷新失败演示！");
-//                }
+        }, 200);
+    }
+
+    public void upChoose(String url) throws IOException {
+        RequestBody requestBody = new FormBody.Builder()
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Looper.prepare();
+                //LogUtils.d(flag+"网络连接失败"+url);
+                Toasty.error(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
             }
-        }, 2000);
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String rr = response.body().string();
+                //LogUtils.d("选择"+"返回内容" + rr);
+
+
+
+            }
+        });
+    }
+
+    public void delChoose(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .delete()
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Looper.prepare();
+                LogUtils.d(flag+"网络连接失败"+url);
+                Toasty.error(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                String rr = response.body().string();
+                LogUtils.d("删除"+"返回内容" + rr);
+
+
+
+            }
+        });
     }
 
     public void getData(String url) throws IOException {

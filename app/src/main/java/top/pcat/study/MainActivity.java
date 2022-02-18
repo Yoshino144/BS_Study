@@ -846,7 +846,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     @SuppressLint("WrongConstant")
     public void setcolor(float a) {
-        LogUtils.d("模糊程度" + a);
+        //LogUtils.d("模糊程度" + a);
         toumingdu = a;
         topBlurView.setBlurRadius(a);
         topBlurView.setOverlayColor(Color.argb((int) (a * 5.5), 255, 255, 255));

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +17,19 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import es.dmoral.toasty.Toasty;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import top.pcat.study.Banner.DataBean;
 import top.pcat.study.Banner.ImageAdapter;
+import top.pcat.study.Curriculum.Adapter.CurItemAdapter;
 import top.pcat.study.Curriculum.Curriculum;
+import top.pcat.study.Pojo.Subject;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.MainActivity;
 import top.pcat.study.R;
@@ -27,12 +37,15 @@ import top.pcat.study.Size.ChapterActivity;
 import top.pcat.study.Size.DisplayUtil;
 import top.pcat.study.Utils.GetUser;
 import top.pcat.study.View.F2BangAdapter;
+import top.pcat.study.View.F2BangItemAdapter;
 import top.pcat.study.View.Fragment2Adapter;
 import top.pcat.study.View.ItemF2Bang;
 import top.pcat.study.View.ItemFragment2;
 
 import com.apkfuns.logutils.LogUtils;
 import com.blankj.utilcode.util.FileUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.RoundLinesIndicator;
 import com.youth.banner.listener.OnPageChangeListener;
@@ -75,17 +88,18 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
     private LinearLayout fourSize;
     private LinearLayout fiveSize;
     private LinearLayout sixSize;
-    private Handler handler = new Handler();
     private int result;
     private DisplayUtil dipToPix;
     private String interres;
     private String tempTest;
+    private List<Subject> subjectList = new ArrayList<>();
     private int nowPage = 0;
     private boolean signFlag;
-    private final Handler cwjHandler = new Handler() {
-        @SuppressLint("HandlerLeak")
+
+    private final Handler handler = new Handler(new Handler.Callback() {
+
         @Override
-        public void handleMessage(Message msg) {
+        public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
                     Bundle bundle = msg.getData();
@@ -116,9 +130,14 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                 case 1:
                     Toast.makeText(getActivity(), "456", Toast.LENGTH_SHORT).show();
                     break;
+
+                case 2:
+                    updata_bang();
+                    break;
             }
+            return false;
         }
-    };
+    });
     private final Runnable mUpdateResults = this::updata2;
 
     // TODO: Rename and change types of parameters
@@ -159,7 +178,11 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                              Bundle savedInstanceState) {
 
         blan = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_blank_fragment2, container, false);
-
+        try {
+            initBang();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
         initBanner();
         //initBanner();
         File path = new File(requireActivity().getFilesDir().getAbsolutePath() + "/Login.txt");
@@ -237,7 +260,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             }
         });
 
-        updata_bang();
+        //updata_bang();
         //updata_bang_item();
 
 
@@ -289,54 +312,41 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                     }
                 };
         recyclerView.setLayoutManager(layoutManager);
-        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s, cwjHandler);
+        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s, handler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
     }
 
     private void updata_bang() {
-        List<ItemF2Bang> itemFragment3 = new ArrayList<>();
 
-        try {
-            initBang(itemFragment3);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_kechngbangdan);
-        LinearLayoutManager layoutManager = new
-                LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
-                    @Override
-                    public boolean canScrollHorizontally() {
-                        return false;
-                    }
+        LogUtils.d("加载课程页榜单数据");
+        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_kechngbangdan_item);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,
+                StaggeredGridLayoutManager.VERTICAL){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
 
-                    @Override
-                    public boolean canScrollVertically() {
-                        return false;
-                    }
-                };
+        };
         recyclerView.setLayoutManager(layoutManager);
-        F2BangAdapter adapter = new F2BangAdapter(itemFragment3, cwjHandler) {
+        F2BangAdapter adapter = new F2BangAdapter(subjectList, handler) {
 
         };
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
+
     }
 
-    private void initBang(List<ItemF2Bang> itemFragment3) throws JSONException {
-
-        try {
-            for (int i = 0; i < 1; i++) {
-                ItemF2Bang apple = new ItemF2Bang(
-                        "人数榜", 2);
-                itemFragment3.add(apple);
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
+    private void initBang() throws JSONException, IOException {
+        LogUtils.d("初始化课程页榜单");
+        getData("http://192.168.31.238:12345/subjects/"+ GetUser.getUserId(getContext()) + "/official");
 
     }
 
@@ -449,7 +459,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
 
             try {
                 URL uu = new URL(url);
-                LogUtils.d("获取已选", "url=============" + url);
+                //LogUtils.d("获取已选"+"url=============" + url);
                 HttpURLConnection connection = (HttpURLConnection) uu.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -467,13 +477,13 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                     }
 
                     tempTest = response.toString();
-                    cwjHandler.post(mUpdateResults);
+                    handler.post(mUpdateResults);
 
                     // Message message = null;
                     //message.what = 0x11;
                     // cwjHandler.sendMessage(message);
 
-                    LogUtils.d("用户已选======", tempTest);
+                    LogUtils.d("用户已选======"+tempTest);
 
 
 //                    progressDiaLogUtils.dismiss();
@@ -536,6 +546,42 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
         StringBuilder builder = new StringBuilder();
         builder.append(name);
         return builder.toString();
+    }
+
+    /**
+     * 模拟榜单
+     * @param url
+     * @throws IOException
+     */
+    public void getData(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                Looper.prepare();
+                LogUtils.d("网络连接失败"+url);
+                Toasty.error(getContext(), "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Gson gson = new Gson();
+                String rr = response.body().string();
+                LogUtils.d("课程页榜单请求成功"+rr);
+
+                subjectList = gson.fromJson(rr,new TypeToken<List<Subject>>() {}.getType());
+                Message message = new Message();
+                message.what = 2;
+                handler.sendMessage(message);
+
+            }
+        });
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.apkfuns.logutils.LogUtils;
 import com.suke.widget.SwitchButton;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +34,7 @@ public class CurItemAdapter extends RecyclerView.Adapter<CurItemAdapter.ViewHold
         TextView zz;
         TextView size;
         TextView time;
-        RadioButton switchButton;
+        CheckBox switchButton;
 
         public ViewHolder (View view)
         {
@@ -70,7 +72,7 @@ public class CurItemAdapter extends RecyclerView.Adapter<CurItemAdapter.ViewHold
      * 按钮点击事件对应的接口
      */
     public interface ButtonInterface{
-        public void onclick( View view,long position);
+        public void onclick( boolean isChecked,long subjectId) throws IOException;
     }
 
     @Override
@@ -84,24 +86,28 @@ public class CurItemAdapter extends RecyclerView.Adapter<CurItemAdapter.ViewHold
         String strTime = simpleDateFormat.format(fruit.getSubjectTime());
         holder.time.setText(strTime);
 
-        if(fruit.isChooseFlag()){
-            holder.switchButton.
-        }
+            holder.switchButton.setChecked(true);
+            holder.switchButton.setText("已选");
 
         holder.switchButton.setOnCheckedChangeListener((view, isChecked) -> {
 
             if(buttonInterface!=null) {
 //                  接口实例化后的而对象，调用重写后的方法
-                buttonInterface.onclick(view,fruit.getSubjectId());
+                try {
+                    buttonInterface.onclick(isChecked,fruit.getSubjectId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
 
             if (isChecked){
                 LogUtils.d("选择了"+fruit.getSubjectName());
-
+                holder.switchButton.setText("已选");
                 Toasty.success(this.context,"选择了"+fruit.getSubjectName()).show();
             }else{
                 LogUtils.d("取消了"+fruit.getSubjectName());
+                holder.switchButton.setText("去体验");
                 Toasty.info(this.context,"取消了"+fruit.getSubjectName()).show();
             }
         });

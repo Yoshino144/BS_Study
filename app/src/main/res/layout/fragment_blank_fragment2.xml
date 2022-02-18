@@ -201,7 +201,6 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:nestedScrollingEnabled="false"
                     android:id="@+id/recycler_view"
-                    tools:listitem="@layout/item_fragment2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="-5dp" />
@@ -272,13 +271,8 @@
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-tools:listitem="@layout/item_f2_bb"
-                    android:nestedScrollingEnabled="false"
-                    android:id="@+id/recycler_kechngbangdan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-5dp" />
+
+                <include layout="@layout/item_f2_bb"/>
 
             </LinearLayout>
 

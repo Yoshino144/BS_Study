@@ -42,9 +42,8 @@
                     roundiv:right_top_radius="5dp" />
 
                 <LinearLayout
-                    android:gravity="center"
                     android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical">
@@ -53,13 +52,13 @@
                         android:id="@+id/fruit_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:text="C语言"
                         android:textColor="#fff"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/zzname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="作者：root"

@@ -1004,8 +1004,8 @@ public class DataFragment extends Fragment {
             set1.setCircleRadius(4f);
             set1.setCircleColor(Color.WHITE);
             set1.setHighLightColor(getResources().getColor(R.color.google_blue));
-            set1.setColor(Color.parseColor("#6698cb"));//#FFB8B8
-            set1.setFillColor(Color.parseColor("#7fccde"));
+            set1.setColor(getResources().getColor(R.color.pc_cyan));//#FFB8B8
+            set1.setFillColor(getResources().getColor(R.color.pc_cyan));
             set1.setFillAlpha(100);
             set1.setDrawHorizontalHighlightIndicator(false);
             set1.setFillFormatter(new IFillFormatter() {
