@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 32
-    buildToolsVersion '32.1.0-rc1'
+    buildToolsVersion '33.0.0 rc1'
     defaultConfig {
         applicationId 'top.pcat.study'
         minSdkVersion 23
@@ -21,15 +21,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_16
+        targetCompatibility JavaVersion.VERSION_16
     }
     sourceSets {
         main {
             res.srcDirs = ['src/main/res', 'src/main/res/size']
         }
     }
-    ndkVersion '23.1.7779620'
+    ndkVersion '25.0.8151533 rc1'
     lint {
         abortOnError false
         checkReleaseBuilds false
@@ -44,38 +44,38 @@ dependencies {
     implementation project(path: ':core')
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.blankj:utilcodex:1.31.0' // 工具库
-    implementation 'com.zaaach:citypicker:2.0.3'
+    implementation 'com.zaaach:citypicker:2.0.3' //城市选择
     implementation 'in.arjsna:swipecardlib:1.0.2'
-    implementation 'androidx.sqlite:sqlite:2.2.0'
-    implementation 'com.youth.banner:banner:2.1.0'
+    implementation 'androidx.sqlite:sqlite:2.2.0' //sqlite
+    implementation 'com.youth.banner:banner:2.1.0' //banner
     implementation 'com.mylhyl:circleDialog:4.0.0'
     implementation 'org.greenrobot:eventbus:3.3.1'
-    implementation 'com.eightbitlab:blurview:1.6.6'
-    implementation 'com.google.code.gson:gson:2.8.9'
-    implementation 'com.zhihu.android:matisse:0.5.2'
+    implementation 'com.eightbitlab:blurview:1.6.6' //高斯模糊view
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.zhihu.android:matisse:0.5.2' //知乎图片选择
     implementation 'androidx.work:work-runtime:2.7.1'
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.github.GrenderG:Toasty:1.5.2' //toast美化
-    implementation 'io.github.lucksiege:ucrop:v3.0.3' // 图片裁剪
-    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'io.github.lucksiege:ucrop:v3.0.5' // 图片裁剪
+    implementation 'androidx.cardview:cardview:1.0.0' //cardview
     implementation 'com.facebook.fresco:fresco:2.6.0' //图片加载
     implementation 'hanks.xyz:htextview-library:0.1.5' //
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.lijiankun24:shadowlayout:1.1.0'
-    implementation 'io.github.lucksiege:camerax:v3.0.3' // 自定义相机
-    implementation 'com.apkfuns.logutils:library:1.0.6'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0' //圆形图片
+    implementation 'com.lijiankun24:shadowlayout:1.1.0' //阴影布局
+    implementation 'io.github.lucksiege:camerax:v3.0.5' // 自定义相机
+    implementation 'com.apkfuns.logutils:library:1.0.6' //logutils
     implementation 'com.github.AppIntro:AppIntro:6.0.0'
-    implementation 'io.github.lucksiege:compress:v3.0.3' // 图片压缩
-    implementation 'com.tencent.bugly:crashreport:4.0.0'
+    implementation 'io.github.lucksiege:compress:v3.0.5' // 图片压缩
+    implementation 'com.tencent.bugly:crashreport:4.0.0' //应用崩溃检测
     implementation 'io.github.rockerhieu:emojicon:1.4.2'
     implementation 'androidx.annotation:annotation:1.3.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'com.github.czy1121:loadinglayout:1.0.1'
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1' //
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
     implementation 'com.knowledge.mnlin:rolltextview:0.0.1'
     implementation 'com.github.Liberuman:ShadowDrawable:0.1'
     implementation 'com.labo.kaji:relativepopupwindow:0.3.1'
@@ -87,21 +87,22 @@ dependencies {
     implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
     implementation 'com.github.CodingEnding:PopupLayout:v1.0'
     implementation 'com.github.lihangleo2:ShadowLayout:3.2.4' // 阴影
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //统计图
     implementation 'org.apache.httpcomponents:httpcore:4.4.15'
     implementation 'com.tencent.bugly:nativecrashreport:3.9.2'
-    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4' // 网络
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.5' // 网络
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'io.github.lucksiege:pictureselector:v3.0.3' // PictureSelector 基础
+    //noinspection GradleDependency
+    implementation 'io.github.lucksiege:pictureselector:v3.0.5' // PictureSelector 基础
     implementation 'com.github.st235:expandablebottombar:1.4.0'
     implementation 'com.github.LinweiJ:ViewPagerIndicator:0.3.0'
     implementation 'com.yuyakaido.android:card-stack-view:2.3.4'
     implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
     implementation 'com.github.florent37:materialviewpager:1.2.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
     implementation 'com.akexorcist:round-corner-progress-bar:2.1.2' //进度条
     implementation 'io.github.scwang90:refresh-layout-kernel:2.0.5' //刷新框架
     implementation  'io.github.scwang90:refresh-layout-kernel:2.0.5' //核心必须依赖

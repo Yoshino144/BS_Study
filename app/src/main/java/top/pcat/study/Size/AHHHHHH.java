@@ -154,7 +154,7 @@ public class AHHHHHH extends AppCompatActivity {
         exa_ok.setOnClickListener(v->{
             view_one.setVisibility(View.GONE);
             view_two.setVisibility(View.VISIBLE);
-            GetData("kemu_name",timuName,"size",String.valueOf(set_size),"http://192.168.31.238/web/Random.php");
+            GetData("kemu_name",timuName,"size",String.valueOf(set_size),"http://192.168.137.1/web/Random.php");
 
         });
     }

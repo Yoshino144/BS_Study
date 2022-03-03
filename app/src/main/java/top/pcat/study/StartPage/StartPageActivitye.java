@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -34,18 +35,37 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class StartPageActivitye extends AppCompatActivity {
     private String[] sentences = new String[]{"What is design?", "Design", "Design is not just", "what it looks like", "and feels like.", "Design", "is how it works.", "- Steve Jobs", "Older people", "sit down and ask,", "'What is it?'", "but the boy asks,", "'What can I do with it?'.", "- Steve Jobs", "Swift", "Objective-C", "iPhone", "iPad", "Mac Mini", "MacBook Pro", "Mac Pro", "爱老婆", "老婆和女儿"};
 
     private FileTool ft;
-
+    private Calendar calendar = Calendar.getInstance();
+private TextView top;
+    private TextView hello;
+    private TextView bot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_start);
 
-
+        int week = calendar.get(Calendar.DAY_OF_WEEK);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+        top = findViewById(R.id.start_top);
+        hello = findViewById(R.id.start_hello);
+        bot = findViewById(R.id.start_bot);
+        Typeface type = Typeface.createFromAsset(this.getAssets(), "fonts/Jua-Regular.ttf");
+        top.setTypeface(type);
+        hello.setTypeface(type);
+        Typeface type2 = Typeface.createFromAsset(this.getAssets(), "fonts/FZMWFont.ttf");
+        bot.setTypeface(type);
+        top.setText(hour+":"+minute + " | " + week + " | " + day + "TH");
+        hello.setText("HELLO");
+        bot.setText("Miao~");
 
         if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) == 0) {
             File path = new File(getFilesDir().getAbsolutePath() + "/privacyFlag");
@@ -54,7 +74,7 @@ public class StartPageActivitye extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            sleep(700);//使程序休眠一秒
+                            sleep(1000);//使程序休眠一秒
                             save(" ");
                             //广告
                             //Intent it = new Intent(getApplicationContext(), InitAdvActivity.class);

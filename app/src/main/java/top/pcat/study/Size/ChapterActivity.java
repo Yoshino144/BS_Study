@@ -265,9 +265,9 @@ public class ChapterActivity extends AppCompatActivity {
                         try {
                             //要耗时运行的程序
 //                                GetJson(timu_name);
-                            Log.d("", "开始请求题目" + "http://192.168.31.238:12345/problems/" + subject_id + "/" + chapter_id + " ");
+                            Log.d("", "开始请求题目" + "http://127.0.0.1:12345/problems/" + subject_id + "/" + chapter_id + " ");
                             GetData("subject_name", subject_name, "zhang_size",
-                                    String.valueOf(position + 1), "http://192.168.31.238:12345/problems/" + subject_id + "/" + chapter_id);
+                                    String.valueOf(position + 1), "http://127.0.0.1:12345/problems/" + subject_id + "/" + chapter_id);
                             //saveItem(item);
                         } catch (Exception ex) {
                             result = -1;
@@ -392,7 +392,7 @@ public class ChapterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String uu = "http://192.168.31.238:8888/pccp_war/getProblem";
+                    String uu = "http://192.168.137.1:8888/pccp_war/getProblem";
                     LogUtils.d("url" + "url=============" + uu);
                     URL url = new URL(uu);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();

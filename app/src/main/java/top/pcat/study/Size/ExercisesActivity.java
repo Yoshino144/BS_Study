@@ -428,7 +428,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                     String json = read(kemu_name+"Flag.json");
                     try {
                         UpData(username,json,allSize,kemu_name);
-                        GetData("kemu_name",kemu_right_name,"http://192.168.31.238/web/GetChapter.php");
+                        GetData("kemu_name",kemu_right_name,"http://192.168.137.1/web/GetChapter.php");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -446,7 +446,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
                 String json = read(kemu_name+"Flag.json");
                 try {
                     UpData(username,json,allSize,kemu_name);
-                    GetData("kemu_name",kemu_right_name,"http://192.168.31.238/web/GetChapter.php");
+                    GetData("kemu_name",kemu_right_name,"http://192.168.137.1/web/GetChapter.php");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -538,7 +538,7 @@ public abstract class ExercisesActivity extends AppCompatActivity   {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238/web/UpUserData.php");
+                    URL url = new URL("http://192.168.137.1/web/UpUserData.php");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);

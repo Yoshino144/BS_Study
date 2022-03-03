@@ -157,10 +157,10 @@ public class ItemFragment extends Fragment {
         adapter.buttonSetOnclick((isChecked, subjectId) -> {
             if (isChecked){
                 LogUtils.d("选择了"+subjectId);
-                upChoose("http://192.168.31.238:12345/subjects/"+subjectId+"/users/"+uuid);
+                upChoose("http://127.0.0.1:12345/subjects/"+subjectId+"/users/"+uuid);
             }else{
                 LogUtils.d("取消了"+subjectId);
-                delChoose("http://192.168.31.238:12345/subjects/"+subjectId+"/users/"+uuid);
+                delChoose("http://127.0.0.1:12345/subjects/"+subjectId+"/users/"+uuid);
             }
         });
     }

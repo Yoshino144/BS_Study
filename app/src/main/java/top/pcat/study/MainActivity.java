@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238:12345/userdates/week/" + userid);
+                    URL url = new URL("http://127.0.0.1:12345/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
@@ -689,7 +689,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238/web/UpUserData.php");
+                    URL url = new URL("http://192.168.137.1/web/UpUserData.php");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
@@ -760,7 +760,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void run() {
                 try {
-                    String uu = "http://192.168.31.238/web/Doc/timu_size.json";
+                    String uu = "http://192.168.137.1/web/Doc/timu_size.json";
                     LogUtils.d("url", "url=============" + uu);
                     URL url = new URL(uu);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -852,7 +852,7 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238/web/putfwq.php");
+                    URL url = new URL("http://192.168.137.1/web/putfwq.php");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     connection.setDoOutput(true);
@@ -893,8 +893,8 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         //你们根据情况自行更改
         //另外网络请求我就不多做解释了
 
-        LogUtils.d("url================","http://192.168.31.238:12345/users/"+uuid+"/infos/profile.photo");
-        URL url = new URL("http://192.168.31.238:12345/users/"+uuid+"/infos/profile.photo");
+        LogUtils.d("url================","http://127.0.0.1:12345/users/"+uuid+"/infos/profile.photo");
+        URL url = new URL("http://127.0.0.1:12345/users/"+uuid+"/infos/profile.photo");
         FormBody body = new FormBody.Builder().add("base64",imgString)
                 .build();
         Request request = new Request.Builder().url(url).put(body).build();

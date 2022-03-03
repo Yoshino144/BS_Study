@@ -352,7 +352,7 @@ public class DataFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://192.168.31.238:12345/userdates/week/" + userid);
+                    URL url = new URL("http://127.0.0.1:12345/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
@@ -397,7 +397,7 @@ public class DataFragment extends Fragment {
             try {
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://192.168.31.238:12345/userdates/three/" + userId)
+                        .url("http://127.0.0.1:12345/userdates/three/" + userId)
                         .get()
                         .build();//创建一个Request对象
                 Response response = client.newCall(request).execute();//发送请求获取返回数据
@@ -600,7 +600,7 @@ public class DataFragment extends Fragment {
 
                                 try {
                                     saveJson("text", String.valueOf(userInput.getText()));
-                                    UpText("id", readInfo(readId()), "text", String.valueOf(userInput.getText()), "http://192.168.31.238/web/UpText.php");
+                                    UpText("id", readInfo(readId()), "text", String.valueOf(userInput.getText()), "http://192.168.137.1/web/UpText.php");
                                 } catch (IOException ex) {
                                     ex.printStackTrace();
                                 }

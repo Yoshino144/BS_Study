@@ -108,9 +108,9 @@ uuid = GetUser.getUserId(this);
         mTab = (SlidingTabLayout) findViewById(R.id.cur_tab);
         mVp = (ViewPager) findViewById(R.id.cur_vp);
 
-        mFragments.add(ItemFragment.newInstance(uuid,"已选","http://192.168.31.238:12345/subjects/" + uuid));
-        mFragments.add(OItemFragment.newInstance(uuid,"官方题库","http://192.168.31.238:12345/subjects/"+ uuid + "/official"));
-        mFragments.add(UItemFragment.newInstance(uuid,"个人题库","http://192.168.31.238:12345/subjects/"+ uuid  + "/un_official"));
+        mFragments.add(ItemFragment.newInstance(uuid,"已选","http://127.0.0.1:12345/subjects/" + uuid));
+        mFragments.add(OItemFragment.newInstance(uuid,"官方题库","http://127.0.0.1:12345/subjects/"+ uuid + "/official"));
+        mFragments.add(UItemFragment.newInstance(uuid,"个人题库","http://127.0.0.1:12345/subjects/"+ uuid  + "/un_official"));
 
         mVp.setOffscreenPageLimit(5);
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),mFragments);

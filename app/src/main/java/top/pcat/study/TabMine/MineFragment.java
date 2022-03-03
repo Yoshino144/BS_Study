@@ -192,6 +192,12 @@ public class MineFragment extends Fragment  {
             }
             else{
             }
+
+            TextView nametext = rootView.findViewById(R.id.usernameshow);
+            nametext.setText(userInfo.getName());
+
+            TextView lvtext = rootView.findViewById(R.id.lvtext);
+            lvtext.setText("Lv."+userInfo.getId().substring(1,6));
         }
         else{
             lvView.setVisibility(View.GONE);
@@ -200,11 +206,8 @@ public class MineFragment extends Fragment  {
             loginflag = false;
         }
 
-        TextView nametext = rootView.findViewById(R.id.usernameshow);
-        nametext.setText(userInfo.getName());
 
-        TextView lvtext = rootView.findViewById(R.id.lvtext);
-        lvtext.setText("Lv."+userInfo.getId().substring(1,6));
+
         return rootView;
     }
 
