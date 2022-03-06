@@ -167,10 +167,10 @@ public class UItemFragment extends Fragment {
         adapter.buttonSetOnclick((isChecked, subjectId) -> {
             if (isChecked){
                 LogUtils.d("选择了"+subjectId);
-                upChoose("http://127.0.0.1:12345/subjects/"+subjectId+"/users/"+uuid);
+                upChoose("http://172.17.128.1:12345/subjects/"+subjectId+"/users/"+uuid);
             }else{
                 LogUtils.d("取消了"+subjectId);
-                delChoose("http://127.0.0.1:12345/subjects/"+subjectId+"/users/"+uuid);
+                delChoose("http://172.17.128.1:12345/subjects/"+subjectId+"/users/"+uuid);
             }
         });
     }
