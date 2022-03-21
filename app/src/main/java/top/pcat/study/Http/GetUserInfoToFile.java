@@ -23,7 +23,7 @@ public class GetUserInfoToFile {
 
     public static void getUserInfo(String uuid, Context context) throws IOException {
         Request request = new Request.Builder()
-                .url("http://172.17.128.1:12345/users/" + uuid + "/infos")
+                .url("http://10.0.2.2:12345/users/" + uuid + "/infos")
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();

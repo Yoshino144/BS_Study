@@ -116,7 +116,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:background="#ffffff"
-                android:hint="用户名"
+                android:hint="手机号"
                 android:textColorHint="#95A1AA"
                 android:textSize="17dp" />
 

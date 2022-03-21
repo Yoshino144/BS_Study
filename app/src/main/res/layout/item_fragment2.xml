@@ -68,7 +68,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
-                            android:text="作者：root"
+                            android:text="作者：小菜鸡"
                             android:textColor="#9F000000"
                             android:textSize="14sp" />
 
@@ -90,6 +90,7 @@
                         android:gravity="center">
 
                         <TextView
+                            android:id="@+id/f2itembut"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="完成 11%"
@@ -110,6 +111,7 @@
                     android:layout_height="0dp">
 
                     <com.akexorcist.roundcornerprogressbar.TextRoundCornerProgressBar
+                        android:id="@+id/pg"
                         android:layout_width="match_parent"
                         android:layout_height="15dp"
                         app:rcBackgroundColor="#347FCCDE"

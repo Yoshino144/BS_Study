@@ -27,7 +27,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import top.pcat.study.Banner.DataBean;
 import top.pcat.study.Banner.ImageAdapter;
-import top.pcat.study.Curriculum.Adapter.CurItemAdapter;
 import top.pcat.study.Curriculum.Curriculum;
 import top.pcat.study.Pojo.Subject;
 import top.pcat.study.Utils.FileTool;
@@ -37,9 +36,6 @@ import top.pcat.study.Size.ChapterActivity;
 import top.pcat.study.Size.DisplayUtil;
 import top.pcat.study.Utils.GetUser;
 import top.pcat.study.View.F2BangAdapter;
-import top.pcat.study.View.F2BangItemAdapter;
-import top.pcat.study.View.Fragment2Adapter;
-import top.pcat.study.View.ItemF2Bang;
 import top.pcat.study.View.ItemFragment2;
 
 import com.apkfuns.logutils.LogUtils;
@@ -118,7 +114,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                         }
                     } else {
                         try {
-                            GetData(bb, subject_name, "http://172.17.128.1:12345/chapters/" + bb);
+                            GetData(bb, subject_name, "http://10.0.2.2:12345/chapters/" + bb);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -219,7 +215,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             tempTest = "cpp,java";
             try {
                 com.apkfuns.logutils.LogUtils.d("获取该id的已选的科目：" + GetUser.getUserId(getContext()));
-                GetYixuan("http://172.17.128.1:12345/subjects/" + GetUser.getUserId(getContext()));
+                GetYixuan("http://10.0.2.2:12345/subjects/" + GetUser.getUserId(getContext()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -349,7 +345,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
 
     private void initBang() throws JSONException, IOException {
         LogUtils.d("初始化课程页榜单");
-        getData("http://172.17.128.1:12345/subjects/"+ GetUser.getUserId(getContext()) + "/official");
+        getData("http://10.0.2.2:12345/subjects/"+ GetUser.getUserId(getContext()) + "/official");
 
     }
 
@@ -510,7 +506,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             //如果不是第一次加载，刷新数据
             if (signFlag) {
                 try {
-                    GetYixuan("http://172.17.128.1:12345/subjects/" + GetUser.getUserId(getContext()));
+                    GetYixuan("http://10.0.2.2:12345/subjects/" + GetUser.getUserId(getContext()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
