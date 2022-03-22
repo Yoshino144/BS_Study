@@ -9,17 +9,26 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/java_radius.xml" value="0.1385" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/radio_f.xml" value="0.1365" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/radio_t.xml" value="0.1365" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_one.xml" value="0.1175" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_pai.xml" value="0.1385" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_sign_button.xml" value="0.1175" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_sign_huo.xml" value="0.1175" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_sousuo.xml" value="0.1385" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_wrong.xml" value="0.1175" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/sign_lv.xml" value="0.1365" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_chapter.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_exercises.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_search.xml" value="0.13043478260869565" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_start.xml" value="0.176" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_title_image_behavior.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_userInfo.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_user_info.xml" value="0.2" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_wchapter_question.xml" value="0.10462962962962963" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_wrong_question.xml" value="0.1381340579710145" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_wrong_question_item.xml" value="0.536" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/blank_fragment5_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/blank_fragment7_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/collection.xml" value="0.24947916666666667" />
@@ -42,7 +51,8 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/recommend.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/timu_item.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/userview.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/webview_yixuan.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/webview_yixuan.xml" value="0.1" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/wrong_one.xml" value="0.11423505572441743" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/bottom_bar.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/size/drawable/bottom_color.xml" value="0.1385" />
@@ -132,7 +142,7 @@
     <option name="priority" value="Medium" />
     <option name="excludeFilter" value="" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="17" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

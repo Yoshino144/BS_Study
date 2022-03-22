@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginTop="7dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    android:id="@+id/wrong_item"
+    android:background="@drawable/shape_wrong"
+    android:layout_height="65dp">
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:id="@+id/subjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ggggg"
+        android:layout_marginLeft="30dp" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="1sp"/>
+
+    <TextView
+        android:id="@+id/problemSize"
+        android:text="435"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="30dp" />
+
+</LinearLayout>

@@ -17,6 +17,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.apkfuns.logutils.LogUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 
+import top.pcat.study.Pojo.UserProblemData;
 import top.pcat.study.Utils.ReadAssets;
 import top.pcat.study.R;
 import top.pcat.study.Size.Examination;
@@ -225,7 +226,8 @@ public class PcAdapterViewpager extends PagerAdapter {
                         public void onClick(View v) {
                             flag[position] = "A";
                             mContext.setFlag(position, "A");
-                            getId(json, position);
+                            UserProblemData userProblemData = getId(json, position);
+                            LogUtils.d("pcAdapter创建做题记录对象：" + userProblemData);
                             getAnswer(json, position);
                             if (Done[position] == false) {
                                 allSize += 1;
@@ -237,10 +239,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                     hold.image_A.setImageResource(R.drawable.ttrue);
                                     hold.text_A.setTextColor(Color.parseColor("#1cabfa"));
                                     trueSize += 1;
-                                    mContext.addtrue(idsize);
+                                    mContext.addtrue(idsize,userProblemData);
                                 } else {
                                     hold.wrongaa.setVisibility(View.VISIBLE);
-                                    mContext.addwrong(idsize);
+                                    mContext.addwrong(idsize,userProblemData);
                                     wrongSize += 1;
                                     hold.image_A.setImageResource(R.drawable.wrong);
                                     hold.text_A.setTextColor(Color.parseColor("#fd6767"));
@@ -265,7 +267,7 @@ public class PcAdapterViewpager extends PagerAdapter {
                     hold.bbb.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            getId(json, position);
+                            UserProblemData userProblemData = getId(json, position);
                             flag[position] = "B";
                             mContext.setFlag(position, "B");
                             getAnswer(json, position);
@@ -280,10 +282,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                     hold.image_B.setImageResource(R.drawable.ttrue);
                                     hold.text_B.setTextColor(Color.parseColor("#1cabfa"));
                                     trueSize += 1;
-                                    mContext.addtrue(idsize);
+                                    mContext.addtrue(idsize,userProblemData);
                                 } else {
                                     hold.wrongaa.setVisibility(View.VISIBLE);
-                                    mContext.addwrong(idsize);
+                                    mContext.addwrong(idsize,userProblemData);
                                     wrongSize += 1;
                                     hold.image_B.setImageResource(R.drawable.wrong);
                                     hold.text_B.setTextColor(Color.parseColor("#fd6767"));
@@ -310,7 +312,7 @@ public class PcAdapterViewpager extends PagerAdapter {
                         public void onClick(View v) {
                             flag[position] = "C";
                             mContext.setFlag(position, "C");
-                            getId(json, position);
+                            UserProblemData userProblemData = getId(json, position);
                             getAnswer(json, position);
 
                             if (Done[position] == false) {
@@ -323,10 +325,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                     hold.image_C.setImageResource(R.drawable.ttrue);
                                     hold.text_C.setTextColor(Color.parseColor("#1cabfa"));
                                     trueSize += 1;
-                                    mContext.addtrue(idsize);
+                                    mContext.addtrue(idsize,userProblemData);
                                 } else {
                                     hold.wrongaa.setVisibility(View.VISIBLE);
-                                    mContext.addwrong(idsize);
+                                    mContext.addwrong(idsize,userProblemData);
                                     wrongSize += 1;
                                     hold.image_C.setImageResource(R.drawable.wrong);
                                     hold.text_C.setTextColor(Color.parseColor("#fd6767"));
@@ -353,7 +355,7 @@ public class PcAdapterViewpager extends PagerAdapter {
                         public void onClick(View v) {
                             flag[position] = "D";
                             mContext.setFlag(position, "D");
-                            getId(json, position);
+                            UserProblemData userProblemData =  getId(json, position);
                             getAnswer(json, position);
 
                             if (Done[position] == false) {
@@ -367,10 +369,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                     hold.image_D.setImageResource(R.drawable.ttrue);
                                     hold.text_D.setTextColor(Color.parseColor("#1cabfa"));
                                     trueSize += 1;
-                                    mContext.addtrue(idsize);
+                                    mContext.addtrue(idsize,userProblemData);
                                 } else {
                                     hold.wrongaa.setVisibility(View.VISIBLE);
-                                    mContext.addwrong(idsize);
+                                    mContext.addwrong(idsize,userProblemData);
                                     wrongSize += 1;
                                     hold.image_D.setImageResource(R.drawable.wrong);
                                     hold.text_D.setTextColor(Color.parseColor("#fd6767"));
@@ -398,7 +400,7 @@ public class PcAdapterViewpager extends PagerAdapter {
                 int tiNum = Integer.parseInt(tihao);
                 if (tiNum - 1 == position) {
                     getAnswer(json, position);
-                    getId(json, position);
+                    UserProblemData userProblemData = getId(json, position);
                     if (xuanxiang.matches("a")) {
                         LogUtils.d("语音选择了" + xuanxiang, "答案" + answer);
                         LogUtils.d("点击了A选项，题号" + position, flag[position] + "答案" + answer);
@@ -414,10 +416,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                 hold.image_A.setImageResource(R.drawable.ttrue);
                                 hold.text_A.setTextColor(Color.parseColor("#1cabfa"));
                                 trueSize += 1;
-                                mContext.addtrue(idsize);
+                                mContext.addtrue(idsize,userProblemData);
                             } else {
                                 hold.wrongaa.setVisibility(View.VISIBLE);
-                                mContext.addwrong(idsize);
+                                mContext.addwrong(idsize,userProblemData);
                                 wrongSize += 1;
                                 hold.image_A.setImageResource(R.drawable.wrong);
                                 hold.text_A.setTextColor(Color.parseColor("#fd6767"));
@@ -453,10 +455,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                 hold.image_B.setImageResource(R.drawable.ttrue);
                                 hold.text_B.setTextColor(Color.parseColor("#1cabfa"));
                                 trueSize += 1;
-                                mContext.addtrue(idsize);
+                                mContext.addtrue(idsize,userProblemData);
                             } else {
                                 hold.wrongaa.setVisibility(View.VISIBLE);
-                                mContext.addwrong(idsize);
+                                mContext.addwrong(idsize,userProblemData);
                                 wrongSize += 1;
                                 hold.image_B.setImageResource(R.drawable.wrong);
                                 hold.text_B.setTextColor(Color.parseColor("#fd6767"));
@@ -491,10 +493,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                 hold.image_C.setImageResource(R.drawable.ttrue);
                                 hold.text_C.setTextColor(Color.parseColor("#1cabfa"));
                                 trueSize += 1;
-                                mContext.addtrue(idsize);
+                                mContext.addtrue(idsize,userProblemData);
                             } else {
                                 hold.wrongaa.setVisibility(View.VISIBLE);
-                                mContext.addwrong(idsize);
+                                mContext.addwrong(idsize,userProblemData);
                                 wrongSize += 1;
                                 hold.image_C.setImageResource(R.drawable.wrong);
                                 hold.text_C.setTextColor(Color.parseColor("#fd6767"));
@@ -529,10 +531,10 @@ public class PcAdapterViewpager extends PagerAdapter {
                                 hold.image_D.setImageResource(R.drawable.ttrue);
                                 hold.text_D.setTextColor(Color.parseColor("#1cabfa"));
                                 trueSize += 1;
-                                mContext.addtrue(idsize);
+                                mContext.addtrue(idsize,userProblemData);
                             } else {
                                 hold.wrongaa.setVisibility(View.VISIBLE);
-                                mContext.addwrong(idsize);
+                                mContext.addwrong(idsize,userProblemData);
                                 wrongSize += 1;
                                 hold.image_D.setImageResource(R.drawable.wrong);
                                 hold.text_D.setTextColor(Color.parseColor("#fd6767"));
@@ -588,16 +590,23 @@ public class PcAdapterViewpager extends PagerAdapter {
         }
     }
 
-    public void getId(String tempInfo, int postion) {
+    public UserProblemData getId(String tempInfo, int postion) {
         try {
+            UserProblemData userProblemData = new UserProblemData();
             JSONArray jsonArray = new JSONArray(tempInfo);
             JSONObject jsonObject = jsonArray.getJSONObject(postion);
             idsize = Integer.parseInt(jsonObject.getString("problemId"));
+            userProblemData.setProblemId(jsonObject.getInt("problemId"));
+            userProblemData.setAnswer(jsonObject.getString("problemAnswer"));
+            userProblemData.setChapterId(jsonObject.getInt("chapterId"));
+            userProblemData.setSubjectId(jsonObject.getInt("subjectId"));
 
             LogUtils.d(postion + "题答案", answer);
+            return userProblemData;
         } catch (JSONException e) {
             e.printStackTrace();//rr
         }
+        return null;
     }
 
     public void readSj(String tempInfo, int postion) {

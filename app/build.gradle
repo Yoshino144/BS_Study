@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 32
-    buildToolsVersion '33.0.0 rc1'
+    buildToolsVersion '33.0.0 rc2'
     defaultConfig {
         applicationId 'top.pcat.study'
         minSdkVersion 23
@@ -29,7 +29,7 @@ android {
             res.srcDirs = ['src/main/res', 'src/main/res/size']
         }
     }
-    ndkVersion '25.0.8151533 rc1'
+    ndkVersion '24.0.8215888'
     lint {
         abortOnError false
         checkReleaseBuilds false

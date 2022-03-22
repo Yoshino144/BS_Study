@@ -94,8 +94,8 @@
             android:label="识别设置"
             android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.DeviceDefault.Light" />
-        <activity android:name=".WrongQuestion.WrongQuestion" />
-        <activity android:name=".WrongQuestion.WrongOne" />
+        <activity android:name=".WrongQuestion.WrongQuestionActivity" />
+        <activity android:name=".WrongQuestion.WChapterActivity" />
         <activity android:name=".Size.Examination" />
         <activity android:name=".NewExercisesActitity.NewExercisesActitity" />
         <activity android:name=".Size.AHHHHHH" />

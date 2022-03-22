@@ -36,7 +36,7 @@ import top.pcat.study.R;
 import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CardsAdapter;
 import com.apkfuns.logutils.LogUtils;
-import top.pcat.study.WrongQuestion.WrongQuestion;
+import top.pcat.study.WrongQuestion.WrongQuestionActivity;
 import top.pcat.study.User.LoginActivity;
 import top.pcat.study.User.UserInfoActivity;
 
@@ -364,7 +364,7 @@ public class MineFragment extends Fragment  {
 //                Color.parseColor("#f5f5f7"), 0, 0, dpToPx(-10));
         wrongQuestion.setOnClickListener(v -> {
             Intent intent01=new Intent();
-            intent01.setClass(getActivity(), WrongQuestion.class);
+            intent01.setClass(getActivity(), WrongQuestionActivity.class);
             startActivity(intent01);
         });
         TextView ye_text = getActivity().findViewById(R.id.ye_text);
