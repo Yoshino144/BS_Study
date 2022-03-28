@@ -19,11 +19,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private LinearLayout shiying;
     private float toumingdu = 0;
     private int nowPage = 0;
+    private ImageView main_sousuo;
 
     private BlurView bottomBlurView;
     private BlurView topBlurView;
@@ -461,6 +464,36 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         // find view
         mViewPager = findViewById(R.id.fragment_vp);
         mTabRadioGroup = findViewById(R.id.tabs_rg);
+        main_sousuo = findViewById(R.id.main_sousuo);
+        main_sousuo.setOnClickListener(v->{
+            if (pageId==2){
+//创建弹出式菜单对象（最低版本11）
+                PopupMenu popup = new PopupMenu(this, v);//第二个参数是绑定的那个view
+                //获取菜单填充器
+                MenuInflater inflater = popup.getMenuInflater();
+                //填充菜单
+                inflater.inflate(R.menu.chat, popup.getMenu());
+                //绑定菜单项的点击事件
+                popup.setOnMenuItemClickListener(item->{
+                    switch (item.getItemId()) {
+                        case R.id.exit:
+                            Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.set:
+                            Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.account:
+                            Toast.makeText(this, "账号", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            break;
+                    }
+                    return false;
+                });
+                //显示(这一行代码不要忘记了)
+                popup.show();
+            }
+        });
         // init fragment
         fragment2 = new StudyFragment();
         mFragments = new ArrayList<>(4);

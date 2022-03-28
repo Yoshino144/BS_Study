@@ -17,6 +17,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import top.pcat.study.Pojo.Msg;
+import top.pcat.study.R;
 import top.pcat.study.User.LoginActivity;
 
 public class GetUserInfoToFile {

@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         showcode.setImageBitmap(Code.getInstance().createBitmap());
         realCode = Code.getInstance().getCode().toLowerCase();
+
     }
 
     public void initView() {

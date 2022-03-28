@@ -3,25 +3,22 @@ package top.pcat.study.TabChat.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import top.pcat.study.TabChat.Fragment.placeholder.PlaceholderContent.PlaceholderItem;
+import top.pcat.study.Pojo.Clasp;
 import top.pcat.study.databinding.FragmentClassItemBinding;
 
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class MyClassItemRecyclerViewAdapter extends RecyclerView.Adapter<MyClassItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<Clasp> mValues;
 
-    public MyClassItemRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MyClassItemRecyclerViewAdapter(List<Clasp> items) {
         mValues = items;
     }
 
@@ -35,8 +32,11 @@ public class MyClassItemRecyclerViewAdapter extends RecyclerView.Adapter<MyClass
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.className.setText(mValues.get(position).getClassName());
+        holder.mContentView.setText(mValues.get(position).getClassId());
+        holder.linearLayout.setOnClickListener(v->{
+
+        });
     }
 
     @Override
@@ -45,15 +45,19 @@ public class MyClassItemRecyclerViewAdapter extends RecyclerView.Adapter<MyClass
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
+        public final TextView className;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public Clasp mItem;
+        public LinearLayout linearLayout;
 
         public ViewHolder(FragmentClassItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
+            className = binding.className;
             mContentView = binding.content;
+            linearLayout=binding.ci;
         }
+
+
 
         @Override
         public String toString() {
