@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://10.0.2.2:12345/userdates/week/" + userid);
+                    URL url = new URL(R.string.network_url+"/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();

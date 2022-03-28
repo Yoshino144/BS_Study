@@ -25,7 +25,7 @@ import top.pcat.study.Utils.StatusBarUtil;
 import top.pcat.study.View.CircleRippleView;
 import top.pcat.study.View.OclockView;
 import top.pcat.study.View.PcAdapterViewpager_two;
-import top.pcat.study.View.PcViewPager;
+import top.pcat.study.Exercises.PcViewPager;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;

@@ -37,9 +37,15 @@ android {
     buildFeatures {
         viewBinding true
     }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
+    implementation (name: 'HTTPDNS_Android_v4.0.0a_release', ext: 'aar')
     api 'cn.rongcloud.sdk:im_kit:5.1.8' // 即时通讯 UI 基础组件
     implementation project(path: ':core')
     testImplementation 'junit:junit:4.13.2'

@@ -25,6 +25,7 @@ import io.rong.imkit.conversationlist.ConversationListFragment;
 import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
+import top.pcat.study.TabChat.Fragment.ClassItemFragment;
 import top.pcat.study.TabHome.RankFragment;
 import top.pcat.study.Utils.DisplayUtil;
 
@@ -45,7 +46,7 @@ public class ChatFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private String[] mTitlesArrays ={"消息","排名"};
+    private String[] mTitlesArrays ={"消息","班级"};
 
     public ChatFragment() {}
 
@@ -118,7 +119,7 @@ public class ChatFragment extends Fragment {
 
         mFragments = new ArrayList<>();
         mFragments.add(new ConversationListFragment());
-        mFragments.add(new RankFragment());
+        mFragments.add(new ClassItemFragment());
 
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mVp.setAdapter(pagerAdapter);

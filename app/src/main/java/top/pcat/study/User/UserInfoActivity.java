@@ -893,8 +893,8 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
         //你们根据情况自行更改
         //另外网络请求我就不多做解释了
 
-        LogUtils.d("url================","http://10.0.2.2:12345/users/"+uuid+"/infos/profile.photo");
-        URL url = new URL("http://10.0.2.2:12345/users/"+uuid+"/infos/profile.photo");
+        LogUtils.d("url================",R.string.network_url+"/users/"+uuid+"/infos/profile.photo");
+        URL url = new URL(R.string.network_url+"/users/"+uuid+"/infos/profile.photo");
         FormBody body = new FormBody.Builder().add("base64",imgString)
                 .build();
         Request request = new Request.Builder().url(url).put(body).build();

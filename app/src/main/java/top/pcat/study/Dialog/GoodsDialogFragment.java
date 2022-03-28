@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import top.pcat.study.Dialog.beans.Goods;
 import top.pcat.study.Dialog.beans.GoodsType;
 import top.pcat.study.Dialog.beans.IGoodsBase;
 import top.pcat.study.R;
-import top.pcat.study.Size.ExercisesActivity;
+import top.pcat.study.Exercises.ExercisesActivity;
 
 import org.apache.http.util.EncodingUtils;
 import org.json.JSONArray;

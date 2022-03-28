@@ -10,6 +10,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +20,37 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.FileUtils;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.knowledge.mnlin.RollTextView;
 
 import in.arjsna.swipecardlib.SwipeCardView;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import top.pcat.study.FastBlur.FastBlurActivity;
 import top.pcat.study.Pojo.UserInfo;
+import top.pcat.study.Pojo.WrongChapter;
 import top.pcat.study.Setting.SettingsActivity;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
+import top.pcat.study.Utils.GetUser;
 import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CardsAdapter;
 import com.apkfuns.logutils.LogUtils;
+
+import top.pcat.study.WrongQuestion.Adapter.WChapterAdapter;
+import top.pcat.study.WrongQuestion.Adapter.WPAdapter;
+import top.pcat.study.WrongQuestion.Pojo.WrongProblem;
 import top.pcat.study.WrongQuestion.WrongQuestionActivity;
 import top.pcat.study.User.LoginActivity;
 import top.pcat.study.User.UserInfoActivity;
@@ -51,6 +66,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,6 +92,22 @@ public class MineFragment extends Fragment  {
     private Gson gosn = new Gson();
 
     public MineFragment() {}
+
+    private List<WrongProblem> wChapterList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private WPAdapter adapter;
+    private Integer subjectId;
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            LogUtils.d("将加到recy中的数据："+wChapterList);
+            adapter = new WPAdapter(wChapterList,false);
+            recyclerView.setAdapter(adapter);
+
+            return false;
+        }
+    });
 
     public static MineFragment newInstance(String param1, String lv) {
         MineFragment fragment = new MineFragment();
@@ -117,40 +149,6 @@ public class MineFragment extends Fragment  {
 
         getDummyData(al);
         CardsAdapter arrayAdapter = new CardsAdapter(getContext(), al );
-        SwipeCardView swipeCardView = (SwipeCardView) rootView.findViewById(R.id.swipe_card_view);
-        swipeCardView.setAdapter(arrayAdapter);
-        swipeCardView.setFlingListener(new SwipeCardView.OnCardFlingListener() {
-            @Override
-            public void onCardExitLeft(Object dataObject) {
-                LogUtils.i( "Left Exit");
-            }
-
-            @Override
-            public void onCardExitRight(Object dataObject) {
-                LogUtils.i( "Right Exit");
-            }
-
-            @Override
-            public void onAdapterAboutToEmpty(int itemsInAdapter) {
-                LogUtils.i( "Adater to be empty");
-                //add more items to adapter and call notifydatasetchanged
-            }
-
-            @Override
-            public void onScroll(float scrollProgressPercent) {
-                LogUtils.i("Scroll");
-            }
-
-            @Override
-            public void onCardExitTop(Object dataObject) {
-                LogUtils.i( "Top Exit");
-            }
-
-            @Override
-            public void onCardExitBottom(Object dataObject) {
-                LogUtils.i("Bottom Exit");
-            }
-        });
 
         yejian = rootView.findViewById(R.id.yejian);
         //TextView banben = rootView.findViewById(R.id.banben);
@@ -198,6 +196,12 @@ public class MineFragment extends Fragment  {
 
             TextView lvtext = rootView.findViewById(R.id.lvtext);
             lvtext.setText("Lv."+userInfo.getId().substring(1,6));
+
+            initWChapters();
+            recyclerView = (RecyclerView) rootView.findViewById(R.id.wq_card);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+
         }
         else{
             lvView.setVisibility(View.GONE);
@@ -209,6 +213,39 @@ public class MineFragment extends Fragment  {
 
 
         return rootView;
+    }
+
+
+    private void initWChapters() {
+        getWChapter();
+//        for (int i = 0; i < 20; i++) {
+//            WChapter apple = new WChapter("章节i" + i, 5*i);
+//            wChapterList.add(apple);
+//
+//        }
+    }
+
+    private void getWChapter() {
+        new Thread(() -> {
+            try {
+                Gson gson = new Gson();
+                OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
+                Request request = new Request.Builder()
+                        .url(R.string.network_url+"/userAnswers/subject/random/" + GetUser.getUserId(getActivity()))
+                        .get()
+                        .build();//创建一个Request对象
+                LogUtils.d("错题章节，网络请求 "+request.url().toString());
+                Response response = client.newCall(request).execute(); //发送请求获取返回数据
+                String responseData = response.body().string(); //处理返回的数据
+
+                LogUtils.d("错题章节，网络请求结果 "+responseData);
+                wChapterList=gson.fromJson(responseData, new TypeToken<List<WrongProblem>>() {}.getType());
+                //wChapterList.add(ww.get(0));
+                handler.sendMessage(new Message());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void getDummyData(ArrayList<CardsAdapter.Card> al) {

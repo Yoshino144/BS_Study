@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -40,7 +41,7 @@ public class WChapterActivity extends AppCompatActivity {
         @Override
         public boolean handleMessage(@NonNull Message msg) {
             LogUtils.d("将加到recy中的数据："+wChapterList);
-            adapter = new WChapterAdapter(wChapterList);
+            adapter = new WChapterAdapter(wChapterList,true);
             recyclerView.setAdapter(adapter);
 
             return false;
@@ -51,6 +52,10 @@ public class WChapterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wchapter_question);
+
+        BarUtils.setStatusBarLightMode(this,true);
+        BarUtils.transparentStatusBar(this);
+
         Intent intent = getIntent();
         String subjectName = intent.getStringExtra("subjectName");
         subjectId = intent.getIntExtra("subjectId",0);
@@ -91,7 +96,7 @@ public class WChapterActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://10.0.2.2:12345/userAnswers/subject/"+subjectId +"/" + GetUser.getUserId(this))
+                        .url(R.string.network_url+"/userAnswers/subject/"+subjectId +"/" + GetUser.getUserId(this))
                         .get()
                         .build();//创建一个Request对象
                 LogUtils.d("错题章节，网络请求 "+request.url().toString());

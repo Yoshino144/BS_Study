@@ -99,15 +99,11 @@
 
             </LinearLayout>
 
-            <in.arjsna.swipecardlib.SwipeCardView
-                android:visibility="gone"
-                android:id="@+id/swipe_card_view"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/wq_card"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
-                app:rotation_degrees="15.5"
-                app:bottom_swipe_detect="false"
-                app:top_swipe_detect="false"
-                tools:context=".CardSwipeActivity" />
+                android:layout_height="match_parent" />
+
 
         </LinearLayout>
     </LinearLayout>

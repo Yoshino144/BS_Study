@@ -1,5 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">喵喵学</string>
+    <string name="network_url">http://12.0.0.1:12343</string>
+<!--    <string name="network_url">http://12.0.0.1:12343</string>-->
 
     <string name="text">学习</string>
     <string name="text2">课程</string>

@@ -16,11 +16,13 @@ import java.util.List;
 import top.pcat.study.Pojo.WrongChapter;
 import top.pcat.study.R;
 import top.pcat.study.Utils.DisplayUtil;
+import top.pcat.study.WrongQuestion.WProblemActivity;
 
 public class WChapterAdapter extends RecyclerView.Adapter<WChapterAdapter.ViewHolder> {
 
     private List<WrongChapter> mWChapterList;
     private Context context;
+    private boolean ff;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView subjectName;
@@ -36,8 +38,9 @@ public class WChapterAdapter extends RecyclerView.Adapter<WChapterAdapter.ViewHo
 
     }
 
-    public WChapterAdapter(List<WrongChapter> wChapterList) {
+    public WChapterAdapter(List<WrongChapter> wChapterList,boolean ff) {
         mWChapterList = wChapterList;
+        ff = ff;
     }
 
     @NonNull
@@ -56,20 +59,27 @@ public class WChapterAdapter extends RecyclerView.Adapter<WChapterAdapter.ViewHo
         holder.subjectName.setText(wChapter.getChapterName());
         holder.problemSize.setText(String.valueOf(wChapter.getProblemSize()));
 
-        if (position == 0) {
-            RecyclerView.LayoutParams layoutParams =
-                    new RecyclerView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams = (RecyclerView.LayoutParams) holder.wChapterItem.getLayoutParams();
-            layoutParams.setMargins(DisplayUtil.dip2px(context,7), DisplayUtil.dip2px(context,70), DisplayUtil.dip2px(context,7), 0);//left,top,right,bottom
-            holder.wChapterItem.setLayoutParams(layoutParams);
-        }
+
+            if (position == 0) {
+                RecyclerView.LayoutParams layoutParams =
+                        new RecyclerView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams = (RecyclerView.LayoutParams) holder.wChapterItem.getLayoutParams();
+                layoutParams.setMargins(DisplayUtil.dip2px(context,7), DisplayUtil.dip2px(context,70), DisplayUtil.dip2px(context,7), 0);//left,top,right,bottom
+                holder.wChapterItem.setLayoutParams(layoutParams);
+            }
+
+
         holder.subjectName.setText(wChapter.getChapterName());
         holder.problemSize.setText(String.valueOf(wChapter.getProblemSize()));
 
         holder.wChapterItem.setOnClickListener(v->{
             Intent intent = new Intent();
-            //intent.setClass(context, NewExercisesActitity.class);
+            intent.setClass(context, WProblemActivity.class);
+            intent.putExtra("chapterId",wChapter.getChapterId());
             intent.putExtra("subjectId",wChapter.getSubjectId());
+            intent.putExtra("chapterName",wChapter.getChapterName());
+
+
             context.startActivity(intent) ;
         });
     }

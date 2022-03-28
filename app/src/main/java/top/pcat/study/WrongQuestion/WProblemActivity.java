@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,22 +26,26 @@ import eightbitlab.com.blurview.RenderScriptBlur;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import top.pcat.study.MainActivity;
 import top.pcat.study.Pojo.WrongChapter;
 import top.pcat.study.R;
 import top.pcat.study.Utils.GetUser;
 import top.pcat.study.WrongQuestion.Adapter.WChapterAdapter;
+import top.pcat.study.WrongQuestion.Adapter.WPAdapter;
+import top.pcat.study.WrongQuestion.Pojo.WrongProblem;
 
 public class WProblemActivity extends AppCompatActivity {
-    private List<WrongChapter> wChapterList = new ArrayList<>();
+    private List<WrongProblem> wChapterList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private WChapterAdapter adapter;
+    private WPAdapter adapter;
     private Integer subjectId;
+    private Integer chapterId;
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(@NonNull Message msg) {
             LogUtils.d("将加到recy中的数据："+wChapterList);
-            adapter = new WChapterAdapter(wChapterList);
+            adapter = new WPAdapter(wChapterList,true);
             recyclerView.setAdapter(adapter);
 
             return false;
@@ -50,12 +55,18 @@ public class WProblemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wchapter_question);
+        setContentView(R.layout.activity_wp);
+
+        BarUtils.setStatusBarLightMode(this,true);
+        BarUtils.transparentStatusBar(this);
+
         Intent intent = getIntent();
-        String subjectName = intent.getStringExtra("subjectName");
+        String chapterName = intent.getStringExtra("chapterName");
         subjectId = intent.getIntExtra("subjectId",0);
+        chapterId = intent.getIntExtra("chapterId",0);
+
         TextView viewById = findViewById(R.id.title);
-        viewById.setText("错题本-"+subjectName);
+        viewById.setText("错题本-"+chapterName);
         final Drawable windowBackground = getWindow().getDecorView().getBackground();
 
         RelativeLayout root = findViewById(R.id.root);
@@ -91,7 +102,7 @@ public class WProblemActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://10.0.2.2:12345/userAnswers/subject/"+subjectId +"/" + GetUser.getUserId(this))
+                        .url(R.string.network_url+"/userAnswers/subject/"+subjectId +"/"+chapterId +"/"+ GetUser.getUserId(this))
                         .get()
                         .build();//创建一个Request对象
                 LogUtils.d("错题章节，网络请求 "+request.url().toString());
@@ -99,7 +110,7 @@ public class WProblemActivity extends AppCompatActivity {
                 String responseData = response.body().string(); //处理返回的数据
 
                 LogUtils.d("错题章节，网络请求结果 "+responseData);
-                wChapterList = gson.fromJson(responseData, new TypeToken<List<WrongChapter>>() {}.getType());
+                wChapterList = gson.fromJson(responseData, new TypeToken<List<WrongProblem>>() {}.getType());
                 handler.sendMessage(new Message());
             } catch (Exception e) {
                 e.printStackTrace();

@@ -352,7 +352,7 @@ public class DataFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://10.0.2.2:12345/userdates/week/" + userid);
+                    URL url = new URL(R.string.network_url+"/userdates/week/" + userid);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.connect();
@@ -397,7 +397,7 @@ public class DataFragment extends Fragment {
             try {
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://10.0.2.2:12345/userdates/three/" + userId)
+                        .url(R.string.network_url+"/userdates/three/" + userId)
                         .get()
                         .build();//创建一个Request对象
                 Response response = client.newCall(request).execute();//发送请求获取返回数据
@@ -438,7 +438,12 @@ public class DataFragment extends Fragment {
             }
 
             //ToDo gai
-            meiri.setText(jsonObject.getString(LocalDate.now().toString())+" / 50 道");
+            try{
+                meiri.setText(jsonObject.getString(LocalDate.now().toString())+" / 50 道");
+            }catch (JSONException j){
+                //j.printStackTrace();
+                meiri.setText("0 / 50 道");
+            }
             meiri_f.setText("33 / 45 min");
             meiri_fb.setText("56%");
             meiri_t2.setProgress(56);
@@ -482,13 +487,47 @@ public class DataFragment extends Fragment {
             }
 
 
-            Sunday = jsonObject.getString(LocalDate.now().plusDays(-6).toString());
-            Moonday = jsonObject.getString(LocalDate.now().plusDays(0).toString());
-            Tuesday = jsonObject.getString(LocalDate.now().plusDays(-1).toString());
-            Wednesday = jsonObject.getString(LocalDate.now().plusDays(-2).toString());
-            Thursday = jsonObject.getString(LocalDate.now().plusDays(-3).toString());
-            Friday = jsonObject.getString(LocalDate.now().plusDays(-4).toString());
-            Saturday = jsonObject.getString(LocalDate.now().plusDays(-5).toString());
+            try {
+                Sunday = jsonObject.getString(LocalDate.now().plusDays(-6).toString());
+            }catch (JSONException j){
+                Sunday = "2";
+            }
+
+            try {
+                Moonday = jsonObject.getString(LocalDate.now().plusDays(0).toString());
+            }catch (JSONException j){
+                Moonday = "2";
+            }
+
+            try {
+                Tuesday = jsonObject.getString(LocalDate.now().plusDays(-1).toString());
+            }catch (JSONException j){
+                Tuesday = "2";
+            }
+
+            try {
+                Wednesday = jsonObject.getString(LocalDate.now().plusDays(-2).toString());
+            }catch (JSONException j){
+                Wednesday = "2";
+            }
+
+            try {
+                Thursday = jsonObject.getString(LocalDate.now().plusDays(-3).toString());
+            }catch (JSONException j){
+                Thursday = "2";
+            }
+
+            try {
+                Friday = jsonObject.getString(LocalDate.now().plusDays(-4).toString());
+            }catch (JSONException j){
+                Friday = "2";
+            }
+
+            try {
+                Saturday = jsonObject.getString(LocalDate.now().plusDays(-5).toString());
+            }catch (JSONException j){
+                Saturday = "2";
+            }
 
 
         } catch (JSONException e) {
@@ -981,7 +1020,13 @@ public class DataFragment extends Fragment {
 
         JSONObject jsonArray = new JSONObject(userdata);
         for (int i = 0; i < count; i++) {
-            values.add(new Entry(i, Float.parseFloat(jsonArray.getString(LocalDate.now().plusDays(-i).toString()))));
+            try {
+                values.add(new Entry(i, Float.parseFloat(jsonArray.getString(LocalDate.now().plusDays(-i).toString()))));
+            }catch (JSONException j){
+                //j.printStackTrace();
+                values.add(new Entry(i, Float.parseFloat(String.valueOf(1))));
+
+            }
         }
 
         LineDataSet set1;

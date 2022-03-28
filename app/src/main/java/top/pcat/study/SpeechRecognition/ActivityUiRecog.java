@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 
 import com.baidu.aip.asrwakeup3.core.recog.IStatus;
-import top.pcat.study.Size.ExercisesActivity;
+import top.pcat.study.Exercises.ExercisesActivity;
 
 import java.util.Map;
 

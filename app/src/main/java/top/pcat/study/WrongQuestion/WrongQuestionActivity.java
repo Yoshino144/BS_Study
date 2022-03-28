@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -48,6 +49,10 @@ public class WrongQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wrong_question);
+
+        BarUtils.setStatusBarLightMode(this,true);
+        BarUtils.transparentStatusBar(this);
+
         final Drawable windowBackground = getWindow().getDecorView().getBackground();
 
         RelativeLayout root = findViewById(R.id.root);
@@ -82,7 +87,7 @@ public class WrongQuestionActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://10.0.2.2:12345/userAnswers/subject/" + GetUser.getUserId(this))
+                        .url(R.string.network_url+"/userAnswers/subject/" + GetUser.getUserId(this))
                         .get()
                         .build();//创建一个Request对象
                 LogUtils.d("错题章节，网络请求 "+request.url().toString());

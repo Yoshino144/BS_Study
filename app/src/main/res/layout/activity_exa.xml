@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
-            <top.pcat.study.View.PcViewPager
+            <top.pcat.study.Exercises.PcViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

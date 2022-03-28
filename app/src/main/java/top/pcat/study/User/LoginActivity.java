@@ -351,9 +351,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void Login(String username, String pass) throws IOException {
 
         String pwMd5 = EncryptUtils.encryptMD5ToString(pass);
-        LogUtils.d("进行登录：" + "http://10.0.2.2:12345/users/" + username + "/" + pwMd5);
+        LogUtils.d("进行登录：" + R.string.network_url+"/users/" + username + "/" + pwMd5);
         Request request = new Request.Builder()
-                .url("http://10.0.2.2:12345/users/" + username + "/" + pwMd5)
+                .url(R.string.network_url+"/users/" + username + "/" + pwMd5)
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -402,7 +402,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      */
     public void getUserInfo() throws IOException {
         Request request = new Request.Builder()
-                .url("http://10.0.2.2:12345/users/" + uuid + "/infos")
+                .url(R.string.network_url+"/users/" + uuid + "/infos")
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -590,7 +590,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url("http://10.0.2.2:12345/users/" + phone)
+                        .url(R.string.network_url+"/users/" + phone)
                         .get()
                         .build();//创建一个Request对象
                 Response response = client.newCall(request).execute();//发送请求获取返回数据

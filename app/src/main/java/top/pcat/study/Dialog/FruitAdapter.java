@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import top.pcat.study.R;
-import top.pcat.study.Size.ExercisesActivity;
+import top.pcat.study.Exercises.ExercisesActivity;
 
 import java.util.List;
 
