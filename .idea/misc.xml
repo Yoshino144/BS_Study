@@ -18,6 +18,7 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/shape_wrong_jie.xml" value="0.1" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/drawable/sign_lv.xml" value="0.1365" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_chapter.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_dialog.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_exercises.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
@@ -37,6 +38,7 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/blank_fragment7_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/collection.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/cur_items.xml" value="0.264" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/dynamic.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/fragment_blank.xml" value="0.2" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment2.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/fragment_blank_fragment3.xml" value="0.24947916666666667" />
@@ -57,6 +59,7 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/layout2.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/layout3.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/layout_hello.xml" value="0.12132725430597771" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/list_item.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/new_exercises.xml" value="0.12132725430597771" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/newf_item.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/ohhhhhhhh.xml" value="0.10833333333333334" />
@@ -67,7 +70,7 @@
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/layout/wrong_one.xml" value="0.11423505572441743" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/bottom_bar.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23489583333333333" />
-        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/chat.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/menu/chat.xml" value="0.1" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/size/drawable/bottom_color.xml" value="0.1385" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/size/drawable/ic_home.xml" value="0.1" />
         <entry key="..\:/Users/Yoshi/Desktop/Project/ItemBank-master/app/src/main/res/xml/network_security_config.xml" value="0.24947916666666667" />

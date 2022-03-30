@@ -5,6 +5,9 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.apkfuns.logutils.LogUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -26,7 +30,6 @@ import top.pcat.study.MainActivity;
 import top.pcat.study.R;
 import top.pcat.study.Ranking.RankingList;
 import top.pcat.study.TabChat.Fragment.ClassItemFragment;
-import top.pcat.study.TabHome.RankFragment;
 import top.pcat.study.Utils.DisplayUtil;
 
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class ChatFragment extends Fragment {
     private String mParam2;
     private SlidingTabLayout mTab;
     private ViewPager mVp;
+    private ClassItemFragment classItemFragment;
     private ArrayList<Fragment> mFragments;
 
     private List<RankingList> rankingList = new ArrayList<>();
@@ -47,6 +51,12 @@ public class ChatFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     private String[] mTitlesArrays ={"消息","班级"};
+    private Handler handler2 = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+        }
+    };
 
     public ChatFragment() {}
 
@@ -119,7 +129,8 @@ public class ChatFragment extends Fragment {
 
         mFragments = new ArrayList<>();
         mFragments.add(new ConversationListFragment());
-        mFragments.add(new ClassItemFragment());
+        classItemFragment = new ClassItemFragment();
+        mFragments.add(classItemFragment);
 
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getActivity().getSupportFragmentManager());
         mVp.setAdapter(pagerAdapter);
@@ -164,6 +175,10 @@ public class ChatFragment extends Fragment {
         return view;
     }
 
+    public Fragment getFramer(){
+        LogUtils.d("huoqu 函数");
+        return classItemFragment;
+    }
 
     @Override
     public void onDetach() {

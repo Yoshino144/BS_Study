@@ -56,6 +56,7 @@ import io.rong.imkit.userinfo.RongUserInfoManager;
 import io.rong.imkit.userinfo.UserDataProvider;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.UserInfo;
+import top.pcat.study.TabChat.Fragment.ClassItemFragment;
 import top.pcat.study.TabCommunity.CommunityFragment;
 import top.pcat.study.Fragment.NoScrollViewPager;
 import top.pcat.study.TabHome.HomeFragment;
@@ -466,7 +467,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         mTabRadioGroup = findViewById(R.id.tabs_rg);
         main_sousuo = findViewById(R.id.main_sousuo);
         main_sousuo.setOnClickListener(v->{
-            if (pageId==2){
+            LogUtils.d("dianji "+pageId);
+            if (pageId==3){
 //创建弹出式菜单对象（最低版本11）
                 PopupMenu popup = new PopupMenu(this, v);//第二个参数是绑定的那个view
                 //获取菜单填充器
@@ -480,10 +482,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                             Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.set:
-                            Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
+                            //ChatFragment fragment = (ChatFragment) getSupportFragmentManager().findFragmentById(3);
+                            ChatFragment fragment = (ChatFragment) mFragments.get(3);
+                            ClassItemFragment framer2 = (ClassItemFragment) fragment.getFramer();
+                            framer2.createClassBut();
                             break;
                         case R.id.account:
-                            Toast.makeText(this, "账号", Toast.LENGTH_SHORT).show();
+                            ChatFragment fragment2 = (ChatFragment) mFragments.get(3);
+                            ClassItemFragment framer3 = (ClassItemFragment) fragment2.getFramer();
+                            framer3.joinClassBut();
                             break;
                         default:
                             break;
@@ -578,6 +585,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
             } else if (position == 3) {
                 LogUtils.d("更换主题33,聊天页");
+                //main_sousuo.setVisibility(View.GONE);
                 BarUtils.setStatusBarLightMode(MainActivity.this, true);
                 topBlurView.setBlurRadius((float) 0.1);
                 topBlurView.setBlurEnabled(false);

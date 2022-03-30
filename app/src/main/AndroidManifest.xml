@@ -104,6 +104,10 @@
         <activity android:name=".Size.OHHHHHH" />
         <activity android:name=".PushService.NewFriendActivity" />
         <activity android:name=".WrongQuestion.WProblemActivity" />
+        <activity android:name=".TabChat.DialogActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/EditDialogStyle"/>
     </application>
 
 </manifest>
