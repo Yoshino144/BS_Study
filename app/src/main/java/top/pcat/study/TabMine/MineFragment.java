@@ -33,13 +33,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.knowledge.mnlin.RollTextView;
 
-import in.arjsna.swipecardlib.SwipeCardView;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import top.pcat.study.FastBlur.FastBlurActivity;
 import top.pcat.study.Pojo.UserInfo;
-import top.pcat.study.Pojo.WrongChapter;
 import top.pcat.study.Setting.SettingsActivity;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.R;
@@ -48,10 +46,9 @@ import top.pcat.study.Utils.PxToDp;
 import top.pcat.study.View.CardsAdapter;
 import com.apkfuns.logutils.LogUtils;
 
-import top.pcat.study.WrongQuestion.Adapter.WChapterAdapter;
 import top.pcat.study.WrongQuestion.Adapter.WPAdapter;
 import top.pcat.study.WrongQuestion.Pojo.WrongProblem;
-import top.pcat.study.WrongQuestion.WrongQuestionActivity;
+import top.pcat.study.WrongQuestion.WSubjectActivity;
 import top.pcat.study.User.LoginActivity;
 import top.pcat.study.User.UserInfoActivity;
 
@@ -231,7 +228,7 @@ public class MineFragment extends Fragment  {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url(R.string.network_url+"/userAnswers/subject/random/" + GetUser.getUserId(getActivity()))
+                        .url(getResources().getString(R.string.network_url)+"/userAnswers/subject/random/" + GetUser.getUserId(getActivity()))
                         .get()
                         .build();//创建一个Request对象
                 LogUtils.d("错题章节，网络请求 "+request.url().toString());
@@ -401,7 +398,7 @@ public class MineFragment extends Fragment  {
 //                Color.parseColor("#f5f5f7"), 0, 0, dpToPx(-10));
         wrongQuestion.setOnClickListener(v -> {
             Intent intent01=new Intent();
-            intent01.setClass(getActivity(), WrongQuestionActivity.class);
+            intent01.setClass(getActivity(), WSubjectActivity.class);
             startActivity(intent01);
         });
         TextView ye_text = getActivity().findViewById(R.id.ye_text);

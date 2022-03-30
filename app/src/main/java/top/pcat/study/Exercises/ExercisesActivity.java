@@ -406,7 +406,7 @@ public abstract class ExercisesActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url(R.string.network_url+"/userAnswers/" + GetUser.getUserId(this))
+                        .url(getResources().getString(R.string.network_url)+"/userAnswers/" + GetUser.getUserId(this))
                         .post(formBodyBuilder.build())
                         .build();//创建一个Request对象
                 Response response = client.newCall(request).execute(); //发送请求获取返回数据

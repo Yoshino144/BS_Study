@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import top.pcat.study.Curriculum.Curriculum;
+import top.pcat.study.Curriculum.CurriculumActivity;
 import top.pcat.study.R;
 import com.suke.widget.SwitchButton;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ItemAdapter  extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private List<Item> mItemList;
-    Curriculum context;
+    CurriculumActivity context;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView itemName;
@@ -33,7 +33,7 @@ public class ItemAdapter  extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     }
 
-    public ItemAdapter(Curriculum context, List<Item> itemList) {
+    public ItemAdapter(CurriculumActivity context, List<Item> itemList) {
         mItemList = itemList;
         this.context = context;
     }

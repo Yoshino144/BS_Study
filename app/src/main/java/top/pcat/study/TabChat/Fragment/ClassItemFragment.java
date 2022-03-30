@@ -111,7 +111,7 @@ public class ClassItemFragment extends Fragment {
 
     public void PutFwq2() throws IOException {
         Request request = new Request.Builder()
-                .url(R.string.network_url+"/classes/"+ GetUser.getUserId(getContext()))
+                .url(getResources().getString(R.string.network_url)+"/classes/"+ GetUser.getUserId(getContext()))
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -127,7 +127,7 @@ public class ClassItemFragment extends Fragment {
             public void onResponse(Call call, Response response) throws IOException {
                 String rr = response.body().string();
                 Gson gson = new Gson();
-                ITEMS = gson.fromJson(rr, new TypeToken<List<Person>>(){}.getType());
+                ITEMS = gson.fromJson(rr, new TypeToken<List<Clasp>>(){}.getType());
 
                 handler2.sendMessage(new Message());
             }

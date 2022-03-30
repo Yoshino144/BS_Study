@@ -24,7 +24,7 @@ public class GetUserInfoToFile {
 
     public static void getUserInfo(String uuid, Context context) throws IOException {
         Request request = new Request.Builder()
-                .url(R.string.network_url+"/users/" + uuid + "/infos")
+                .url(context.getResources().getString(R.string.network_url)+"/users/" + uuid + "/infos")
                 .get()
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();

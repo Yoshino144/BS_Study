@@ -141,7 +141,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void PutFwq2(String username, String md5, String phone) throws IOException {
         MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
         Request request = new Request.Builder()
-                .url(R.string.network_url+"/users/" + phone + "/" + md5 + "/" + "username")
+                .url(getResources().getString(R.string.network_url)+"/users/" + phone + "/" + md5 + "/" + "username")
                 .post(RequestBody.Companion.create(username, mediaType))
                 .build();
         OkHttpClient okHttpClient = new OkHttpClient();

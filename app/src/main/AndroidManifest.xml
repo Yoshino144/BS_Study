@@ -83,7 +83,7 @@
         <activity android:name=".Search.MesActivity" />
         <activity android:name=".FastBlur.FastBlurActivity" />
         <activity android:name=".Setting.UpData" />
-        <activity android:name=".Curriculum.Curriculum" />
+        <activity android:name=".Curriculum.CurriculumActivity" />
         <activity android:name=".Curriculum.Collection" />
         <activity android:name=".Curriculum.Recommend" />
         <activity android:name=".Setting.Setting" />
@@ -96,7 +96,7 @@
             android:label="识别设置"
             android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.DeviceDefault.Light" />
-        <activity android:name=".WrongQuestion.WrongQuestionActivity" />
+        <activity android:name=".WrongQuestion.WSubjectActivity" />
         <activity android:name=".WrongQuestion.WChapterActivity" />
         <activity android:name=".Size.Examination" />
         <activity android:name=".NewExercisesActitity.NewExercisesActitity" />

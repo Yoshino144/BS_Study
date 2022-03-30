@@ -265,9 +265,9 @@ public class ChapterActivity extends AppCompatActivity {
                         try {
                             //要耗时运行的程序
 //                                GetJson(timu_name);
-                            Log.d("", "开始请求题目" + R.string.network_url+"/problems/" + subject_id + "/" + chapter_id + " ");
+                            Log.d("", "开始请求题目" + getResources().getString(R.string.network_url)+"/problems/" + subject_id + "/" + chapter_id + " ");
                             GetData("subject_name", subject_name, "zhang_size",
-                                    String.valueOf(position + 1), R.string.network_url+"/problems/" + subject_id + "/" + chapter_id);
+                                    String.valueOf(position + 1), getResources().getString(R.string.network_url)+"/problems/" + subject_id + "/" + chapter_id);
                             //saveItem(item);
                         } catch (Exception ex) {
                             result = -1;

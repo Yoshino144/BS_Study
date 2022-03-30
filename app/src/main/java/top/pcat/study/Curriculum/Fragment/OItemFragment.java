@@ -221,10 +221,10 @@ public class OItemFragment extends Fragment {
         adapter.buttonSetOnclick((isChecked, subjectId) -> {
             if (isChecked){
                 LogUtils.d("选择了"+subjectId);
-                upChoose(R.string.network_url+"/subjects/"+subjectId+"/users/"+uuid);
+                upChoose(getResources().getString(R.string.network_url)+"/subjects/"+subjectId+"/users/"+uuid);
             }else{
                 LogUtils.d("取消了"+subjectId);
-                delChoose(R.string.network_url+"/subjects/"+subjectId+"/users/"+uuid);
+                delChoose(getResources().getString(R.string.network_url)+"/subjects/"+subjectId+"/users/"+uuid);
             }
         });
     }

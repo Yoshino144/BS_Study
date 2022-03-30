@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     android:id="@+id/root"
-    tools:context=".WrongQuestion.WrongQuestionActivity">
+    tools:context=".WrongQuestion.WSubjectActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wq_list"

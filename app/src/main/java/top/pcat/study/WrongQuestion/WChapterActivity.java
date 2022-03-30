@@ -96,7 +96,7 @@ public class WChapterActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 OkHttpClient client = new OkHttpClient();//新建一个OKHttp的对象
                 Request request = new Request.Builder()
-                        .url(R.string.network_url+"/userAnswers/subject/"+subjectId +"/" + GetUser.getUserId(this))
+                        .url(getResources().getString(R.string.network_url)+"/userAnswers/subject/"+subjectId +"/" + GetUser.getUserId(this))
                         .get()
                         .build();//创建一个Request对象
                 LogUtils.d("错题章节，网络请求 "+request.url().toString());

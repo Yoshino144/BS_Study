@@ -27,7 +27,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import top.pcat.study.Banner.DataBean;
 import top.pcat.study.Banner.ImageAdapter;
-import top.pcat.study.Curriculum.Curriculum;
+import top.pcat.study.Curriculum.CurriculumActivity;
 import top.pcat.study.Pojo.Subject;
 import top.pcat.study.Utils.FileTool;
 import top.pcat.study.MainActivity;
@@ -104,7 +104,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                     if (bb.indexOf("0") != -1) {
                         if (signFlag) {
                             Intent intent01 = new Intent();
-                            intent01.setClass(getActivity(), Curriculum.class);
+                            intent01.setClass(getActivity(), CurriculumActivity.class);
                             startActivity(intent01);
                             Toast.makeText(getActivity(), "全部", Toast.LENGTH_SHORT).show();
 
@@ -114,7 +114,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                         }
                     } else {
                         try {
-                            GetData(bb, subject_name, R.string.network_url+"/chapters/" + bb);
+                            GetData(bb, subject_name, getResources().getString(R.string.network_url)+"/chapters/" + bb);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -215,7 +215,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             tempTest = "cpp,java";
             try {
                 com.apkfuns.logutils.LogUtils.d("获取该id的已选的科目：" + GetUser.getUserId(getContext()));
-                GetYixuan(R.string.network_url+"/subjects/" + GetUser.getUserId(getContext()));
+                GetYixuan(getResources().getString(R.string.network_url)+"/subjects/" + GetUser.getUserId(getContext()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -272,7 +272,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
 
                 if (signFlag) {
                     Intent intent01 = new Intent();
-                    intent01.setClass(getActivity(), Curriculum.class);
+                    intent01.setClass(getActivity(), CurriculumActivity.class);
                     startActivity(intent01);
                     //Toast.makeText(getActivity(), "全部", 0).show();
 
@@ -311,7 +311,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
                     }
                 };
         recyclerView.setLayoutManager(layoutManager);
-        Fragment2Adapter adapter = new Fragment2Adapter(itemFragment2s, handler);
+        HomeSubjectListAdapter adapter = new HomeSubjectListAdapter(itemFragment2s, handler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
@@ -344,8 +344,8 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
     }
 
     private void initBang() throws JSONException, IOException {
-        LogUtils.d("初始化课程页榜单");
-        getData(R.string.network_url+"/subjects/"+ GetUser.getUserId(getContext()) + "/official");
+        LogUtils.d("初始化课程页榜单"+getResources().getString(R.string.network_url)+"/subjects/"+ GetUser.getUserId(getContext()) + "/official");
+        getData(getResources().getString(R.string.network_url)+"/subjects/"+ GetUser.getUserId(getContext()) + "/official");
 
     }
 
@@ -506,7 +506,7 @@ public class StudyFragment extends Fragment implements OnPageChangeListener {
             //如果不是第一次加载，刷新数据
             if (signFlag) {
                 try {
-                    GetYixuan(R.string.network_url+"/subjects/" + GetUser.getUserId(getContext()));
+                    GetYixuan(getResources().getString(R.string.network_url)+"/subjects/" + GetUser.getUserId(getContext()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
