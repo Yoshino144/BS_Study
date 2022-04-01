@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -29,13 +31,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.apkfuns.logutils.LogUtils;
+import com.blankj.utilcode.util.FileUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -190,11 +195,16 @@ public class ClassItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_class_item_list, container, false);
-        try {
-            PutFwq2();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (FileUtils.isFileExists(getActivity().getFilesDir().getAbsolutePath() + "/userToken")) {
+            try {
+                PutFwq2();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

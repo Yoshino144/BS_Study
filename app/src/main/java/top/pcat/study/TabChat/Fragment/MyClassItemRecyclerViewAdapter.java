@@ -43,10 +43,10 @@ public class MyClassItemRecyclerViewAdapter extends RecyclerView.Adapter<MyClass
         holder.mItem = mValues.get(position);
         holder.className.setText(mValues.get(position).getClassName());
         holder.mContentView.setText(mValues.get(position).getClassId());
-        holder.linearLayout.setOnClickListener(v->{
+        holder.linearLayout.setOnClickListener(v -> {
             LogUtils.d(mValues.get(position).getClassName());
-            Log.d("hb",mValues.get(position).getClassName());
-            RouteUtils.routeToConversationActivity(context,Conversation.ConversationType.GROUP, mValues.get(position).getClassId());
+            Log.d("hb", mValues.get(position).getClassName());
+            RouteUtils.routeToConversationActivity(context, Conversation.ConversationType.GROUP, mValues.get(position).getClassId());
         });
     }
 
@@ -65,11 +65,9 @@ public class MyClassItemRecyclerViewAdapter extends RecyclerView.Adapter<MyClass
             super(binding.getRoot());
             className = binding.className;
             mContentView = binding.content;
-            linearLayout=binding.ci;
+            linearLayout = binding.ci;
         }
-
-
-
+        
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

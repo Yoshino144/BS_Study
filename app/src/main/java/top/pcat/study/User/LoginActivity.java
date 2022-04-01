@@ -41,6 +41,7 @@ import org.json.JSONObject;
 import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import top.pcat.study.MainActivity;
@@ -48,6 +49,7 @@ import top.pcat.study.Pojo.LoginReq;
 import top.pcat.study.Pojo.UserInfo;
 import top.pcat.study.R;
 import top.pcat.study.Pojo.Msg;
+import top.pcat.study.Utils.GetUser;
 import top.pcat.study.Utils.StatusBarUtil;
 
 
@@ -97,6 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     LogUtils.d("获取用户id:" + uuid);
                     try {
                         getUserInfo();
+                        getToken();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -391,6 +394,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Toasty.error(LoginActivity.this, msg.getMessage(), Toast.LENGTH_SHORT).show();
                     Looper.loop();
                 }
+            }
+        });
+    }
+
+    //融云token
+    public void getToken() throws IOException {
+
+        LogUtils.d("获取token：" + getResources().getString(R.string.network_url)+"/users/rongToken");
+        MediaType mediaType = MediaType.parse("text/x-markdown; charset=utf-8");
+        FormBody.Builder formBodyBuilder = new FormBody.Builder();
+        formBodyBuilder.add("userId", uuid);
+        Request request = new Request.Builder()
+                .url(getResources().getString(R.string.network_url)+"/users/rongToken")
+                .post(formBodyBuilder.build())
+                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Looper.prepare();
+                Toasty.error(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()){
+                    String rr = response.body().string();
+                    LogUtils.d(FileIOUtils.writeFileFromString(
+                            getFilesDir().getAbsolutePath() + "/rongToken", rr));
+
+                }else{
+                    Looper.prepare();
+                    Toasty.error(LoginActivity.this, "额。。。网络有一点点不好。。", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+
             }
         });
     }

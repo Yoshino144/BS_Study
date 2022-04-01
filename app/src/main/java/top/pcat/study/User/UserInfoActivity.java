@@ -377,7 +377,12 @@ public class UserInfoActivity extends AppCompatActivity implements View.OnClickL
 
         TextView textBir = findViewById(R.id.birText);
         DateFormat df = getDateInstance();
-        textBir.setText(df.format(userInfo.getBirthday()));
+        try{
+            textBir.setText(df.format(userInfo.getBirthday()));
+        }catch (Exception e){
+
+            textBir.setText("空");
+        }
 
         TextView textCity = findViewById(R.id.cityText);
         textCity.setText(userInfo.getCity());

@@ -64,6 +64,7 @@ import top.pcat.study.Utils.FileTool;
 import top.pcat.study.TabStudy.StudyFragment;
 import top.pcat.study.TabChat.ChatFragment;
 import top.pcat.study.TabMine.MineFragment;
+import top.pcat.study.Utils.GetUser;
 import top.pcat.study.Utils.PxToDp;
 
 import org.apache.http.util.EncodingUtils;
@@ -220,27 +221,35 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         RongUserInfoManager.getInstance().setUserInfoProvider(userInfoProvider, true);
 
         String token = "gZWy3AOlXHmZjzEH0rIK0+JuIhWSI2mOw/z1dKtSMNQi7H5LCbg9Ln4be8dxcjSmeTsOmCDEo0Q=@7zkh.cn.rongnav.com;7zkh.cn.rongcfg.com";
-        RongIM.connect(token, new RongIMClient.ConnectCallback() {
-            @Override
-            public void onSuccess(String userId) {
-                Toasty.success(MainActivity.this, userId);
-                LogUtils.d("融云--登录成功" + String.valueOf(userId));
-                //RouteUtils.routeToConversationListActivity(MainActivity.this, "");
-            }
+        token = GetUser.getRongToken(this);
+        LogUtils.d("融云token"+token);
+        if(token != null || "".equals(token)){
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+                @Override
+                public void onSuccess(String userId) {
+                    Toasty.success(MainActivity.this, userId);
+                    LogUtils.d("融云--登录成功" + String.valueOf(userId));
+                    //RouteUtils.routeToConversationListActivity(MainActivity.this, "");
+                }
 
-            @Override
-            public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
-                LogUtils.e("融云--登录失败" + String.valueOf(connectionErrorCode.getValue()));
-                Toasty.error(MainActivity.this, String.valueOf(connectionErrorCode.getValue()));
-            }
+                @Override
+                public void onError(RongIMClient.ConnectionErrorCode connectionErrorCode) {
+                    LogUtils.e("融云--登录失败" + String.valueOf(connectionErrorCode.getValue()));
+                    Toasty.error(MainActivity.this, String.valueOf(connectionErrorCode.getValue()));
+                }
 
-            @Override
-            public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
+                @Override
+                public void onDatabaseOpened(RongIMClient.DatabaseOpenStatus databaseOpenStatus) {
 
-                LogUtils.d("融云--数据库" + String.valueOf(databaseOpenStatus.getValue())
-                        + databaseOpenStatus.toString());
-            }
-        });
+                    LogUtils.d("融云--数据库" + String.valueOf(databaseOpenStatus.getValue())
+                            + databaseOpenStatus.toString());
+                }
+            });
+        }else{
+
+            LogUtils.e("融云token读取失败");
+        }
+
 
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 //        StatusBarUtil.setStatusBarMode(this, true, R.color.cw);

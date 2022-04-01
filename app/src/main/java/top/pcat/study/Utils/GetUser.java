@@ -26,4 +26,8 @@ public class GetUser {
         return  gson.fromJson(userInfoJson, UserInfo.class);
 
     }
+
+    public static String getRongToken(Context context){
+        return FileIOUtils.readFile2String(context.getFilesDir().getAbsolutePath() + "/rongToken");
+    }
 }

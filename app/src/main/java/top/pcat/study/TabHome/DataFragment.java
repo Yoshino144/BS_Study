@@ -429,9 +429,9 @@ public class DataFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void readtb(String tempInfo) {
         try {
-            JSONObject jsonObject = new JSONObject(tempInfo);
-
+            JSONObject jsonObject = null;
             try{
+                jsonObject = new JSONObject(tempInfo);
                 todaysize.setText("+ " + jsonObject.getString(LocalDate.now().toString()) + " 道");
             }catch (Exception e){
                 todaysize.setText("+ " + "0" + " 道");
@@ -530,7 +530,7 @@ public class DataFragment extends Fragment {
             }
 
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
